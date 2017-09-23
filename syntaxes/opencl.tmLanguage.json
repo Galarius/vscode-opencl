@@ -1,0 +1,94 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"scopeName": "source.opencl",
+	"name": "OpenCL",
+	"patterns": [
+		{
+			"include": "source.c",
+			"__comment": "Include C grammar: https://raw.githubusercontent.com/Microsoft/vscode/master/extensions/cpp/syntaxes/c.json"
+		},
+		{
+			"include": "source.cpp",
+			"__comment": "Include C++ grammar: https://raw.githubusercontent.com/Microsoft/vscode/master/extensions/cpp/syntaxes/c%2B%2B.json"
+		},
+		{
+			"include": "#keywords.opencl.c",
+			"__comment": "OpenCL C keywords from OpenCL Programming Guide [Tables 4.1,4.2,4.6] except those which are already specified in `source.c`"
+		},
+		{
+			"include": "#keywords.opencl.cpp",
+			"__comment": "OpenCL C++ keywords from The OpenCL C++ Specification [Tables 1.3,1.4] except those which are already specified in `source.cpp`"
+		}
+	],
+	"repository": {
+		"keywords.opencl.c": {
+			"patterns": [
+				{
+					"name": "keyword.control.opencl.c.datatypes",
+					"match": "\\b(half|ptrdiff_t|uchar|ushort|uint|ulong)\\b",
+					"__comment": "OpenCL datatypes that are not presented in `source.c`"
+				},
+				{
+					"name": "keyword.control.opencl.c.datatypes.vector2",
+					"match": "\\b(char2|uchar2|short2|ushort2|int2|uint2|long2|ulong2|float2|double2|half2)\\b",
+					"__comment": "Vector datatypes, n = 2"
+				},
+				{
+					"name": "keyword.control.opencl.c.datatypes.vector3",
+					"match": "\\b(char3|uchar3|short3|ushort3|int3|uint3|long3|ulong3|float3|double3|half3)\\b",
+					"__comment": "Vector datatypes, n = 3"
+				},
+				{
+					"name": "keyword.control.opencl.c.datatypes.vector4",
+					"match": "\\b(char4|uchar4|short4|ushort4|int4|uint4|long4|ulong4|float4|double4|half4)\\b",
+					"__comment": "Vector datatypes, n = 4"
+				},
+				{
+					"name": "keyword.control.opencl.c.datatypes.vector8",
+					"match": "\\b(char8|uchar8|short8|ushort8|int8|uint8|long8|ulong8|float8|double8|half8)\\b",
+					"__comment": "Vector datatypes, n = 8"
+				},
+				{
+					"name": "keyword.control.opencl.c.datatypes.vector16",
+					"match": "\\b(char16|uchar16|short16|ushort16|int16|uint16|long16|ulong16|float16|double16|half16)\\b",
+					"__comment": "Vector datatypes, n = 16"
+				},
+				{
+					"name": "keyword.control.opencl.c.datatypes.images",
+					"match": "\\b(image2d_t|image3d_t|sampler_t|sampler_t)\\b"
+				},
+				{
+					"name": "keyword.control.opencl.c.datatypes.qualifiers.address.space",
+					"match": "\\b(__global|global|__local|local|__constant|constant|__private|private)\\b",
+					"__comment": "Address space qualifiers"
+				},
+				{
+					"name": "keyword.control.opencl.c.datatypes.qualifiers.function",
+					"match": "\\b(__kernel|kernel)\\b",
+					"__comment": "Function qualifiers"
+				},
+				{
+					"name": "keyword.control.opencl.c.datatypes.table.qualifiers.access",
+					"match": "\\b(__read_only|read_only|__write_only|write_only|__read_write|read_write)\\b",
+					"__comment": "Access qualifiers"
+				}
+			],
+			"keywords.opencl.cpp": {
+				"patterns": [
+					{
+						"name": "keyword.control.opencl.cpp.uniform",
+						"match": "\\b(uniform)\\b"
+					},
+					{
+						"name": "keyword.control.opencl.cpp.datatypes",
+						"match": "\\b(complex|imaginary|quad|quad2|quad3|quad4|quad8|quad16|float2x2|float2x3|float2x4|float2x8|float2x16|float3x2|float3x3|float3x4|float3x8|float3x16|float4x2|float4x3|float4x4|float4x8|float4x16|float8x2|float8x3|float8x4|float8x8|float8x16|float16x2|float16x3|float16x4|float16x8|float16x16|double2x2|double2x3|double2x4|double2x8|double2x16|double3x2|double3x3|double3x4|double3x8|double3x16|double4x2|double4x3|double4x4|double4x8|double4x16|double8x2|double8x3|double8x4|double8x8|double8x16|double16x2|double16x3|double16x4|double16x8|double16x16)\\b"
+					},
+					{
+						"name": "keyword.control.opencl.cpp.datatypes.images",
+						"match": "\\b(image2d|image3d|image2d_array|image1d|image1d_buffer|image1d_array|image2d_depth|image2d_array_depth|sampler|queue|ndrange|event|pipe|program_pipe|reserve_id|mem_type|mem_type_local|mem_type_global|mem_type_image)\\b"
+					}
+				]
+			}
+		}
+	}
+}

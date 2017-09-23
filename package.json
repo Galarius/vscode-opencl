@@ -1,0 +1,50 @@
+{
+    "name": "vscode-opencl",
+    "displayName": "OpenCL",
+    "description": "OpenCL Syntax Highlighting",
+    "version": "0.0.1",
+    "publisher": "galarius",
+    "icon": "OpenCL_128x.jpg",
+    "author": {
+        "name": "Galarius"
+    },
+    "license": "SEE LICENSE IN LICENSE.txt",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Galarius/vscode-opencl"
+      },
+    "engines": {
+        "vscode": "^1.10.0"
+    },
+    "markdown": "github",
+    "keywords": [
+        "OpenCL",
+        "Khronos",
+        "cl"
+      ],
+    "categories": [
+        "Languages"
+    ],
+    "contributes": {
+        "languages": [
+            {
+                "id": "opencl",
+                "aliases": [
+                    "OpenCL",
+                    "opencl"
+                ],
+                "extensions": [
+                    ".cl",
+                    ".ocl"
+                ]
+            }
+        ],
+        "grammars": [
+            {
+                "language": "opencl",
+                "scopeName": "source.opencl",
+                "path": "./syntaxes/opencl.tmLanguage.json"
+            }
+        ]
+    }
+}
