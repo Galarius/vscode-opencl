@@ -10,6 +10,8 @@ This extension adds support for:
 * OpenCL C keywords
 * OpenCL C++ keywords
 
+![screen](https://raw.githubusercontent.com/Galarius/vscode-opencl/master/screen.png)
+
 ## Release Notes
 
 ### 0.0.1
