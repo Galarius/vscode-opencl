@@ -1,0 +1,19 @@
+# AStyle Options file
+# Installation: brew install astyle
+# Run command: astyle --options=test/.astylerc -n test/kernel.cl
+# braces
+--style=kr
+# indent
+--indent=tab
+--indent-namespaces
+--indent-switches
+--indent-cases
+--indent-preproc-block
+--indent-preproc-define
+--indent-col1-comments
+# pad
+--break-blocks
+--pad-comma
+--unpad-paren
+--delete-empty-lines
+--align-pointer=name

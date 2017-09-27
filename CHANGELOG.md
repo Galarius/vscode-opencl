@@ -1,12 +1,11 @@
-# Changelog
+# OpenCL for Visual Studio Code Change Log
 
-All notable changes to this project will be documented in this file.
+## Version 0.0.2: September 27, 2017
 
-The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
-and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
+* Improving the highlighting of OpenCL data types (In accordance with the built-in rules for C and C++ syntax highlighting).
 
-## [Unreleased]
+## Version 0.0.1: September 23, 2017
 
-## 0.0.1 - 2017-09-23
-
-- initial release
+* `.cl` and `.ocl` file extensions support
+* OpenCL C keywords
+* OpenCL C++ datatypes
