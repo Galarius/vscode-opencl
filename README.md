@@ -6,7 +6,7 @@ This extension adds support for:
 * OpenCL C keywords syntax highlighting
 * OpenCL C++ keywords syntax highlighting
 
-![screen](https://raw.githubusercontent.com/Galarius/vscode-opencl/master/screen.png)
+![screen](https://raw.githubusercontent.com/Galarius/vscode-opencl/master/opencl-screenshot.png)
 
 ## License
 
