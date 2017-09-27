@@ -1,5 +1,8 @@
 # OpenCL for Visual Studio Code
 
+[![Current Version](https://vsmarketplacebadge.apphb.com/version-short/galarius.vscode-opencl.svg)](https://marketplace.visualstudio.com/items?itemName=galarius.vscode-opencl)
+[![Install Count](https://vsmarketplacebadge.apphb.com/installs/galarius.vscode-opencl.svg)](https://marketplace.visualstudio.com/items?itemName=galarius.vscode-opencl)
+
 This extension adds support for:
 
 * `.cl` and `.ocl` file extensions
