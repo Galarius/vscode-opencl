@@ -4,10 +4,6 @@
 	"name": "OpenCL",
 	"patterns": [
 		{
-			"include": "source.c",
-			"__comment": "Include C grammar: https://raw.githubusercontent.com/Microsoft/vscode/master/extensions/cpp/syntaxes/c.json"
-		},
-		{
 			"include": "source.cpp",
 			"__comment": "Include C++ grammar: https://raw.githubusercontent.com/Microsoft/vscode/master/extensions/cpp/syntaxes/c%2B%2B.json"
 		},
@@ -108,6 +104,10 @@
 				{
 					"name": "storage.type.opencl.cpp.image",
 					"match": "\\b(image2d|image3d|image2d_array|image1d|image1d_buffer|image1d_array|image2d_depth|image2d_array_depth|sampler|queue|ndrange|event|pipe|program_pipe|reserve_id|mem_type|mem_type_local|mem_type_global|mem_type_image)\\b"
+				},
+				{
+					"name": "storage.type.opencl.cpp.atomic",
+					"match": "\\b(atomic_int|atomic_uint|atomic_long|atomic_ulong|atomic_float|atomic_double|atomic_intptr_t|atomic_uintptr_t|atomic_size_t|atomic_ptrdiff_t|atomic_flag)\\b"
 				}
 			]
 		}

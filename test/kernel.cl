@@ -33,7 +33,7 @@ typedef struct searchKeyStruct {
  ***/
 __kernel void sample_kernel(__global void *bstRoot,
                             __global void *searchKeyVect)
-{
+{	
 	__global node      *searchNode  = (__global node *)(bstRoot);
 	__global searchKey *keyPtr      = (__global searchKey *)(searchKeyVect);
 	int                 gid         =  get_global_id(0);
