@@ -4,6 +4,10 @@ import * as vscode from 'vscode';
 
 export const OPECL_LANGUAGE_ID: vscode.DocumentFilter = { language: "opencl", scheme: "file" };
 
+export const CONFIG: vscode.LanguageConfiguration = {
+    wordPattern: /(-?\d*\.\d\w*)|([^\`\~\!\#\^\&\*\(\)\-\=\+\[\{\]\}\\\|\;\:\'\"\,\.\<\>\/\?\s]+)/g
+}
+
 export const KEYWORDS: string[] = [
     // C
     "asm","__asm__","auto","bool","_Bool","char","_Complex","double","enum","float","_Imaginary","int","long","short","signed","struct","typedef","union","unsigned","void",
@@ -106,14 +110,4 @@ export const MACROS: string[] = [
     "DBL_DIG","DBL_MANT_DIG","DBL_MAX_10_EXP","DBL_MAX_EXP","DBL_MIN_10_EXP","DBL_MIN_EXP","DBL_MAX","DBL_MIN","DBL_EPSILSON",
     "M_E","M_LOG2E","M_LOG10E","M_LN2","M_LN10","M_PI","M_PI_2","M_PI_4","M_1_PI","M_2_PI","M_2_SQRTPI","M_SQRT2","M_SQRT1_2","HALF_DIG","HALF_MANT_DIG","HALF_MAX_10_EXP","HALF_MAX_EXP","HALF_MIN_10_EXP","HALF_MIN_EXP","HALF_RADIX","HALF_MAX","HALF_MIN","HALF_EPSILSON",
     "M_E_H","M_LOG2E_H","M_LOG10E_H","M_LN2_H","M_LN10_H","M_PI_H","M_PI_2_H","M_PI_4_H","M_1_PI_H","M_2_PI_H","M_2_SQRTPI_H","M_SQRT2_H","M_SQRT1_2_H"
-];
-
-export const ENUMS: string[] = [
-    //// OpenCL C++
-    // memory_order
-    "memory_order_relaxed","memory_order_acquire","memory_order_release","memory_order_acq_rel","memory_order_seq_cst",
-    // memory_scope
-    "memory_scope_work_item","memory_scope_sub_group","memory_scope_work_group","memory_scope_device","memory_scope_all_svm_devices",
-    // image_channel_order
-    "a","r","rx","rg","rgx","ra","rgb","rgbx","rgba","argb","bgra","intensity","luminance","abgr","depth","srgb","srgbx","srgba","sbgra"
 ];

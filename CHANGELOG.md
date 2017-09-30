@@ -1,5 +1,9 @@
 # OpenCL for Visual Studio Code Change Log
 
+## Version 0.1.1: September 30, 2017
+
+* Auto-Completion (Words from the document)
+
 ## Version 0.1.0: September 27, 2017
 
 * Auto-Completion (Built-in OpenCL functions, data types and macros)
