@@ -1,0 +1,107 @@
+{
+    "clCreateBuffer": {
+        "prefix": "clCreateBuffer",
+        "body": [
+            "clCreateBuffer(${1:context}, ${2|CL_MEM_READ_WRITE,CL_MEM_WRITE_ONLY,CL_MEM_READ_ONLY,CL_MEM_USE_HOST_PTR,CL_MEM_ALLOC_HOST_PTR,CL_MEM_COPY_HOST_PTR|}, ${3:size_in_bytes}, ${4:host_ptr}, ${5:errcode_ret});"
+        ],
+        "description": "OpenCL Create Buffer"
+    },
+    "clCreateContext": {
+        "prefix": "clCreateContext",
+        "body": [
+            "clCreateContext(${1:properties}, ${2:num_devices}, ${3:devices}, ${4:pfn_notify}, ${5:user_data_ptr}, ${6:errcode_ret});"
+        ],
+        "description": "OpenCL Create Context"
+    },
+    "clCreateProgramWithSource": {
+        "prefix": "clCreateProgramWithSource",
+        "body": [
+            "clCreateProgramWithSource(${1:context}, ${2:count}, ${3:strings}, ${4:lengths}, ${5:errcode_ret});"
+        ],
+        "description": "OpenCL Create Program"
+    },
+    "clBuildProgram": {
+        "prefix": "clBuildProgram",
+        "body": [
+            "clBuildProgram(${1:program}, ${2:num_devices}, ${3:device_list}, ${4:options}, ${5:pfn_notify}, ${6:user_data_ptr});"
+        ],
+        "description": "OpenCL Build Program"
+    },
+    "clGetProgramBuildInfo": {
+        "prefix": "clGetProgramBuildInfo",
+        "body": [
+            "clGetProgramBuildInfo(${1:program}, ${2:device}, ${3|CL_PROGRAM_BUILD_STATUS,CL_PROGRAM_BUILD_OPTIONS,CL_PROGRAM_BUILD_LOG|}, ${4:param_value}, ${5:param_value_size}, ${6:param_value_size_ret});"
+        ],
+        "description": "OpenCL Get Program Build Log"
+    },
+    "clGetEventProfilingInfo": {
+        "prefix": "clGetEventProfilingInfo",
+        "body": [
+            "clGetEventProfilingInfo(${1:event}, ${2|CL_PROFILING_COMMAND_QUEUED,CL_PROFILING_COMMAND_SUBMIT,CL_PROFILING_COMMAND_START,CL_PROFILING_COMMAND_END|}, ${3:param_value_size}, ${4:param_value}, ${5:param_value_size_ret});"
+        ],
+        "description": "OpenCL Get Event Profiling Info"
+    },
+    "clCreateKernel": {
+        "prefix": "clCreateKernel",
+        "body": [
+            "clCreateKernel(${1:program}, ${2:kernel_name}, ${3:errcode_ret});"
+        ],
+        "description": "OpenCL Create Kernel"
+    },
+    "clGetDeviceInfo": {
+        "prefix": "clGetDeviceInfo",
+        "body": [
+            "clGetDeviceInfo(${1:device}, ${3|CL_DEVICE_ADDRESS_BITS,CL_DEVICE_AVAILABLE,CL_DEVICE_COMPILER_AVAILABLE,CL_DEVICE_DOUBLE_FP_CONFIG,CL_DEVICE_ENDIAN_LITTLE,CL_DEVICE_ERROR_CORRECTION_SUPPORT,CL_DEVICE_EXECUTION_CAPABILITIES,CL_DEVICE_EXTENSIONS,CL_DEVICE_GLOBAL_MEM_CACHE_SIZE,CL_DEVICE_GLOBAL_MEM_CACHE_TYPE,CL_DEVICE_GLOBAL_MEM_CACHELINE_SIZE,CL_DEVICE_GLOBAL_MEM_SIZE,CL_DEVICE_HALF_FP_CONFIG,CL_DEVICE_IMAGE_SUPPORT,CL_DEVICE_IMAGE2D_MAX_HEIGHT,CL_DEVICE_IMAGE2D_MAX_WIDTH,CL_DEVICE_IMAGE3D_MAX_DEPTH,CL_DEVICE_IMAGE3D_MAX_HEIGHT,CL_DEVICE_IMAGE3D_MAX_WIDTH,CL_DEVICE_LOCAL_MEM_SIZE,CL_DEVICE_LOCAL_MEM_TYPE,CL_DEVICE_MAX_CLOCK_FREQUENCY,CL_DEVICE_MAX_COMPUTE_UNITS,CL_DEVICE_MAX_CONSTANT_ARGS,CL_DEVICE_MAX_CONSTANT_BUFFER_SIZE,CL_DEVICE_MAX_MEM_ALLOC_SIZE,CL_DEVICE_MAX_PARAMETER_SIZE,CL_DEVICE_MAX_READ_IMAGE_ARGS,CL_DEVICE_MAX_SAMPLERS,CL_DEVICE_MAX_WORK_GROUP_SIZE,CL_DEVICE_MAX_WORK_ITEM_DIMENSIONS,CL_DEVICE_MAX_WORK_ITEM_SIZES,CL_DEVICE_MAX_WRITE_IMAGE_ARGS,CL_DEVICE_MEM_BASE_ADDR_ALIGN,CL_DEVICE_MIN_DATA_TYPE_ALIGN_SIZE,CL_DEVICE_NAME,CL_DEVICE_PLATFORM,CL_DEVICE_PREFERRED_VECTOR_WIDTH_CHAR,CL_DEVICE_PREFERRED_VECTOR_WIDTH_SHORT,CL_DEVICE_PREFERRED_VECTOR_WIDTH_INT,CL_DEVICE_PREFERRED_VECTOR_WIDTH_LONG,CL_DEVICE_PREFERRED_VECTOR_WIDTH_FLOAT,CL_DEVICE_PREFERRED_VECTOR_WIDTH_DOUBLE,CL_DEVICE_PROFILE,CL_DEVICE_PROFILING_TIMER_RESOLUTION,CL_DEVICE_QUEUE_PROPERTIES,CL_DEVICE_SINGLE_FP_CONFIG,CL_DEVICE_TYPE,CL_DEVICE_VENDOR,CL_DEVICE_VENDOR_ID,CL_DEVICE_VERSION,CL_DRIVER_VERSION|}, ${4:param_value_size}, ${5:param_value}, ${6:param_value_size_ret});"
+        ],
+        "description": "OpenCL Get Device Info"
+    },
+    "clCreateCommandQueue": {
+        "prefix": "clCreateCommandQueue",
+        "body": [
+            "clCreateCommandQueue(${1:context}, ${2:device}, ${3:properties}, ${4:errcode_ret});"
+        ],
+        "description": "OpenCL Create Command Queue"
+    },
+    "clSetKernelArg": {
+        "prefix": "clSetKernelArg",
+        "body": [
+            "clSetKernelArg(${1:kernel}, ${2:arg_index}, ${3:arg_size}, ${4:arg_value});"
+        ],
+        "description": "OpenCL Set Kernel Arg"
+    },
+    "clEnqueueNDRangeKernel": {
+        "prefix": "clEnqueueNDRangeKernel",
+        "body": [
+            "clEnqueueNDRangeKernel(${1:command_queue}, ${2:kernel}, ${3:work_dim}, ${4:global_work_offset}, ${5:global_work_size}, ${6:local_work_size}, ${7:num_events_in_wait_list}, ${8:event_wait_list}, ${9:event});"
+        ],
+        "description": "OpenCL Enqueue ND Range Kernel"
+    },
+    "clEnqueueReadBuffer": {
+        "prefix": "clEnqueueReadBuffer",
+        "body": [
+            "clEnqueueReadBuffer(${1:command_queue}, ${2:buffer}, ${3:blocking_read}, ${4:offset}, ${5:cb}, ${6:ptr}, ${7:num_events_in_wait_list}, ${8:event_wait_list}, ${9:event});"
+        ],
+        "description": "OpenCL Enqueue Read Buffer"
+    },
+    "clGetPlatformInfo": {
+        "prefix": "clGetPlatformInfo",
+        "body": [
+            "clGetPlatformInfo(${1:platform}, ${2|CL_PLATFORM_PROFILE,CL_PLATFORM_VERSION,CL_PLATFORM_NAME,CL_PLATFORM_VENDOR,CL_PLATFORM_EXTENSIONS|}, ${3:param_value_size}, ${4:param_value}, ${5:param_value_size_ret});"
+        ],
+        "description": "OpenCL Get Platform Info"
+    },
+    "clGetDeviceIDs": {
+        "prefix": "clGetDeviceIDs",
+        "body": [
+            "clGetDeviceIDs(${1:platform}, ${2|CL_DEVICE_TYPE_CPU,CL_DEVICE_TYPE_GPU,CL_DEVICE_TYPE_ACCELERATOR,CL_DEVICE_TYPE_DEFAULT,CL_DEVICE_TYPE_ALL|}, ${3:num_entries}, ${4:devices}, ${5:num_devices});"
+        ],
+        "description": "OpenCL Get Device IDs"
+    },
+    "clGetPlatformIDs": {
+        "prefix": "clGetPlatformIDs",
+        "body": [
+            "clGetPlatformIDs(${1:num_entries}, ${2:platforms}, ${3:num_platforms});"
+        ],
+        "description": "OpenCL Get Platform IDs"
+    }
+}

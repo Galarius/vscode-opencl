@@ -1,0 +1,20 @@
+{
+	"__kernel": {
+		"prefix": "__kernel",
+		"body": [
+            "__kernel void ${1:name}(${2:arguments}) {",
+            "\t${0:/* code */}",
+            "}"
+        ],
+		"description": "Kernel Function Snippet"
+    },
+    "kernel": {
+		"prefix": "kernel",
+		"body": [
+            "kernel void ${1:name}(${2:arguments}) {",
+            "\t${0:/* code */}",
+            "}"
+        ],
+		"description": "Kernel Function Snippet"
+    }
+}

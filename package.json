@@ -2,9 +2,9 @@
     "name": "vscode-opencl",
     "displayName": "OpenCL",
     "description": "OpenCL for Visual Studio Code",
-    "version": "0.1.1",
+    "version": "0.1.2",
     "publisher": "galarius",
-    "icon": "OpenCL_128x.jpg",
+    "icon": "images/OpenCL_128x.jpg",
     "author": {
         "name": "Galarius"
     },
@@ -26,7 +26,9 @@
         "Languages"
     ],
     "activationEvents": [
-        "onLanguage:opencl"
+        "onLanguage:opencl",
+        "onLanguage:c",
+        "onLanguage:cpp"
     ],
     "main": "./out/extension",
     "contributes": {
@@ -48,6 +50,20 @@
                 "language": "opencl",
                 "scopeName": "source.opencl",
                 "path": "./syntaxes/opencl.tmLanguage.json"
+            }
+        ],
+        "snippets": [
+            {
+              "language": "opencl",
+              "path": "./snippets/opencl.device.tmSnippets.json"
+            },
+            {
+                "language": "c",
+                "path": "./snippets/opencl.host.tmSnippets.json"
+            },
+            {
+                "language": "cpp",
+                "path": "./snippets/opencl.host.tmSnippets.json"
             }
         ]
     },
