@@ -23,7 +23,8 @@
         "cl"
     ],
     "categories": [
-        "Languages"
+        "Languages",
+        "Snippets"
     ],
     "activationEvents": [
         "onLanguage:opencl",
