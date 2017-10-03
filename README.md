@@ -33,8 +33,6 @@ This extension adds support for:
 
 Press `Install` button
 
-![screen-install](https://raw.githubusercontent.com/Galarius/vscode-opencl/master/images/install.button.png)
-
 ### **III.** Install from the `.vsix` file
 
 1. Download `vsix` package from the [Marketplace](https://marketplace.visualstudio.com/items?itemName=galarius.vscode-opencl) (Press `Download Extension` link) or select the specific version of this extension from it's [Releases page](https://github.com/Galarius/vscode-opencl/releases)
