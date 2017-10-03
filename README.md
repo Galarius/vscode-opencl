@@ -33,7 +33,7 @@ This extension adds support for:
 
 Press `Install` button
 
-![screen-install](https://raw.githubusercontent.com/Galarius/vscode-opencl/master/images/instal.button.png)
+![screen-install](https://raw.githubusercontent.com/Galarius/vscode-opencl/master/images/install.button.png)
 
 ### **III.** Install from the `.vsix` file
 
