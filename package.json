@@ -55,8 +55,8 @@
         ],
         "snippets": [
             {
-              "language": "opencl",
-              "path": "./snippets/opencl.device.tmSnippets.json"
+                "language": "opencl",
+                "path": "./snippets/opencl.device.tmSnippets.json"
             },
             {
                 "language": "c",
@@ -65,6 +65,13 @@
             {
                 "language": "cpp",
                 "path": "./snippets/opencl.host.tmSnippets.json"
+            }
+        ],
+        "commands": [
+            {
+                "command": "opencl.info",
+                "title": "OpenCL: Info",
+                "description": "Show OpenCL platforms/devices info."
             }
         ]
     },
@@ -75,6 +82,10 @@
     },
     "devDependencies": {
         "typescript": "^2.4.2",
-        "vscode": "^1.1.4"
+        "vscode": "^1.1.4",
+        "@types/node": "^7.0.43"
+    },
+    "dependencies": {
+        "child-process-promise": "^1.1.0"
     }
 }
