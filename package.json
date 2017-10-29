@@ -29,7 +29,8 @@
     "activationEvents": [
         "onLanguage:opencl",
         "onLanguage:c",
-        "onLanguage:cpp"
+        "onLanguage:cpp",
+        "onCommand:opencl.info"
     ],
     "main": "./out/extension",
     "contributes": {

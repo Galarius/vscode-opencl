@@ -25,7 +25,7 @@ function execute(command: string): Promise<Buffer> {
         return result.stdout;
     }).fail(function(error) {
         console.error("Error: " + error);
-        vscode.window.showErrorMessage("Error: " + error);
+        vscode.window.showErrorMessage(error);
     }).progress(function(childProcess) {
         console.log("Command: " + command + " running...");
     });
@@ -52,7 +52,7 @@ export function oclinfoDumpAll() {
             vscode.window.showTextDocument(doc);
             }, (error: any) => {
                 console.error(error);
-                vscode.window.showErrorMessage("Error: " + error);
+                vscode.window.showErrorMessage(error);
             });
         });
     } else {

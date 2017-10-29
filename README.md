@@ -12,15 +12,27 @@ This extension adds:
 * Code Snippets for some host and device functions
 * Command `OpenCL: Info` to show OpenCL platforms/devices info. (`linux` is not supported yet)
 
-![screen-autocomplete](https://raw.githubusercontent.com/Galarius/vscode-opencl/master/images/vscode-opencl-autocomplete.gif)  
-*Syntax Highlighting, Auto-Completion*
-
-![screen-snippet](https://raw.githubusercontent.com/Galarius/vscode-opencl/master/images/vscode-opencl-snippet.gif)  
-*Code Snippets*
+|![screen-autocomplete](https://raw.githubusercontent.com/Galarius/vscode-opencl/master/images/vscode-opencl-autocomplete.gif)|
+|-|
+|*Syntax Highlighting, Auto-Completion*|
+|![screen-snippet](https://raw.githubusercontent.com/Galarius/vscode-opencl/master/images/vscode-opencl-snippet.gif)|
+|*Code Snippets*|
+|![vscode-opencl-cmd-oclinfo](https://raw.githubusercontent.com/Galarius/vscode-opencl/master/images/vscode-opencl-cmd-oclinfo.gif)|
+|*OpenCL platforms/devices info*|
+||
 
 ## Prerequisites
 
+*[Required]*
+
 * [Visual Studio Code](https://code.visualstudio.com)
+
+*[Optional]*
+
+In order to run command `OpenCL: Info` on Windows:
+
+* Check that you have a device that supports OpenCL 
+* Make sure your OpenCL device driver is up to date. You can download drivers manually: [Intel](https://software.intel.com/en-us/articles/opencl-drivers), [NVidia](http://www.nvidia.com/Download/index.aspx), [AMD](http://support.amd.com/en-us/download) 
 
 ## How To Install This Extension
 
@@ -73,7 +85,17 @@ Here's a quick guide on `pull requests`:
    some feedback, but if you haven't heard back from me after a couple of days,
    feel free to leave a comment on the pull request.
 
-## OpenCL for Visual Studio Code Change Log
+## FAQ
+
+> Why `OpenCL: Info` command shows error?
+
+The command needs OpenCL drivers and run-time libraries to be installed on your system. They can be obtained e.g. from [Intel](https://software.intel.com/en-us/articles/opencl-drivers).
+
+> I am on Linux. Why can't I use `OpenCL: Info` command?
+
+It is not supported for now, but will be in future.
+
+## Change Log
 
 See [CHANGELOG.md](https://marketplace.visualstudio.com/items/galarius.vscode-opencl/changelog)
 

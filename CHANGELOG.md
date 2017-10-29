@@ -3,10 +3,12 @@
 ## Version 0.1.3: October 29, 2017
 
 Added command `OpenCL: Info` to show OpenCL platforms/devices info.
-The command is activated when a file with any of the supported extensions (`.cl`,`.ocl`,`.c`,`.cpp`) is opened.
+
+![vscode-opencl-cmd-oclinfo](https://raw.githubusercontent.com/Galarius/vscode-opencl/master/images/vscode-opencl-cmd-oclinfo.gif)
 
 *Only Win32 and macOS are supported.*
 
+*Requirements: OpenCL drivers and runtime libraries.*
 
 ## Version 0.1.2: October 3, 2017
 
