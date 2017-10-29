@@ -1,5 +1,13 @@
 # OpenCL for Visual Studio Code Change Log
 
+## Version 0.1.3: October 29, 2017
+
+Added command `OpenCL: Info` to show OpenCL platforms/devices info.
+The command is activated when a file with any of the supported extensions (`.cl`,`.ocl`,`.c`,`.cpp`) is opened.
+
+*Only Win32 and macOS are supported.*
+
+
 ## Version 0.1.2: October 3, 2017
 
 * Added Code Snippets for host OpenCL functions

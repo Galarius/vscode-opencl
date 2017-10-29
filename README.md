@@ -3,13 +3,14 @@
 [![Current Version](https://vsmarketplacebadge.apphb.com/version-short/galarius.vscode-opencl.svg)](https://marketplace.visualstudio.com/items?itemName=galarius.vscode-opencl)
 [![Install Count](https://vsmarketplacebadge.apphb.com/installs/galarius.vscode-opencl.svg)](https://marketplace.visualstudio.com/items?itemName=galarius.vscode-opencl)
 
-This extension adds support for:
+This extension adds:
 
-* `.cl` and `.ocl` file extensions
+* `.cl` and `.ocl` file extensions support
 * OpenCL C keywords syntax highlighting
 * OpenCL C++ keywords syntax highlighting
 * Auto-Completion (Built-in OpenCL functions, data types and macros)
 * Code Snippets for some host and device functions
+* Command `OpenCL: Info` to show OpenCL platforms/devices info. (`linux` is not supported yet)
 
 ![screen-autocomplete](https://raw.githubusercontent.com/Galarius/vscode-opencl/master/images/vscode-opencl-autocomplete.gif)  
 *Syntax Highlighting, Auto-Completion*
@@ -74,28 +75,7 @@ Here's a quick guide on `pull requests`:
 
 ## OpenCL for Visual Studio Code Change Log
 
-### Version 0.1.2: October 3, 2017
-
-* Added Code Snippets for host OpenCL functions
-* Added Code Snippets for device OpenCL functions
-
-### Version 0.1.1: September 30, 2017
-
-* Added Auto-Completion (Words from the document)
-
-### Version 0.1.0: September 27, 2017
-
-* Added Auto-Completion (Built-in OpenCL functions, data types and macros)
-
-### Version 0.0.2: September 27, 2017
-
-* Improving the highlighting of OpenCL data types (In accordance with the built-in rules for C and C++ syntax highlighting).
-
-### Version 0.0.1: September 23, 2017
-
-* `.cl` and `.ocl` file extensions support
-* OpenCL C keywords
-* OpenCL C++ datatypes
+See [CHANGELOG.md](https://marketplace.visualstudio.com/items/galarius.vscode-opencl/changelog)
 
 ## License
 
