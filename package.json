@@ -44,7 +44,8 @@
                 "extensions": [
                     ".cl",
                     ".ocl"
-                ]
+                ],
+                "configuration": "./language-configuration.json"
             }
         ],
         "grammars": [
