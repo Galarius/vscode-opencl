@@ -8,9 +8,14 @@ void highlighting_test()
 	// storage.type.opencl.c
 	highlight<half>();
 	// storage.type.opencl.c
-	highlight<ptrdiff_t>();
 	highlight<uchar>();
+	highlight<ushort>();
+	highlight<uint>();
 	highlight<ulong>();
+	highlight<size_t>();
+	highlight<ptrdiff_t>();
+	highlight<intptr_t>();
+	highlight<uintptr_t>();
 	// storage.type.opencl.c.vector2
 	highlight<char2>();
 	highlight<short2>();

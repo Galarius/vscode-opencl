@@ -22,7 +22,7 @@
 				},
 				{
 					"name": "storage.type.opencl.c",
-					"match": "\\b(ptrdiff_t|uchar|ulong)\\b"
+					"match": "\\b(uchar|ushort|uint|ulong|size_t|ptrdiff_t|intptr_t|uintptr_t)\\b"
 				},
 				{
 					"name": "storage.type.opencl.c.vector2",
