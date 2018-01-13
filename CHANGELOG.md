@@ -1,5 +1,9 @@
 # OpenCL for Visual Studio Code Change Log
 
+## Version 0.1.5: January 13, 2018
+
+* Fixed: Types `ushort`, `uint`, `size_t`, `intptr_t`, `uintptr_t` were not highlighted.
+
 ## Version 0.1.4: January 2, 2018
 
 `Happy New Year!`
@@ -7,7 +11,7 @@
 ![logo-ny](https://www.dropbox.com/s/yp46odwnkxwxvlq/OpenCL_128x_ny.png?dl=1)
 
 * Fixed: Unsigned types and types with `_t` at the end were not highlighted for some color themes;
-* Fixed: `Toggle Line Comment` and `Toggle Block Comment` commands didn't work in `*.cl` files.
+* Fixed: `Toggle Line Comment` and `Toggle Block Comment` commands did not work in `*.cl` files.
 
 ## Version 0.1.3: October 29, 2017
 
