@@ -7,6 +7,7 @@ import * as opencl from "./opencl";
 import * as oclinfo from "./oclinfo";
 
 import { OpenCLCompletionItemProvider } from './completionProvider';
+import { OpenCLHoverProvider } from './hoverProvider';
 
 export async function activate(context: vscode.ExtensionContext) {
 
@@ -17,4 +18,9 @@ export async function activate(context: vscode.ExtensionContext) {
     
     let completionProvider = new OpenCLCompletionItemProvider();
     context.subscriptions.push(vscode.languages.registerCompletionItemProvider(opencl.OPECL_LANGUAGE_ID, completionProvider));
+
+    let signatureHelpProvider = new OpenCLHoverProvider();
+    context.subscriptions.push(vscode.languages.registerHoverProvider(opencl.OPECL_LANGUAGE_ID, signatureHelpProvider));
+    context.subscriptions.push(vscode.languages.registerHoverProvider({ language: "c", scheme: "file" }, signatureHelpProvider));
+    context.subscriptions.push(vscode.languages.registerHoverProvider({ language: "cpp", scheme: "file" }, signatureHelpProvider));
 }
