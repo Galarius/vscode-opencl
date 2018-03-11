@@ -1,0 +1,1 @@
+    cl_int clUnloadPlatformCompiler(cl_platform_id platform)

@@ -1,0 +1,4 @@
+    cl_int clCreateKernelsInProgram(cl_program program,
+                                    cl_uint num_kernels,
+                                    cl_kernel *kernels,
+                                    cl_uint *num_kernels_ret)

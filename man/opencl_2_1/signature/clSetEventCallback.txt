@@ -1,0 +1,4 @@
+    cl_int clSetEventCallback(cl_event event,
+                              cl_int command_exec_callback_type,
+                              void (CL_CALLBACK *pfn_event_notify) ( cl_event event, cl_int event_command_exec_status, void *user_data ),
+                              void *user_data)

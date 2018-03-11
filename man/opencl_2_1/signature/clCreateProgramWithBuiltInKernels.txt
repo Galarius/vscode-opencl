@@ -1,0 +1,5 @@
+    cl_program clCreateProgramWithBuiltInKernels(cl_context context,
+                                                 cl_uint num_devices,
+                                                 const cl_device_id *device_list,
+                                                 const char *kernel_names,
+                                                 cl_int *errcode_ret)

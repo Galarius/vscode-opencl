@@ -1,0 +1,1 @@
+    cl_int clReleaseEvent(cl_event event)

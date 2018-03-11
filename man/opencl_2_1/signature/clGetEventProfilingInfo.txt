@@ -1,0 +1,5 @@
+    cl_int clGetEventProfilingInfo(cl_event event,
+                                   cl_profiling_info param_name,
+                                   size_t param_value_size,
+                                   void *param_value,
+                                   size_t *param_value_size_ret)

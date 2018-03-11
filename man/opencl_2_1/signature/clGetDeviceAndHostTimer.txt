@@ -1,0 +1,3 @@
+    cl_int clGetDeviceAndHostTimer(cl_device_id device,
+                                   cl_ulong * device_timestamp,
+                                   cl_ulong * host_timestamp)

@@ -1,0 +1,3 @@
+    cl_int clSetKernelArgSVMPointer(cl_kernel kernel,
+                                    cl_uint arg_index,
+                                    const void *arg_value)

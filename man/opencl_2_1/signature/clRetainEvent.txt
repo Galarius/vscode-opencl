@@ -1,0 +1,1 @@
+    cl_int clRetainEvent(cl_event event)

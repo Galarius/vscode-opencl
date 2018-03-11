@@ -1,0 +1,1 @@
+    cl_int clReleaseSampler(cl_sampler sampler)

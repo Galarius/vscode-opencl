@@ -1,0 +1,1 @@
+    cl_int clRetainMemObject(cl_mem memobj)

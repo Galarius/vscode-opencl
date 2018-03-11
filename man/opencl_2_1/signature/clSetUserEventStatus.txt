@@ -1,0 +1,2 @@
+    cl_int clSetUserEventStatus(cl_event event,
+                                cl_int execution_status)

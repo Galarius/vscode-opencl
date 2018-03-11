@@ -1,0 +1,5 @@
+    cl_int clCreateSubDevices(cl_device_id in_device,
+                              const cl_device_partition_property *properties,
+                              cl_uint num_devices,
+                              cl_device_id *out_devices,
+                              cl_uint *num_devices_ret)

@@ -1,0 +1,1 @@
+    cl_int clRetainProgram(cl_program program)

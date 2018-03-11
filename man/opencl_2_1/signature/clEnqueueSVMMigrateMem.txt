@@ -1,0 +1,8 @@
+    cl_int clEnqueueSVMMigrateMem(cl_command_queue command_queue,
+                                  cl_uint num_svm_pointers,
+                                  const void **svm_pointers,
+                                  const size_t *sizes,
+                                  const cl_mem_migration_flags flags,
+                                  cl_uint num_events_in_wait_list,
+                                  const cl_event *event_wait_list,
+                                  cl_event *event)

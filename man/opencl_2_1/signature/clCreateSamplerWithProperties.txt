@@ -1,0 +1,3 @@
+    cl_sampler clCreateSamplerWithProperties(cl_context context,
+                                             const cl_sampler_properties *sampler_properties,
+                                             cl_int *errcode_ret)

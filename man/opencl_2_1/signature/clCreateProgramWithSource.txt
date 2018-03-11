@@ -1,0 +1,5 @@
+    cl_program clCreateProgramWithSource(cl_context context,
+                                         cl_uint count,
+                                         const char **strings,
+                                         const size_t *lengths,
+                                         cl_int *errcode_ret)

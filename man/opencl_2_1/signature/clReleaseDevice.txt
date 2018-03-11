@@ -1,0 +1,1 @@
+    cl_int clReleaseDevice(cl_device_id device)

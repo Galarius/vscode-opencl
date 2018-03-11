@@ -1,0 +1,2 @@
+    cl_event clCreateUserEvent(cl_context context,
+                               cl_int *errcode_ret)

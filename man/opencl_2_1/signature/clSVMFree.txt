@@ -1,0 +1,2 @@
+    void clSVMFree(cl_context context,
+                   void *svm_pointer)

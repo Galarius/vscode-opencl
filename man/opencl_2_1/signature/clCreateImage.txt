@@ -1,0 +1,6 @@
+    cl_mem clCreateImage(cl_context context,
+                         cl_mem_flags flags,
+                         const cl_image_format *image_format,
+                         const cl_image_desc *image_desc,
+                         void *host_ptr,
+                         cl_int *errcode_ret)

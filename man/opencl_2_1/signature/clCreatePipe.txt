@@ -1,0 +1,6 @@
+    cl_mem clCreatePipe(cl_context context,
+                        cl_mem_flags flags,
+                        cl_uint pipe_packet_size,
+                        cl_uint pipe_max_packets,
+                        const cl_pipe_properties * properties,
+                        cl_int *errcode_ret)

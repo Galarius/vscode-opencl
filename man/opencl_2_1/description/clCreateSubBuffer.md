@@ -1,15 +1,25 @@
 Parameters
 ----------
 
-`context`  
-A valid OpenCL context used to create the buffer object.
+`buffer`  
+A valid buffer object and cannot be a sub-buffer object.
 
 `flags`  
 A bit-field that is used to specify allocation and usage information
-such as the memory arena that should be used to allocate the buffer
-object and how it will be used. The following table describes the
-possible values for `flags`. If value specified for `flags` is 0, the
-default is used which is `CL_MEM_READ_WRITE`.
+about the sub-buffer memory object being created and is described in the
+table below. If the `CL_MEM_READ_WRITE`, `CL_MEM_READ_ONLY` or
+`CL_MEM_WRITE_ONLY` values are not specified in `flags`, they are
+inherited from the corresponding memory access qualifers associated with
+`buffer`. The `CL_MEM_USE_HOST_PTR`, `CL_MEM_ALLOC_HOST_PTR` and
+`CL_MEM_COPY_HOST_PTR` values cannot be specified in `flags` but are
+inherited from the corresponding memory access qualifiers associated
+with `buffer`. If `CL_MEM_COPY_HOST_PTR` is specified in the memory
+access qualifier values associated with `buffer` it does not imply any
+additional copies when the sub-buffer is created from `buffer`. If the
+`CL_MEM_HOST_WRITE_ONLY`, `CL_MEM_HOST_READ_ONLY` or
+`CL_MEM_HOST_NO_ACCESS` values are not specified in `flags`, they are
+inherited from the corresponding memory access qualifiers associated
+with `buffer`.
 
 | cl\_mem\_flags                    | Description                       |
 | --- | --- |
@@ -22,66 +32,59 @@ default is used which is `CL_MEM_READ_WRITE`.
 |  `CL_MEM_HOST_WRITE_ONLY`          |  This flag specifies that the host   will only write to the memory       object (using OpenCL APIs that      enqueue a write or a map for        write). This can be used to         optimize write access from the      host (e.g. enable write-combined    allocations for memory objects      for devices that communicate with   the host over a system bus such     as PCIe).                         |
 |  `CL_MEM_HOST_READ_ONLY`           |  This flag specifies that the host   will only read the memory object    (using OpenCL APIs that enqueue a   read or a map for read).            `CL_MEM_HOST_WRITE_ONLY` and        `CL_MEM_HOST_READ_ONLY` are         mutually exclusive.               |
 |  `CL_MEM_HOST_NO_ACCESS`           |  This flag specifies that the host   will not read or write the memory   object.                             `CL_MEM_HOST_WRITE_ONLY` or         `CL_MEM_HOST_READ_ONLY` and         `CL_MEM_HOST_NO_ACCESS` are         mutually exclusive.               |
-`size`  
-The size in bytes of the buffer memory object to be allocated.
+`buffer_create_type` and `buffer_create_info`  
+Describes the type of buffer object to be created. The list of supported
+values for `buffer_create_type` and corresponding descriptor that
+`buffer_create_info` points to is described below.
 
-`host_ptr`  
-A pointer to the buffer data that may already be allocated by the
-application. The size of the buffer that `host_ptr` points to must be ≥
-`size` bytes.
-
-`errcode_ret`  
-Returns an appropriate error code. If `errcode_ret` is NULL, no error
-code is returned.
-
+| cl\_buffer\_create\_type          | Description                       |
+| --- | --- |
+|  `CL_BUFFER_CREATE_TYPE_REGION`    |  Create a buffer object that         represents a specific region in     `buffer`.                           `buffer_create_info` is a pointer   to the following structure:             typedef struct _cl_buffer_reg   ion {                                       size_t origin;                      size_t size;                    } cl_buffer_region;             (`origin, size`) defines the        offset and size in bytes in         `buffer`.                           If `buffer` is created with         `CL_MEM_USE_HOST_PTR`, the          `host_ptr` associated with the      buffer object returned is           `host_ptr` + `origin`.              The buffer object returned          references the data store           allocated for `buffer` and points   to a specific region given by       (`origin, size`) in this data       store.                              `CL_INVALID_VALUE` is returned in   `errcode_ret` if the region         specified by (`origin, size`) is    out of bounds in `buffer`.          `CL_INVALID_BUFFER_SIZE` if         `size` is 0.                        `CL_MISALIGNED_SUB_BUFFER_OFFSET`   is returned in `errcode_ret` if     there are no devices in context     associated with `buffer` for        which the `origin` value is         aligned to the                      `CL_DEVICE_MEM_BASE_ADDR_ALIGN`     value.                            |
 Notes
 -----
 
-The user is responsible for ensuring that data passed into and out of
-OpenCL images are natively aligned relative to the start of the buffer
-as per kernel language or IL requirements. OpenCL buffers created with
-`CL_MEM_USE_HOST_PTR` need to provide an appropriately aligned host
-memory pointer that is aligned to the data types used to access these
-buffers in a kernel(s).
-
-If `clCreateBuffer` is called with a pointer returned by `clSVMAlloc` as
-its `host_ptr` argument, and `CL_MEM_USE_HOST_PTR` is set in its `flags`
-argument, `clCreateBuffer` will succeed and return a valid non-zero
-buffer object as long as the `size` argument to `clCreateBuffer` is no
-larger than the `size` argument passed in the original `clSVMAlloc`
-call. The new buffer object returned has the shared memory as the
-underlying storage. Locations in the buffer’s underlying shared memory
-can be operated on using atomic operations to the device’s level of
-support as defined in the memory model.
+Concurrent reading from, writing to and copying between both a buffer
+object and its sub-buffer object(s) is undefined. Concurrent reading
+from, writing to and copying between overlapping sub-buffer objects
+created with the same buffer object is undefined. Only reading from both
+a buffer object and its sub-buffer objects or reading from multiple
+overlapping sub-buffer objects is defined.
 
 Errors
 ------
 
-Returns a valid non-zero buffer object and `errcode_ret` is set to
-`CL_SUCCESS` if the buffer object is created successfully. Otherwise, it
-returns a NULL value with one of the following error values returned in
-`errcode_ret`:
+Returns `CL_SUCCESS` if the function is executed successfully.
+Otherwise, it returns one of the following errors in `errcode_ret`
 
--   `CL_INVALID_CONTEXT` if `context` is not a valid context.
+-   `CL_INVALID_MEM_OBJECT` if `buffer` is not a valid buffer object or
+    is a sub-buffer object.
 
--   `CL_INVALID_VALUE` if values specified in `flags` are not valid as
-    defined in the table above.
+-   `CL_INVALID_VALUE` if `buffer` was created with `CL_MEM_WRITE_ONLY`
+    and `flags` specifies `CL_MEM_READ_WRITE` or `CL_MEM_READ_ONLY`, or
+    if `buffer` was created with `CL_MEM_READ_ONLY` and `flags`
+    specifies `CL_MEM_READ_WRITE` or `CL_MEM_WRITE_ONLY`, or if `flags`
+    specifies `CL_MEM_USE_HOST_PTR` or `CL_MEM_ALLOC_HOST_PTR` or
+    `CL_MEM_COPY_HOST_PTR`.
 
--   `CL_INVALID_BUFFER_SIZE` if `size` is 0.
+-   `CL_INVALID_VALUE` if `buffer` was created with
+    `CL_MEM_HOST_WRITE_ONLY` and `flags` specifies
+    `CL_MEM_HOST_READ_ONLY` or if `buffer` was created with
+    `CL_MEM_HOST_READ_ONLY` and `flags` specifies
+    `CL_MEM_HOST_WRITE_ONLY`, or if `buffer` was created with
+    `CL_MEM_HOST_NO_ACCESS` and `flags` specifies
+    `CL_MEM_HOST_READ_ONLY` or `CL_MEM_HOST_WRITE_ONLY`.
 
-    Implementations may return `CL_INVALID_BUFFER_SIZE` if `size` is
-    greater than the `CL_DEVICE_MAX_MEM_ALLOC_SIZE` value specified in
-    the table of allowed values for `param_name` for
-    [`clGetDeviceInfo`](clGetDeviceInfo.html) for all `devices` in
-    context.
+-   `CL_INVALID_VALUE` if value specified in `buffer_create_type` is not
+    valid.
 
--   `CL_INVALID_HOST_PTR` if `host_ptr` is NULL and
-    `CL_MEM_USE_HOST_PTR` or `CL_MEM_COPY_HOST_PTR` are set in `flags`
-    or if `host_ptr` is not NULL but `CL_MEM_COPY_HOST_PTR` or
-    `CL_MEM_USE_HOST_PTR` are not set in `flags`.
+-   `CL_INVALID_VALUE` if value(s) specified in `buffer_create_info`
+    (for a given `buffer_create_type`) is not valid or if
+    `buffer_create_info` is NULL.
+
+-   `CL_INVALID_BUFFER_SIZE` if size is 0.
 
 -   `CL_MEM_OBJECT_ALLOCATION_FAILURE` if there is a failure to allocate
-    memory for buffer object.
+    memory for sub-buffer object.
 
 -   `CL_OUT_OF_RESOURCES` if there is a failure to allocate resources
     required by the OpenCL implementation on the device.
@@ -92,17 +95,16 @@ returns a NULL value with one of the following error values returned in
 Also see
 --------
 
+[`clCreateBuffer`](clCreateBuffer.html),
 [`clEnqueueReadBuffer`](clEnqueueReadBuffer.html),
 [`clEnqueueWriteBuffer`](clEnqueueWriteBuffer.html),
-[`clEnqueueCopyBuffer`](clEnqueueCopyBuffer.html),
-[`clCreateSubBuffer`](clCreateSubBuffer.html), [Cardinality
-Diagram](classDiagram.html)
+[`clEnqueueCopyBuffer`](clEnqueueCopyBuffer.html)
 
 Specification
 -------------
 
 [OpenCL 2.1 API Specification, page
-104](https://www.khronos.org/registry/cl/specs/opencl-2.1.pdf#page=104)
+107](https://www.khronos.org/registry/cl/specs/opencl-2.1.pdf#page=107)
 
 Copyright
 ---------

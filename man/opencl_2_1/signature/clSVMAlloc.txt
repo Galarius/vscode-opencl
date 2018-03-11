@@ -1,0 +1,4 @@
+    void * clSVMAlloc(cl_context context,
+                      cl_svm_mem_flags flags,
+                      size_t size,
+                      cl_uint alignment)

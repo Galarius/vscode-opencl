@@ -1,0 +1,2 @@
+    cl_kernel clCloneKernel(cl_kernel source_kernel,
+                            cl_int *errcode_ret)

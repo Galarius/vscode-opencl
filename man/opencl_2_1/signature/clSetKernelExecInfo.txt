@@ -1,0 +1,4 @@
+    cl_int clSetKernelExecInfo(cl_kernel kernel,
+                               cl_kernel_exec_info param_name,
+                               size_t param_value_size,
+                               const void *param_value)
