@@ -1,5 +1,13 @@
 # OpenCL for Visual Studio Code Change Log
 
+## Version 0.2.0: March 11, 2018
+
+* Added: Hover tooltip for OpenCL Runtime.
+    
+    ![vscode-opencl-cmd-oclinfo](https://raw.githubusercontent.com/Galarius/vscode-opencl/master/images/vscode-opencl-hover.gif)
+
+* Added: New icon with transparent background.
+
 ## Version 0.1.5: January 13, 2018
 
 * Fixed: Types `ushort`, `uint`, `size_t`, `intptr_t`, `uintptr_t` were not highlighted.
