@@ -4,7 +4,7 @@
     "description": "OpenCL for Visual Studio Code",
     "version": "0.1.5",
     "publisher": "galarius",
-    "icon": "images/OpenCL_128x.jpg",
+    "icon": "images/OpenCL_128x.png",
     "author": {
         "name": "Galarius"
     },
