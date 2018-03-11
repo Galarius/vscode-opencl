@@ -210,30 +210,28 @@ def main():
                 os.system('./grid2php {} {}'.format(tmp, dst))
             os.remove(tmp)
         elif opt == '-u':
-            # for func in OPENCL_RUNTIME:
-            #     md = os.path.join(RESULT_DIR, func + '.md')
-            #     dst_sig = os.path.join(MAN_SIG_DIR, func + '.txt')
-            #     dst_desc = os.path.join(MAN_DESC_DIR, func + '.md')
+            for func in OPENCL_RUNTIME:
+                md = os.path.join(RESULT_DIR, func + '.md')
+                dst_sig = os.path.join(MAN_SIG_DIR, func + '.txt')
+                dst_desc = os.path.join(MAN_DESC_DIR, func + '.md')
                 
-            #     if not func.startswith('cl_'):
-            #         print 'Creating file with {} signature...'.format(func)
-            #         # get signature from file
-            #         sig = get_signature(md)
-            #         with open(dst_sig, 'w') as f:
-            #             f.write(sig)
+                if not func.startswith('cl_'):
+                    print 'Creating file with {} signature...'.format(func)
+                    # get signature from file
+                    sig = get_signature(md)
+                    with open(dst_sig, 'w') as f:
+                        f.write(sig)
                 
-            #     print 'Creating file with {} description...'.format(func)
-            #     # get description from file
-            #     desc = get_description(md)
-            #     with open(dst_desc, 'w') as f:
-            #         f.write(desc)
+                print 'Creating file with {} description...'.format(func)
+                # get description from file
+                desc = get_description(md)
+                with open(dst_desc, 'w') as f:
+                    f.write(desc)
 
             print 'Generating openclMan.ts file...'
             content = generate_openclman_ts()
             with open(OPENCL_MAN_TS, 'w') as f:
-                f.write(content)
-
-                
+                f.write(content)                
         else:
             print 'Unregognised option {}'.format(opt)
     print 'Done!'
