@@ -5,11 +5,12 @@
 
 This extension adds:
 
-* `.cl` and `.ocl` file extensions support
+* Support for file extensions: `.cl` and `.ocl`
 * OpenCL C keywords syntax highlighting
 * OpenCL C++ keywords syntax highlighting
 * Auto-Completion (Built-in OpenCL functions, data types and macros)
-* Code Snippets for some host and device functions
+* Hover tooltip for OpenCL Runtime
+* Code Snippets for some host and device functions ([list of functions](https://raw.githubusercontent.com/Galarius/vscode-opencl/master/snippets/code.snippets.progress.md))
 * Command `OpenCL: Info` to show OpenCL platforms/devices info. (`linux` is not supported yet)
 
 |![screen-autocomplete](https://raw.githubusercontent.com/Galarius/vscode-opencl/master/images/vscode-opencl-autocomplete.gif)|
@@ -19,6 +20,8 @@ This extension adds:
 |*Code Snippets*|
 |![vscode-opencl-cmd-oclinfo](https://raw.githubusercontent.com/Galarius/vscode-opencl/master/images/vscode-opencl-cmd-oclinfo.gif)|
 |*OpenCL platforms/devices info*|
+|![vscode-opencl-cmd-oclinfo](https://raw.githubusercontent.com/Galarius/vscode-opencl/master/images/vscode-opencl-hover.gif)|
+|*Hover tooltip for OpenCL Runtime*|
 ||
 
 ## Prerequisites
@@ -34,27 +37,11 @@ In order to run command `OpenCL: Info` on Windows:
 * Check that you have a device that supports OpenCL 
 * Make sure your OpenCL device driver is up to date. You can download drivers manually: [Intel](https://software.intel.com/en-us/articles/opencl-drivers), [NVidia](http://www.nvidia.com/Download/index.aspx), [AMD](http://support.amd.com/en-us/download) 
 
-## How To Install This Extension
+## How To Install
 
-### **I.** Install from the Extensions pane
+See [INSTALL.md](https://github.com/Galarius/vscode-opencl/blob/master/INSTALL.md)
 
-1. Press `Ctrl+Shift+X` or `Cmd+Shift+X` to open the Extensions pane
-
-2. Find and install the `OpenCL` extension
-
-### **II.** Install from the [Marketplace](https://marketplace.visualstudio.com/items?itemName=galarius.vscode-opencl)
-
-Press `Install` button
-
-### **III.** Install from the `.vsix` file
-
-1. Download `vsix` package from the [Marketplace](https://marketplace.visualstudio.com/items?itemName=galarius.vscode-opencl) (Press `Download Extension` link) or select the specific version of this extension from it's [Releases page](https://github.com/Galarius/vscode-opencl/releases)
-
-2. In VS Code press `Ctrl+Shift+X` or `Cmd+Shift+X` to open the Extensions pane
-
-3. Press at the right top corner of the pane and select `Install from VSIX...`
-
-## How To Use This Extension
+## How To Use
 
 * Open any `.cl` or `.ocl` file in VS Code to activate syntax highlighting, auto-completion and code snippets for OpenCL kernel files.
 
@@ -62,38 +49,11 @@ Press `Install` button
 
 ## Contributing
 
-There are plenty of possible improvements:
-
-* Auto-Completion for OpenCL C++ Standard Library
-
-* Documentation Hover View for OpenCL API
-
-* More Code Snippets (check [current progress](https://raw.githubusercontent.com/Galarius/vscode-opencl/master/snippets/code.snippets.progress.md))
-
-* Check for [open issues](https://github.com/Galarius/vscode-opencl/issues)
-
-Here's a quick guide on `pull requests`:
-
-1. [Check for open issues](https://github.com/galarius/vscode-opencl/issues), or
-   open a fresh issue to start a discussion around a feature idea or a bug.
-   Opening a separate issue to discuss the change is less important for smaller
-   changes, as the discussion can be done in the pull request.
-2. [Fork](https://github.com/galarius/vscode-opencl.git) this repository on GitHub, and start making your changes.
-3. Push the change (it's recommended to use a separate branch for your feature).
-4. Open a pull request.
-5. I will try to merge and deploy changes as soon as possible, or at least leave
-   some feedback, but if you haven't heard back from me after a couple of days,
-   feel free to leave a comment on the pull request.
+See [CONTRIBUTING.md](https://github.com/Galarius/vscode-opencl/blob/master/CONTRIBUTING.md)
 
 ## FAQ
 
-> Why `OpenCL: Info` command shows error?
-
-The command needs OpenCL drivers and run-time libraries to be installed on your system. They can be obtained e.g. from [Intel](https://software.intel.com/en-us/articles/opencl-drivers).
-
-> I am on Linux. Why can't I use `OpenCL: Info` command?
-
-It is not supported for now, but will be in future.
+See [FAQ.md](https://github.com/Galarius/vscode-opencl/blob/master/FAQ.md)
 
 ## Change Log
 
@@ -101,4 +61,4 @@ See [CHANGELOG.md](https://marketplace.visualstudio.com/items/galarius.vscode-op
 
 ## License
 
-[MIT](https://raw.githubusercontent.com/Galarius/vscode-opencl/master/LICENSE.txt)
+See [LICENSE.txt](https://raw.githubusercontent.com/Galarius/vscode-opencl/master/LICENSE.txt)
