@@ -20,6 +20,7 @@ MAN_DIR      = os.path.join('..', 'man', 'opencl_2_1')
 MAN_DESC_DIR = os.path.join('..', 'man', 'opencl_2_1', 'description')
 MAN_SIG_DIR  = os.path.join('..', 'man', 'opencl_2_1', 'signature')
 OPENCL_MAN_TS = os.path.join('..', 'src', 'openclMan.ts')
+GRID2PHP_TBL = os.path.join('grid2php', 'cmake-build-debug', 'grid2php')
 
 
 BASE_LINK = 'http://man.opencl.org/'
@@ -207,7 +208,7 @@ def main():
                 #
                 #   some text    
                 print 'Converting {} with `grid2php`...'.format(func)
-                os.system('./grid2php {} {}'.format(tmp, dst))
+                os.system('{} {} {}'.format(GRID2PHP_TBL, tmp, dst))
             os.remove(tmp)
         elif opt == '-u':
             for func in OPENCL_RUNTIME:
