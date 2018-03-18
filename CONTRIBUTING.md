@@ -1,14 +1,14 @@
 # Contributing
 
-There are plenty of possible improvements:
+There are several possible improvements:
 
-* Auto-Completion for OpenCL C++ Standard Library
+* Build & Test [oclinfo](https://github.com/Galarius/ocl-info) for different Linux distributions that are supported by VS Code to provide `OpenCL : Info` command support.
 
-* Documentation Hover View for OpenCL API
+* Auto-Completion for OpenCL C++ Standard Library.
 
-* More Code Snippets (check [current progress](https://raw.githubusercontent.com/Galarius/vscode-opencl/master/snippets/code.snippets.progress.md))
+* More Code Snippets (check [current progress](https://raw.githubusercontent.com/Galarius/vscode-opencl/master/snippets/code.snippets.progress.md)).
 
-* Check for [open issues](https://github.com/Galarius/vscode-opencl/issues)
+* Check for [open issues](https://github.com/Galarius/vscode-opencl/issues).
 
 Here's a quick guide on `pull requests`:
 
