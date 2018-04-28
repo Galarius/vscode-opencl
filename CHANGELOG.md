@@ -1,5 +1,9 @@
 # OpenCL for Visual Studio Code Change Log
 
+## Version 0.2.1: April 28, 2018
+
+* `Hoek` dependency was updated due to potential security vulnerability in older version.
+
 ## Version 0.2.0: March 11, 2018
 
 * Added: Hover tooltip for OpenCL Runtime.
