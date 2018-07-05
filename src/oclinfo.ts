@@ -6,6 +6,8 @@ import * as os from "os";
 import * as fs from 'fs';
 var exec = require('child-process-promise').exec;
 
+import * as cmd from './cmd';
+
 function findOclInfoPath(): string {
     let extPath = vscode.extensions.getExtension("galarius.vscode-opencl").extensionPath
     switch (os.platform()) {
@@ -18,33 +20,11 @@ function findOclInfoPath(): string {
     }
 }
 
-function execute(command: string): Promise<Buffer> {
-    return exec(command, {
-        cwd: vscode.workspace.rootPath
-    }).then(function(result): Buffer {
-        return result.stdout;
-    }).fail(function(error) {
-        console.error("Error: " + error);
-        vscode.window.showErrorMessage(error);
-    }).progress(function(childProcess) {
-        console.log("Command: " + command + " running...");
-    });
-}
-
-function buildCommand(args: Array<string>): string {
-    let command = "";
-    for (let arg of args) {
-        command += arg + " ";
-    }
-    command = command.slice(0, -1)
-    return command;
-}
-
 export function oclinfoDumpAll() {
     let oclinfoPath = findOclInfoPath();
     if(oclinfoPath) {
-        let command = buildCommand([oclinfoPath, "-pds"])
-        execute(command).then(function(output){
+        let command = cmd.buildCommand([oclinfoPath, "-pds"])
+        cmd.execute(command).then(function(output){
             let filePath = path.join(vscode.workspace.rootPath, "oclinfo.txt");
             fs.writeFileSync(filePath, output);
             var openPath = vscode.Uri.file(filePath);
