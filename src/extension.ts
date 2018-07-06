@@ -25,6 +25,9 @@ export async function activate(context: vscode.ExtensionContext) {
     context.subscriptions.push(vscode.languages.registerHoverProvider({ language: "c", scheme: "file" }, signatureHelpProvider));
     context.subscriptions.push(vscode.languages.registerHoverProvider({ language: "cpp", scheme: "file" }, signatureHelpProvider));
 
-    let formattingProvider = new OpenCLDocumentFormattingEditProvider();
-    context.subscriptions.push(vscode.languages.registerDocumentFormattingEditProvider(opencl.OPECL_LANGUAGE_ID, formattingProvider));
+    let formattingEnabled = vscode.workspace.getConfiguration().get('opencl.formattingToolEnabled');
+    if(formattingEnabled) {
+        let formattingProvider = new OpenCLDocumentFormattingEditProvider();
+        context.subscriptions.push(vscode.languages.registerDocumentFormattingEditProvider(opencl.OPECL_LANGUAGE_ID, formattingProvider));
+    }
 }

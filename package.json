@@ -75,7 +75,23 @@
                 "title": "OpenCL: Info",
                 "description": "Show OpenCL platforms/devices info."
             }
-        ]
+        ],
+        "configuration": {
+            "type": "object",
+            "title": "OpenCL Configuration",
+            "properties": {
+                "opencl.formattingToolEnabled": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Availability of formatting tool for OpenCL."
+                },
+                "opencl.formattingToolName": {
+                    "type": "string",
+                    "default": "astyle",
+                    "description": "Tool for OpenCL code formatting. AStyle is used by default."
+                }
+            }
+        }
     },
     "scripts": {
         "vscode:prepublish": "tsc -p ./",
