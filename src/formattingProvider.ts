@@ -2,9 +2,19 @@
 
 import * as vscode from 'vscode'; 
 import * as cmd from './cmd';
+import * as os from "os";
+
+function formattingAppName(): string {
+    switch (os.platform()) {
+        case "win32":
+            return "astyle.exe";
+        default:
+            return "astyle";
+    }
+}
 
 function isAvailable(): Promise<boolean> {
-    let command = cmd.buildCommand(['astyler', '--version'])
+    let command = cmd.buildCommand([formattingAppName(), '--version'])
     return cmd.execute(command).then(function(output) {
         let version = output.toString()
         return version.startsWith('Artistic Style Version')
@@ -21,7 +31,7 @@ export class OpenCLDocumentFormattingEditProvider implements vscode.DocumentForm
         
         isAvailable().then(function(output) {
             let filename = document.fileName
-            let command = cmd.buildCommand(['astyle', '-n', filename])
+            let command = cmd.buildCommand([formattingAppName(), '-n', filename])
             cmd.execute(command)
         }, (error: any) => {
             let err = "Artistic Style is not available at PATH!";
