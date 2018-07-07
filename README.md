@@ -14,18 +14,14 @@ This extension adds:
 * Command `OpenCL: Info` to show OpenCL platforms/devices info. (`linux` is not supported yet)
 * Support for external formatters (e.g. [AStyle](http://astyle.sourceforge.net))
 
-|![screen-autocomplete](https://raw.githubusercontent.com/Galarius/vscode-opencl/master/images/vscode-opencl-autocomplete.gif)|
-|-|
-|*Syntax Highlighting, Auto-Completion*|
-|![screen-snippet](https://raw.githubusercontent.com/Galarius/vscode-opencl/master/images/vscode-opencl-snippet.gif)|
-|*Code Snippets*|
-|![vscode-opencl-cmd-oclinfo](https://raw.githubusercontent.com/Galarius/vscode-opencl/master/images/vscode-opencl-cmd-oclinfo.gif)|
-|*OpenCL platforms/devices info*|
-|![vscode-opencl-cmd-oclinfo](https://raw.githubusercontent.com/Galarius/vscode-opencl/master/images/vscode-opencl-hover.gif)|
-|*Hover tooltip for OpenCL Runtime*|
-|![vscode-opencl-cmd-oclinfo](images/vscode-opencl-formatting.gif)|
-|*Source code formatting*|
-||
+|![screen-autocomplete](https://raw.githubusercontent.com/Galarius/vscode-opencl/master/images/vscode-opencl-autocomplete.gif)|![screen-snippet](https://raw.githubusercontent.com/Galarius/vscode-opencl/master/images/vscode-opencl-snippet.gif)|
+|-|-|
+|*Syntax Highlighting, Auto-Completion*|*Code Snippets*|
+|![vscode-opencl-cmd-oclinfo](https://raw.githubusercontent.com/Galarius/vscode-opencl/master/images/vscode-opencl-cmd-oclinfo.gif)|![vscode-opencl-cmd-oclinfo](https://raw.githubusercontent.com/Galarius/vscode-opencl/master/images/vscode-opencl-hover.gif)|
+|*OpenCL platforms/devices info*|*Hover tooltip for OpenCL Runtime*|
+|![vscode-opencl-cmd-oclinfo](images/vscode-opencl-formatting.gif)||
+|*Source code formatting*||
+|||
 
 ## Prerequisites
 
