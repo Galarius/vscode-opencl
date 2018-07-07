@@ -23,8 +23,9 @@
         "cl"
     ],
     "categories": [
-        "Languages",
-        "Snippets"
+        "Programming Languages",
+        "Snippets",
+        "Formatters"
     ],
     "activationEvents": [
         "onLanguage:opencl",
@@ -83,17 +84,18 @@
                 "opencl.formatting.enabled": {
                     "type": "boolean",
                     "default": true,
-                    "description": "Enable/Disable code formatting for OpenCL."
+                    "description": "Enable/Disable code formatting for OpenCL (Restart is required)."
                 },
                 "opencl.formatting.name": {
                     "type": "string",
                     "default": "astyle",
-                    "description": "The name of formatting tool to launch."
+                    "description": "The file name of the formatting utility.\nShould be available at $PATH, otherwise specify full file name."
                 },
                 "opencl.formatting.args": {
                     "type": "array",
-                    "default": [ "-n" ],
-                    "description": "Command line arguments for formatting tool."
+                    "default": [ 
+                        "-n" ],
+                    "description": "Command line arguments for formatting utility.\nUse variable ${workspaceRoot} to specify configuration file in a workspace \n(e.g. `--options=${workspaceRoot}/.astylerc` for Artistic Style)."
                 }
             }
         }
