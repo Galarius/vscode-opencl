@@ -19,9 +19,8 @@ This extension adds:
 |*Syntax Highlighting, Auto-Completion*|*Code Snippets*|
 |![vscode-opencl-cmd-oclinfo](https://raw.githubusercontent.com/Galarius/vscode-opencl/master/images/vscode-opencl-cmd-oclinfo.gif)|![vscode-opencl-cmd-oclinfo](https://raw.githubusercontent.com/Galarius/vscode-opencl/master/images/vscode-opencl-hover.gif)|
 |*OpenCL platforms/devices info*|*Hover tooltip for OpenCL Runtime*|
-|![vscode-opencl-cmd-oclinfo](images/vscode-opencl-formatting.gif)||
+|![vscode-opencl-cmd-oclinfo](https://raw.githubusercontent.com/Galarius/vscode-opencl/master/images/vscode-opencl-formatting.gif)||
 |*Source code formatting*||
-|||
 
 ## Prerequisites
 
@@ -52,7 +51,7 @@ See [INSTALL.md](https://github.com/Galarius/vscode-opencl/blob/master/INSTALL.m
 
 * `opencl.formatting.name` - The file name of the formatting utility (Should be available at `$PATH`, otherwise specify full file name);
 
-* `opencl.formatting.args` - Array of command line options.
+* `opencl.formatting.args` - An array of command line options.
 
 [AStyle](http://astyle.sourceforge.net)  formatting utility is used by default. If workspace contains AStyle configuration file `.astylerc`, add the following option to `opencl.formatting.args` in workspace configuration: `--options=${workspaceRoot}/.astylerc`.
 
