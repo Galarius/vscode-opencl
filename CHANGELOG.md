@@ -1,5 +1,11 @@
 # OpenCL for Visual Studio Code Change Log
 
+## Version 0.3.0: July 07, 2018
+
+* Added: Support for external formatters (e.g. [AStyle](http://astyle.sourceforge.net))
+
+![vscode-opencl-formatting](https://raw.githubusercontent.com/Galarius/vscode-opencl/master/images/vscode-opencl-formatting.gif)
+
 ## Version 0.2.1: April 28, 2018
 
 * `Hoek` dependency was updated due to potential security vulnerability in older version.

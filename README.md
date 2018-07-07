@@ -19,7 +19,7 @@ This extension adds:
 |*Syntax Highlighting, Auto-Completion*|*Code Snippets*|
 |![vscode-opencl-cmd-oclinfo](https://raw.githubusercontent.com/Galarius/vscode-opencl/master/images/vscode-opencl-cmd-oclinfo.gif)|![vscode-opencl-cmd-oclinfo](https://raw.githubusercontent.com/Galarius/vscode-opencl/master/images/vscode-opencl-hover.gif)|
 |*OpenCL platforms/devices info*|*Hover tooltip for OpenCL Runtime*|
-|![vscode-opencl-cmd-oclinfo](https://raw.githubusercontent.com/Galarius/vscode-opencl/master/images/vscode-opencl-formatting.gif)||
+|![vscode-opencl-formatting](https://raw.githubusercontent.com/Galarius/vscode-opencl/master/images/vscode-opencl-formatting.gif)||
 |*Source code formatting*||
 
 ## Prerequisites
@@ -53,8 +53,7 @@ See [INSTALL.md](https://github.com/Galarius/vscode-opencl/blob/master/INSTALL.m
 
 * `opencl.formatting.args` - An array of command line options.
 
-[AStyle](http://astyle.sourceforge.net)  formatting utility is used by default. If workspace contains AStyle configuration file `.astylerc`, add the following option to `opencl.formatting.args` in workspace configuration: `--options=${workspaceRoot}/.astylerc`.
-
+[AStyle](http://astyle.sourceforge.net) formatting utility is used by default. If workspace contains AStyle configuration file `.astylerc`, add `--options=${workspaceRoot}/.astylerc` option to `opencl.formatting.args` in a workspace configuration.
 
 ## Contributing
 
