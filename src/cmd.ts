@@ -11,8 +11,10 @@ export function execute(command: string): Promise<Buffer> {
     }).then(function(result): Buffer {
         return result.stdout;
     }).fail(function(error) {
-        console.error("Error: " + error);
-        vscode.window.showErrorMessage(error);
+        console.error(error);
+        let msg = "[Error: " + error.code + "] " + error.stderr;
+        vscode.window.showErrorMessage(msg)
+        return error
     }).progress(function(childProcess) {
         console.log("Command: " + command + " running...");
     });
