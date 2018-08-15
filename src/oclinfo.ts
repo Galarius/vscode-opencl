@@ -15,6 +15,8 @@ function findOclInfoPath(): string {
             return path.join(extPath, "bin", "win32", "oclinfo.exe");
         case "darwin":
             return path.join(extPath, "bin", "darwin", "oclinfo");
+        case "linux":
+            return path.join(extPath, "bin", "linux", "clinfo");
         default:
             return "";
     }
