@@ -11,7 +11,7 @@ This extension adds:
 * Auto-Completion (Built-in OpenCL functions, data types and macros)
 * Hover tooltip for OpenCL Runtime
 * Code Snippets for some host and device functions ([list of functions](https://raw.githubusercontent.com/Galarius/vscode-opencl/master/snippets/code.snippets.progress.md))
-* Command `OpenCL: Info` to show OpenCL platforms/devices info. (`linux` is not supported yet)
+* Command `OpenCL: Info` to show OpenCL platforms/devices info.
 * Support for external formatters (e.g. [AStyle](http://astyle.sourceforge.net))
 
 |![screen-autocomplete](https://raw.githubusercontent.com/Galarius/vscode-opencl/master/images/vscode-opencl-autocomplete.gif)|![screen-snippet](https://raw.githubusercontent.com/Galarius/vscode-opencl/master/images/vscode-opencl-snippet.gif)|
