@@ -30,7 +30,7 @@ This extension adds:
 
 *[Optional]*
 
-In order to run command `OpenCL: Info` on Windows:
+In order to run command `OpenCL: Info`:
 
 * Check that you have a device that supports OpenCL;
 * Make sure your OpenCL device driver is up to date. You can download drivers manually: [Intel](https://software.intel.com/en-us/articles/opencl-drivers), [NVidia](http://www.nvidia.com/Download/index.aspx), [AMD](http://support.amd.com/en-us/download).

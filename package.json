@@ -2,7 +2,7 @@
     "name": "vscode-opencl",
     "displayName": "OpenCL",
     "description": "OpenCL for Visual Studio Code",
-    "version": "0.3.0",
+    "version": "0.4.0",
     "publisher": "galarius",
     "icon": "images/OpenCL_128x.png",
     "author": {
@@ -93,8 +93,9 @@
                 },
                 "opencl.formatting.args": {
                     "type": "array",
-                    "default": [ 
-                        "-n" ],
+                    "default": [
+                        "-n"
+                    ],
                     "description": "Command line arguments for formatting utility.\nUse variable ${workspaceRoot} to specify configuration file in a workspace \n(e.g. `--options=${workspaceRoot}/.astylerc` for Artistic Style)."
                 }
             }
@@ -106,12 +107,12 @@
         "postinstall": "node ./node_modules/vscode/bin/install"
     },
     "devDependencies": {
-        "@types/node": "^7.0.56",
-        "typescript": "^2.7.2",
-        "vscode": "^1.1.12"
+        "@types/node": "^7.0.69",
+        "typescript": "^2.9.2",
+        "vscode": "^1.1.21"
     },
     "dependencies": {
         "child-process-promise": "^1.1.0",
-        "hoek": "^5.0.3"
+        "hoek": "^5.0.4"
     }
 }
