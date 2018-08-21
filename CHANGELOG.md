@@ -1,12 +1,12 @@
 # OpenCL for Visual Studio Code Change Log
 
-## Version 0.4.0: August 21, 2018
+## Version 0.4.0: August 22, 2018
 
 * Added auto closing pairs (brackets and quotes)
 
 * Added [clinfo](https://github.com/Oblomov/clinfo) binary supporting `OpenCL: Info` command on Linux (*Requirements: OpenCL drivers and runtime libraries*)
 
-* `node-sshpk ` and `url-parse` dependencies were updated due to potential security vulnerability in older version.
+* `node-sshpk ` and `url-parse` dependencies were updated due to potential security vulnerability in older versions.
 
 ## Version 0.3.0: July 07, 2018
 
