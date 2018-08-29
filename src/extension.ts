@@ -9,6 +9,7 @@ import * as oclinfo from "./oclinfo";
 import { OpenCLCompletionItemProvider } from './completionProvider';
 import { OpenCLHoverProvider } from './hoverProvider';
 import { OpenCLDocumentFormattingEditProvider } from './formattingProvider';
+import { OpenCLTaskProvider } from './taskProvider';
 
 export async function activate(context: vscode.ExtensionContext) {
 
@@ -30,4 +31,8 @@ export async function activate(context: vscode.ExtensionContext) {
         let formattingProvider = new OpenCLDocumentFormattingEditProvider();
         context.subscriptions.push(vscode.languages.registerDocumentFormattingEditProvider(opencl.OPECL_LANGUAGE_ID, formattingProvider));
     }
+
+    let taskProvider = new OpenCLTaskProvider();
+    context.subscriptions.push(vscode.workspace.registerTaskProvider(opencl.OPECL_LANGUAGE_ID.language, taskProvider));    
+    
 }

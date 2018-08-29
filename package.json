@@ -31,7 +31,8 @@
         "onLanguage:opencl",
         "onLanguage:c",
         "onLanguage:cpp",
-        "onCommand:opencl.info"
+        "onCommand:opencl.info",
+        "onCommand:workbench.action.tasks.runTask"
     ],
     "main": "./out/src/extension",
     "contributes": {
@@ -99,7 +100,31 @@
                     "description": "Command line arguments for formatting utility.\nUse variable ${workspaceRoot} to specify configuration file in a workspace \n(e.g. `--options=${workspaceRoot}/.astylerc` for Artistic Style)."
                 }
             }
-        }
+        },
+        "taskDefinitions": [
+			{
+				"type": "opencl",
+				"required": [
+                    "task",
+                    "command",
+                    "args"
+				],
+				"properties": {
+					"task": {
+						"type": "string",
+                        "description": "The kernel task to customize"
+                    },
+                    "command": {
+                        "type": "string",
+                        "description": "The kernel task to customize"
+                    },
+                    "args": {
+                        "type": "array",
+                        "description": "The kernel task to customize"
+                    }
+				}
+			}
+		]
     },
     "scripts": {
         "vscode:prepublish": "tsc -p ./",
