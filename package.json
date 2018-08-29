@@ -124,7 +124,22 @@
                     }
 				}
 			}
-		]
+        ],
+        "problemMatchers": [
+            {
+                "name": "ioc",
+                "owner": "opencl",
+                "fileLocation": "absolute",
+                "pattern": {
+                    "regexp": "^(.*):(\\d+):(\\d+): ((fatal )?error|warning|Scholar): (.*)$",
+                    "file": 1,
+                    "line": 2,
+                    "column": 3,
+                    "severity": 4,
+                    "message": 6
+                }
+            }
+        ]
     },
     "scripts": {
         "vscode:prepublish": "tsc -p ./",
