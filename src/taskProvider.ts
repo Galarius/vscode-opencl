@@ -11,7 +11,6 @@ interface KernelTaskDefinition extends vscode.TaskDefinition {
     args: Array<string>;
 }
 
-
 export class OpenCLTaskProvider implements vscode.TaskProvider {
     provideTasks(token?: vscode.CancellationToken): vscode.ProviderResult<vscode.Task[]> {
         return this.getTasks();
@@ -45,7 +44,7 @@ export class OpenCLTaskProvider implements vscode.TaskProvider {
             args: [
                 '-cmd=build',
                 '-input="filePath"',
-                `-ir="${fName}"`
+                `-ir="${fName}"`,
             ]
         };
         return defBuild;
@@ -59,36 +58,37 @@ export class OpenCLTaskProvider implements vscode.TaskProvider {
         return task;
     }
 
-    getTasks(): Thenable<vscode.Task[]> {
+    async getTasks(): Promise<vscode.Task[]> 
+    {
+        let result: vscode.Task[] = [];
 
-        return vscode.workspace.findFiles('**/*.cl').then( (files) => {
+        let workspaceRoot = vscode.workspace.rootPath;
+        if(!workspaceRoot) {
+            return result;
+        }
+        
+        // Find all *.cl and *.ocl files in the workspace
+        let clFiles = await vscode.workspace.findFiles('**/*.cl');
+        let oclFiles = await vscode.workspace.findFiles('**/*.ocl');
+        let files = clFiles.concat(oclFiles);
+        if(!files.length) {
+            return result;
+        }
+        
+        for(const file of files)
+        {
+            let fName = file.fsPath.substring(file.fsPath.lastIndexOf(path.sep) + 1);
 
-            let result: vscode.Task[] = [];
-            if(!files.length) {
-                return result;
-            }
+            let defCompile: KernelTaskDefinition = this.taskCompileDefinition(file.fsPath);
+            let defBuild: KernelTaskDefinition = this.taskBuildDefinition(file.fsPath);
 
-            let paths : string[] = [];
-            for (const file of files) {
-                paths.push(file.fsPath);
-            }
+            let compileTask = this.buildTask(defCompile, `compile [${fName}]`);
+            let buildTask = this.buildTask(defBuild, `build [${fName}]`);
 
-            let pickOptions: vscode.QuickPickOptions = {
-                placeHolder: "Select the kernel file..."
-            };
+            result.push(compileTask);
+            result.push(buildTask);    
+        }
 
-            return vscode.window.showQuickPick(paths, pickOptions).then(item => {
-                let defCompile: KernelTaskDefinition = this.taskCompileDefinition(item);
-                let defBuild: KernelTaskDefinition = this.taskBuildDefinition(item);
-    
-                let compileTask = this.buildTask(defCompile, 'compile');
-                let buildTask = this.buildTask(defBuild, 'build');
-    
-                result.push(compileTask);
-                result.push(buildTask);    
-
-                return result;
-            });
-        });
+        return result;
     }
 }		
