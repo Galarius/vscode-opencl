@@ -60,28 +60,35 @@ export class OpenCLTaskProvider implements vscode.TaskProvider {
     }
 
     getTasks(): Thenable<vscode.Task[]> {
-        let workspaceRoot = vscode.workspace.rootPath;
+
         return vscode.workspace.findFiles('**/*.cl').then( (files) => {
 
-            let emptyTasks: vscode.Task[] = [];
+            let result: vscode.Task[] = [];
             if(!files.length) {
-                return emptyTasks;
+                return result;
             }
 
-            let file = files[0];
+            let paths : string[] = [];
+            for (const file of files) {
+                paths.push(file.fsPath);
+            }
 
-            let result: vscode.Task[] = [];
-            
-            let defCompile: KernelTaskDefinition = this.taskCompileDefinition(file.fsPath);
-            let defBuild: KernelTaskDefinition = this.taskBuildDefinition(file.fsPath);
+            let pickOptions: vscode.QuickPickOptions = {
+                placeHolder: "Select the kernel file..."
+            };
 
-            let compileTask = this.buildTask(defCompile, 'compile');
-            let buildTask = this.buildTask(defBuild, 'build');
+            return vscode.window.showQuickPick(paths, pickOptions).then(item => {
+                let defCompile: KernelTaskDefinition = this.taskCompileDefinition(item);
+                let defBuild: KernelTaskDefinition = this.taskBuildDefinition(item);
+    
+                let compileTask = this.buildTask(defCompile, 'compile');
+                let buildTask = this.buildTask(defBuild, 'build');
+    
+                result.push(compileTask);
+                result.push(buildTask);    
 
-            result.push(compileTask);
-            result.push(buildTask);
-
-            return result;
+                return result;
+            });
         });
     }
 }		
