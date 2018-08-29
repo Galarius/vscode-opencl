@@ -43,8 +43,8 @@ export class OpenCLTaskProvider implements vscode.TaskProvider {
             task: `build`,
             args: [
                 '-cmd=build',
-                '-input="filePath"',
-                `-ir="${fName}"`,
+                `-input="${filePath}"`,
+                `-ir="${fName}"`
             ]
         };
         return defBuild;
@@ -53,7 +53,11 @@ export class OpenCLTaskProvider implements vscode.TaskProvider {
     buildTask(definition: KernelTaskDefinition, name: string) : vscode.Task {
         let args = [definition.command].concat(definition.args);
         let command = cmd.buildCommand(args);
-        let task = new vscode.Task(definition, name, 'opencl', new vscode.ShellExecution(command));
+        /*
+            `$ioc` matcher handles messages like this:
+            C:/project/kernel.cl:48:34: error: used type 'float' where floating point type is not allowed
+        */
+        let task = new vscode.Task(definition, name, 'opencl', new vscode.ShellExecution(command), "$ioc");
         task.group = vscode.TaskGroup.Build;
         return task;
     }
