@@ -6,12 +6,14 @@ import * as vscode from 'vscode'
 import * as cmd from './cmd'
 
 interface KernelTaskDefinition extends vscode.TaskDefinition {
+    label: string;
     task: string;
     command: string;
     args: Array<string>;
 }
 
 export class OpenCLTaskProvider implements vscode.TaskProvider {
+
     provideTasks(token?: vscode.CancellationToken): vscode.ProviderResult<vscode.Task[]> {
         return this.getTasks();
     }
@@ -20,32 +22,49 @@ export class OpenCLTaskProvider implements vscode.TaskProvider {
         return undefined;
     }
 
-    taskCompileDefinition(filePath: string): KernelTaskDefinition
+    taskCompileDefinition(filePath: string, label: string): KernelTaskDefinition
     {
+        label = 'opencl: custom '.concat(label);
         let defCompile: KernelTaskDefinition = {
-            type: 'opencl',
-            command: 'ioc64',
+            label: `${label}`,
+            type: 'shell',
             task: `compile`,
+            command: 'ioc64',
             args: [
                 '-cmd=compile',
                 `-input="${filePath}"`
-            ]
+            ],
+            // ToDo: args for openclc
+            "osx": {
+                command: '/System/Library/Frameworks/OpenCL.framework/Libraries/openclc',
+                args: [
+                    `"${filePath}"`
+                ],
+            }
         };
         return defCompile;
     }
 
-    taskBuildDefinition(filePath: string): KernelTaskDefinition
+    taskBuildDefinition(filePath: string, fName: string, label: string): KernelTaskDefinition
     {
-        let fName = filePath.substring(filePath.lastIndexOf(path.sep) + 1);
+        label = 'opencl: custom '.concat(label);
         let defBuild: KernelTaskDefinition = {
-            type: 'opencl',
-            command: 'ioc64',
+            label: `${label}`,
+            type: 'shell',
             task: `build`,
+            command: 'ioc64',
             args: [
                 '-cmd=build',
                 `-input="${filePath}"`,
                 `-ir="${fName}"`
-            ]
+            ],
+            // ToDo: args for openclc
+            "osx": {
+                command: '/System/Library/Frameworks/OpenCL.framework/Libraries/openclc',
+                args: [
+                    `"${filePath}"`
+                ],
+            }
         };
         return defBuild;
     }
@@ -55,7 +74,12 @@ export class OpenCLTaskProvider implements vscode.TaskProvider {
         let command = cmd.buildCommand(args);
         /*
             `$ioc` matcher handles messages like this:
+
             C:/project/kernel.cl:48:34: error: used type 'float' where floating point type is not allowed
+
+            See definition in package.json ("problemMatchers").
+
+            ToDo: problem matcher for openclc (macOS)
         */
         let task = new vscode.Task(definition, name, 'opencl', new vscode.ShellExecution(command), "$ioc");
         task.group = vscode.TaskGroup.Build;
@@ -79,15 +103,18 @@ export class OpenCLTaskProvider implements vscode.TaskProvider {
             return result;
         }
         
+        // Provide build & compile task for each kernel file
         for(const file of files)
         {
             let fName = file.fsPath.substring(file.fsPath.lastIndexOf(path.sep) + 1);
+            let compileName = `compile [${fName}]`;
+            let buildName = `build [${fName}]`;
 
-            let defCompile: KernelTaskDefinition = this.taskCompileDefinition(file.fsPath);
-            let defBuild: KernelTaskDefinition = this.taskBuildDefinition(file.fsPath);
+            let defCompile: KernelTaskDefinition = this.taskCompileDefinition(file.fsPath, compileName);
+            let defBuild:   KernelTaskDefinition = this.taskBuildDefinition(file.fsPath, fName, buildName);
 
-            let compileTask = this.buildTask(defCompile, `compile [${fName}]`);
-            let buildTask = this.buildTask(defBuild, `build [${fName}]`);
+            let compileTask = this.buildTask(defCompile, compileName);
+            let buildTask = this.buildTask(defBuild, buildName);
 
             result.push(compileTask);
             result.push(buildTask);    
