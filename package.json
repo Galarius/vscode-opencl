@@ -90,7 +90,7 @@
                 "opencl.formatting.name": {
                     "type": "string",
                     "default": "astyle",
-                    "description": "The file name of the formatting utility.\nShould be available at $PATH, otherwise specify full file name."
+                    "description": "The file name of the formatting utility.\nShould be available at $PATH, otherwise specify the full file name."
                 },
                 "opencl.formatting.args": {
                     "type": "array",
@@ -103,26 +103,43 @@
         },
         "taskDefinitions": [
 			{
-				"type": "opencl",
+				"type": "shell",
 				"required": [
+                    "label",
                     "task",
                     "command",
                     "args"
 				],
 				"properties": {
+                    "label": {
+                        "type": "string",
+                        "description": "Task name"
+                    },
 					"task": {
 						"type": "string",
-                        "description": "The kernel task to customize"
+                        "description": "The offline compiler task"
                     },
                     "command": {
                         "type": "string",
-                        "description": "The kernel task to customize"
+                        "description": "The offline compiler command"
                     },
                     "args": {
                         "type": "array",
-                        "description": "The kernel task to customize"
+                        "description": "The offline compiler command-line arguments"
+                    },
+                    "osx": {
+                        "type": "object",
+                        "description": "Overrides for macOS"
+                    },
+                    "linux": {
+                        "type": "object",
+                        "description": "Overrides for Linux"
+                    },
+                    "windows": {
+                        "type": "object",
+                        "description": "Overrides for Windows"
                     }
-				}
+                }
 			}
         ],
         "problemMatchers": [
