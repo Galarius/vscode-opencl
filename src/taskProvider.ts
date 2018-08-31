@@ -34,7 +34,8 @@ export class OpenCLTaskProvider implements vscode.TaskProvider {
         if(os.platform() == "darwin") {
             command = '/System/Library/Frameworks/OpenCL.framework/Libraries/openclc';
         } else {
-            if(os.arch() in ['arm64', 'ppc64', 'x64']) {
+            const archs64 = ['arm64', 'ppc64', 'x64'];
+            if(archs64.find(a => a == os.arch())) {
                 command = 'ioc64';
             } else {
                 command = 'ioc32';
