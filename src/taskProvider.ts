@@ -23,146 +23,142 @@ export class OpenCLTaskProvider implements vscode.TaskProvider {
         return undefined;
     }
 
-    kernelName(filePath: string): string
-    {
+    kernelName(filePath: string): string {
         return filePath.substring(filePath.lastIndexOf(path.sep) + 1);
     }
 
-    commandName(): string
-    {
-        let command: string;
-        if(os.platform() == "darwin") {
-            command = '/System/Library/Frameworks/OpenCL.framework/Libraries/openclc';
+    // Default tasks for a given kernel
+    // Requirements: 
+    //  - Intel OpenCL SDK
+    //  - Windows, Linux
+    generateDefaultIOCTasks(kernelPath: string): vscode.Task[] {
+        let tasks : vscode.Task[];
+        let fName = this.kernelName(kernelPath);    // kernel file name
+        let command: string;                        // offline compiler name
+        const archs64 = ['arm64', 'ppc64', 'x64'];  // 64-bit arch identifiers
+        // select an appropriate compiler name
+        if(archs64.find(a => a == os.arch())) {
+            command = 'ioc64';
         } else {
-            const archs64 = ['arm64', 'ppc64', 'x64'];
-            if(archs64.find(a => a == os.arch())) {
-                command = 'ioc64';
-            } else {
-                command = 'ioc32';
-            }
+            command = 'ioc32';
         }
-        return command;
-    }
-
-    argsForCommandName(command: string, task: string, filePath: string): string[]
-    {
-        let fName = this.kernelName(filePath);
-        if(os.platform() == "darwin") {
-            // ToDo: typical args for 'compile' and for 'build'.
-            return [
-                '-emit-llvm',
-                '-c',
-                `-o ${fName}.bc`,
-                `"${filePath}"`
+        // 'compile-only' task
+        let taskName = `compile [${fName}]`;
+        let definition: KernelTaskDefinition = {
+            label: 'opencl: custom '.concat(taskName),
+            type: 'shell',
+            task: 'compile',
+            command: command,
+            args: [
+                '-cmd=compile',
+                `-input="${kernelPath}"`
             ]
-        } else {
-            if(task == 'compile') {
-                return [
-                    '-cmd=compile',
-                    `-input="${filePath}"`
-                ]
-            } else {
-                return [
-                    '-cmd=build',
-                    `-input="${filePath}"`,
-                    `-ir="${fName}"`
-                ]
-            }
-        }
-    }
-
-    taskCompileDefinition(filePath: string, label: string): KernelTaskDefinition
-    {
-        let command = this.commandName();
-        let args = this.argsForCommandName(command, 'compile', filePath);
-        label = 'opencl: custom '.concat(label);
-        let defCompile: KernelTaskDefinition = {
-            label: label,
-            type: 'shell',
-            task: `compile`,
-            command: command,
-            args: args
         };
-        return defCompile;
-    }
-
-    taskBuildDefinition(filePath: string, fName: string, label: string): KernelTaskDefinition
-    {
-        let command = this.commandName();
-        let args = this.argsForCommandName(command, 'build', filePath);
-        label = 'opencl: custom '.concat(label);
-        let defBuild: KernelTaskDefinition = {
-            label: `${label}`,
-            type: 'shell',
-            task: `build`,
-            command: command,
-            args: args
-        };
-        return defBuild;
-    }
-
-    /*
-        `$ioc` matcher handles messages like this:
-        ------------------------------------------
-
-        C:/project/kernel.cl:48:34: error: used type 'float' where floating point type is not allowed
-
-        `$openclc` matcher handles messages like this:
-        ----------------------------------------------
-
-        /Users/galarius/Documents/Projects/Languages/Node.js/vscode-opencl/test/kernel.cl:42:8: error:
-            use of undeclared identifier 'NULL'
-
-        See definition in package.json ("problemMatchers").
-    */
-    buildTask(definition: KernelTaskDefinition, name: string) : vscode.Task {
-        let args = [definition.command].concat(definition.args);
-        let command = cmd.buildCommand(args);
-        let defaultProblemMatcher: string;
-        if(os.platform() == "darwin") {
-            defaultProblemMatcher = "$openclc";
-        } else {
-            defaultProblemMatcher = "$ioc"
-        }
-        let task = new vscode.Task(definition, name, 'opencl', new vscode.ShellExecution(command), defaultProblemMatcher);
+        let args = [definition.command].concat(definition.args);    // command + args 
+        let commandLine = cmd.buildCommand(args);                   // command line 
+        /*
+            `$ioc` matcher handles messages like this:
+            C:/project/kernel.cl:48:34: error: used type 'float' where floating point type is not allowed
+            See definition in package.json ("problemMatchers").
+        */
+        let task = new vscode.Task(definition, taskName, 'opencl', new vscode.ShellExecution(commandLine), "$ioc");
         task.group = vscode.TaskGroup.Build;
-        return task;
+        // 'build' tasks
+        const standarts = ['ir', 'spir32', 'spir64', 'spirv32', 'spirv64']
+        for(const std of standarts) {
+            let taskName = `build [${fName}] {${std}}`;
+            let definition: KernelTaskDefinition = {
+                label: 'opencl: custom '.concat(taskName),
+                type: 'shell',
+                task: 'build',
+                command: command,
+                args: [
+                    '-cmd=build',
+                    `-input="${kernelPath}"`,
+                    `-${std}=${fName}.${std}`
+                ]
+            };
+            let args = [definition.command].concat(definition.args);
+            let commandLine = cmd.buildCommand(args);
+            let task = new vscode.Task(definition, taskName, 'opencl', 
+                                       new vscode.ShellExecution(commandLine), 
+                                       "$ioc");
+            task.group = vscode.TaskGroup.Build;
+            tasks.push(task);
+        }
+        return tasks;
+    }
+
+    // Default tasks for a given kernel
+    // Requirements: 
+    //  - OpenCL.framework
+    //  - macOS
+    generateDefaultOpenCLCTasks(kernelPath: string): vscode.Task[] {
+        let tasks : vscode.Task[] = [];
+        let fName = this.kernelName(kernelPath);
+        const archs = ['i386', 'x86_64', 'gpu_32', 'gpu_64']
+        for(const arch of archs) {
+            let taskName = `build [${fName}] {${arch}}`;
+            let definition: KernelTaskDefinition = {
+                label: 'opencl: custom '.concat(taskName),
+                type: 'shell',
+                task: 'build',
+                command: '/System/Library/Frameworks/OpenCL.framework/Libraries/openclc',
+                args: [
+                    '-emit-llvm',
+                    '-c',
+                    `-arch ${arch}`,
+                    kernelPath,
+                    `-o ${fName}.${arch}.bc`
+                ]
+            };
+            let args = [definition.command].concat(definition.args);
+            let commandLine = cmd.buildCommand(args);
+            /*
+                `$openclc` matcher handles messages like this:
+                /Users/galarius/Documents/Projects/Languages/Node.js/vscode-opencl/test/kernel.cl:42:8: error:
+                    use of undeclared identifier 'NULL'
+                See definition in package.json ("problemMatchers").
+            */
+            let task = new vscode.Task(definition, taskName, 'opencl', 
+                                       new vscode.ShellExecution(commandLine), 
+                                       "$openclc");
+            task.group = vscode.TaskGroup.Build;
+            tasks.push(task);
+        }
+        return tasks;
+    }
+
+    generateDefaultTasksForKernel(kernelPath: string): vscode.Task[]
+    {
+        if(os.platform() == "darwin")   // macOS & openclc
+            return this.generateDefaultOpenCLCTasks(kernelPath);
+        else                            // Windows, Linux & ioc32/64
+            return this.generateDefaultIOCTasks(kernelPath);
     }
 
     async getTasks(): Promise<vscode.Task[]> 
     {
-        let result: vscode.Task[] = [];
+        let tasks: vscode.Task[] = [];
 
         let workspaceRoot = vscode.workspace.rootPath;
         if(!workspaceRoot) {
-            return result;
+            return tasks;
         }
         
         // Find all *.cl and *.ocl files in the workspace
-        let clFiles = await vscode.workspace.findFiles('**/*.cl');
+        let clFiles  = await vscode.workspace.findFiles('**/*.cl');
         let oclFiles = await vscode.workspace.findFiles('**/*.ocl');
         let files = clFiles.concat(oclFiles);
         if(!files.length) {
-            return result;
+            return tasks;
         }
         
-        // Provide build & compile task for each kernel file
-        for(const file of files)
-        {
-            let fName = this.kernelName(file.fsPath);
-            let compileName = `compile [${fName}]`;
-            let buildName = `build [${fName}]`;
-
-            let defCompile: KernelTaskDefinition = this.taskCompileDefinition(file.fsPath, compileName);
-            let defBuild:   KernelTaskDefinition = this.taskBuildDefinition(file.fsPath, fName, buildName);
-
-            let compileTask = this.buildTask(defCompile, compileName);
-            let buildTask = this.buildTask(defBuild, buildName);
-
-            result.push(compileTask);
-            result.push(buildTask);    
+        // Provide tasks for each kernel file
+        for(const file of files) {
+            tasks = tasks.concat(this.generateDefaultTasksForKernel(file.fsPath));
         }
 
-        return result;
+        return tasks;
     }
 }		
