@@ -1,72 +1,55 @@
 # OpenCL for Visual Studio Code
 
-[![Current Version](https://vsmarketplacebadge.apphb.com/version-short/galarius.vscode-opencl.svg)](https://marketplace.visualstudio.com/items?itemName=galarius.vscode-opencl)
+![](https://github.com/Galarius/vscode-opencl/blob/master/images/kernel.png)[![Current Version](https://vsmarketplacebadge.apphb.com/version-short/galarius.vscode-opencl.svg)](https://marketplace.visualstudio.com/items?itemName=galarius.vscode-opencl)
 [![Install Count](https://vsmarketplacebadge.apphb.com/installs/galarius.vscode-opencl.svg)](https://marketplace.visualstudio.com/items?itemName=galarius.vscode-opencl)
 
-This extension adds:
+This extension adds OpenCL C/C++ language support to [VS Code](https://code.visualstudio.com).
 
-* Support for file extensions: `.cl` and `.ocl`
-* OpenCL C keywords syntax highlighting
-* OpenCL C++ keywords syntax highlighting
-* Auto-Completion (Built-in OpenCL functions, data types and macros)
-* Hover tooltip for OpenCL Runtime
-* Code Snippets for some host and device functions ([list of functions](https://raw.githubusercontent.com/Galarius/vscode-opencl/master/snippets/code.snippets.progress.md))
-* Command `OpenCL: Info` to show OpenCL platforms/devices info.
-* Support for external formatters (e.g. [AStyle](http://astyle.sourceforge.net))
+## Features
 
-|![screen-autocomplete](https://raw.githubusercontent.com/Galarius/vscode-opencl/master/images/vscode-opencl-autocomplete.gif)|![screen-snippet](https://raw.githubusercontent.com/Galarius/vscode-opencl/master/images/vscode-opencl-snippet.gif)|
-|-|-|
-|*Syntax Highlighting, Auto-Completion*|*Code Snippets*|
-|![vscode-opencl-cmd-oclinfo](https://raw.githubusercontent.com/Galarius/vscode-opencl/master/images/vscode-opencl-cmd-oclinfo.gif)|![vscode-opencl-cmd-oclinfo](https://raw.githubusercontent.com/Galarius/vscode-opencl/master/images/vscode-opencl-hover.gif)|
-|*OpenCL platforms/devices info*|*Hover tooltip for OpenCL Runtime*|
-|![vscode-opencl-formatting](https://raw.githubusercontent.com/Galarius/vscode-opencl/master/images/vscode-opencl-formatting.gif)||
-|*Source code formatting*||
+* OpenCL Compute Kernel Support [`*.cl`, `*.ocl`]
+* OpenCL C/C++ Syntax Highlighting
+* Auto Completion of Built-in OpenCL Symbols
+* Offline Kernel Compilation
+* Code Snippets ([details](https://raw.githubusercontent.com/Galarius/vscode-opencl/master/snippets/code.snippets.progress.md))
+* Support for External Code Formatters (e.g. [AStyle](http://astyle.sourceforge.net))
+* OpenCL Platforms & Devices Info
 
 ## Prerequisites
 
-*[Required]*
+* OpenCL Drivers [[Intel](https://software.intel.com/en-us/articles/opencl-drivers), [NVidia](http://www.nvidia.com/Download/index.aspx), [AMD](http://support.amd.com/en-us/download)]
+* [Intel OpenCL SDK](https://software.intel.com/en-us/articles/opencl-drivers) [Windows, Linux]
+* OpenCL.framework [macOS]
 
-* [Visual Studio Code](https://code.visualstudio.com)
+## How to use this extension?
 
-*[Optional]*
+Install and open [VS Code](https://code.visualstudio.com). Press `Ctrl+Shift+X` or `Cmd+Shift+X` to open the Extensions pane. Find and install the `OpenCL` extension. You can also install the extension from the Marketplace ([Installation Guide](https://github.com/Galarius/vscode-opencl/blob/master/INSTALL.md)). Open any `.cl` or `.ocl` file in VS Code to activate syntax highlighting, auto-completion, code snippets and document formatting for OpenCL kernel files. Open any file associated with `C` or `C++` language in VS Code to activate code snippets for OpenCL host device functions.
 
-In order to run command `OpenCL: Info`:
+The extension uses a set of tools to provide offline compilation and OpenCL devices/platforms information. By default `ioc32/ioc64` offline compiler is used on `Linux` and `Windows` and `openclc` is used on `macOS`. This requires [Intel OpenCL SDK](https://software.intel.com/en-us/articles/opencl-drivers) [Windows, Linux] to be installed on the system. For macOS `openclc` should be a part of `OpenCL.framework`. It is possible to customize command and arguments (see [Offline Kernel Compilation](#offline-kernel-compilation) for details).
 
-* Check that you have a device that supports OpenCL;
-* Make sure your OpenCL device driver is up to date. You can download drivers manually: [Intel](https://software.intel.com/en-us/articles/opencl-drivers), [NVidia](http://www.nvidia.com/Download/index.aspx), [AMD](http://support.amd.com/en-us/download).
 
-## How To Install
+## Offline Compilation
 
-See [INSTALL.md](https://github.com/Galarius/vscode-opencl/blob/master/INSTALL.md)
+## Formatting Configuration
 
-## How To Use
-
-* Open any `.cl` or `.ocl` file in VS Code to activate syntax highlighting, auto-completion, code snippets and document formatting for OpenCL kernel files.
-
-* Open any file associated with `C` or `C++` language in VS Code to activate code snippets for OpenCL functions.
-
-### Formatting Configuration
-
-* `opencl.formatting.enabled` - Enable/Disable code formatting for OpenCL (Restart is required);
-
+* `opencl.formatting.enabled` - Enable / Disable code formatting for OpenCL (Restart is required);
 * `opencl.formatting.name` - The file name of the formatting utility (Should be available at `$PATH`, otherwise specify full file name);
-
 * `opencl.formatting.args` - An array of command line options.
-
 [AStyle](http://astyle.sourceforge.net) formatting utility is used by default. If workspace contains AStyle configuration file `.astylerc`, add `--options=${workspaceRoot}/.astylerc` option to `opencl.formatting.args` in a workspace configuration.
+
+## Commands
+
+1. Press `Ctrl+Shift+P` or `Cmd+Shift+P`
+2. Type `OpenCL: Info`
 
 ## Contributing
 
-See [CONTRIBUTING.md](https://github.com/Galarius/vscode-opencl/blob/master/CONTRIBUTING.md)
-
-## FAQ
-
-See [FAQ.md](https://github.com/Galarius/vscode-opencl/blob/master/FAQ.md)
+[Contributing Guide](https://github.com/Galarius/vscode-opencl/blob/master/CONTRIBUTING.md)
 
 ## Change Log
 
-See [CHANGELOG.md](https://marketplace.visualstudio.com/items/galarius.vscode-opencl/changelog)
+[OpenCL for VS Code Change Log](https://marketplace.visualstudio.com/items/galarius.vscode-opencl/changelog)
 
 ## License
 
-See [LICENSE.txt](https://raw.githubusercontent.com/Galarius/vscode-opencl/master/LICENSE.txt)
+[MIT License](https://raw.githubusercontent.com/Galarius/vscode-opencl/master/LICENSE.txt)
