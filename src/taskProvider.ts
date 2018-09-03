@@ -24,7 +24,16 @@ export class OpenCLTaskProvider implements vscode.TaskProvider {
     }
 
     kernelName(filePath: string): string {
-        return filePath.substring(filePath.lastIndexOf(path.sep) + 1);
+        let name = filePath.substring(filePath.lastIndexOf(path.sep) + 1);
+        let oclIdx = name.lastIndexOf('.ocl');
+        let clIdx = name.lastIndexOf('.cl');
+        if(oclIdx != -1) {
+            name = name.substring(0, oclIdx);
+        }
+        if(clIdx != -1) {
+            name = name.substring(0, clIdx);
+        }
+        return name;
     }
 
     // Default tasks for a given kernel
@@ -32,7 +41,7 @@ export class OpenCLTaskProvider implements vscode.TaskProvider {
     //  - Intel OpenCL SDK
     //  - Windows, Linux
     generateDefaultIOCTasks(kernelPath: string): vscode.Task[] {
-        let tasks : vscode.Task[];
+        let tasks : vscode.Task[] = [];
         let fName = this.kernelName(kernelPath);    // kernel file name
         let command: string;                        // offline compiler name
         const archs64 = ['arm64', 'ppc64', 'x64'];  // 64-bit arch identifiers
