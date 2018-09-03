@@ -72,6 +72,7 @@ export class OpenCLTaskProvider implements vscode.TaskProvider {
         */
         let task = new vscode.Task(definition, taskName, 'opencl', new vscode.ShellExecution(commandLine), "$ioc");
         task.group = vscode.TaskGroup.Build;
+        tasks.push(task);
         // 'build' tasks
         const standarts = ['ir', 'spir32', 'spir64', 'spirv32', 'spirv64']
         for(const std of standarts) {
