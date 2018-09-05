@@ -1,5 +1,65 @@
 # OpenCL for Visual Studio Code Change Log
 
+## Version 0.5.0-pre
+
+**Offline OpenCL Kernel Compilation**
+
+The extension provides predefined set of VS Code tasks for kernel compilation using `ioc32/ioc64` or `openclc` (on macOS).
+
+### Run Predefined Task
+
+1. Press `Tasks > Run Task...`
+
+2. Press `Run Task...` and select one of the predefined `opencl` tasks for file `kernel.cl`. The set of tasks (fig. 1) is generated for each kernel file that was found in the current workspace.
+
+    ![fig 1](https://raw.githubusercontent.com/Galarius/vscode-opencl/feature/taskProvider/images/vscode-opencl-clc-2.png)
+
+    *Figure 1. Predefined Tasks for `ioc64` compiler.*
+
+### Customize Build Task
+
+Press `Tasks > Configure Tasks...`. Select one of the predefined `opencl` tasks. File `tasks.json` will be created (or extended) with configuration of the selected task.
+
+You can override `command` and `args` fields to use another compiler. Field `label` is a displayed task name, `problemMatcher` should be overriten to match a compiler's errors and warnings so messages could be displayed in `Problems` view.
+
+An example of modified `tasks.json` configuration file for using [AMD Mali](https://developer.arm.com/products/software-development-tools/graphics-development-tools/mali-offline-compiler) as OpenCL offline compiler:
+
+```json
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "shell",
+            "label": "opencl: malisc compile",
+            "task": "compile",
+            "command": "malisc",
+            "args": [
+                "--name kernelName",
+                "kernel.cl"
+            ],
+            "problemMatcher": [
+                {
+                    "owner": "opencl",
+                    "fileLocation": ["relative", "${workspaceFolder}"],
+                    "pattern": {
+                        "regexp": "^(ERROR|WARNING): <(.*)>:(\\d+):(\\d+): (error|warning): (.*)$",
+                        "file": 2,
+                        "line": 3,
+                        "column": 4,
+                        "severity": 1,
+                        "message": 6
+                    }
+                }
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ]
+}
+```
+
 ## Version 0.4.0: August 22, 2018
 
 * Added auto closing pairs (brackets and quotes)
@@ -31,10 +91,6 @@
 * Fixed: Types `ushort`, `uint`, `size_t`, `intptr_t`, `uintptr_t` were not highlighted.
 
 ## Version 0.1.4: January 2, 2018
-
-`Happy New Year!`
-
-![logo-ny](https://www.dropbox.com/s/yp46odwnkxwxvlq/OpenCL_128x_ny.png?dl=1)
 
 * Fixed: Unsigned types and types with `_t` at the end were not highlighted for some color themes;
 * Fixed: `Toggle Line Comment` and `Toggle Block Comment` commands did not work in `*.cl` files.
