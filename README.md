@@ -1,6 +1,6 @@
 # OpenCL for Visual Studio Code
 
-![](images/kernel.png)[![Current Version](https://vsmarketplacebadge.apphb.com/version-short/galarius.vscode-opencl.svg)](https://marketplace.visualstudio.com/items?itemName=galarius.vscode-opencl)
+![](https://raw.githubusercontent.com/Galarius/vscode-opencl/feature/taskProvider/images/kernel.png)[![Current Version](https://vsmarketplacebadge.apphb.com/version-short/galarius.vscode-opencl.svg)](https://marketplace.visualstudio.com/items?itemName=galarius.vscode-opencl)
 [![Install Count](https://vsmarketplacebadge.apphb.com/installs/galarius.vscode-opencl.svg)](https://marketplace.visualstudio.com/items?itemName=galarius.vscode-opencl)
 
 This extension adds OpenCL C/C++ language support to [VS Code](https://code.visualstudio.com).
@@ -16,7 +16,8 @@ This extension adds OpenCL C/C++ language support to [VS Code](https://code.visu
 * Support for External Code Formatters (e.g. [AStyle](http://astyle.sourceforge.net))
 * OpenCL Platforms & Devices Info
 
-[Features Preview](PREVIEW.md) (GIFs)
+[Features Preview](https://github.com/Galarius/vscode-opencl/blob/master/PREVIEW.md) (GIFs)
+
 
 ## Prerequisites
 
@@ -45,7 +46,7 @@ This extension adds OpenCL C/C++ language support to [VS Code](https://code.visu
 
 Install and open [VS Code](https://code.visualstudio.com). Press `Ctrl+Shift+X` or `Cmd+Shift+X` to open the Extensions pane. Find and install the `OpenCL` extension. You can also install the extension from the Marketplace ([Installation Guide](https://github.com/Galarius/vscode-opencl/blob/master/INSTALL.md)). Open any `.cl` or `.ocl` file in VS Code to activate syntax highlighting, auto-completion, code snippets, API reference tooltips and document formatting for OpenCL kernel files. Open any file associated with `C` or `C++` language in VS Code to activate code snippets for OpenCL host device functions.
 
-The extension uses a set of tools to provide offline compilation and OpenCL devices/platforms information. By default `ioc32/ioc64` offline compiler is used on `Linux` and `Windows` and `openclc` is used on `macOS`. This requires [Intel OpenCL SDK](https://software.intel.com/en-us/articles/opencl-drivers) [Windows, Linux] to be installed on the system. For macOS `openclc` should be a part of `OpenCL.framework`. It is possible to customize command and arguments (see [Offline Kernel Compilation](#offline-kernel-compilation) for details).
+The extension uses a set of tools to provide offline compilation and OpenCL devices/platforms information. By default `ioc32/ioc64` offline compiler is used on `Linux` and `Windows` and `openclc` is used on `macOS`. This requires [Intel OpenCL SDK](https://software.intel.com/en-us/articles/opencl-drivers) [Windows, Linux] to be installed on the system. For macOS `openclc` should be a part of `OpenCL.framework` (shipped with XCode). It is possible to customize command and arguments (see [Offline Kernel Compilation](#offline-kernel-compilation) for details).
 
 ## Offline Kernel Compilation
 
@@ -55,13 +56,13 @@ This extension provides predefined set of VS Code tasks for kernel compilation u
 
 1. Press `Tasks > Run Task...` (fig. 1)
 
-    ![](images/vscode-opencl-clc-1.png)
+    ![fig 1](https://raw.githubusercontent.com/Galarius/vscode-opencl/feature/taskProvider/images/vscode-opencl-clc-1.png)
 
     *Figure 1. Tasks menu.*
 
-2. Press `Run Task...` and select one of the predefined `opencl` tasks for file `kernel.cl`. The set of tasks (fig. 2) is generated for each kernel that was found in the current workspace.
+2. Press `Run Task...` and select one of the predefined `opencl` tasks for file `kernel.cl`. The set of tasks (fig. 2) is generated for each kernel file that was found in the current workspace.
 
-    ![](images/vscode-opencl-clc-2.png)
+    ![fig 2](https://raw.githubusercontent.com/Galarius/vscode-opencl/feature/taskProvider/images/vscode-opencl-clc-2.png)
 
     *Figure 2. Predefined Tasks for `ioc64` compiler.*
 
@@ -69,7 +70,7 @@ This extension provides predefined set of VS Code tasks for kernel compilation u
 
 Press `Tasks > Configure Default Build Task...`. Select one of the predefined `opencl` tasks. File `tasks.json` will be created (or extended) with configuration of the selected task (fig. 3). Press `Ctrl+Shift+B` to call it with the shortcut.
 
-![](images/vscode-opencl-clc-3.png)
+![fig 3](https://raw.githubusercontent.com/Galarius/vscode-opencl/feature/taskProvider/images/vscode-opencl-clc-3.png)
 
 *Figure 3. Default Build Task Configuration.*
 
@@ -77,7 +78,7 @@ Press `Tasks > Configure Default Build Task...`. Select one of the predefined `o
 
 Press `Tasks > Configure Tasks...`. Select one of the predefined `opencl` tasks. File `tasks.json` will be created (or extended) with configuration of the selected task.
 
-You can override `command` and `args` fields to use another compiler. Field `label` is a displayed task name, `problemMatcher` should be overriten to match a compiler's errors/warnings so messages could be displayed in `Problems` view.
+You can override `command` and `args` fields to use another compiler. Field `label` is a displayed task name, `problemMatcher` should be overriten to match a compiler's errors and warnings so messages could be displayed in `Problems` view.
 
 An example of modified `tasks.json` configuration file for using [AMD Mali](https://developer.arm.com/products/software-development-tools/graphics-development-tools/mali-offline-compiler) as OpenCL offline compiler:
 
@@ -125,7 +126,7 @@ ERROR: <source>:56:25: error: used type 'float' where floating point type is not
                                    ~~~~~~~~~ ^
 ```
 
-Customized task can also be bound to a custom shortcut (See [Binding keyboard shortcuts to tasks](https://code.visualstudio.com/Docs/editor/tasks#_binding-keyboard-shortcuts-to-tasks)).
+Customized tasks can also be bound to a custom shortcuts (See [Binding keyboard shortcuts to tasks](https://code.visualstudio.com/Docs/editor/tasks#_binding-keyboard-shortcuts-to-tasks)).
 
 ## Formatting Configuration
 
