@@ -1,6 +1,6 @@
 # OpenCL for Visual Studio Code Change Log
 
-## Version 0.5.0-pre
+## Version 0.5.0
 
 **Offline OpenCL Kernel Compilation**
 
@@ -12,7 +12,7 @@ The extension provides predefined set of VS Code tasks for kernel compilation us
 
 2. Press `Run Task...` and select one of the predefined `opencl` tasks for file `kernel.cl`. The set of tasks (fig. 1) is generated for each kernel file that was found in the current workspace.
 
-    ![fig 1](https://raw.githubusercontent.com/Galarius/vscode-opencl/feature/taskProvider/images/vscode-opencl-clc-2.png)
+    ![fig 1](https://raw.githubusercontent.com/Galarius/vscode-opencl/master/images/vscode-opencl-clc-2.png)
 
     *Figure 1. Predefined Tasks for `ioc64` compiler.*
 

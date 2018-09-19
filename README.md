@@ -1,6 +1,6 @@
 # OpenCL for Visual Studio Code
 
-![](https://raw.githubusercontent.com/Galarius/vscode-opencl/feature/taskProvider/images/kernel.png)[![Current Version](https://vsmarketplacebadge.apphb.com/version-short/galarius.vscode-opencl.svg)](https://marketplace.visualstudio.com/items?itemName=galarius.vscode-opencl)
+![](https://raw.githubusercontent.com/Galarius/vscode-opencl/master/images/kernel.png)[![Current Version](https://vsmarketplacebadge.apphb.com/version-short/galarius.vscode-opencl.svg)](https://marketplace.visualstudio.com/items?itemName=galarius.vscode-opencl)
 [![Install Count](https://vsmarketplacebadge.apphb.com/installs/galarius.vscode-opencl.svg)](https://marketplace.visualstudio.com/items?itemName=galarius.vscode-opencl)
 
 This extension adds OpenCL C/C++ language support to [VS Code](https://code.visualstudio.com).
@@ -56,13 +56,13 @@ This extension provides predefined set of VS Code tasks for kernel compilation u
 
 1. Press `Tasks > Run Task...` (fig. 1)
 
-    ![fig 1](https://raw.githubusercontent.com/Galarius/vscode-opencl/feature/taskProvider/images/vscode-opencl-clc-1.png)
+    ![fig 1](https://raw.githubusercontent.com/Galarius/vscode-opencl/master/images/vscode-opencl-clc-1.png)
 
     *Figure 1. Tasks menu.*
 
 2. Press `Run Task...` and select one of the predefined `opencl` tasks for file `kernel.cl`. The set of tasks (fig. 2) is generated for each kernel file that was found in the current workspace.
 
-    ![fig 2](https://raw.githubusercontent.com/Galarius/vscode-opencl/feature/taskProvider/images/vscode-opencl-clc-2.png)
+    ![fig 2](https://raw.githubusercontent.com/Galarius/vscode-opencl/master/images/vscode-opencl-clc-2.png)
 
     *Figure 2. Predefined Tasks for `ioc64` compiler.*
 
@@ -70,7 +70,7 @@ This extension provides predefined set of VS Code tasks for kernel compilation u
 
 Press `Tasks > Configure Default Build Task...`. Select one of the predefined `opencl` tasks. File `tasks.json` will be created (or extended) with configuration of the selected task (fig. 3). Press `Ctrl+Shift+B` to call it with the shortcut.
 
-![fig 3](https://raw.githubusercontent.com/Galarius/vscode-opencl/feature/taskProvider/images/vscode-opencl-clc-3.png)
+![fig 3](https://raw.githubusercontent.com/Galarius/vscode-opencl/master/images/vscode-opencl-clc-3.png)
 
 *Figure 3. Default Build Task Configuration.*
 
