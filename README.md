@@ -46,7 +46,7 @@ This extension adds OpenCL C/C++ language support to [VS Code](https://code.visu
 
 Install and open [VS Code](https://code.visualstudio.com). Press `Ctrl+Shift+X` or `Cmd+Shift+X` to open the Extensions pane. Find and install the `OpenCL` extension. You can also install the extension from the Marketplace ([Installation Guide](https://github.com/Galarius/vscode-opencl/blob/master/INSTALL.md)). Open any `.cl` or `.ocl` file in VS Code to activate syntax highlighting, auto-completion, code snippets, API reference tooltips and document formatting for OpenCL kernel files. Open any file associated with `C` or `C++` language in VS Code to activate code snippets for OpenCL host device functions.
 
-The extension uses a set of tools to provide offline compilation and OpenCL devices/platforms information. By default `ioc32/ioc64` offline compiler is used on `Linux` and `Windows` and `openclc` is used on `macOS`. This requires [Intel OpenCL SDK](https://software.intel.com/en-us/articles/opencl-drivers) [Windows, Linux] to be installed on the system. For macOS `openclc` should be a part of `OpenCL.framework` (shipped with XCode). It is possible to customize command and arguments (see [Offline Kernel Compilation](#offline-kernel-compilation) for details).
+The extension uses a set of tools to provide offline compilation and OpenCL devices/platforms information. By default `ioc32/ioc64` offline compiler is used on `Linux` and `Windows` and `openclc` is used on `macOS`. This requires [Intel OpenCL SDK](https://software.intel.com/en-us/articles/opencl-drivers) [Windows, Linux] to be installed on the system. For macOS `openclc` should be a part of `OpenCL.framework` (shipped with XCode). It is possible to use another offline OpenCL compiler (see [Customize Build Task](#customize-build-task) for details).
 
 ## Offline Kernel Compilation
 
@@ -54,11 +54,11 @@ This extension provides predefined set of VS Code tasks for kernel compilation u
 
 ### Run Predefined Task
 
-1. Press `Tasks > Run Task...` (fig. 1)
+1. Press `Terminal > Run Task...` (fig. 1)
 
     ![fig 1](https://raw.githubusercontent.com/Galarius/vscode-opencl/master/images/vscode-opencl-clc-1.png)
 
-    *Figure 1. Tasks menu.*
+    *Figure 1. `Terminal` menu.*
 
 2. Press `Run Task...` and select one of the predefined `opencl` tasks for file `kernel.cl`. The set of tasks (fig. 2) is generated for each kernel file that was found in the current workspace.
 
@@ -68,17 +68,47 @@ This extension provides predefined set of VS Code tasks for kernel compilation u
 
 ### Configure Default Build Task
 
-Press `Tasks > Configure Default Build Task...`. Select one of the predefined `opencl` tasks. File `tasks.json` will be created (or extended) with configuration of the selected task (fig. 3). Press `Ctrl+Shift+B` to call it with the shortcut.
+Press `Terminal > Configure Default Build Task...`. Select one of the predefined `opencl` tasks. File `tasks.json` will be created (or extended) with configuration of the selected task. Press `Ctrl+Shift+B` to call it with the shortcut.
 
-![fig 3](https://raw.githubusercontent.com/Galarius/vscode-opencl/master/images/vscode-opencl-clc-3.png)
+It is possible to override selected  task definition. **It is important** to change the field `type` of the task from `opencl` to `shell`, otherwise the task will be ignored.
 
-*Figure 3. Default Build Task Configuration.*
+An example of configurable task for an `openclc` offline compiler:
+
+```json
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "shell", // replace `opencl` with `shell`
+            "label": "opencl: custom build [kernel] {gpu_64}",
+            "command": "/System/Library/Frameworks/OpenCL.framework/Libraries/openclc",
+            "args": [
+                "-emit-llvm",
+                "-c",
+                "-arch",
+                "gpu_64",
+                "kernel.cl",
+                "-o kernel.gpu_64.bc"
+            ],
+            "problemMatcher": [
+                "$opencl.common",
+                "$opencl.openclc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ]
+}
+```
+
 
 ### Customize Build Task
 
-Press `Tasks > Configure Tasks...`. Select one of the predefined `opencl` tasks. File `tasks.json` will be created (or extended) with configuration of the selected task.
+Press `Terminal > Configure Tasks...`. Select one of the predefined `opencl` tasks. File `tasks.json` will be created (or extended) with configuration of the selected task.
 
-You can override `command` and `args` fields to use another compiler. Field `label` is a displayed task name, `problemMatcher` should be overriten to match a compiler's errors and warnings so messages could be displayed in `Problems` view.
+**It is important** to change the field `type` of a task from `opencl` to `shell`, otherwise the task will be ignored. Fields `command` and `args` may be overridden for using another compiler. Field `label` is a displayed task name. `problemMatcher` should be overridden to match a compiler's errors and warnings so messages could be displayed in `Problems` view.
 
 An example of modified `tasks.json` configuration file for using [AMD Mali](https://developer.arm.com/products/software-development-tools/graphics-development-tools/mali-offline-compiler) as OpenCL offline compiler:
 
@@ -89,7 +119,6 @@ An example of modified `tasks.json` configuration file for using [AMD Mali](http
         {
             "type": "shell",
             "label": "opencl: malisc compile",
-            "task": "compile",
             "command": "malisc",
             "args": [
                 "--name kernelName",
