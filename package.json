@@ -103,9 +103,8 @@
         },
         "taskDefinitions": [
             {
-                "type": "shell",
+                "type": "opencl",
                 "required": [
-                    "label",
                     "task",
                     "command",
                     "args"
@@ -144,7 +143,7 @@
         ],
         "problemMatchers": [
             {
-                "name": "ioc",
+                "name": "clc.universal",
                 "owner": "opencl",
                 "fileLocation": "absolute",
                 "pattern": {
@@ -155,24 +154,6 @@
                     "severity": 4,
                     "message": 6
                 }
-            },
-            {
-                "name": "openclc",
-                "owner": "opencl",
-                "fileLocation": "absolute",
-                "pattern": [
-                    {
-                        "regexp": "^(.*):(\\d+):(\\d+): ((fatal )?error|warning|Scholar):$",
-                        "file": 1,
-                        "line": 2,
-                        "column": 3,
-                        "severity": 4
-                    },
-                    {
-                        "regexp": "^(.*)$",
-                        "message": 1
-                    }
-                ]
             }
         ]
     },
