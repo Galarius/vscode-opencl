@@ -154,6 +154,15 @@
                     "severity": 4,
                     "message": 6
                 }
+            },
+            {
+                "name": "opencl.openclc",
+                "owner": "opencl",
+                "pattern": {
+                    "regexp": "^openclc: (error|warning): (.*)$",
+                    "severity": 1,
+                    "message": 2
+                }
             }
         ]
     },

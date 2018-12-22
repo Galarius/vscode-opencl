@@ -123,7 +123,7 @@ function generateDefaultOpenCLCTasks(kernelPath: string): vscode.Task[] {
         */
         let task = new vscode.Task(definition, taskName, 'opencl', 
                                     new vscode.ShellExecution(commandLine), 
-                                    "$opencl.common");
+                                    ["$opencl.common", "$opencl.openclc"]);
         task.group = vscode.TaskGroup.Build;
         tasks.push(task);
     }
