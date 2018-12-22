@@ -56,7 +56,7 @@ This extension provides predefined set of VS Code tasks for kernel compilation u
 
 1. Press `Terminal > Run Task...` (fig. 1)
 
-    ![fig 1](https://raw.githubusercontent.com/Galarius/vscode-opencl/master/images/vscode-opencl-clc-1.png)
+    <img src="https://raw.githubusercontent.com/Galarius/vscode-opencl/master/images/vscode-opencl-clc-1.png" width=50%>
 
     *Figure 1. `Terminal` menu.*
 
@@ -64,7 +64,7 @@ This extension provides predefined set of VS Code tasks for kernel compilation u
 
     ![fig 2](https://raw.githubusercontent.com/Galarius/vscode-opencl/master/images/vscode-opencl-clc-2.png)
 
-    *Figure 2. Predefined Tasks for `ioc64` compiler.*
+    *Figure 2. Predefined Tasks for `openclc` compiler.*
 
 ### Configure Default Build Task
 
