@@ -8,7 +8,6 @@ import * as os from "os";
 
 interface KernelTaskDefinition extends vscode.TaskDefinition {
     label: string;
-    task: string;
     command: string;
     args: Array<string>;
 }
@@ -47,7 +46,6 @@ function generateDefaultIOCTasks(kernelPath: string): vscode.Task[] {
     let definition: KernelTaskDefinition = {
         label: 'opencl: custom '.concat(taskName),
         type: 'opencl',
-        task: 'compile',
         command: command,
         args: [
             '-cmd=compile',
@@ -71,7 +69,6 @@ function generateDefaultIOCTasks(kernelPath: string): vscode.Task[] {
         let definition: KernelTaskDefinition = {
             label: 'opencl: custom '.concat(taskName),
             type: 'opencl',
-            task: 'build',
             command: command,
             args: [
                 '-cmd=build',
@@ -103,12 +100,12 @@ function generateDefaultOpenCLCTasks(kernelPath: string): vscode.Task[] {
         let definition: KernelTaskDefinition = {
             label: 'opencl: custom '.concat(taskName),
             type: 'opencl',
-            task: 'build',
             command: '/System/Library/Frameworks/OpenCL.framework/Libraries/openclc',
             args: [
                 '-emit-llvm',
                 '-c',
-                `-arch ${arch}`,
+                `-arch`,
+                arch,
                 kernelPath,
                 `-o ${fName}.${arch}.bc`
             ]

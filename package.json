@@ -105,7 +105,7 @@
             {
                 "type": "opencl",
                 "required": [
-                    "task",
+                    "label",
                     "command",
                     "args"
                 ],
@@ -113,10 +113,6 @@
                     "label": {
                         "type": "string",
                         "description": "Task name"
-                    },
-                    "task": {
-                        "type": "string",
-                        "description": "The offline compiler task"
                     },
                     "command": {
                         "type": "string",
