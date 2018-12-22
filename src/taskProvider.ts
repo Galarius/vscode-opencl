@@ -55,7 +55,7 @@ export class OpenCLTaskProvider implements vscode.TaskProvider {
         let taskName = `compile [${fName}]`;
         let definition: KernelTaskDefinition = {
             label: 'opencl: custom '.concat(taskName),
-            type: 'shell',
+            type: 'opencl',
             task: 'compile',
             command: command,
             args: [
@@ -66,11 +66,11 @@ export class OpenCLTaskProvider implements vscode.TaskProvider {
         let args = [definition.command].concat(definition.args);    // command + args 
         let commandLine = cmd.buildCommand(args);                   // command line 
         /*
-            `$ioc` matcher handles messages like this:
+            `$clc.universal` matcher handles messages like this:
             C:/project/kernel.cl:48:34: error: used type 'float' where floating point type is not allowed
             See definition in package.json ("problemMatchers").
         */
-        let task = new vscode.Task(definition, taskName, 'opencl', new vscode.ShellExecution(commandLine), "$ioc");
+        let task = new vscode.Task(definition, taskName, 'opencl', new vscode.ShellExecution(commandLine), "$clc.universal");
         task.group = vscode.TaskGroup.Build;
         tasks.push(task);
         // 'build' tasks
@@ -79,7 +79,7 @@ export class OpenCLTaskProvider implements vscode.TaskProvider {
             let taskName = `build [${fName}] {${std}}`;
             let definition: KernelTaskDefinition = {
                 label: 'opencl: custom '.concat(taskName),
-                type: 'shell',
+                type: 'opencl',
                 task: 'build',
                 command: command,
                 args: [
@@ -92,7 +92,7 @@ export class OpenCLTaskProvider implements vscode.TaskProvider {
             let commandLine = cmd.buildCommand(args);
             let task = new vscode.Task(definition, taskName, 'opencl', 
                                        new vscode.ShellExecution(commandLine), 
-                                       "$ioc");
+                                       "$clc.universal");
             task.group = vscode.TaskGroup.Build;
             tasks.push(task);
         }
@@ -111,7 +111,7 @@ export class OpenCLTaskProvider implements vscode.TaskProvider {
             let taskName = `build [${fName}] {${arch}}`;
             let definition: KernelTaskDefinition = {
                 label: 'opencl: custom '.concat(taskName),
-                type: 'shell',
+                type: 'opencl',
                 task: 'build',
                 command: '/System/Library/Frameworks/OpenCL.framework/Libraries/openclc',
                 args: [
