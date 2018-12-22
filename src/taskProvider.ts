@@ -57,11 +57,11 @@ function generateDefaultIOCTasks(kernelPath: string): vscode.Task[] {
     let args = [definition.command].concat(definition.args);    // command + args 
     let commandLine = cmd.buildCommand(args);                   // command line 
     /*
-        `$clc.universal` matcher handles messages like this:
+        `$opencl.common` matcher handles messages like this:
         C:/project/kernel.cl:48:34: error: used type 'float' where floating point type is not allowed
         See definition in package.json ("problemMatchers").
     */
-    let task = new vscode.Task(definition, taskName, 'opencl', new vscode.ShellExecution(commandLine), "$clc.universal");
+    let task = new vscode.Task(definition, taskName, 'opencl', new vscode.ShellExecution(commandLine), "$opencl.common");
     task.group = vscode.TaskGroup.Build;
     tasks.push(task);
     // 'build' tasks
@@ -83,7 +83,7 @@ function generateDefaultIOCTasks(kernelPath: string): vscode.Task[] {
         let commandLine = cmd.buildCommand(args);
         let task = new vscode.Task(definition, taskName, 'opencl', 
                                     new vscode.ShellExecution(commandLine), 
-                                    "$clc.universal");
+                                    "$opencl.common");
         task.group = vscode.TaskGroup.Build;
         tasks.push(task);
     }
@@ -116,14 +116,14 @@ function generateDefaultOpenCLCTasks(kernelPath: string): vscode.Task[] {
         let args = [definition.command].concat(definition.args);
         let commandLine = cmd.buildCommand(args);
         /*
-            `$openclc` matcher handles messages like this:
+            `$opencl.common` matcher handles messages like this:
             /Users/galarius/Documents/Projects/Languages/Node.js/vscode-opencl/test/kernel.cl:42:8: error:
                 use of undeclared identifier 'NULL'
             See definition in package.json ("problemMatchers").
         */
         let task = new vscode.Task(definition, taskName, 'opencl', 
                                     new vscode.ShellExecution(commandLine), 
-                                    "$openclc");
+                                    "$opencl.common");
         task.group = vscode.TaskGroup.Build;
         tasks.push(task);
     }
