@@ -14,7 +14,7 @@
         "url": "https://github.com/Galarius/vscode-opencl"
     },
     "engines": {
-        "vscode": "^1.16.0"
+        "vscode": "^1.26.0"
     },
     "markdown": "github",
     "keywords": [
@@ -102,21 +102,21 @@
             }
         },
         "taskDefinitions": [
-			{
-				"type": "shell",
-				"required": [
+            {
+                "type": "shell",
+                "required": [
                     "label",
                     "task",
                     "command",
                     "args"
-				],
-				"properties": {
+                ],
+                "properties": {
                     "label": {
                         "type": "string",
                         "description": "Task name"
                     },
-					"task": {
-						"type": "string",
+                    "task": {
+                        "type": "string",
                         "description": "The offline compiler task"
                     },
                     "command": {
@@ -140,7 +140,7 @@
                         "description": "Overrides for Windows"
                     }
                 }
-			}
+            }
         ],
         "problemMatchers": [
             {
@@ -182,9 +182,9 @@
         "postinstall": "node ./node_modules/vscode/bin/install"
     },
     "devDependencies": {
-        "@types/node": "^7.0.69",
-        "typescript": "^2.9.2",
-        "vscode": "^1.1.21"
+        "@types/node": "^8.10.39",
+        "typescript": "^3.2.2",
+        "vscode": "^1.1.26"
     },
     "dependencies": {
         "child-process-promise": "^1.1.0",
