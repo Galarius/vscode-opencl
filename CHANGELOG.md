@@ -1,6 +1,6 @@
 # OpenCL for Visual Studio Code Change Log
 
-## Version 0.5.1
+## Version 0.5.1: December 23, 2018
 
 * Fixed OpenCL tasks for the latest VS Code
 
@@ -8,7 +8,7 @@
 
 * Optimized task list generation
 
-## Version 0.5.0
+## Version 0.5.0: September 19, 2018
 
 ### Offline OpenCL Kernel Compilation
 

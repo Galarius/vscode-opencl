@@ -19,8 +19,12 @@
     "markdown": "github",
     "keywords": [
         "OpenCL",
-        "Khronos",
-        "cl"
+        "cl",
+        "ocl",
+        "kernel",
+        "compiler",
+        "highlighting",
+        "completion"
     ],
     "categories": [
         "Programming Languages",
