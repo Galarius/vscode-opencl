@@ -1,8 +1,16 @@
 # OpenCL for Visual Studio Code Change Log
 
+## Version 0.5.1
+
+* Fixed OpenCL tasks for the latest VS Code
+
+* `$ioc` and `$openclc` problem matchers replaced with `$opencl.common` and `$opencl.openclc`
+
+* Optimized task list generation
+
 ## Version 0.5.0
 
-**Offline OpenCL Kernel Compilation**
+### Offline OpenCL Kernel Compilation
 
 The extension provides predefined set of VS Code tasks for kernel compilation using `ioc32/ioc64` or `openclc` (on macOS).
 
