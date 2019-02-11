@@ -59,7 +59,7 @@ function generateDefaultIOCTasks(kernelPath: string): vscode.Task[] {
         C:/project/kernel.cl:48:34: error: used type 'float' where floating point type is not allowed
         See definition in package.json ("problemMatchers").
     */
-    let task = new vscode.Task(definition, taskName, 'opencl', new vscode.ShellExecution(commandLine), "$opencl.common");
+    let task = new vscode.Task(definition, vscode.TaskScope.Workspace, taskName, 'opencl', new vscode.ShellExecution(commandLine), "$opencl.common");
     task.group = vscode.TaskGroup.Build;
     tasks.push(task);
     // 'build' tasks
@@ -78,7 +78,7 @@ function generateDefaultIOCTasks(kernelPath: string): vscode.Task[] {
         };
         let args = [definition.command].concat(definition.args);
         let commandLine = cmd.buildCommand(args);
-        let task = new vscode.Task(definition, taskName, 'opencl', 
+        let task = new vscode.Task(definition, vscode.TaskScope.Workspace, taskName, 'opencl', 
                                     new vscode.ShellExecution(commandLine), 
                                     "$opencl.common");
         task.group = vscode.TaskGroup.Build;
@@ -118,7 +118,7 @@ function generateDefaultOpenCLCTasks(kernelPath: string): vscode.Task[] {
                 use of undeclared identifier 'NULL'
             See definition in package.json ("problemMatchers").
         */
-        let task = new vscode.Task(definition, taskName, 'opencl', 
+        let task = new vscode.Task(definition, vscode.TaskScope.Workspace, taskName, 'opencl', 
                                     new vscode.ShellExecution(commandLine), 
                                     ["$opencl.common", "$opencl.openclc"]);
         task.group = vscode.TaskGroup.Build;
