@@ -110,8 +110,7 @@
                 "type": "opencl",
                 "required": [
                     "label",
-                    "command",
-                    "args"
+                    "command"
                 ],
                 "properties": {
                     "label": {
