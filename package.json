@@ -14,7 +14,7 @@
         "url": "https://github.com/Galarius/vscode-opencl"
     },
     "engines": {
-        "vscode": "^1.26.0"
+        "vscode": "^1.31.0"
     },
     "markdown": "github",
     "keywords": [
@@ -173,8 +173,8 @@
     },
     "devDependencies": {
         "@types/node": "^8.10.39",
-        "typescript": "^3.2.2",
-        "vscode": "^1.1.26"
+        "typescript": "^3.3.1",
+        "vscode": "^1.1.29"
     },
     "dependencies": {
         "child-process-promise": "^1.1.0",
