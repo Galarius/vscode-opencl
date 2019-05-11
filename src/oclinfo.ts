@@ -3,7 +3,6 @@
 import * as vscode from 'vscode';
 import * as path from 'path';
 import * as os from "os";
-import * as fs from 'fs';
 var exec = require('child-process-promise').exec;
 
 import * as cmd from './cmd';
@@ -27,11 +26,12 @@ export function oclinfoDumpAll() {
     if(oclinfoPath) {
         let command = cmd.buildCommand([oclinfoPath, "-pds"])
         cmd.execute(command).then(function(output){
-            let filePath = path.join(vscode.workspace.rootPath, "oclinfo.txt");
-            fs.writeFileSync(filePath, output);
-            var openPath = vscode.Uri.file(filePath);
-            vscode.workspace.openTextDocument(openPath).then(doc => {
-            vscode.window.showTextDocument(doc);
+            vscode.workspace.openTextDocument({language: 'text'}).then((doc: vscode.TextDocument) => {
+                vscode.window.showTextDocument(doc, 1, false).then(e => {
+                    e.edit(edit => {
+                        edit.insert(new vscode.Position(0, 0), output.toString("utf-8"));
+                    });
+                });
             }, (error: any) => {
                 console.error(error);
                 vscode.window.showErrorMessage(error);
