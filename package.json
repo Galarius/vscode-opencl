@@ -2,7 +2,7 @@
     "name": "vscode-opencl",
     "displayName": "OpenCL",
     "description": "OpenCL for Visual Studio Code",
-    "version": "0.5.2",
+    "version": "0.6.0",
     "publisher": "galarius",
     "icon": "images/OpenCL_128x.png",
     "author": {
@@ -84,17 +84,17 @@
         ],
         "configuration": {
             "type": "object",
-            "title": "OpenCL Configuration",
+            "title": "OpenCL",
             "properties": {
                 "opencl.formatting.name": {
                     "type": "string",
                     "default": "clang-format",
-                    "description": "The file name of the formatting utility.\nShould be available at $PATH, otherwise specify the full file name."
+                    "description": "The file name of the formatting utility. Should be available at $PATH, otherwise specify the full file name. Default value is 'clang-format' which is shipped with 'ms-vscode.cpptools' extension."
                 },
-                "opencl.formatting.args": {
+                "opencl.formatting.options": {
                     "type": "array",
                     "default": [],
-                    "description": "Command line arguments for formatting utility.\nUse variable ${workspaceRoot} to specify configuration file in a workspace \n(e.g. `--options=${workspaceRoot}/.astylerc` for Artistic Style)."
+                    "description": "Command line arguments for a formatting utility. Options are ommited if default 'clang-format' utility is used. In this case create '.clang-format' file in the root of the project to override default options. If other utility is specified (e.g. astyle) provide a list of arguments. Use variable ${workspaceRoot} to specify configuration file in a workspace (e.g. '--options=${workspaceRoot}/.astylerc' for Artistic Style)."
                 }
             }
         },
