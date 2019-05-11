@@ -15,8 +15,8 @@ export class OpenCLDocumentFormattingEditProvider implements vscode.DocumentForm
         let result: vscode.TextEdit[] = [];
 
         // opencl settings
-        let app  : string = vscode.workspace.getConfiguration().get('opencl.formatting.name')
-        let args : Array<string> = vscode.workspace.getConfiguration().get('opencl.formatting.args')
+        let app  : string = vscode.workspace.getConfiguration().get('opencl.formatting.name', '')
+        let args : Array<string> = vscode.workspace.getConfiguration().get('opencl.formatting.options', [])
 
         // if workspace is opened, check if .clang-format exists
         let workspaceRoot = vscode.workspace.rootPath;
@@ -104,25 +104,26 @@ export class OpenCLDocumentFormattingEditProvider implements vscode.DocumentForm
         
         let result: vscode.TextEdit[] = []
     
-
         let workspaceRoot = vscode.workspace.rootPath;
-        if (!workspaceRoot) {
-            return result;
+        if (workspaceRoot) {
+            args.forEach((item, index) => {
+                args[index] = item.replace("${workspaceRoot}", workspaceRoot);
+            });    
         }
-
-        args.forEach((item, index) => {
-            args[index] = item.replace("${workspaceRoot}", vscode.workspace.rootPath);
-        });
-
         args.push(document.fileName)
         args = [app].concat(args)
         let commandLine = cmd.buildCommand(args)
 
         cp.exec(commandLine, { cwd: workspaceRoot }, (error, stdout, stderr) => {
+            if (stdout && stdout.length > 0) {
+                this.getOutputChannel().appendLine(stdout);
+            } 
             if (stderr && stderr.length > 0) {
                 this.getOutputChannel().appendLine(stderr);
-                this.getOutputChannel().show(true);
             } 
+            if ((stdout && stdout.length > 0) || (stderr && stderr.length > 0)) {
+                this.getOutputChannel().show(true);
+            }
         });
 
         return result;
