@@ -1,11 +1,11 @@
 # OpenCL for Visual Studio Code Change Log
 
-## Version 0.6.0: May 11, 2019
+## Version 0.6.0: May 12, 2019
 
-* `clang-format` (bundled with `ms-vscode.cpptools`) is a default formatting utility now.
-* Configuration `opencl.formatting.args` was renamed to `opencl.formatting.options`.
-* Command `OpenCL: Info` will not create `oclinfo.txt` file in the project's root. Instead it will just open a new VS Code tab with command's result without saving it to file.
-* Neither `OpenCL: Info` command nor `Format Document` action do not require an open workspace.
+* Updated: `clang-format` (bundled with `ms-vscode.cpptools`) is a default formatting utility now.
+* Updated: Configuration `opencl.formatting.args` was renamed to `opencl.formatting.options`.
+* Updated: Command `OpenCL: Info` will not create `oclinfo.txt` file in the project's root. Instead it will just open a new VS Code tab with command's result without saving it to a file.
+* Added: Neither `OpenCL: Info` command nor `Format Document` action do not require an open workspace anymore.
 
 ## Version 0.5.2: February 16, 2019
 
