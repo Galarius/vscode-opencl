@@ -164,12 +164,13 @@
         "postinstall": "node ./node_modules/vscode/bin/install"
     },
     "devDependencies": {
-        "@types/node": "^8.10.39",
-        "typescript": "^3.3.1",
+        "@types/node": "^8.10.49",
+        "typescript": "^3.5.1",
         "vscode": "^1.1.34"
     },
     "dependencies": {
         "child-process-promise": "^1.1.0",
-        "hoek": "^5.0.4"
+        "hoek": "^5.0.4",
+        "querystringify": "^2.0.0"
     }
 }
