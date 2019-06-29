@@ -1,115 +1,206 @@
 {
-	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
-	"scopeName": "source.opencl",
-	"name": "OpenCL",
-	"patterns": [
-		{
-			"include": "#storage_types",
-			"__comment.c": "OpenCL C keywords from OpenCL Programming Guide [Tables 4.1,4.2,4.6] except those which are already specified in `source.c`",
-			"__comment.cpp": "OpenCL C++ keywords from The OpenCL C++ Specification [Tables 1.3,1.4] except those which are already specified in `source.cpp`"
-		},
-		{
-			"include": "source.cpp",
-			"__comment": "Include C++ grammar: https://raw.githubusercontent.com/Microsoft/vscode/master/extensions/cpp/syntaxes/c%2B%2B.json"
-		}
-	],
-	"repository": {
-		"storage_types": {
+    "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+    "scopeName": "source.opencl",
+    "name": "OpenCL",
+    "patterns": [
+        {
+            "include": "#storage_types",
+            "__comment.c": "OpenCL C keywords from OpenCL Programming Guide [Tables 4.1,4.2,4.6] except those which are already specified in `source.c`",
+            "__comment.cpp": "OpenCL C++ keywords from The OpenCL C++ Specification [Tables 1.3,1.4] except those which are already specified in `source.cpp`"
+        },
+        {
+            "include": "source.cpp",
+            "__comment": "Include C++ grammar: https://raw.githubusercontent.com/microsoft/vscode/master/extensions/cpp/syntaxes/cpp.tmLanguage.json"
+        }
+    ],
+    "repository": {
+        "storage_types": {
+            "patterns": [
+                {
+                    "name": "storage.type.opencl.c",
+                    "match": "\\b(half)\\b"
+                },
+                {
+                    "name": "storage.type.opencl.c",
+                    "match": "\\b(uchar|ushort|uint|ulong|size_t|ptrdiff_t|intptr_t|uintptr_t)\\b"
+                },
+                {
+                    "name": "storage.type.opencl.c.vector2",
+                    "match": "\\b(char2|short2|int2|long2|float2|double2|half2)\\b",
+                    "__comment": "Vector datatypes, n = 2"
+                },
+                {
+                    "name": "storage.type.opencl.c.vector2",
+                    "match": "\\b(uchar2|ushort2|uint2|ulong2)\\b",
+                    "__comment": "Vector datatypes, n = 2"
+                },
+                {
+                    "name": "storage.type.opencl.c.vector3",
+                    "match": "\\b(char3|short3|int3|long3|float3|double3|half3)\\b",
+                    "__comment": "Vector datatypes, n = 3"
+                },
+                {
+                    "name": "storage.type.opencl.c.vector3",
+                    "match": "\\b(uchar3|ushort3|uint3|ulong3)\\b",
+                    "__comment": "Vector datatypes, n = 3"
+                },
+                {
+                    "name": "storage.type.opencl.c.vector4",
+                    "match": "\\b(char4|short4|int4|long4|float4|double4|half4)\\b",
+                    "__comment": "Vector datatypes, n = 4"
+                },
+                {
+                    "name": "storage.type.opencl.c.vector4",
+                    "match": "\\b(uchar4|ushort4|uint4|ulong4)\\b",
+                    "__comment": "Vector datatypes, n = 4"
+                },
+                {
+                    "name": "storage.type.opencl.c.vector8",
+                    "match": "\\b(char8|short8|int8|long8|float8|double8|half8)\\b",
+                    "__comment": "Vector datatypes, n = 8"
+                },
+                {
+                    "name": "storage.type.opencl.c.vector8",
+                    "match": "\\b(uchar8|ushort8|uint8|ulong8)\\b",
+                    "__comment": "Vector datatypes, n = 8"
+                },
+                {
+                    "name": "storage.type.opencl.c.vector16",
+                    "match": "\\b(char16|short16|int16|long16|float16|double16|half16)\\b",
+                    "__comment": "Vector datatypes, n = 16"
+                },
+                {
+                    "name": "storage.type.opencl.c.vector16",
+                    "match": "\\b(uchar16|ushort16|uint16|ulong16)\\b",
+                    "__comment": "Vector datatypes, n = 16"
+                },
+                {
+                    "name": "storage.type.opencl.c.image",
+                    "match": "\\b(image2d_t|image3d_t|sampler_t|sampler_t)\\b"
+                },
+                {
+                    "name": "storage.qualifier.opencl.c.address.space",
+                    "match": "\\b(__global|global|__local|local|__constant|constant|__private|private)\\b",
+                    "__comment": "Address space qualifiers"
+                },
+                {
+                    "name": "storage.qualifier.opencl.c.function",
+                    "match": "\\b(__kernel|kernel)\\b",
+                    "__comment": "Function qualifiers"
+                },
+                {
+                    "name": "storage.qualifier.opencl.c.access",
+                    "match": "\\b(__read_only|read_only|__write_only|write_only|__read_write|read_write)\\b",
+                    "__comment": "Access qualifiers"
+                },
+                {
+                    "name": "storage.qualifier.opencl.cpp",
+                    "match": "\\b(uniform)\\b"
+                },
+                {
+                    "name": "storage.type.opencl.cpp",
+                    "match": "\\b(complex|imaginary|quad|quad2|quad3|quad4|quad8|quad16|float2x2|float2x3|float2x4|float2x8|float2x16|float3x2|float3x3|float3x4|float3x8|float3x16|float4x2|float4x3|float4x4|float4x8|float4x16|float8x2|float8x3|float8x4|float8x8|float8x16|float16x2|float16x3|float16x4|float16x8|float16x16|double2x2|double2x3|double2x4|double2x8|double2x16|double3x2|double3x3|double3x4|double3x8|double3x16|double4x2|double4x3|double4x4|double4x8|double4x16|double8x2|double8x3|double8x4|double8x8|double8x16|double16x2|double16x3|double16x4|double16x8|double16x16)\\b"
+                },
+                {
+                    "name": "storage.type.opencl.cpp.image",
+                    "match": "\\b(image2d|image3d|image2d_array|image1d|image1d_buffer|image1d_array|image2d_depth|image2d_array_depth|sampler|queue|ndrange|event|pipe|program_pipe|reserve_id|mem_type|mem_type_local|mem_type_global|mem_type_image)\\b"
+                },
+                {
+                    "name": "storage.type.opencl.cpp.atomic",
+                    "match": "\\b(atomic_int|atomic_uint|atomic_long|atomic_ulong|atomic_float|atomic_double|atomic_intptr_t|atomic_uintptr_t|atomic_size_t|atomic_ptrdiff_t|atomic_flag)\\b"
+                }
+            ]
+        },
+        "function_parameter_context": {
 			"patterns": [
 				{
-					"name": "storage.type.opencl.c",
-					"match": "\\b(half)\\b"
-				},
-				{
-					"name": "storage.type.opencl.c",
-					"match": "\\b(uchar|ushort|uint|ulong|size_t|ptrdiff_t|intptr_t|uintptr_t)\\b"
-				},
-				{
-					"name": "storage.type.opencl.c.vector2",
-					"match": "\\b(char2|short2|int2|long2|float2|double2|half2)\\b",
-					"__comment": "Vector datatypes, n = 2"
-				},
-				{
-					"name": "storage.type.opencl.c.vector2",
-					"match": "\\b(uchar2|ushort2|uint2|ulong2)\\b",
-					"__comment": "Vector datatypes, n = 2"
-				},
-				{
-					"name": "storage.type.opencl.c.vector3",
-					"match": "\\b(char3|short3|int3|long3|float3|double3|half3)\\b",
-					"__comment": "Vector datatypes, n = 3"
-				},
-				{
-					"name": "storage.type.opencl.c.vector3",
-					"match": "\\b(uchar3|ushort3|uint3|ulong3)\\b",
-					"__comment": "Vector datatypes, n = 3"
-				},
-				{
-					"name": "storage.type.opencl.c.vector4",
-					"match": "\\b(char4|short4|int4|long4|float4|double4|half4)\\b",
-					"__comment": "Vector datatypes, n = 4"
-				},
-				{
-					"name": "storage.type.opencl.c.vector4",
-					"match": "\\b(uchar4|ushort4|uint4|ulong4)\\b",
-					"__comment": "Vector datatypes, n = 4"
-				},
-				{
-					"name": "storage.type.opencl.c.vector8",
-					"match": "\\b(char8|short8|int8|long8|float8|double8|half8)\\b",
-					"__comment": "Vector datatypes, n = 8"
-				},
-				{
-					"name": "storage.type.opencl.c.vector8",
-					"match": "\\b(uchar8|ushort8|uint8|ulong8)\\b",
-					"__comment": "Vector datatypes, n = 8"
-				},
-				{
-					"name": "storage.type.opencl.c.vector16",
-					"match": "\\b(char16|short16|int16|long16|float16|double16|half16)\\b",
-					"__comment": "Vector datatypes, n = 16"
-				},
-				{
-					"name": "storage.type.opencl.c.vector16",
-					"match": "\\b(uchar16|ushort16|uint16|ulong16)\\b",
-					"__comment": "Vector datatypes, n = 16"
-				},
-				{
-					"name": "storage.type.opencl.c.image",
-					"match": "\\b(image2d_t|image3d_t|sampler_t|sampler_t)\\b"
-				},
-				{
-					"name": "storage.qualifier.opencl.c.address.space",
-					"match": "\\b(__global|global|__local|local|__constant|constant|__private|private)\\b",
-					"__comment": "Address space qualifiers"
-				},
-				{
-					"name": "storage.qualifier.opencl.c.function",
-					"match": "\\b(__kernel|kernel)\\b",
-					"__comment": "Function qualifiers"
-				},
-				{
-					"name": "storage.qualifier.opencl.c.access",
-					"match": "\\b(__read_only|read_only|__write_only|write_only|__read_write|read_write)\\b",
-					"__comment": "Access qualifiers"
-				},
-				{
-					"name": "storage.qualifier.opencl.cpp",
-					"match": "\\b(uniform)\\b"
-				},
-				{
-					"name": "storage.type.opencl.cpp",
-					"match": "\\b(complex|imaginary|quad|quad2|quad3|quad4|quad8|quad16|float2x2|float2x3|float2x4|float2x8|float2x16|float3x2|float3x3|float3x4|float3x8|float3x16|float4x2|float4x3|float4x4|float4x8|float4x16|float8x2|float8x3|float8x4|float8x8|float8x16|float16x2|float16x3|float16x4|float16x8|float16x16|double2x2|double2x3|double2x4|double2x8|double2x16|double3x2|double3x3|double3x4|double3x8|double3x16|double4x2|double4x3|double4x4|double4x8|double4x16|double8x2|double8x3|double8x4|double8x8|double8x16|double16x2|double16x3|double16x4|double16x8|double16x16)\\b"
-				},
-				{
-					"name": "storage.type.opencl.cpp.image",
-					"match": "\\b(image2d|image3d|image2d_array|image1d|image1d_buffer|image1d_array|image2d_depth|image2d_array_depth|sampler|queue|ndrange|event|pipe|program_pipe|reserve_id|mem_type|mem_type_local|mem_type_global|mem_type_image)\\b"
-				},
-				{
-					"name": "storage.type.opencl.cpp.atomic",
-					"match": "\\b(atomic_int|atomic_uint|atomic_long|atomic_ulong|atomic_float|atomic_double|atomic_intptr_t|atomic_uintptr_t|atomic_size_t|atomic_ptrdiff_t|atomic_flag)\\b"
-				}
-			]
-		}
-	}
+					"include": "#parameter_struct"
+                }
+            ]
+        },
+        "parameter_enum": {
+            "match": "(enum)\\s+((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*(?!\\w))\\s*(?:((?:((?:(?:(?>\\s+)|(\\/\\*)(.+?)(\\*\\/))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))((?:\\*((?:(?:(?>\\s+)|(\\/\\*)(.+?)(\\*\\/))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z))))*)((?:&((?:(?:(?>\\s+)|(\\/\\*)(.+?)(\\*\\/))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))){0,2})((?:(?:(?>\\s+)|(\\/\\*)(.+?)(\\*\\/))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z))))?)|\\s+)((?:(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*(?!\\w))?)\\s*(?:\\[\\s*\\]\\s*)?(?=,|\\)|\\n)",
+            "captures": {
+                "1": {
+                    "name": "storage.type.enum.parameter.cpp"
+                },
+                "2": {
+                    "name": "entity.name.type.enum.parameter.cpp"
+                },
+                "4": {
+                    "patterns": [
+                        {
+                            "include": "#inline_comment"
+                        }
+                    ]
+                },
+                "5": {
+                    "name": "comment.block.cpp punctuation.definition.comment.begin.cpp"
+                },
+                "6": {
+                    "name": "comment.block.cpp"
+                },
+                "7": {
+                    "name": "comment.block.cpp punctuation.definition.comment.end.cpp"
+                },
+                "8": {
+                    "name": "storage.modifier.pointer.cpp"
+                },
+                "9": {
+                    "patterns": [
+                        {
+                            "include": "#inline_comment"
+                        }
+                    ]
+                },
+                "10": {
+                    "name": "comment.block.cpp punctuation.definition.comment.begin.cpp"
+                },
+                "11": {
+                    "name": "comment.block.cpp"
+                },
+                "12": {
+                    "name": "comment.block.cpp punctuation.definition.comment.end.cpp"
+                },
+                "13": {
+                    "name": "storage.modifier.reference.cpp"
+                },
+                "14": {
+                    "patterns": [
+                        {
+                            "include": "#inline_comment"
+                        }
+                    ]
+                },
+                "15": {
+                    "name": "comment.block.cpp punctuation.definition.comment.begin.cpp"
+                },
+                "16": {
+                    "name": "comment.block.cpp"
+                },
+                "17": {
+                    "name": "comment.block.cpp punctuation.definition.comment.end.cpp"
+                },
+                "18": {
+                    "patterns": [
+                        {
+                            "include": "#inline_comment"
+                        }
+                    ]
+                },
+                "19": {
+                    "name": "comment.block.cpp punctuation.definition.comment.begin.cpp"
+                },
+                "20": {
+                    "name": "comment.block.cpp"
+                },
+                "21": {
+                    "name": "comment.block.cpp punctuation.definition.comment.end.cpp"
+                },
+                "22": {
+                    "name": "variable.other.object.declare.cpp"
+                }
+            }
+        }
+    }
 }
