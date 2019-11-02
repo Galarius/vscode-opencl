@@ -1,5 +1,10 @@
 # OpenCL for Visual Studio Code Change Log
 
+## Version 0.6.1: Nov 2, 2019
+
+* Fixed highlighting issues
+* Fixed security vulnerabilities
+
 ## Version 0.6.0: May 12, 2019
 
 * Updated: `clang-format` (bundled with `ms-vscode.cpptools`) is a default formatting utility now.
