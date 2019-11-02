@@ -84,7 +84,7 @@ void highlighting_test()
 	// storage.qualifier.opencl.c.address.space
 	__global	global
 	__local	local
-	__constantconstant
+	__constant constant
 	__private	private
 	// storage.qualifier.opencl.c.function
 	__kernel	kernel
@@ -98,7 +98,7 @@ void highlighting_test()
 	complex
 	imaginary
 	quad quad2 quad3
-	quad4quad8 quad16
+	quad4 quad8 quad16
 	float2x2 float2x3 float2x4
 	float2x8 float2x16 float3x2
 	float3x3 float3x4 float3x8 float3x16
