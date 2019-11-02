@@ -1,157 +1,152 @@
-
-template<typename T>
-void highlight()
-{  }
-
 void highlighting_test()
 {
 	// storage.type.opencl.c
-	highlight<half>();
+	half
 	// storage.type.opencl.c
-	highlight<uchar>();
-	highlight<ushort>();
-	highlight<uint>();
-	highlight<ulong>();
-	highlight<size_t>();
-	highlight<ptrdiff_t>();
-	highlight<intptr_t>();
-	highlight<uintptr_t>();
+	uchar
+	ushort
+	uint
+	ulong
+	size_t
+	ptrdiff_t
+	intptr_t
+	uintptr_t
 	// storage.type.opencl.c.vector2
-	highlight<char2>();
-	highlight<short2>();
-	highlight<int2>();
-	highlight<long2>();
-	highlight<float2>();
-	highlight<double2>();
-	highlight<half2>();
+	char2
+	short2
+	int2
+	long2
+	float2
+	double2
+	half2
 	// storage.type.opencl.c.vector2
-	highlight<uchar2>();
-	highlight<ushort2>();
-	highlight<uint2>();
-	highlight<ulong2>();
+	uchar2
+	ushort2
+	uint2
+	ulong2
 	// storage.type.opencl.c.vector3
-	highlight<char3>();
-	highlight<short3>();
-	highlight<int3>();
-	highlight<long3>();
-	highlight<float3>();
-	highlight<double3>();
-	highlight<half3>();
+	char3
+	short3
+	int3
+	long3
+	float3
+	double3
+	half3
 	// storage.type.opencl.c.vector3
-	highlight<uchar3>();
-	highlight<ushort3>();
-	highlight<uint3>();
-	highlight<ulong3>();
+	uchar3
+	ushort3
+	uint3
+	ulong3
 	// storage.type.opencl.c.vector4
-	highlight<char4>();
-	highlight<short4>();
-	highlight<int4>();
-	highlight<long4>();
-	highlight<float4>();
-	highlight<double4>();
-	highlight<half4>();
+	char4
+	short4
+	int4
+	long4
+	float4
+	double4
+	half4
 	// storage.type.opencl.c.vector4
-	highlight<uchar4>();
-	highlight<ushort4>();
-	highlight<uint4>();
-	highlight<ulong4>();
+	uchar4
+	ushort4
+	uint4
+	ulong4
 	// storage.type.opencl.c.vector8
-	highlight<char8>();
-	highlight<short8>();
-	highlight<int8>();
-	highlight<long8>();
-	highlight<float8>();
-	highlight<double8>();
-	highlight<half8>();
+	char8
+	short8
+	int8
+	long8
+	float8
+	double8
+	half8
 	// storage.type.opencl.c.vector8
-	highlight<uchar8>();
-	highlight<ushort8>();
-	highlight<uint8>();
-	highlight<ulong8>();
+	uchar8
+	ushort8
+	uint8
+	ulong8
 	// storage.type.opencl.c.vector16
-	highlight<char16>();
-	highlight<short16>();
-	highlight<int16>();
-	highlight<long16>();
-	highlight<float16>();
-	highlight<double16>();
-	highlight<half16>();
+	char16
+	short16
+	int16
+	long16
+	float16
+	double16
+	half16
 	// storage.type.opencl.c.vector16
-	highlight<uchar16>();
-	highlight<ushort16>();
-	highlight<uint16>();
-	highlight<ulong16>();
+	uchar16
+	ushort16
+	uint16
+	ulong16
 	// storage.type.opencl.c.image
-	highlight<image2d_t>();
-	highlight<image3d_t>();
-	highlight<sampler_t>();
-	highlight<sampler_t>();
+	image2d_t
+	image3d_t
+	sampler_t
+	sampler_t
 	// storage.qualifier.opencl.c.address.space
-	highlight<__global>();	highlight<global>();
-	highlight<__local>();	highlight<local>();
-	highlight<__constant>();highlight<constant>();
-	highlight<__private>();	highlight<private>();
+	__global	global
+	__local	local
+	__constantconstant
+	__private	private
 	// storage.qualifier.opencl.c.function
-	highlight<__kernel>();	highlight<kernel>();
+	__kernel	kernel
 	// storage.qualifier.opencl.c.access
-	highlight<__read_only>();	highlight<read_only>();
-	highlight<__write_only>();	highlight<write_only>();
-	highlight<__read_write>();	highlight<read_write>();
+	__read_only	read_only
+	__write_only	write_only
+	__read_write	read_write
 	// storage.qualifier.opencl.cpp
-	highlight<uniform>();
+	uniform
 	// storage.type.opencl.cpp
-	highlight<complex>();
-	highlight<imaginary>();
-	highlight<quad>(); highlight<quad2>(); highlight<quad3>();
-	highlight<quad4>();highlight<quad8>(); highlight<quad16>();
-	highlight<float2x2>(); highlight<float2x3>(); highlight<float2x4>();
-	highlight<float2x8>(); highlight<float2x16>(); highlight<float3x2>();
-	highlight<float3x3>(); highlight<float3x4>(); highlight<float3x8>(); highlight<float3x16>();
-	highlight<float4x2>(); highlight<float4x3>(); highlight<float4x4>();
-	highlight<float4x8>(); highlight<float4x16>(); highlight<float8x2>();
-	highlight<float8x3>(); highlight<float8x4>(); highlight<float8x8>(); highlight<float8x16>();
-	highlight<float16x2>(); highlight<float16x3>(); highlight<float16x4>();
-	highlight<float16x8>(); highlight<float16x16>();
-	highlight<double2x2>(); highlight<double2x3>(); highlight<double2x4>();
-	highlight<double2x8>(); highlight<double2x16>();
-	highlight<double3x2>(); highlight<double3x3>(); highlight<double3x4>();
-	highlight<double3x8>(); highlight<double3x16>();
-	highlight<double4x2>(); highlight<double4x3>();
-	highlight<double4x4>(); highlight<double4x8>(); highlight<double4x16>();
-	highlight<double8x2>(); highlight<double8x3>();
-	highlight<double8x4>(); highlight<double8x8>(); highlight<double8x16>();
-	highlight<double16x2>(); highlight<double16x3>();
-	highlight<double16x4>(); highlight<double16x8>(); highlight<double16x16>();
+	complex
+	imaginary
+	quad quad2 quad3
+	quad4quad8 quad16
+	float2x2 float2x3 float2x4
+	float2x8 float2x16 float3x2
+	float3x3 float3x4 float3x8 float3x16
+	float4x2 float4x3 float4x4
+	float4x8 float4x16 float8x2
+	float8x3 float8x4 float8x8 float8x16
+	float16x2 float16x3 float16x4
+	float16x8 float16x16
+	double2x2 double2x3 double2x4
+	double2x8 double2x16
+	double3x2 double3x3 double3x4
+	double3x8 double3x16
+	double4x2 double4x3
+	double4x4 double4x8 double4x16
+	double8x2 double8x3
+	double8x4 double8x8 double8x16
+	double16x2 double16x3
+	double16x4 double16x8 double16x16
 	// storage.type.opencl.cpp.image
-	highlight<image2d>();
-	highlight<image3d>();
-	highlight<image2d_array>();
-	highlight<image1d>();
-	highlight<image1d_buffer>();
-	highlight<image1d_array>();
-	highlight<image2d_depth>();
-	highlight<image2d_array_depth>();
-	highlight<sampler>();
-	highlight<queue>();
-	highlight<ndrange>();
-	highlight<event>();
-	highlight<pipe>();
-	highlight<program_pipe>();
-	highlight<reserve_id>();
-	highlight<mem_type>();
-	highlight<mem_type_local>();
-	highlight<mem_type_global>();
-	highlight<mem_type_image>();
+	image2d
+	image3d
+	image2d_array
+	image1d
+	image1d_buffer
+	image1d_array
+	image2d_depth
+	image2d_array_depth
+	sampler
+	queue
+	ndrange
+	event
+	pipe
+	program_pipe
+	reserve_id
+	mem_type
+	mem_type_local
+	mem_type_global
+	mem_type_image
 	// storage.type.opencl.cpp.atomic
-	highlight<atomic_int>();
-	highlight<atomic_uint>();
-	highlight<atomic_long>();
-	highlight<atomic_ulong>();
-	highlight<atomic_float>();
-	highlight<atomic_double>();
-	highlight<atomic_intptr_t>();
-	highlight<atomic_uintptr_t>();
-	highlight<atomic_size_t>();
-	highlight<atomic_ptrdiff_t>();
-	highlight<atomic_flag>();
+	atomic_int
+	atomic_uint
+	atomic_long
+	atomic_ulong
+	atomic_float
+	atomic_double
+	atomic_intptr_t
+	atomic_uintptr_t
+	atomic_size_t
+	atomic_ptrdiff_t
+	atomic_flag
 }
