@@ -5,10 +5,10 @@ import * as path from 'path';
 import * as vscode from 'vscode';
 import * as opencl from "./opencl";
 import * as oclinfo from "./oclinfo";
+import * as formatter from "./providers/formatter";
 
 import { OpenCLCompletionItemProvider } from './completionProvider';
 import { OpenCLHoverProvider } from './hoverProvider';
-import { OpenCLDocumentFormattingEditProvider } from './formattingProvider';
 import { getOpenCLTasks } from './taskProvider';
 
 export async function activate(context: vscode.ExtensionContext) {
@@ -30,7 +30,7 @@ export async function activate(context: vscode.ExtensionContext) {
     context.subscriptions.push(vscode.languages.registerHoverProvider({ language: "cpp", scheme: "file" }, signatureHelpProvider));
 
     // Formating
-    let formattingProvider = new OpenCLDocumentFormattingEditProvider();
+    let formattingProvider = new formatter.OpenCLDocumentFormattingEditProvider();
     context.subscriptions.push(vscode.languages.registerDocumentFormattingEditProvider(opencl.OPECL_LANGUAGE_ID, formattingProvider));
 
     // Tasks
