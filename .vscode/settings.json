@@ -1,9 +1,9 @@
 {
     "files.exclude": {
-        "out": false
+        "_build": false
     },
     "search.exclude": {
-        "out": true
+        "_build": true
     },
     "typescript.tsdk": "./node_modules/typescript/lib",
     "spellright.language": "ru",

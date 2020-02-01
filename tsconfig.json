@@ -1,17 +1,22 @@
 {
     "compilerOptions": {
+        "allowJs": true,
+        "checkJs": true,
         "target": "es6",
         "module": "commonjs",
+        "removeComments": true,
         "moduleResolution": "node",
-        "outDir": "out",
+        "outDir": "./_build",
         "lib": [
             "es2016"
         ],
         "sourceMap": true,
-        "rootDir": "."
+        "rootDir": "./"
     },
+    "include": [
+        "src/**/*"
+    ],
     "exclude": [
-        "node_modules",
-        "server"
+        "node_modules"
     ]
 }

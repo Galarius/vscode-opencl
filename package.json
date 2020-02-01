@@ -38,7 +38,7 @@
         "onCommand:opencl.info",
         "onCommand:workbench.action.tasks.runTask"
     ],
-    "main": "./out/src/extension",
+    "main": "./_build/src/extension",
     "contributes": {
         "languages": [
             {
@@ -137,7 +137,6 @@
             {
                 "name": "opencl.common",
                 "owner": "opencl",
-                "fileLocation": "absolute",
                 "pattern": {
                     "regexp": "^(.*):(\\d+):(\\d+): ((fatal )?error|warning|Scholar): (.*)$",
                     "file": 1,
@@ -171,6 +170,7 @@
     "dependencies": {
         "child-process-promise": "^1.1.0",
         "hoek": "^5.0.4",
+        "promisify-child-process": "^3.1.3",
         "querystringify": "^2.0.0"
     }
 }
