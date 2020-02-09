@@ -167,9 +167,7 @@ Customized tasks can also be bound to a custom shortcuts (See [Binding keyboard 
 
 ## Formatting Configuration
 
-* `opencl.formatting.name` - The file name of the formatting utility. Should be available at `$PATH`, otherwise specify the full file name. Default value is `clang-format` which is shipped with `ms-vscode.cpptools` extension.
-
-* `opencl.formatting.options` - Command line arguments for a formatting utility. **Options are ommited if default 'clang-format' utility is used**. In this case create `.clang-format` file in the root of the project to override default options. If other utility is specified (e.g. `astyle`) provide a list of arguments. Use variable `${workspaceRoot}` to specify configuration file in a workspace (e.g. `--options=${workspaceRoot}/.astylerc` for Artistic Style).
+* `opencl.formatting.name` - Default formatting utility is 'clang-format', which is shipped with 'ms-vscode.cpptools' extension. Specify an absolute path to use another version of 'clang-format'. ( Configuration file '.clang-format' must be located in the directory with a kernel file )
 
 ## Commands
 

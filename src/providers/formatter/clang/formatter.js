@@ -30,14 +30,14 @@ const getClangBinaryPath = () => {
     return path.join(baseDir, 'clang-format')
 }
 
-const getClangArgumentList = () => {
-    const style = getClangFormatStyle('file')
+const getClangArgumentList = configExists => {
+    const defaultStyle = configExists ? 'file' : 'Visual Studio'
+    const style = getClangFormatStyle(defaultStyle)
     const fallbackStyle = getClangFallbackStyle('LLVM')
     return [
         '-verbose', 
         `-style=${style}`, 
-        `-fallback-style=${fallbackStyle}`,
-        '--assume-filename=kernel.cl'
+        `-fallback-style=${fallbackStyle}`
     ]
 }
 
