@@ -1,6 +1,5 @@
 const vscode = require('vscode')
-
-const { spawn } = require('promisify-child-process')
+const cp = require('child_process')
 
 import { exists, killTree } from '../../modules/utils'
 import { isCppExtensionInstalled } from '../../modules/dependencies'
@@ -17,16 +16,15 @@ class OpenCLDocumentFormattingEditProvider {
     }
 
     async provideDocumentFormattingEdits(document, options, token) {
-
         // opencl settings
-        const app  = vscode.workspace.getConfiguration().get('opencl.formatting.name', '')
+        const app = vscode.workspace.getConfiguration().get('opencl.formatting.name', '')
         let args = vscode.workspace.getConfiguration().get('opencl.formatting.options', [])
 
-        if(app)
+        if (app && app != 'clang-format')
             return this.runFormatter(app, args, document, token)
 
         // Default 'clang-format' (shipped with ms-vscode.cpptools)
-        if(!isCppExtensionInstalled()) {
+        if (!isCppExtensionInstalled()) {
             vscode.window.showErrorMessage(STR_CPP_EXTENSION_NOT_INSTALLED_ERROR)
             return []
         }
@@ -34,36 +32,61 @@ class OpenCLDocumentFormattingEditProvider {
         const clangFormat = getClangBinaryPath()
         const binExists = await exists(clangFormat)
 
-        if(!binExists) {
+        if (!binExists) {
             vscode.window.showErrorMessage(STR_FAILED_TO_FIND_FORMATTER)
             return []
         }
-            
-        args = getClangArgumentList()
-        return this.runFormatter(clangFormat, args, document, token)
+
+        args = await getClangArgumentList()
+
+        return this.runFormatter(clangFormat, args, document, token).then(
+            (edits) => edits,
+            (err) => {
+                if (err) {
+                    console.log(err)
+                    return Promise.reject('Check the console in dev tools to find errors when formatting.');
+                }
+            }
+        )
     }
 
     getOutputChannel() {
         return this.channel
     }
 
-    async runFormatter(app, args, document, token) {
-        const p = spawn(app, args, {encoding: 'utf8'})
-        token.onCancellationRequested(() => !p.killed && killTree(p.pid))
-        if (p.pid)
-            p.stdin.end(document.getText())
-        const { stdout, stderr } = await p
-        
-        console.log(`Spawn process stderr: ${stderr}`)
+    runFormatter(app, args, document, token) {
+        console.log(`[Formatter] Running ${app} with arguments: ${args}...`)
+        return new Promise((resolve, reject) => {
+            let stdout = ''
+            let stderr = ''
+            const p = cp.spawn(app, args)
+            token.onCancellationRequested(() => !p.killed && killTree(p.pid))
+            p.stdout.setEncoding('utf8')
+            p.stdout.on('data', (data) => (stdout += data))
+            p.stderr.on('data', (data) => (stderr += data))
 
-        const fileStart = new vscode.Position(0, 0)
-        const fileEnd = document.lineAt(document.lineCount - 1).range.end
-        const textEdits = [
-            new vscode.TextEdit(new vscode.Range(fileStart, fileEnd), stdout.toString())
-        ]
+            p.on('error', err => {
+                if (err)
+                    return reject(err)
+            })
 
-        return textEdits
+            p.on('close', code => {
+
+                if (code !== 0)
+                    return reject(stderr)
+
+                const fileStart = new vscode.Position(0, 0)
+                const fileEnd = document.lineAt(document.lineCount - 1).range.end
+                const textEdits = [
+                    new vscode.TextEdit(new vscode.Range(fileStart, fileEnd), stdout)
+                ]
+                return resolve(textEdits)
+            })
+
+            if (p.pid)
+                p.stdin.end(document.getText())
+        })
     }
-}		
+}
 
 export { OpenCLDocumentFormattingEditProvider }

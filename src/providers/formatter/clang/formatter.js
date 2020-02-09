@@ -3,18 +3,16 @@ const vscode = require('vscode')
 
 import { cppExtension } from '../../../modules/dependencies'
 
-const getClangFormatStyle   = ({ default: x = 'file' }) => {
-    const style = vscode.workspace.getConfiguration().get('C_Cpp.clang_format_style', x)
- 
+const getClangFormatStyle = defaultValue => {
+    const style = vscode.workspace.getConfiguration().get('C_Cpp.clang_format_style', defaultValue)
     if(style === 'Visual Studio') 
         return '{UseTab: Never, IndentWidth: 4, BreakBeforeBraces: Allman, AllowShortIfStatementsOnASingleLine: false, IndentCaseLabels: false, ColumnLimit: 0}'
-
     return style
 }
 
-const getClangFallbackStyle = ({ default: x = 'LLVM' }) => {
-    const style = vscode.workspace.getConfiguration().get('C_Cpp.clang_format_fallbackStyle', x)
-    return ['LLVM', 'Google', 'Chromium', 'Mozilla', 'WebKit'].includes(style) ? style : x
+const getClangFallbackStyle = defaultValue => {
+    const style = vscode.workspace.getConfiguration().get('C_Cpp.clang_format_fallbackStyle', defaultValue)
+    return ['LLVM', 'Google', 'Chromium', 'Mozilla', 'WebKit'].includes(style) ? style : defaultValue
 }
 
 const getClangBinaryPath = () => {
@@ -33,13 +31,14 @@ const getClangBinaryPath = () => {
 }
 
 const getClangArgumentList = () => {
-    const style = getClangFormatStyle()
-    const fallbackStyle = getClangFallbackStyle()
+    const style = getClangFormatStyle('file')
+    const fallbackStyle = getClangFallbackStyle('LLVM')
     return [
         '-verbose', 
-        `-style="${style}"`, 
-        `-fallback-style="${fallbackStyle}"`, 
-        '-i']
+        `-style=${style}`, 
+        `-fallback-style=${fallbackStyle}`,
+        '--assume-filename=kernel.cl'
+    ]
 }
 
 export {
