@@ -1,5 +1,4 @@
 .vscode/**
-_build/**
 test/**
 src/**
 dev/**
