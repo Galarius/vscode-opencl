@@ -14,14 +14,14 @@ class OpenCLDocumentFormattingEditProvider {
 
     async provideDocumentFormattingEdits(document, options, token) {
         // opencl settings
-        const app = vscode.workspace.getConfiguration().get('opencl.formatting.name', '')
+        const app = vscode.workspace.getConfiguration().get('opencl.formatting.name', 'clang-format')
         const clangFormatConfig = await scanParentFolders(path.dirname(document.fileName), '.clang-format')
         const clangFormatConfigExists = typeof clangFormatConfig !== 'undefined'
         if(clangFormatConfigExists)
             console.info(`[OpenCL Formatter] Configuration file '.clang-format' is found at ${clangFormatConfig}.`)
         const args = await getClangArgumentList(clangFormatConfigExists)
 
-        if (app && app !== 'clang-format') {
+        if (app && app !== 'clang-format' && app !== 'clang-format.exe') {
             // Try to run non-default 'clang-format' formatter
             return this.format(app, args, document, token)
         }
