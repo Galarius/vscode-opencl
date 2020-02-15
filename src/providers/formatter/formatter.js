@@ -2,7 +2,7 @@ const vscode = require('vscode')
 const cp = require('child_process')
 const path = require('path')
 
-import { exists, killTree } from '../../modules/utils'
+import { exists, scanParentFolders, killTree } from '../../modules/utils'
 import { isCppExtensionInstalled } from '../../modules/dependencies'
 import { getClangBinaryPath, getClangArgumentList } from './clang/formatter'
 
@@ -15,10 +15,10 @@ class OpenCLDocumentFormattingEditProvider {
     async provideDocumentFormattingEdits(document, options, token) {
         // opencl settings
         const app = vscode.workspace.getConfiguration().get('opencl.formatting.name', '')
-        const clangFormatConfigDir = path.dirname(document.fileName)
-        const clangFormatConfig = path.join(clangFormatConfigDir, '.clang-format')
-        const clangFormatConfigExists = await exists(clangFormatConfig)
-        console.info(`[OpenCL Formatter] Configuration file '.clang-format' is ${ clangFormatConfigExists ? 'found' : 'not found' } at ${clangFormatConfigDir}.`)
+        const clangFormatConfig = await scanParentFolders(path.dirname(document.fileName), '.clang-format')
+        const clangFormatConfigExists = typeof clangFormatConfig !== 'undefined'
+        if(clangFormatConfigExists)
+            console.info(`[OpenCL Formatter] Configuration file '.clang-format' is found at ${clangFormatConfig}.`)
         const args = await getClangArgumentList(clangFormatConfigExists)
 
         if (app && app !== 'clang-format') {
@@ -50,7 +50,7 @@ class OpenCLDocumentFormattingEditProvider {
             (edits) => edits,
             (err) => {
                 if (err) {
-                    console.log(err)
+                    console.error(`${err}`)
                     vscode.window.showErrorMessage(STR_FORMATTER_PROCESS_FAILED)
                     return Promise.reject(STR_FORMATTER_PROCESS_FAILED)
                 }
@@ -60,13 +60,14 @@ class OpenCLDocumentFormattingEditProvider {
 }
 
 const runner = (app, args, document, token) => {
+    args.push(document.fileName)
     console.log(`[OpenCL Formatter] Running ${app} with arguments: ${args}...`)
     return new Promise((resolve, reject) => {
         let stdout = ''
         let stderr = ''
 
         const cwd = path.dirname(document.fileName)
-        const p = cp.spawn(app, args,  { cwd })
+        const p = cp.spawn(app, args, { cwd })
 
         token.onCancellationRequested(() => !p.killed && killTree(p.pid))
 
@@ -75,16 +76,14 @@ const runner = (app, args, document, token) => {
         p.stderr.on('data', (data) => (stderr += data))
 
         p.on('error', err => {
-            if (err) {
-                console.error(err)
+            if (err)
                 return reject(err)
-            }
         })
 
         p.on('close', code => {
 
             if (code !== 0) {
-                console.log(`[OpenCL Formatter] Process closed with code ${code}`)
+                console.error(`[OpenCL Formatter] Process finished with code ${code}`)
                 return reject(stderr)
             }
 
@@ -95,9 +94,6 @@ const runner = (app, args, document, token) => {
             ]
             return resolve(textEdits)
         })
-
-        if (p.pid)
-            p.stdin.end(document.getText())
     })
 }
 
