@@ -90,7 +90,7 @@
                     "type": "string",
                     "default": "clang-format",
                     "description": "Default formatting utility is 'clang-format', which is shipped with 'ms-vscode.cpptools' extension. Specify an absolute path to use another version of 'clang-format'. Configuration file '.clang-format' must be located in the directory with a kernel file, otherwise formatting options from 'ms-vscode.cpptools' are used."
-                }                
+                }
             }
         },
         "taskDefinitions": [
@@ -156,10 +156,15 @@
     "scripts": {
         "vscode:prepublish": "tsc -p ./",
         "compile": "tsc -watch -p ./",
-        "postinstall": "node ./node_modules/vscode/bin/install"
+        "postinstall": "node ./node_modules/vscode/bin/install",
+        "test": "jest"
     },
     "devDependencies": {
+        "@babel/core": "^7.8.4",
+        "@babel/preset-env": "^7.8.4",
         "@types/node": "^8.10.58",
+        "babel-jest": "^25.1.0",
+        "jest": "^25.1.0",
         "typescript": "^3.6.4",
         "vscode": "^1.1.36"
     },
@@ -167,5 +172,13 @@
         "child-process-promise": "^1.1.0",
         "hoek": "^5.0.4",
         "querystringify": "^2.0.0"
+    },
+    "jest": {
+        "testPathIgnorePatterns": [
+            "/node_modules/",
+            "/_build/",
+            "/test/",
+            "/man/"
+        ]
     }
 }
