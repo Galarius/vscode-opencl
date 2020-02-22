@@ -1,4 +1,6 @@
 .vscode/**
+__mocks__
+_build/__mocks__
 test/**
 src/**
 dev/**
