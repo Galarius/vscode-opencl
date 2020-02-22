@@ -14,7 +14,7 @@ const getClangFormatStyle = defaultValue => {
 
 const getClangFallbackStyle = defaultValue => {
     const style = vscode.workspace.getConfiguration().get('C_Cpp.clang_format_fallbackStyle', defaultValue)
-    return ['Visual Studio', 'LLVM', 'Google', 'Chromium', 'Mozilla', 'WebKit'].includes(style) ? style : defaultValue
+    return ['LLVM', 'Google', 'Chromium', 'Mozilla', 'WebKit'].includes(style) ? style : 'LLVM'
 }
 
 const getClangBinaryPath = () => {
@@ -35,7 +35,7 @@ const getClangBinaryPath = () => {
 const getClangArgumentList = configExists => {
     const defaultStyle = configExists ? 'file' : 'Visual Studio'
     let style = getClangFormatStyle(defaultStyle)
-    const fallbackStyle = getClangFallbackStyle('Visual Studio')
+    const fallbackStyle = getClangFallbackStyle('LLVM')
     
     if(style === 'file' && fallbackStyle === 'Visual Studio' && !configExists) {
         console.warn(`[OpenCL Formatter] Configuration 'C_Cpp.clang_format_style' is set to 'file', 'C_Cpp.clang_format_fallbackStyle' - to 'Visual Studio'. Configuration file '.clang-format' was not found in the file's directory or any of it's parent directories. Style 'Visual Studio' is not a built-in 'clang-format' style. Argument 'style' will be patched.`)
@@ -53,6 +53,9 @@ const getClangArgumentList = configExists => {
 }
 
 export {
+    VS_STYLE,
+    getClangFormatStyle,
+    getClangFallbackStyle,
     getClangBinaryPath,
     getClangArgumentList
 }
