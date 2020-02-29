@@ -1,11 +1,12 @@
 # OpenCL for Visual Studio Code Change Log
 
-## Version <NEXT>
+## Version 0.6.5: Feb 29, 2020
 
-* Formatter provider has been rewritten:
-    * Formatter modifies a file without auto save
-    * Removed configuration `opencl.formatting.options`
-    * Only `clang-format` is supported (another version of `clang-format` can still be specified using `opencl.formatting.name` configuration)
+* Security updates
+* Discontinued support for formatters other than `clang-format`
+* Formatter changes the document without automatic saving
+* Unsaved changes are kept when formatting
+* Removed configuration `opencl.formatting.options`
 
 ## Version 0.6.1: Nov 2, 2019
 

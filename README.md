@@ -13,7 +13,7 @@ This extension adds [OpenCL C/C++](https://en.wikipedia.org/wiki/OpenCL) languag
 * Offline Kernel Compilation
 * Built-in OpenCL API Reference
 * Code Snippets ([details](https://raw.githubusercontent.com/Galarius/vscode-opencl/master/snippets/code.snippets.progress.md))
-* Support for External Code Formatters (e.g. [AStyle](http://astyle.sourceforge.net))
+* Clang-Format Support
 * OpenCL Platforms & Devices Info
 
 [Features Preview](https://github.com/Galarius/vscode-opencl/blob/master/PREVIEW.md) (GIFs)
@@ -167,7 +167,7 @@ Customized tasks can also be bound to a custom shortcuts (See [Binding keyboard 
 
 ## Formatting Configuration
 
-* `opencl.formatting.name` - Default formatting utility is 'clang-format', which is shipped with 'ms-vscode.cpptools' extension. Specify an absolute path to use another version of 'clang-format'. Configuration file '.clang-format' must be located in the directory with a kernel file, otherwise formatting options from 'ms-vscode.cpptools' are used.
+* `opencl.formatting.name` - Default formatting utility is 'clang-format', which is shipped with 'ms-vscode.cpptools' extension. Specify an absolute path to use another version of 'clang-format'.
 
 ## Commands
 
