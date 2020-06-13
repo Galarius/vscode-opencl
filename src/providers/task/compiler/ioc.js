@@ -1,10 +1,10 @@
 const vscode = require('vscode')
 const path = require('path')
 const os = require('os')
-import { getKernelName, getJointCommand} from './common'
+import { getKernelName, getJointCommand} from '../common'
 
-const ARCHS = ['cpu', 'gpu', 'fpga_fast_emu']
-const STANDARDS = ['ir', 'llvm', 'spirv32', 'spirv64']
+const IOC_ARCHS = Object.freeze(['cpu', 'gpu', 'fpga_fast_emu'])
+const IOC_STANDARDS = Object.freeze(['ir', 'llvm', 'spirv32', 'spirv64'])
 
 const getCompiler = () => {
     const archs64 = ['arm64', 'ppc64', 'x64'];  // 64-bit arch identifiers
@@ -67,21 +67,26 @@ const buildTask = ({taskName, definition}) => {
 //  - Intel OpenCL SDK
 //  - Windows, Linux
 // @return <vscode.Task[]>
-const generateDefaultIOCTasks = (kernelPath) => {
+const generateDefaultIOCTasks = (kernelPath, deviceDetector) => {
     let tasks = []
     const name = getKernelName(kernelPath)        // kernel file name
     const command = getCompiler()
    
     // 'compile-only' task
-    for(const arch of ARCHS) {
+    for(const arch of IOC_ARCHS) {
+        if(!deviceDetector.isDeviceSupported(arch))
+            continue
         const taskName = `compile [${name}] {${arch}}`
         const definition = getCompileTaskDefinition({taskName, command}, {arch, kernelPath})
         const task = buildTask({taskName, definition})
         tasks.push(task)
     }
     // 'build' tasks
-    for(const arch of ARCHS) {
-        for(const std of STANDARDS) {
+    for(const arch of IOC_ARCHS) {
+        if(!deviceDetector.isDeviceSupported(arch))
+            continue
+
+        for(const std of IOC_STANDARDS) {
             if(std === 'llvm' && arch !== 'gpu')
                 continue
             const taskName = `build [${name}] {${arch}} [${std}]`
@@ -96,7 +101,11 @@ const generateDefaultIOCTasks = (kernelPath) => {
 }
 
 export {
-    generateDefaultIOCTasks
+    generateDefaultIOCTasks,
+    getCompiler,
+    buildTask
+    , // consts
+    IOC_ARCHS
     , // for testing
     getCompileTaskDefinition,
     getBuildTaskDefinition

@@ -9,7 +9,7 @@ import * as formatter from "./providers/formatter";
 
 import { OpenCLCompletionItemProvider } from './completionProvider';
 import { OpenCLHoverProvider } from './hoverProvider';
-import { getOpenCLTasks } from './providers/task';
+import { getOpenCLTasks, buildTask, OpenCLDeviceDetector } from './providers/task';
 
 export async function activate(context: vscode.ExtensionContext) {
 
@@ -38,8 +38,8 @@ export async function activate(context: vscode.ExtensionContext) {
     if(!workspaces) {
         return
     }
-
     let openclPromise: Thenable<vscode.Task[]> | undefined = undefined;
+    const deviceDetector = new OpenCLDeviceDetector()
     for(const workspace of workspaces) {
         let clPattern = path.join(workspace.uri.fsPath, '**/*.cl');
         let oclPattern = path.join(workspace.uri.fsPath, '**/*.ocl');
@@ -51,14 +51,29 @@ export async function activate(context: vscode.ExtensionContext) {
         oclFileWatcher.onDidDelete(() => openclPromise = undefined);
     }
     context.subscriptions.push(vscode.tasks.registerTaskProvider(opencl.OPECL_LANGUAGE_ID.language, { 
-        provideTasks: () => {
+        provideTasks: async () => {
             if (!openclPromise) {
-                openclPromise = getOpenCLTasks();
+                await deviceDetector.detect()
+                if(deviceDetector.isAnyDeviceSupported()) {
+                    openclPromise = getOpenCLTasks(deviceDetector);
+                } else {
+                    vscode.window.showErrorMessage('There are no supported opencl devices')
+                }
             }
             return openclPromise;
         },
-        resolveTask(_task: vscode.Task): vscode.Task | undefined {
+        resolveTask: async (_task: vscode.Task) => {
+            const definition = _task.definition;
+            if (definition) {
+                const prefix = 'opencl: '
+                if(_task.name.indexOf(prefix) != -1) {
+                    const taskName = _task.name.substr(prefix.length);
+                    return buildTask({taskName, definition})
+                }
+            }
             return undefined;
         }
-    }));    
+    }));
+
+   
 }
