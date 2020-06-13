@@ -1,8 +1,6 @@
 'use strict';
 
 import * as vscode from 'vscode';
-import * as path from 'path';
-import * as os from "os";
 var exec = require('child-process-promise').exec;
 
 export function execute(command: string): Promise<Buffer> {

@@ -9,7 +9,7 @@ import * as formatter from "./providers/formatter";
 
 import { OpenCLCompletionItemProvider } from './completionProvider';
 import { OpenCLHoverProvider } from './hoverProvider';
-import { getOpenCLTasks } from './taskProvider';
+import { getOpenCLTasks } from './providers/task';
 
 export async function activate(context: vscode.ExtensionContext) {
 
@@ -34,19 +34,22 @@ export async function activate(context: vscode.ExtensionContext) {
     context.subscriptions.push(vscode.languages.registerDocumentFormattingEditProvider(opencl.OPECL_LANGUAGE_ID, formattingProvider));
 
     // Tasks
-    let workspaceRoot = vscode.workspace.rootPath;
-    if (!workspaceRoot) {
-        return;
+    let workspaces = vscode.workspace.workspaceFolders;
+    if(!workspaces) {
+        return
     }
+
     let openclPromise: Thenable<vscode.Task[]> | undefined = undefined;
-    let clPattern = path.join(workspaceRoot, '**/*.cl');
-    let oclPattern = path.join(workspaceRoot, '**/*.ocl');
-    let clFileWatcher = vscode.workspace.createFileSystemWatcher(clPattern);
-    let oclFileWatcher = vscode.workspace.createFileSystemWatcher(oclPattern);
-    clFileWatcher.onDidCreate(() => openclPromise = undefined);
-    clFileWatcher.onDidDelete(() => openclPromise = undefined);
-    oclFileWatcher.onDidCreate(() => openclPromise = undefined);
-    oclFileWatcher.onDidDelete(() => openclPromise = undefined);
+    for(const workspace of workspaces) {
+        let clPattern = path.join(workspace.uri.fsPath, '**/*.cl');
+        let oclPattern = path.join(workspace.uri.fsPath, '**/*.ocl');
+        let clFileWatcher = vscode.workspace.createFileSystemWatcher(clPattern);
+        let oclFileWatcher = vscode.workspace.createFileSystemWatcher(oclPattern);
+        clFileWatcher.onDidCreate(() => openclPromise = undefined);
+        clFileWatcher.onDidDelete(() => openclPromise = undefined);
+        oclFileWatcher.onDidCreate(() => openclPromise = undefined);
+        oclFileWatcher.onDidDelete(() => openclPromise = undefined);
+    }
     context.subscriptions.push(vscode.tasks.registerTaskProvider(opencl.OPECL_LANGUAGE_ID.language, { 
         provideTasks: () => {
             if (!openclPromise) {
@@ -57,6 +60,5 @@ export async function activate(context: vscode.ExtensionContext) {
         resolveTask(_task: vscode.Task): vscode.Task | undefined {
             return undefined;
         }
-	}));    
-    
+    }));    
 }
