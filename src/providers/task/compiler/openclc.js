@@ -1,13 +1,17 @@
 const vscode = require('vscode')
-import { getKernelName, getJointCommand } from './common'
+import { getKernelName, getJointCommand } from '../common'
 
-const ARCHS = ['i386', 'x86_64', 'gpu_32', 'gpu_64']
+const OPENCLC_ARCHS = Object.freeze(['i386', 'x86_64', 'gpu_32', 'gpu_64'])
+
+const getCompiler = () => {
+    return '/System/Library/Frameworks/OpenCL.framework/Libraries/openclc'
+}
 
 const getTaskDefinition = ({taskName, arch, kernelPath, outputPath}) => {
     return {
         label: 'opencl: custom '.concat(taskName),
         type: 'opencl',
-        command: '/System/Library/Frameworks/OpenCL.framework/Libraries/openclc',
+        command: getCompiler(),
         args: [
             '-emit-llvm',
             '-c',
@@ -47,10 +51,12 @@ const buildTask = ({taskName, definition}) => {
 //  - OpenCL.framework
 //  - macOS
 // @return <vscode.Task[]>
-const generateDefaultOpenCLCTasks = (kernelPath) => {
+const generateDefaultOpenCLCTasks = (kernelPath, deviceDetector) => {
     let tasks = []
     const name = getKernelName(kernelPath)        // kernel file name
-    for(const arch of ARCHS) {
+    for(const arch of OPENCLC_ARCHS) {
+        if(!deviceDetector.isDeviceSupported(arch))
+            continue
         let taskName = `build [${name}] {${arch}}`
         const outputPath = `${name}.${arch}.bc`
         const definition = getTaskDefinition({taskName, arch, kernelPath, outputPath})
@@ -61,7 +67,11 @@ const generateDefaultOpenCLCTasks = (kernelPath) => {
 }
 
 export {
-    generateDefaultOpenCLCTasks
+    generateDefaultOpenCLCTasks,
+    getCompiler,
+    buildTask
+    , // consts
+    OPENCLC_ARCHS
     , // for testing
     getTaskDefinition
 }
