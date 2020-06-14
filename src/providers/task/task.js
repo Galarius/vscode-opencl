@@ -17,7 +17,7 @@ const generateDefaultTasksForKernel = (kernelPath, deviceDetector) => {
 }
 
 /** 
- * @returns  {Promise<vscode.Task[]}
+ * @returns  {Promise<vscode.Task[]>}
  */
 const getOpenCLTasks = async (deviceDetector) => {
     let tasks = []
