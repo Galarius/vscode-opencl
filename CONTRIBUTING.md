@@ -2,6 +2,8 @@
 
 There are several possible improvements:
 
+* Language Server
+
 * Tree View for OpenCL platforms/devices
 
 * Auto-Completion for OpenCL C++ Standard Library
