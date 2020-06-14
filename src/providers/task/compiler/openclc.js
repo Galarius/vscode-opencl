@@ -2,6 +2,7 @@ const vscode = require('vscode')
 import { getKernelName, getJointCommand } from '../common'
 
 const OPENCLC_ARCHS = Object.freeze(['i386', 'x86_64', 'gpu_32', 'gpu_64'])
+const LOG_PREFIX = '[OpenCL OPENCLC Task Provider]'
 
 const getCompiler = () => {
     return '/System/Library/Frameworks/OpenCL.framework/Libraries/openclc'
@@ -55,8 +56,10 @@ const generateDefaultOpenCLCTasks = (kernelPath, deviceDetector) => {
     let tasks = []
     const name = getKernelName(kernelPath)        // kernel file name
     for(const arch of OPENCLC_ARCHS) {
-        if(!deviceDetector.isDeviceSupported(arch))
+        if(!deviceDetector.isDeviceSupported(arch)) {
+            console.log(`${LOG_PREFIX} Skip '${arch}' because it is not supported`)
             continue
+        }
         let taskName = `build [${name}] {${arch}}`
         const outputPath = `${name}.${arch}.bc`
         const definition = getTaskDefinition({taskName, arch, kernelPath, outputPath})
