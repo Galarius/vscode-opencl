@@ -23,7 +23,7 @@ This extension adds [OpenCL C/C++](https://en.wikipedia.org/wiki/OpenCL) languag
 
 * Extension [ms-vscode.cpptools](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools)
 * OpenCL Drivers [[Intel](https://software.intel.com/en-us/articles/opencl-drivers), [NVidia](http://www.nvidia.com/Download/index.aspx), [AMD](http://support.amd.com/en-us/download)]
-* [Intel OpenCL SDK 2019](https://software.intel.com/en-us/articles/opencl-drivers) [Windows, Linux]
+* [Intel® SDK for OpenCL™ 2019](https://software.intel.com/en-us/articles/opencl-drivers) [Windows, Linux]
 or `OpenCL.framework` [macOS] (shipped with XCode)
 
 ---
