@@ -5,6 +5,7 @@ import { getKernelName, getJointCommand} from '../common'
 
 const IOC_ARCHS = Object.freeze(['cpu', 'gpu', 'fpga_fast_emu'])
 const IOC_STANDARDS = Object.freeze(['ir', 'llvm', 'spirv32', 'spirv64'])
+const LOG_PREFIX = '[OpenCL IOC Task Provider]'
 
 const getCompiler = () => {
     const archs64 = ['arm64', 'ppc64', 'x64'];  // 64-bit arch identifiers
@@ -74,8 +75,10 @@ const generateDefaultIOCTasks = (kernelPath, deviceDetector) => {
    
     // 'compile-only' task
     for(const arch of IOC_ARCHS) {
-        if(!deviceDetector.isDeviceSupported(arch))
+        if(!deviceDetector.isDeviceSupported(arch)) {
+            console.log(`${LOG_PREFIX} [CompileTask] Skip '${arch}' because it is not supported`)
             continue
+        }
         const taskName = `compile [${name}] {${arch}}`
         const definition = getCompileTaskDefinition({taskName, command}, {arch, kernelPath})
         const task = buildTask({taskName, definition})
@@ -83,8 +86,10 @@ const generateDefaultIOCTasks = (kernelPath, deviceDetector) => {
     }
     // 'build' tasks
     for(const arch of IOC_ARCHS) {
-        if(!deviceDetector.isDeviceSupported(arch))
+        if(!deviceDetector.isDeviceSupported(arch)) {
+            console.log(`${LOG_PREFIX} [BuildTask] Skip '${arch}' because it is not supported`)
             continue
+        }
 
         for(const std of IOC_STANDARDS) {
             if(std === 'llvm' && arch !== 'gpu')
