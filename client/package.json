@@ -1,0 +1,24 @@
+{
+	"name": "vscode-opencl-client",
+	"description": "VSCode part of the vscode-opencl language server",
+	"author": "galarius",
+	"license": "MIT",
+	"version": "0.6.6",
+	"publisher": "galarius",
+	"repository": {
+        "type": "git",
+        "url": "https://github.com/Galarius/vscode-opencl"
+    },
+	"engines": {
+		"vscode": "^1.52.0"
+	},
+	"dependencies": {
+		"vscode-languageclient": "^7.0.0",
+		"child-process-promise": "^1.1.0",
+        "hoek": "^5.0.4",
+        "querystringify": "^2.0.0"
+	},
+	"devDependencies": {
+		"@types/vscode": "^1.52.0"
+	}
+}

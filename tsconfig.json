@@ -1,14 +1,12 @@
 {
     "compilerOptions": {
-        "allowJs": true,
-        "checkJs": true,
-        "target": "es6",
+        "target": "es2019",
         "module": "commonjs",
         "removeComments": true,
         "moduleResolution": "node",
         "outDir": "./_build",
         "lib": [
-            "es2016"
+            "es2019"
         ],
         "sourceMap": true,
         "rootDir": "./"
@@ -17,6 +15,11 @@
         "src/**/*"
     ],
     "exclude": [
-        "node_modules"
-    ]
+        "node_modules",
+        "old",
+    ],
+    "references": [
+		{ "path": "./client" },
+		{ "path": "./server" }
+	]
 }

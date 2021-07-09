@@ -1,6 +1,6 @@
 'use strict';
 
-import { HoverProvider, Hover, MarkdownString, TextDocument, CancellationToken, Position, workspace, MarkedString } from 'vscode';
+import { HoverProvider, Hover, MarkdownString, TextDocument, CancellationToken, Position } from 'vscode';
 import fs = require('fs');
 import apiDoc = require('./openclMan');
 
@@ -17,14 +17,16 @@ export class OpenCLHoverProvider implements HoverProvider {
 
 		var entry = apiDoc.OpenCLSignatures[name];
 		if (entry && entry.description) {
-			let brief = entry.brief;
+			let brief = new MarkdownString(entry.brief);
 			let signature = fs.readFileSync(entry.signature, 'utf8');
+			let codeBlock = new MarkdownString();
+			codeBlock.appendCodeblock(signature, 'opencl')
 			let md = fs.readFileSync(entry.description, 'utf8');
 			let description = new MarkdownString(md);
-			let reference = 'Reference: ' + entry.reference;
-			let contents: MarkedString[] = [
+			let reference = new MarkdownString('Reference: ' + entry.reference);
+			let contents: MarkdownString[] = [
 				brief,
-				{ language: 'opencl', value: signature },
+				codeBlock,
 				description,
 				reference
 			];

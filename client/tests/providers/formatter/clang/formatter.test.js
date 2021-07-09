@@ -1,5 +1,5 @@
 import { VS_STYLE, getClangFormatStyle, getClangFallbackStyle, getClangBinaryPath, getClangArgumentList } from './formatter'
-const vscode = require("../../../../__mocks__/vscode")
+const vscode = require("../../../../tests/mocks/vscode")
 
 describe('Clang Formatter Tests', () => {
 
