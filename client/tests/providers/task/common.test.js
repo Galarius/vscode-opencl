@@ -1,4 +1,4 @@
-import { getKernelName, getJointCommand } from './common'
+import { getKernelName, getJointCommand } from '../../../src/providers/task/common'
 
 describe('Task Provider Common Tests', () => {
     test('Should return kernel name without extension', () => {

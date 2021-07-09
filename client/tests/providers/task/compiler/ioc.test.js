@@ -1,4 +1,4 @@
-import { getCompileTaskDefinition, getBuildTaskDefinition } from './ioc'
+import { getCompileTaskDefinition, getBuildTaskDefinition } from '../../../../src/providers/task/compiler/ioc'
 
 
 describe('Task Provider IOC Tests', () => {

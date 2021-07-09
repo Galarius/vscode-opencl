@@ -1,4 +1,4 @@
-import { getTaskDefinition } from './openclc'
+import { getTaskDefinition } from '../../../../src/providers/task/compiler/openclc'
 
 describe('Task Provider OPENCLC Tests', () => {
     test('Test task definition creation', () => {
