@@ -4,9 +4,7 @@ import * as vscode from 'vscode';
 var exec = require('child-process-promise').exec;
 
 export function execute(command: string): Promise<Buffer> {
-    return exec(command, {
-        cwd: vscode.workspace.rootPath
-    }).then(function(result): Buffer {
+    return exec(command, {}).then(function(result): Buffer {
         return result.stdout;
     }).fail(function(error) {
         console.error(error);

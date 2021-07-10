@@ -3,8 +3,8 @@
 // Import the module and reference it with the alias vscode in your code below
 import * as path from 'path';
 import * as vscode from 'vscode';
-import * as opencl from "./opencl";
-import * as oclinfo from "./oclinfo";
+import * as opencl from "./providers/completion/opencl";
+import * as oclinfo from "./commands/oclinfo";
 import * as formatter from "./providers/formatter";
 
 import { workspace, ExtensionContext } from 'vscode';
@@ -16,8 +16,8 @@ import {
   TransportKind
 } from 'vscode-languageclient/node';
 
-import { OpenCLCompletionItemProvider } from './completionProvider';
-import { OpenCLHoverProvider } from './hoverProvider';
+import { OpenCLCompletionItemProvider } from './providers/completion/completion';
+import { OpenCLHoverProvider } from './providers/hover/hover';
 import { getOpenCLTasks, buildTask, OpenCLDeviceDetector } from './providers/task';
 
 let client: LanguageClient;

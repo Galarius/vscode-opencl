@@ -109,7 +109,7 @@ const runner = ({ app, args, config }, { document, token }) => {
 const killTree = (processId) => {
     kill(processId, (err) => {
         if (err) {
-            console.log('Error killing process tree: ' + err);
+            console.log('Failed to kill process tree: ' + err);
         }
     });
 };
