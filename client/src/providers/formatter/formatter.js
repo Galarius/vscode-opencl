@@ -1,8 +1,9 @@
 const vscode = require('vscode')
 const cp = require('child_process')
 const path = require('path')
+const kill = require('tree-kill')
 
-import { exists, scanParentFolders, killTree } from '../../modules/utils'
+import { exists, scanParentFolders } from '../../modules/utils'
 import { isCppExtensionInstalled } from '../../modules/dependencies'
 import { getClangBinaryPath, getClangArgumentList } from './clang/formatter'
 
@@ -104,5 +105,13 @@ const runner = ({ app, args, config }, { document, token }) => {
             p.stdin.end(document.getText(), 'utf-8');
     })
 }
+
+const killTree = (processId) => {
+    kill(processId, (err) => {
+        if (err) {
+            console.log('Error killing process tree: ' + err);
+        }
+    });
+};
 
 export { OpenCLDocumentFormattingEditProvider }
