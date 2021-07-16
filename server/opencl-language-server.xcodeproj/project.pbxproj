@@ -7,15 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4A1E8CD526A0A55E000E1B6F /* diagnostics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4A1E8CD426A0A55E000E1B6F /* diagnostics.cpp */; };
 		4A1E8CD826A0A74F000E1B6F /* OpenCL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A1E8CD726A0A74F000E1B6F /* OpenCL.framework */; };
 		4A1E8CD926A0A757000E1B6F /* OpenCL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A1E8CD726A0A74F000E1B6F /* OpenCL.framework */; };
-		4A1E8CDE26A0AE4A000E1B6F /* diagnostics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4A1E8CD426A0A55E000E1B6F /* diagnostics.cpp */; };
-		4A79E0AE269F5E1D00397512 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4A79E0AD269F5E1D00397512 /* main.cpp */; };
-		4A79E0B5269F5F6000397512 /* jsonrpc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4A79E0B3269F5F6000397512 /* jsonrpc.cpp */; };
-		4A79E0B6269F5F6000397512 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4A79E0B4269F5F6000397512 /* main.cpp */; };
-		4A79E0B8269F673600397512 /* jsonrpc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4A79E0B3269F5F6000397512 /* jsonrpc.cpp */; };
-		4ACCB3A826A1C55D009C6269 /* lsp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4ACCB3A526A1B622009C6269 /* lsp.cpp */; };
+		4A63A9FF26A20073001286FD /* jsonrpc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4A63A9FB26A20073001286FD /* jsonrpc.cpp */; };
+		4A63AA0026A20073001286FD /* diagnostics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4A63A9FC26A20073001286FD /* diagnostics.cpp */; };
+		4A63AA0126A20073001286FD /* lsp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4A63A9FD26A20073001286FD /* lsp.cpp */; };
+		4A63AA0226A20073001286FD /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4A63A9FE26A20073001286FD /* main.cpp */; };
+		4A63AA0926A200FD001286FD /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4A63AA0426A2007D001286FD /* main.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -40,18 +38,17 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		4A1E8CD226A070D1000E1B6F /* glogger.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = glogger.hpp; path = lib/logger/include/glogger.hpp; sourceTree = SOURCE_ROOT; };
-		4A1E8CD326A0A45C000E1B6F /* diagnostics.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = diagnostics.hpp; sourceTree = "<group>"; };
-		4A1E8CD426A0A55E000E1B6F /* diagnostics.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = diagnostics.cpp; sourceTree = "<group>"; };
 		4A1E8CD726A0A74F000E1B6F /* OpenCL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenCL.framework; path = System/Library/Frameworks/OpenCL.framework; sourceTree = SDKROOT; };
+		4A63A9F726A20073001286FD /* lsp.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = lsp.hpp; sourceTree = "<group>"; };
+		4A63A9F826A20073001286FD /* diagnostics.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = diagnostics.hpp; sourceTree = "<group>"; };
+		4A63A9F926A20073001286FD /* jsonrpc.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = jsonrpc.hpp; sourceTree = "<group>"; };
+		4A63A9FB26A20073001286FD /* jsonrpc.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = jsonrpc.cpp; sourceTree = "<group>"; };
+		4A63A9FC26A20073001286FD /* diagnostics.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = diagnostics.cpp; sourceTree = "<group>"; };
+		4A63A9FD26A20073001286FD /* lsp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = lsp.cpp; sourceTree = "<group>"; };
+		4A63A9FE26A20073001286FD /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		4A63AA0426A2007D001286FD /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		4A79E087269F5CA600397512 /* opencl-language-server */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "opencl-language-server"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A79E0A1269F5D8600397512 /* opencl-language-server-tests */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "opencl-language-server-tests"; sourceTree = BUILT_PRODUCTS_DIR; };
-		4A79E0AD269F5E1D00397512 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = tests/main.cpp; sourceTree = SOURCE_ROOT; };
-		4A79E0B0269F5F5600397512 /* jsonrpc.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = jsonrpc.hpp; sourceTree = "<group>"; };
-		4A79E0B3269F5F6000397512 /* jsonrpc.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = jsonrpc.cpp; sourceTree = "<group>"; };
-		4A79E0B4269F5F6000397512 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
-		4ACCB39D26A1B5EC009C6269 /* lsp.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = lsp.hpp; sourceTree = "<group>"; };
-		4ACCB3A526A1B622009C6269 /* lsp.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = lsp.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,13 +79,43 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		4A63A9F626A20073001286FD /* include */ = {
+			isa = PBXGroup;
+			children = (
+				4A63A9F726A20073001286FD /* lsp.hpp */,
+				4A63A9F826A20073001286FD /* diagnostics.hpp */,
+				4A63A9F926A20073001286FD /* jsonrpc.hpp */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		4A63A9FA26A20073001286FD /* src */ = {
+			isa = PBXGroup;
+			children = (
+				4A63A9FB26A20073001286FD /* jsonrpc.cpp */,
+				4A63A9FC26A20073001286FD /* diagnostics.cpp */,
+				4A63A9FD26A20073001286FD /* lsp.cpp */,
+				4A63A9FE26A20073001286FD /* main.cpp */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+		4A63AA0326A2007D001286FD /* tests */ = {
+			isa = PBXGroup;
+			children = (
+				4A63AA0426A2007D001286FD /* main.cpp */,
+			);
+			path = tests;
+			sourceTree = "<group>";
+		};
 		4A79E07E269F5CA600397512 = {
 			isa = PBXGroup;
 			children = (
-				4A79E089269F5CA600397512 /* opencl-language-server */,
-				4A79E0A8269F5D9800397512 /* opencl-language-server-tests */,
-				4A79E088269F5CA600397512 /* Products */,
 				4A1E8CD626A0A74F000E1B6F /* Frameworks */,
+				4A63A9F626A20073001286FD /* include */,
+				4A79E088269F5CA600397512 /* Products */,
+				4A63A9FA26A20073001286FD /* src */,
+				4A63AA0326A2007D001286FD /* tests */,
 			);
 			sourceTree = "<group>";
 		};
@@ -100,45 +127,6 @@
 			);
 			name = Products;
 			sourceTree = "<group>";
-		};
-		4A79E089269F5CA600397512 /* opencl-language-server */ = {
-			isa = PBXGroup;
-			children = (
-				4A79E0AF269F5F5600397512 /* include */,
-				4A79E0B2269F5F6000397512 /* src */,
-			);
-			path = "opencl-language-server";
-			sourceTree = "<group>";
-		};
-		4A79E0A8269F5D9800397512 /* opencl-language-server-tests */ = {
-			isa = PBXGroup;
-			children = (
-				4A79E0AD269F5E1D00397512 /* main.cpp */,
-			);
-			path = "opencl-language-server-tests";
-			sourceTree = "<group>";
-		};
-		4A79E0AF269F5F5600397512 /* include */ = {
-			isa = PBXGroup;
-			children = (
-				4A1E8CD326A0A45C000E1B6F /* diagnostics.hpp */,
-				4A1E8CD226A070D1000E1B6F /* glogger.hpp */,
-				4A79E0B0269F5F5600397512 /* jsonrpc.hpp */,
-				4ACCB39D26A1B5EC009C6269 /* lsp.hpp */,
-			);
-			path = include;
-			sourceTree = SOURCE_ROOT;
-		};
-		4A79E0B2269F5F6000397512 /* src */ = {
-			isa = PBXGroup;
-			children = (
-				4A1E8CD426A0A55E000E1B6F /* diagnostics.cpp */,
-				4A79E0B3269F5F6000397512 /* jsonrpc.cpp */,
-				4ACCB3A526A1B622009C6269 /* lsp.cpp */,
-				4A79E0B4269F5F6000397512 /* main.cpp */,
-			);
-			path = src;
-			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXGroup section */
 
@@ -218,10 +206,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4A79E0B5269F5F6000397512 /* jsonrpc.cpp in Sources */,
-				4A1E8CD526A0A55E000E1B6F /* diagnostics.cpp in Sources */,
-				4A79E0B6269F5F6000397512 /* main.cpp in Sources */,
-				4ACCB3A826A1C55D009C6269 /* lsp.cpp in Sources */,
+				4A63AA0126A20073001286FD /* lsp.cpp in Sources */,
+				4A63AA0026A20073001286FD /* diagnostics.cpp in Sources */,
+				4A63AA0226A20073001286FD /* main.cpp in Sources */,
+				4A63A9FF26A20073001286FD /* jsonrpc.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -229,9 +217,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4A1E8CDE26A0AE4A000E1B6F /* diagnostics.cpp in Sources */,
-				4A79E0AE269F5E1D00397512 /* main.cpp in Sources */,
-				4A79E0B8269F673600397512 /* jsonrpc.cpp in Sources */,
+				4A63AA0926A200FD001286FD /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -357,6 +343,7 @@
 				DEVELOPMENT_TEAM = 28ZE7583ZV;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = "BOOST_JSON_STANDALONE=1";
+				HEADER_SEARCH_PATHS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SYSTEM_HEADER_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/lib/json/include",
@@ -374,6 +361,7 @@
 				DEVELOPMENT_TEAM = 28ZE7583ZV;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = "BOOST_JSON_STANDALONE=1";
+				HEADER_SEARCH_PATHS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SYSTEM_HEADER_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/lib/json/include",

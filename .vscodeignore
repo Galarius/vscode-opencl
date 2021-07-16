@@ -1,13 +1,9 @@
 .vscode/**
 __mocks__
-__node_server
-_build/__mocks__
-server/build
 test/**
-src/**
+client/src/**
 dev/**
 **/*.map
 .gitignore
 tsconfig.json
 LICENSE.md
-server/externals/

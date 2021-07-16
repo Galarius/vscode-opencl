@@ -6,8 +6,11 @@ import * as vscode from 'vscode';
 import * as opencl from "./providers/completion/opencl";
 import * as oclinfo from "./commands/oclinfo";
 import * as formatter from "./providers/formatter";
+import * as os from 'os';
 
 import { workspace, ExtensionContext } from 'vscode';
+import { Trace } from 'vscode-jsonrpc';
+
 
 import {
   LanguageClient,
@@ -20,43 +23,37 @@ import { OpenCLCompletionItemProvider } from './providers/completion/completion'
 import { OpenCLHoverProvider } from './providers/hover/hover';
 import { getOpenCLTasks, buildTask, OpenCLDeviceDetector } from './providers/task';
 
-let client: LanguageClient;
-
 export function activate(context: ExtensionContext) {
   // The server is implemented in node
-  let serverModule = context.asAbsolutePath(path.join('server', 'out', 'server.js'));
-  // The debug options for the server
-  // --inspect=6009: runs the server in Node's Inspector mode so VS Code can attach to the server for debugging
-  let debugOptions = { execArgv: ['--nolazy', '--inspect=6009'] };
+  var serverModule = ''
+  var debugServerModule = ''
+  if(os.platform() == "darwin") { 
+    serverModule = context.asAbsolutePath(path.join('bin', 'darwin', 'opencl-language-server'));
+    debugServerModule = context.asAbsolutePath(path.join('server', 'out', 'opencl-language-server', 'Build', 'Products', 'Debug', 'opencl-language-server'));
+  } else {
+    // todo: add for win and linux
+  }
 
   // If the extension is launched in debug mode then the debug server options are used
   // Otherwise the run options are used
   let serverOptions: ServerOptions = {
-    run: { module: serverModule, transport: TransportKind.ipc },
-    debug: {
-      module: serverModule,
-      transport: TransportKind.ipc,
-      options: debugOptions
-    }
-  };
+    command: process.env.VSCODE_DEBUG_MODE === 'true' ? debugServerModule : serverModule,
+		transport: TransportKind.stdio,
+  }; 
 
   // Options to control the language client
   let clientOptions: LanguageClientOptions = {
-    // Register the server for plain text documents
-    documentSelector: [{ scheme: 'file', language: 'opencl' }],
-    synchronize: {
-      // Notify the server about file changes to '.clientrc files contained in the workspace
-      fileEvents: workspace.createFileSystemWatcher('**/.clientrc')
-    }
+    documentSelector: [{ scheme: 'file', language: 'opencl' }]
   };
 
   // Create the language client and start the client.
-  client = new LanguageClient(
-    'languageServerExample',
-    'Language Server Example',
+  let client = new LanguageClient(
+    'opencl-language-server',
+    'OpenCL Language Server',
     serverOptions,
     clientOptions
   );
+  client.trace = Trace.Messages;
 
   // Commands
   let openclInfo = vscode.commands.registerCommand('opencl.info', () => {
@@ -120,13 +117,6 @@ export function activate(context: ExtensionContext) {
       }
   }));
 
-  // Start the client. This will also launch the server
-  client.start();
-}
-
-export function deactivate(): Thenable<void> | undefined {
-  if (!client) {
-    return undefined;
-  }
-  return client.stop();
+  let disposable = client.start();
+  context.subscriptions.push(disposable);
 }
