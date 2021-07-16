@@ -19,7 +19,6 @@
         "old",
     ],
     "references": [
-		{ "path": "./client" },
-		{ "path": "./server" }
+		{ "path": "./client" }
 	]
 }

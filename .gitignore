@@ -1,7 +1,10 @@
 _build
+build
 out
 node_modules
+__node_server
 .DS_Store
 ._*
 *.vsix
 *.tsbuildinfo
+server/externals/

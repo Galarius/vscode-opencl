@@ -90,6 +90,10 @@
                     "type": "string",
                     "default": "clang-format",
                     "description": "Default formatting utility is 'clang-format', which is shipped with 'ms-vscode.cpptools' extension. Specify an absolute path to use another version of 'clang-format'."
+                },
+                "opencl.server.build_options": {
+                    "type": "array",
+                    "description": "build options to be used for building the program executable. The list of supported options is described on https://www.khronos.org/registry/OpenCL/sdk/1.2/docs/man/xhtml/clBuildProgram.html."
                 }
             }
         },
