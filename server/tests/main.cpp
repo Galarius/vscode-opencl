@@ -5,12 +5,14 @@
 //  Created by is on 7/14/21.
 //
 
+#define CATCH_CONFIG_MAIN
 #include <catch2/catch.hpp>
 
 #include "jsonrpc.hpp"
 #define __glogger_implementation__    // define this only once
 #include <glogger.hpp>
 #include "diagnostics.hpp"
+#include <boost/json/src.hpp>
 
 using namespace vscode::opencl;
 using namespace boost;
@@ -35,7 +37,7 @@ std::string BuildRequest(const json::object& obj)
 void Send(const std::string& request, JsonRPC& jrpc)
 {
     for(auto c: request)
-        jrpc.Read(c);
+        jrpc.Consume(c);
 }
 
 std::string ParseResponse(std::string str)
@@ -59,7 +61,7 @@ TEST_CASE( "JSON-RPC TESTS", "<->" )
     SECTION( "Corrupted request handling" ) {
         std::string message = BuildRequest(R"!({"jsonrpc: 2.0", "id":0, [method]: "initialized"})!");
         JsonRPC jrpc;
-        jrpc.RegisterOutputCallback([](const std::string& message){
+        jrpc.RegisterOutputCallback([](const std::string& message) {
             auto response = boost::json::parse(ParseResponse(message)).as_object();
             REQUIRE(response["error"].as_object()["code"] == -32700);
         });
@@ -78,14 +80,12 @@ TEST_CASE( "JSON-RPC TESTS", "<->" )
         });
         std::string request = BuildRequest(obj);
         JsonRPC jrpc;
-       jrpc.RegisterInputCallback("initialize", [](const boost::json::object& request) {
+        jrpc.RegisterMethodCallback("initialize", [](const boost::json::object& request) {
            const auto& processId = request.at("params").as_object()
                                           .at("processId").as_int64();
            REQUIRE(processId == 60650);
-           return json::object();
-       });
+        });
         jrpc.RegisterOutputCallback([](const std::string& message){
-            // check message
             REQUIRE(message.size() > 0);
         });
         Send(request, jrpc);
