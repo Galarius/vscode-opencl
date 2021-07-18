@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		4A1E8CD826A0A74F000E1B6F /* OpenCL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A1E8CD726A0A74F000E1B6F /* OpenCL.framework */; };
 		4A1E8CD926A0A757000E1B6F /* OpenCL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A1E8CD726A0A74F000E1B6F /* OpenCL.framework */; };
+		4A2FED4126A4921600822A36 /* jsonrpc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4A63A9FB26A20073001286FD /* jsonrpc.cpp */; };
 		4A63A9FF26A20073001286FD /* jsonrpc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4A63A9FB26A20073001286FD /* jsonrpc.cpp */; };
 		4A63AA0026A20073001286FD /* diagnostics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4A63A9FC26A20073001286FD /* diagnostics.cpp */; };
 		4A63AA0126A20073001286FD /* lsp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4A63A9FD26A20073001286FD /* lsp.cpp */; };
@@ -218,6 +219,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4A63AA0926A200FD001286FD /* main.cpp in Sources */,
+				4A2FED4126A4921600822A36 /* jsonrpc.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

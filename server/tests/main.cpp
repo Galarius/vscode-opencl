@@ -5,7 +5,6 @@
 //  Created by is on 7/14/21.
 //
 
-#define CATCH_CONFIG_MAIN
 #include <catch2/catch.hpp>
 
 #include "jsonrpc.hpp"
