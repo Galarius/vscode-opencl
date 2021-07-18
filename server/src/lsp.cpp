@@ -35,6 +35,7 @@ private:
     void OnTextOpen(const json::object& data);
     void OnTextChanged(const json::object& data);
     void OnConfiguration(const json::object& data);
+    void OnTraceConfiguration(const json::object& data);
 
 private:
     JsonRPC m_jrpc;
@@ -124,17 +125,33 @@ void LSPServer::OnConfiguration(const json::object& data)
     }
 }
 
+void LSPServer::OnTraceConfiguration(const json::object& data)
+{
+    auto traceValue = data.at("params").as_object().at("value").as_string();
+    m_outQueue.push(json::object(
+        {{"method", "$/logTrace"},
+         {"params",
+          {
+              {"message", "Test Message"}
+          }}}));
+}
+
 void LSPServer::Run()
 {
+    auto self = this->shared_from_this();
     m_jrpc.RegisterMethodCallback(
-        "initialize", [self = this->shared_from_this()](const json::object& request) { self->OnInitialize(request); });
+        "initialize", [self](const json::object& request) { self->OnInitialize(request); });
 
-    m_jrpc.RegisterMethodCallback("initialized", [self = this->shared_from_this()](const json::object& request) {
+    m_jrpc.RegisterMethodCallback("initialized", [self](const json::object& request) {
         self->OnInitialized(request);
     });
-
+    
+    m_jrpc.RegisterMethodCallback("$/setTrace", [self](const json::object& request) {
+        self->OnTraceConfiguration(request);
+    });
+    
     m_jrpc.RegisterMethodCallback(
-        "textDocument/didOpen", [self = this->shared_from_this()](const json::object& request) {
+        "textDocument/didOpen", [self](const json::object& request) {
             if (self->m_configured)
                 self->OnTextOpen(request);
             else
@@ -142,14 +159,14 @@ void LSPServer::Run()
         });
 
     m_jrpc.RegisterMethodCallback(
-        "textDocument/didChange", [self = this->shared_from_this()](const json::object& request) {
+        "textDocument/didChange", [self](const json::object& request) {
             if (self->m_configured)
                 self->OnTextChanged(request);
             else
                 self->m_inQueue.push(std::make_pair("textDocument/didChange", request));
         });
 
-    m_jrpc.RegisterInputCallback([self = this->shared_from_this()](const json::object& respond) {
+    m_jrpc.RegisterInputCallback([self](const json::object& respond) {
         auto id = respond.at("id").as_int64();
         if (id == ID_CONFIGURATION)
             self->OnConfiguration(respond);

@@ -94,7 +94,18 @@
                 "opencl.server.build_options": {
                     "type": "array",
                     "description": "build options to be used for building the program executable. The list of supported options is described on https://www.khronos.org/registry/OpenCL/sdk/1.2/docs/man/xhtml/clBuildProgram.html."
-                }
+                },
+                "opencl.trace.server": {
+					"scope": "window",
+					"type": "string",
+					"enum": [
+						"off",
+						"messages",
+						"verbose"
+					],
+					"default": "off",
+					"description": "Traces the communication between VS Code and the OpenCL language server."
+				}
             }
         },
         "taskDefinitions": [

@@ -15,6 +15,7 @@ import { Trace } from 'vscode-jsonrpc';
 import {
   LanguageClient,
   LanguageClientOptions,
+  RevealOutputChannelOn,
   ServerOptions,
   TransportKind
 } from 'vscode-languageclient/node';
@@ -42,18 +43,32 @@ export function activate(context: ExtensionContext) {
   }; 
 
   // Options to control the language client
+  let output: vscode.OutputChannel = vscode.window.createOutputChannel('OpenCL Language Server')
   let clientOptions: LanguageClientOptions = {
-    documentSelector: [{ scheme: 'file', language: 'opencl' }]
+    documentSelector: [{ scheme: 'file', language: 'opencl' }],
+    synchronize: {
+      fileEvents: [
+      workspace.createFileSystemWatcher('**/*.cl'),
+      workspace.createFileSystemWatcher('**/*.cl')
+    ]},
+    outputChannel: output,
+    outputChannelName: 'OpenCL Language Server',
+    traceOutputChannel: output,
+    revealOutputChannelOn: RevealOutputChannelOn.Never,
+    initializationFailedHandler: error => {
+      output.appendLine(`Failed to initialize language server due to ${error && error.toString()}`);
+      return true;
+    },
   };
 
   // Create the language client and start the client.
   let client = new LanguageClient(
-    'opencl-language-server',
+    'opencl',
     'OpenCL Language Server',
     serverOptions,
     clientOptions
   );
-  client.trace = Trace.Off;
+  //client.trace = Trace.Verbose;
 
   // Commands
   let openclInfo = vscode.commands.registerCommand('opencl.info', () => {
@@ -117,6 +132,7 @@ export function activate(context: ExtensionContext) {
       }
   }));
 
+  output.appendLine("OpenCL Language Server started")
   let disposable = client.start();
   context.subscriptions.push(disposable);
 }
