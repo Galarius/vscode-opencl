@@ -125,17 +125,6 @@ void LSPServer::OnConfiguration(const json::object& data)
     }
 }
 
-void LSPServer::OnTraceConfiguration(const json::object& data)
-{
-    auto traceValue = data.at("params").as_object().at("value").as_string();
-    m_outQueue.push(json::object(
-        {{"method", "$/logTrace"},
-         {"params",
-          {
-              {"message", "Test Message"}
-          }}}));
-}
-
 void LSPServer::Run()
 {
     auto self = this->shared_from_this();
@@ -145,11 +134,7 @@ void LSPServer::Run()
     m_jrpc.RegisterMethodCallback("initialized", [self](const json::object& request) {
         self->OnInitialized(request);
     });
-    
-    m_jrpc.RegisterMethodCallback("$/setTrace", [self](const json::object& request) {
-        self->OnTraceConfiguration(request);
-    });
-    
+        
     m_jrpc.RegisterMethodCallback(
         "textDocument/didOpen", [self](const json::object& request) {
             if (self->m_configured)

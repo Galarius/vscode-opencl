@@ -1,6 +1,8 @@
 #include "jsonrpc.hpp"
 #include <glogger.hpp>
 
+using namespace boost;
+
 namespace vscode::opencl {
 
 void JsonRPC::RegisterMethodCallback(const std::string& method, InputCallbackFunc&& func)
@@ -38,20 +40,24 @@ void JsonRPC::Consume(char c)
             GLogDebug(">>>>>>>>>>>>>>>>");
             GLogDebug("");
 
-            m_body = boost::json::parse(m_buffer).as_object();
+            m_body = json::parse(m_buffer).as_object();
             auto method = m_body["method"];
             if (method.is_string())
             {
                 m_method = method.as_string();
                 if (m_method == "initialize")
                 {
-                    m_initialized = true;
+                    OnInitialize();
                 }
                 else if (!m_initialized)
                 {
                     GLogError("Unexpected first message: ", m_method);
                     WriteError(ErrorCode::NotInitialized, "Server was not initialized.");
                     return;
+                }
+                else if (m_method == "$/setTrace")
+                {
+                    OnTracingChanged(m_body);
                 }
                 FireMethodCallback();
             }
@@ -96,13 +102,13 @@ bool JsonRPC::IsReady() const
     return !m_isProcessing;
 }
 
-void JsonRPC::Write(const boost::json::object& data) const
+void JsonRPC::Write(const json::object& data) const
 {
     assert(m_outputCallback);
 
-    boost::json::object body = data;
+    json::object body = data;
     body.emplace("jsonrpc", "2.0");
-    std::string content = boost::json::serialize(boost::json::value_from(body));
+    std::string content = json::serialize(json::value_from(body));
     std::string message;
     message.append("Content-Length: " + std::to_string(content.size()) + "\r\n");
     message.append("Content-Type: application/vscode-jsonrpc;charset=utf-8\r\n");
@@ -127,6 +133,46 @@ void JsonRPC::Reset()
     m_validHeader = false;
     m_contentLength = 0;
     m_isProcessing = true;
+}
+
+void JsonRPC::LogTrace(const std::string& message, const std::string& verbose)
+{
+    if(!m_tracing)
+    {
+        GLogDebug("JRPC tracing is disabled");
+        GLogTrace("The message was: ", message, ", verbose: ", verbose);
+        return;
+    }
+    
+    if(!verbose.empty() && !m_verbosity)
+    {
+        GLogDebug("JRPC verbose tracing is disabled");
+        GLogTrace("The verbose message was: ", verbose);
+        return;
+    }
+        
+    Write(json::object({
+        {"method", "$/logTrace"},
+        {"params", {
+            {"message", message},
+            {"verbose", m_verbosity ? verbose : ""}
+        }}
+    }));
+}
+
+void JsonRPC::OnInitialize()
+{
+    const auto traceValue = m_body["params"].as_object().at("trace").as_string();
+    m_tracing = traceValue != "off";
+    m_verbosity = traceValue == "verbose";
+    m_initialized = true;
+}
+
+void JsonRPC::OnTracingChanged(const json::object& data)
+{
+    auto traceValue = data.at("params").as_object().at("value").as_string();
+    m_tracing = traceValue != "off";
+    m_verbosity = traceValue == "verbose";
 }
 
 bool JsonRPC::ReadHeader()
@@ -157,19 +203,29 @@ void JsonRPC::FireMethodCallback()
 {
     assert(m_outputCallback);
     auto callback = m_callbacks.find(m_method);
+        
     if (callback == m_callbacks.end())
     {
-        WriteError(ErrorCode::MethodNotFound, "Method '" + m_method + "' is not supported.");
+        const bool mustRespond = m_method.rfind("$/", 0) == json::string::npos;
+        if(mustRespond)
+            WriteError(ErrorCode::MethodNotFound, "Method '" + m_method + "' is not supported.");
     }
     else
     {
-        callback->second(m_body);
+        try
+        {
+            callback->second(m_body);
+        }
+        catch(std::exception& err)
+        {
+            GLogError("Failed to handle method '", m_method, "'");
+        }
     }
 }
 
 void JsonRPC::WriteError(JsonRPC::ErrorCode errorCode, const std::string& message) const
 {
-    boost::json::object obj(
+    json::object obj(
         {{"error",
           {
               {"code", static_cast<int>(errorCode)},

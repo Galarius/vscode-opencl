@@ -49,8 +49,14 @@ public:
     bool IsReady() const;
     void Write(const boost::json::object& data) const;
     void Reset();
+    /**
+     Send trace message to client.
+     */
+    void LogTrace(const std::string& message, const std::string& verbose = "");
 
 private:
+    void OnInitialize();
+    void OnTracingChanged(const boost::json::object& data);
     bool ReadHeader();
     void FireMethodCallback();
     void FireRespondCallback();
@@ -67,6 +73,8 @@ private:
     bool m_isProcessing = true;
     bool m_initialized = false;
     bool m_validHeader = false;
+    bool m_tracing = false;
+    bool m_verbosity = false;
     long long m_contentLength = 0;
     std::regex m_headerRegex {"([\\w-]+): (.+)\\r\\n(?:([^:]+)\\r\\n)?"};
 };
