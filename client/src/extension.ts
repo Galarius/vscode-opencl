@@ -29,7 +29,7 @@ export function activate(context: ExtensionContext) {
   var debugServerModule = ''
   if(os.platform() == "darwin") { 
     serverModule = context.asAbsolutePath(path.join('bin', 'darwin', 'opencl-language-server'));
-    debugServerModule = context.asAbsolutePath(path.join('server', 'out', 'opencl-language-server', 'Build', 'Products', 'Debug', 'opencl-language-server'));
+    debugServerModule = context.asAbsolutePath(path.join('server', 'build', 'bin', 'Debug', 'opencl-language-server'));
   } else {
     // todo: add for win and linux
   }
@@ -53,7 +53,7 @@ export function activate(context: ExtensionContext) {
     serverOptions,
     clientOptions
   );
-  client.trace = Trace.Messages;
+  client.trace = Trace.Off;
 
   // Commands
   let openclInfo = vscode.commands.registerCommand('opencl.info', () => {

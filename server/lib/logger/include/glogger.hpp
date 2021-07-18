@@ -350,7 +350,7 @@ private:
             std::string snow = CurrentTime();
             if (level >= m_minLevelFile)
             {
-                if(m_output == File || m_output == Both && m_fout.good())
+                if((m_output == File || m_output == Both) && m_fout.good())
                 {
                     m_fout << snow << m_separator << LevelName(level) << m_separator << message << std::endl;
                 }

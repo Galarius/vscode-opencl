@@ -2,11 +2,18 @@ cmake_minimum_required (VERSION 3.1)
 
 project(opencl-language-server)
 
-add_subdirectory(tests)
-
 find_package(OpenCL REQUIRED)
+message(STATUS "OpenCL found: ${OPENCL_FOUND}")
+message(STATUS "OpenCL includes: ${OPENCL_INCLUDE_DIRS}")
+message(STATUS "OpenCL CXX includes: ${OPENCL_HAS_CPP_BINDINGS}")
+message(STATUS "OpenCL libraries: ${OPENCL_LIBRARIES}")
 
-message ("C++ Flags:" ${CMAKE_CXX_FLAGS})
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
+
+message("CMake Generator:" ${CMAKE_GENERATOR})
+message("C++ Flags:" ${CMAKE_CXX_FLAGS})
 message("List of compile features: ${CMAKE_CXX_COMPILE_FEATURES}")
 
 file(GLOB HEADERS "${PROJECT_SOURCE_DIR}/include/*.hpp")
@@ -14,13 +21,12 @@ file(GLOB SOURCES "${PROJECT_SOURCE_DIR}/src/*.cpp")
 source_group("headers" FILES ${HEADERS})
 source_group("sources" FILES ${SOURCES})
 
-add_executable (${PROJECT_NAME} ${SOURCES})
+add_executable (${PROJECT_NAME} ${SOURCES} ${HEADERS})
 
 target_compile_definitions(${PROJECT_NAME} PRIVATE 
     BOOST_JSON_STANDALONE
     CL_SILENCE_DEPRECATION
 )
-target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_17)
 
 target_include_directories(${PROJECT_NAME}
      PRIVATE ${OpenCL_INCLUDE_DIRS}
@@ -30,6 +36,30 @@ target_include_directories(${PROJECT_NAME}
      PRIVATE ${PROJECT_SOURCE_DIR}/lib/json/include
 )
 
-set_target_properties(${PROJECT_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/out)
+set_target_properties(${PROJECT_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/bin)
 
 target_link_libraries (${PROJECT_NAME} ${OpenCL_LIBRARIES})
+
+########### TESTS ############
+
+set(TESTS_PROJECT_NAME "opencl-language-server-tests")
+
+add_executable (${TESTS_PROJECT_NAME} 
+    "${PROJECT_SOURCE_DIR}/include/jsonrpc.hpp"
+    "${PROJECT_SOURCE_DIR}/src/jsonrpc.cpp"
+    "${PROJECT_SOURCE_DIR}/tests/main.cpp")
+
+target_include_directories(${TESTS_PROJECT_NAME}
+     PRIVATE ${PROJECT_SOURCE_DIR}/include
+     PRIVATE ${PROJECT_SOURCE_DIR}/lib/json/include
+     PRIVATE ${PROJECT_SOURCE_DIR}/lib/logger/include
+     PRIVATE ${PROJECT_SOURCE_DIR}/lib/catch/single_include
+)
+
+target_compile_definitions(${TESTS_PROJECT_NAME} PRIVATE 
+    CATCH_CONFIG_MAIN
+    BOOST_JSON_STANDALONE
+    CL_SILENCE_DEPRECATION
+)
+
+set_target_properties(${TESTS_PROJECT_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/bin)
