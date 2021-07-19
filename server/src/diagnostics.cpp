@@ -271,7 +271,7 @@ boost::json::array Diagnostics::Get(const Source& source)
         buildLog = BuildSource(source.text, kernelDir);
     }
 
-    GLogTrace(TracePrefix, "BuildLog:", buildLog);
+    GLogTrace(TracePrefix, "BuildLog:\n", buildLog);
 
     return BuildDiagnostics(buildLog, srcName);
 }
