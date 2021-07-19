@@ -242,6 +242,19 @@ private:
      * @param[in] message message to write
      */
     void WriteLogMessage(Level level, std::string& message);
+    
+    bool ShouldSkip(Level level)
+    {
+        if(m_output == File)
+            return level < m_minLevelFile;
+        else if(m_output == Console)
+            return level < m_minLevelConsole;
+        else if(m_output == Both)
+            return level < m_minLevelConsole && level < m_minLevelFile;
+        else if(m_output == Off)
+            return !m_recordEnabled || level < m_minLevelConsole;
+    }
+    
     /**
      * @brief Inner logging method to perform console/file output
      * @param[in] args arguments for logging
@@ -250,6 +263,9 @@ private:
     template<typename ...Args>
     void InnerLog(Level level, Args&&... args)
     {
+        if(ShouldSkip(level))
+            return;
+
         m_writeLock.lock();
         unpack(std::forward<Args>(args)...); // unpack arguments and build message
         std::string message = m_bufferUnpack.str();
@@ -348,22 +364,19 @@ private:
         if (m_output != Off && !(m_skipEmptyMsgs && message.empty()) )
         {
             std::string snow = CurrentTime();
-            if (level >= m_minLevelFile)
+            if((m_output == File || m_output == Both) && m_fout.good())
             {
-                if((m_output == File || m_output == Both) && m_fout.good())
+                m_fout << snow << m_separator << LevelName(level) << m_separator << message << std::endl;
+            }
+            else if(m_output == Console || m_output == Both)
+            {
+                if (level == Level::Error)
                 {
-                    m_fout << snow << m_separator << LevelName(level) << m_separator << message << std::endl;
+                    std::cerr << snow << m_separator << LevelName(level) << m_separator << message << std::endl;
                 }
-                else if(m_output == Console || m_output == Both)
+                else
                 {
-                    if (level == Level::Error)
-                    {
-                        std::cerr << snow << m_separator << LevelName(level) << m_separator << message << std::endl;
-                    }
-                    else
-                    {
-                        std::cout << snow << m_separator << LevelName(level) << m_separator << message << std::endl;
-                    }
+                    std::cout << snow << m_separator << LevelName(level) << m_separator << message << std::endl;
                 }
             }
         }
