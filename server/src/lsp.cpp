@@ -10,14 +10,43 @@
 #include "jsonrpc.hpp"
 #include "diagnostics.hpp"
 
-#include <queue>
 #include <glogger.hpp>
 
-#define ID_CONFIGURATION 71621
+#include <queue>
+#include <sstream>
+#include <random>
+#include <string>
+#include <unordered_map>
 
 using namespace boost;
 
+namespace {
+
+std::string GenerateId() {
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> dis(0, 255);
+    std::string identifier;
+    std::stringstream hex;
+    for (auto i = 0; i < 16; ++i) {
+        const auto rc = dis(gen);
+        hex << std::hex << rc;
+        auto str = hex.str();
+        identifier.append(str.length() < 2 ? '0' + str : str);
+        hex.str(std::string());
+    }
+    return identifier;
+}
+
+}
+
 namespace vscode::opencl {
+
+struct Capabilities
+{
+    bool hasConfigurationCapability = false;
+    bool supportDidChangeConfiguration = false;
+};
 
 class LSPServer
     : public ILSPServer
@@ -41,37 +70,86 @@ private:
     JsonRPC m_jrpc;
     std::shared_ptr<IDiagnostics> m_diagnostics;
     std::queue<json::object> m_outQueue;
-    std::queue<std::pair<std::string, json::object>> m_inQueue;
-    bool m_configured = false;
+    Capabilities m_capabilities;
+    std::unordered_map<std::string, std::string> m_requests;
 };
 
 #pragma mark -
 
 void LSPServer::GetConfiguration()
 {
-    json::object item({{{"section", "opencl.server.build_options"}}});
-    json::array items({item});
-    m_outQueue.push(json::object(
-        {{{"id", ID_CONFIGURATION}, {"method", "workspace/configuration"}, {"params", {{"items", items}}}}}));
+    if(!m_capabilities.hasConfigurationCapability)
+        return;
+
+    json::object item({
+        {
+            {"section", "opencl.server.build.options"}
+        }
+    });
+    m_requests["workspace/configuration"] = GenerateId();
+    m_outQueue.push(json::object({
+        {
+            {"id", m_requests["workspace/configuration"]},
+            {"method", "workspace/configuration"},
+            {"params", {
+                {"items", json::array({item})}
+            }}
+        }
+    }));
 }
+
 
 void LSPServer::OnInitialize(const json::object& data)
 {
-    json::object textDocumentSync(
-        {{"textDocumentSync",
-          {
+    m_capabilities.hasConfigurationCapability = data.at("params").as_object()
+                                                       .at("capabilities").as_object()
+                                                       .at("workspace").as_object()
+                                                       .at("configuration").as_bool();
+    m_capabilities.supportDidChangeConfiguration = data.at("params").as_object()
+                                                       .at("capabilities").as_object()
+                                                       .at("workspace").as_object()
+                                                       .at("didChangeConfiguration").as_object()
+                                                       .at("dynamicRegistration").as_bool();
+    auto buildOptions = data.at("params").as_object()
+                            .at("initializationOptions").as_object()
+                            .at("configuration").as_object()
+                            .at("build_options").as_array();
+    m_diagnostics->SetBuildOptions(buildOptions);
+    
+    json::object capabilities({
+        {"textDocumentSync", {
               {"openClose", true},
               {"change", 1}, // TextDocumentSyncKind.Full
               {"willSave", false},
               {"willSaveWaitUntil", false},
               {"save", {{"includeText", false}}},
-          }}});
-    m_outQueue.push(json::object({{{"id", data.at("id")}, {"result", {{"capabilities", textDocumentSync}}}}}));
+        }},
+    });
+    m_outQueue.push(json::object({{{"id", data.at("id")}, {"result", {{"capabilities", capabilities}}}}}));
 }
 
 void LSPServer::OnInitialized(const json::object& data)
 {
-    GetConfiguration();
+    if(!m_capabilities.supportDidChangeConfiguration)
+        return;
+    json::array registrations({
+        {
+            {"id", GenerateId()},
+            {"method", "workspace/didChangeConfiguration"},
+        }
+    });
+    json::array params ({
+        {
+            {"registrations", registrations},
+        }
+    });
+    m_outQueue.push(json::object({
+        {
+            {"id", GenerateId()},
+            {"method", "client/registerCapability"},
+            {"params", params}
+        }
+    }));
 }
 
 void LSPServer::OnTextOpen(const json::object& data)
@@ -112,17 +190,7 @@ void LSPServer::OnConfiguration(const json::object& data)
     auto result = data.at("result").as_array().front();
     auto items = result.as_array();
     m_diagnostics->SetBuildOptions(items);
-    m_configured = true;
 
-    while (!m_inQueue.empty())
-    {
-        auto [method, request] = m_inQueue.front();
-        if (method == "textDocument/didOpen")
-            OnTextOpen(request);
-        else if (method == "textDocument/didChange")
-            OnTextChanged(request);
-        m_inQueue.pop();
-    }
 }
 
 void LSPServer::Run()
@@ -137,24 +205,22 @@ void LSPServer::Run()
         
     m_jrpc.RegisterMethodCallback(
         "textDocument/didOpen", [self](const json::object& request) {
-            if (self->m_configured)
-                self->OnTextOpen(request);
-            else
-                self->m_inQueue.push(std::make_pair("textDocument/didOpen", request));
+            self->OnTextOpen(request);
         });
 
     m_jrpc.RegisterMethodCallback(
         "textDocument/didChange", [self](const json::object& request) {
-            if (self->m_configured)
-                self->OnTextChanged(request);
-            else
-                self->m_inQueue.push(std::make_pair("textDocument/didChange", request));
+            self->OnTextChanged(request);
         });
-
+    
     m_jrpc.RegisterInputCallback([self](const json::object& respond) {
-        auto id = respond.at("id").as_int64();
-        if (id == ID_CONFIGURATION)
+        const auto id = respond.at("id").as_string();
+        if (id == self->m_requests["workspace/configuration"])
             self->OnConfiguration(respond);
+    });
+
+    m_jrpc.RegisterMethodCallback("workspace/didChangeConfiguration", [self](const json::object& request) {
+        self->GetConfiguration();
     });
 
     m_jrpc.RegisterOutputCallback([](const std::string& message) { std::cout << message << std::flush; });

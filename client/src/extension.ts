@@ -46,15 +46,15 @@ export function activate(context: ExtensionContext) {
   let output: vscode.OutputChannel = vscode.window.createOutputChannel('OpenCL Language Server')
   let clientOptions: LanguageClientOptions = {
     documentSelector: [{ scheme: 'file', language: 'opencl' }],
-    synchronize: {
-      fileEvents: [
-      workspace.createFileSystemWatcher('**/*.cl'),
-      workspace.createFileSystemWatcher('**/*.cl')
-    ]},
     outputChannel: output,
     outputChannelName: 'OpenCL Language Server',
     traceOutputChannel: output,
     revealOutputChannelOn: RevealOutputChannelOn.Never,
+    initializationOptions: {
+      configuration: {
+        build_options: vscode.workspace.getConfiguration().get('opencl.server.build.options', [])
+      }
+    },
     initializationFailedHandler: error => {
       output.appendLine(`Failed to initialize language server due to ${error && error.toString()}`);
       return true;
