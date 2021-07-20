@@ -16,7 +16,6 @@
 #include <sstream>
 #include <random>
 #include <string>
-#include <unordered_map>
 
 using namespace boost;
 
@@ -71,7 +70,7 @@ private:
     std::shared_ptr<IDiagnostics> m_diagnostics;
     std::queue<json::object> m_outQueue;
     Capabilities m_capabilities;
-    std::unordered_map<std::string, std::string> m_requests;
+    std::queue<std::pair<std::string, std::string>> m_requests;
 };
 
 #pragma mark -
@@ -86,10 +85,11 @@ void LSPServer::GetConfiguration()
             {"section", "OpenCL.server.buildOptions"}
         }
     });
-    m_requests["workspace/configuration"] = GenerateId();
+    const auto requestId = GenerateId();
+    m_requests.push(std::make_pair("workspace/configuration", requestId));
     m_outQueue.push(json::object({
         {
-            {"id", m_requests["workspace/configuration"]},
+            {"id", requestId},
             {"method", "workspace/configuration"},
             {"params", {
                 {"items", json::array({item})}
@@ -190,7 +190,6 @@ void LSPServer::OnConfiguration(const json::object& data)
     auto result = data.at("result").as_array().front();
     auto items = result.as_array();
     m_diagnostics->SetBuildOptions(items);
-
 }
 
 void LSPServer::Run()
@@ -215,8 +214,13 @@ void LSPServer::Run()
     
     m_jrpc.RegisterInputCallback([self](const json::object& respond) {
         const auto id = respond.at("id").as_string();
-        if (id == self->m_requests["workspace/configuration"])
-            self->OnConfiguration(respond);
+        if(!self->m_requests.empty())
+        {
+            auto request = self->m_requests.front();
+            if (id == request.second && request.first == "workspace/configuration")
+                self->OnConfiguration(respond);
+            self->m_requests.pop();
+        }
     });
 
     m_jrpc.RegisterMethodCallback("workspace/didChangeConfiguration", [self](const json::object& request) {
