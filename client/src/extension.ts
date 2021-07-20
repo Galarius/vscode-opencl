@@ -8,9 +8,7 @@ import * as oclinfo from "./commands/oclinfo";
 import * as formatter from "./providers/formatter";
 import * as os from 'os';
 
-import { workspace, ExtensionContext } from 'vscode';
-import { Trace } from 'vscode-jsonrpc';
-
+import { ExtensionContext } from 'vscode';
 
 import {
   LanguageClient,
@@ -24,8 +22,7 @@ import { OpenCLCompletionItemProvider } from './providers/completion/completion'
 import { OpenCLHoverProvider } from './providers/hover/hover';
 import { getOpenCLTasks, buildTask, OpenCLDeviceDetector } from './providers/task';
 
-export function activate(context: ExtensionContext) {
-  // The server is implemented in node
+function createAndStartLanguageServer(context: ExtensionContext) {
   var serverModule = ''
   var debugServerModule = ''
   if(os.platform() == "darwin") { 
@@ -66,7 +63,8 @@ export function activate(context: ExtensionContext) {
     revealOutputChannelOn: RevealOutputChannelOn.Never,
     initializationOptions: {
       configuration: {
-        build_options: vscode.workspace.getConfiguration().get('OpenCL.server.buildOptions', [])
+        buildOptions: vscode.workspace.getConfiguration().get('OpenCL.server.buildOptions', []),
+        maxNumberOfProblems: vscode.workspace.getConfiguration().get('OpenCL.server.maxNumberOfProblems', 100)
       }
     },
     initializationFailedHandler: error => {
@@ -84,6 +82,13 @@ export function activate(context: ExtensionContext) {
   );
   //client.trace = Trace.Verbose;
 
+  output.appendLine("OpenCL Language Server started")
+  let disposable = client.start();
+  context.subscriptions.push(disposable);
+}
+
+export function activate(context: ExtensionContext) {
+  
   // Commands
   let openclInfo = vscode.commands.registerCommand('opencl.info', () => {
       oclinfo.oclinfoDumpAll();
@@ -145,8 +150,10 @@ export function activate(context: ExtensionContext) {
           return undefined;
       }
   }));
-
-  output.appendLine("OpenCL Language Server started")
-  let disposable = client.start();
-  context.subscriptions.push(disposable);
+  
+  // Language Server
+  if(vscode.workspace.getConfiguration().get('OpenCL.server.enable', true))
+  {
+    createAndStartLanguageServer(context)
+  }
 }

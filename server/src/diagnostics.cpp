@@ -80,6 +80,7 @@ public:
     Diagnostics();
     boost::json::array Get(const Source& source);
     void SetBuildOptions(const boost::json::array& options);
+    void SetMaxProblemsCount(int maxNumberOfProblems);
 
 private:
     boost::json::array BuildDiagnostics(const std::string& buildLog, const std::string& name);
@@ -90,6 +91,7 @@ private:
     cl::Device m_device;
     std::regex m_regex {"^(.*):(\\d+):(\\d+): ((fatal )?error|warning|Scholar): (.*)$"};
     std::string m_BuildOptions;
+    int m_maxNumberOfProblems = 100;
 };
 
 Diagnostics::Diagnostics()
@@ -209,12 +211,19 @@ boost::json::array Diagnostics::BuildDiagnostics(const std::string& buildLog, co
     std::smatch matches;
     auto errorLines = SplitString(buildLog, "\n");
     json::array diagnostics;
+    int count = 0;
     for (auto errLine : errorLines)
     {
         std::regex_search(errLine, matches, m_regex);
         if (matches.size() != 7)
             continue;
 
+        if(count++ > m_maxNumberOfProblems)
+        {
+            GLogInfo(TracePrefix, "Maximum number of problems reached, other problems will be slipped");
+            break;
+        }
+        
         auto [source, line, col, severity, message] = ParseOutput(matches);
         json::object diagnostic;
         json::object range {
@@ -240,6 +249,7 @@ boost::json::array Diagnostics::BuildDiagnostics(const std::string& buildLog, co
 
 boost::json::array Diagnostics::Get(const Source& source)
 {
+    GLogDebug(TracePrefix, "Getting diagnostics...");
     if (!m_isInitialized)
         throw std::runtime_error("Failed to init OpenCL");
 
@@ -289,12 +299,18 @@ void Diagnostics::SetBuildOptions(const json::array& options)
             args.append(" ");
         }
         m_BuildOptions = std::move(args);
-        GLogTrace(TracePrefix, "Set build options: ", m_BuildOptions);
+        GLogDebug(TracePrefix, "Set build options: ", m_BuildOptions);
     }
     catch (std::exception& e)
     {
         GLogError(TracePrefix, "Failed to parse build options, error", e.what());
     }
+}
+
+void Diagnostics::SetMaxProblemsCount(int maxNumberOfProblems)
+{
+    GLogDebug(TracePrefix, "Set max number of problems: ", maxNumberOfProblems);
+    m_maxNumberOfProblems = maxNumberOfProblems;
 }
 
 std::shared_ptr<IDiagnostics> CreateDiagnostics()

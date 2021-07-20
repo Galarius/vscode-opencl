@@ -68,7 +68,8 @@ void LSPServer::GetConfiguration()
         return;
     }
     GLogDebug(TracePrefix, "Make configuration request");
-    json::object item({{{"section", "OpenCL.server.buildOptions"}}});
+    json::object buildOptions({{{"section", "OpenCL.server.buildOptions"}}});
+    json::object maxNumberOfProblems({{{"section", "OpenCL.server.maxNumberOfProblems"}}});
     const auto requestId = utils::GenerateId();
     m_requests.push(std::make_pair("workspace/configuration", requestId));
     // clang-format off
@@ -77,7 +78,7 @@ void LSPServer::GetConfiguration()
             {"id", requestId},
             {"method", "workspace/configuration"},
             {"params", {
-                {"items", json::array({item})}
+                {"items", json::array({buildOptions, maxNumberOfProblems})}
             }}
         }
     }));
@@ -90,32 +91,25 @@ void LSPServer::OnInitialize(const json::object& data)
     GLogDebug(TracePrefix, "Received 'initialize' request");
     try
     {
-        m_capabilities.hasConfigurationCapability = data.at("params")
-                                                        .as_object()
-                                                        .at("capabilities")
-                                                        .as_object()
-                                                        .at("workspace")
-                                                        .as_object()
-                                                        .at("configuration")
-                                                        .as_bool();
-        m_capabilities.supportDidChangeConfiguration = data.at("params")
-                                                           .as_object()
-                                                           .at("capabilities")
-                                                           .as_object()
-                                                           .at("workspace")
-                                                           .as_object()
-                                                           .at("didChangeConfiguration")
-                                                           .as_object()
-                                                           .at("dynamicRegistration")
-                                                           .as_bool();
-        auto buildOptions = data.at("params")
-                                .as_object()
-                                .at("initializationOptions")
-                                .as_object()
-                                .at("configuration")
-                                .as_object()
-                                .at("build_options")
-                                .as_array();
+        // clang-format off
+        m_capabilities.hasConfigurationCapability = data.at("params").as_object()
+                                                        .at("capabilities").as_object()
+                                                        .at("workspace").as_object()
+                                                        .at("configuration").as_bool();
+        m_capabilities.supportDidChangeConfiguration = data.at("params").as_object()
+                                                           .at("capabilities").as_object()
+                                                           .at("workspace").as_object()
+                                                           .at("didChangeConfiguration").as_object()
+                                                           .at("dynamicRegistration").as_bool();
+        auto buildOptions = data.at("params").as_object()
+                                .at("initializationOptions").as_object()
+                                .at("configuration").as_object()
+                                .at("buildOptions").as_array();
+        auto maxNumberOfProblems = data.at("params").as_object()
+                                .at("initializationOptions").as_object()
+                                .at("configuration").as_object()
+                                .at("maxNumberOfProblems").as_int64();
+        // clang-format on
         m_diagnostics->SetBuildOptions(buildOptions);
     }
     catch (std::exception& err)
@@ -227,9 +221,30 @@ void LSPServer::OnTextChanged(const json::object& data)
 void LSPServer::OnConfiguration(const json::object& data)
 {
     GLogDebug(TracePrefix, "Received 'configuration' respond");
-    auto result = data.at("result").as_array().front();
-    auto items = result.as_array();
-    m_diagnostics->SetBuildOptions(items);
+    auto result = data.at("result").as_array();
+    if(result.empty())
+    {
+        GLogWarn(TracePrefix, "Empty result");
+        return;
+    }
+    
+    if(result.size() != 2)
+    {
+        GLogWarn(TracePrefix, "Unexpected result items count");
+        return;
+    }
+    
+    try
+    {
+        auto buildOptions = result.at(0).as_array();
+        auto maxProblemsCount = result.at(1).as_int64();
+        m_diagnostics->SetBuildOptions(buildOptions);
+        m_diagnostics->SetMaxProblemsCount(maxProblemsCount);
+    }
+    catch (std::exception& err)
+    {
+        GLogError(TracePrefix, "Failed to update settings", err.what());
+    }
 }
 
 void LSPServer::OnRespond(const json::object& data)

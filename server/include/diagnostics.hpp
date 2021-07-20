@@ -22,6 +22,7 @@ struct Source
 struct IDiagnostics
 {
     virtual void SetBuildOptions(const boost::json::array& options) = 0;
+    virtual void SetMaxProblemsCount(int maxNumberOfProblems) = 0;
     virtual boost::json::array Get(const Source& source) = 0;
 };
 
