@@ -35,10 +35,24 @@ export function activate(context: ExtensionContext) {
     // todo: add for win and linux
   }
 
+  let enableFileLogging = vscode.workspace.getConfiguration().get('OpenCL.server.debug.enableFileLogging', false)
+  let logFileName = vscode.workspace.getConfiguration().get('OpenCL.server.debug.logFileName', 'opencl-language-server.log')
+  let logLevel = vscode.workspace.getConfiguration().get('OpenCL.server.debug.logLevel', 0)
+  let args: Array<any> = []
+  if(enableFileLogging)
+  {
+    args.push('--enable-file-tracing')
+    args.push('--filename')
+    args.push(logFileName)
+    args.push('--level')
+    args.push(logLevel)
+  }
+
   // If the extension is launched in debug mode then the debug server options are used
   // Otherwise the run options are used
   let serverOptions: ServerOptions = {
     command: process.env.VSCODE_DEBUG_MODE === 'true' ? debugServerModule : serverModule,
+    args: args,
 		transport: TransportKind.stdio,
   }; 
 
@@ -52,7 +66,7 @@ export function activate(context: ExtensionContext) {
     revealOutputChannelOn: RevealOutputChannelOn.Never,
     initializationOptions: {
       configuration: {
-        build_options: vscode.workspace.getConfiguration().get('opencl.server.build.options', [])
+        build_options: vscode.workspace.getConfiguration().get('OpenCL.server.buildOptions', [])
       }
     },
     initializationFailedHandler: error => {

@@ -7,7 +7,7 @@ import { exists, scanParentFolders } from '../../modules/utils'
 import { isCppExtensionInstalled } from '../../modules/dependencies'
 import { getClangBinaryPath, getClangArgumentList } from './clang/formatter'
 
-const STR_CPP_EXTENSION_NOT_INSTALLED_ERROR = "[OpenCL Formatter] Extension 'ms-vscode.cpptools' is required to run 'clang-format' utility. Edit 'opencl.formatting.name' in Preferences to use custom formatter or specify an absolute path to 'clang-format'."
+const STR_CPP_EXTENSION_NOT_INSTALLED_ERROR = "[OpenCL Formatter] Extension 'ms-vscode.cpptools' is required to run 'clang-format' utility. Edit 'OpenCL.formatting.name' in Preferences to use custom formatter or specify an absolute path to 'clang-format'."
 const STR_FAILED_TO_FIND_FORMATTER = "[OpenCL Formatter] Failed to find default 'clang-format' binary in 'ms-vscode.cpptools' extension."
 const STR_FORMATTER_PROCESS_FAILED = '[OpenCL Formatter] Failed to format document. Check the console in dev tools to find errors when formatting.'
 const STR_FORMATTER_NOT_FOUND = '[OpenCL Formatter] Failed to find formatter. Check the console in dev tools.'
@@ -16,7 +16,7 @@ class OpenCLDocumentFormattingEditProvider {
 
     async provideDocumentFormattingEdits(document, options, token) {
         // opencl settings
-        let app = vscode.workspace.getConfiguration().get('opencl.formatting.name', 'clang-format')
+        let app = vscode.workspace.getConfiguration().get('OpenCL.formatting.name', 'clang-format')
         app = app.replace(/["]/g,"").trim()
         const config = await scanParentFolders(path.dirname(document.fileName), '.clang-format')
         const configExists = typeof config !== 'undefined'

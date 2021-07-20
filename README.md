@@ -167,7 +167,7 @@ Customized tasks can also be bound to a custom shortcuts (See [Binding keyboard 
 
 ## Formatting Configuration
 
-* `opencl.formatting.name` - Default formatting utility is 'clang-format', which is shipped with 'ms-vscode.cpptools' extension. Specify an absolute path to use another version of 'clang-format'.
+* `OpenCL.formatting.name` - Default formatting utility is 'clang-format', which is shipped with 'ms-vscode.cpptools' extension. Specify an absolute path to use another version of 'clang-format'.
 
 ## Commands
 

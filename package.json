@@ -86,16 +86,16 @@
             "type": "object",
             "title": "OpenCL",
             "properties": {
-                "opencl.formatting.name": {
+                "OpenCL.formatting.name": {
                     "type": "string",
                     "default": "clang-format",
                     "description": "Default formatting utility is 'clang-format', which is shipped with 'ms-vscode.cpptools' extension. Specify an absolute path to use another version of 'clang-format'."
                 },
-                "opencl.server.build.options": {
+                "OpenCL.server.buildOptions": {
                     "type": "array",
                     "description": "build options to be used for building the program executable. The list of supported options is described on https://www.khronos.org/registry/OpenCL/sdk/1.2/docs/man/xhtml/clBuildProgram.html."
                 },
-                "opencl.trace.server": {
+                "OpenCL.trace.server": {
 					"scope": "window",
 					"type": "string",
 					"enum": [
@@ -105,7 +105,32 @@
 					],
 					"default": "off",
 					"description": "Traces the communication between VS Code and the OpenCL language server."
-				}
+				},
+                "OpenCL.server.debug.enableFileLogging": {
+                    "type": "boolean",
+                    "description": "Traces the server's internal state. Server restart is required."
+                },
+                "OpenCL.server.debug.logFileName": {
+                    "type": "string",
+                    "default": "opencl-language-server.log"
+                },
+                "OpenCL.server.debug.logLevel": {
+                    "type": "integer",
+					"enum": [
+						0, 
+                        1,
+                        2,
+                        3,
+                        4
+					],
+                    "enumDescriptions": [
+                        "Trace",
+                        "Debug",
+                        "Info",
+                        "Warn",  
+                        "Error"
+                    ]
+                }
             }
         },
         "taskDefinitions": [

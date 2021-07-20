@@ -83,7 +83,7 @@ void LSPServer::GetConfiguration()
 
     json::object item({
         {
-            {"section", "opencl.server.build.options"}
+            {"section", "OpenCL.server.buildOptions"}
         }
     });
     m_requests["workspace/configuration"] = GenerateId();
