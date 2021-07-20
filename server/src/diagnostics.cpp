@@ -1,7 +1,9 @@
-/*!
-  \file
-  \author Ilya Shoshin (Galarius)
-*/
+//
+//  diagnostics.cpp
+//  opencl-language-server
+//
+//  Created by Ilya Shoshin (Galarius) on 7/16/21.
+//
 
 #include "diagnostics.hpp"
 

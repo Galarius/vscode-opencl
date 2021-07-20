@@ -1,8 +1,8 @@
 //
-//  lsp.h
+//  lsp.hpp
 //  opencl-language-server
 //
-//  Created by is on 7/16/21.
+//  Created by Ilya Shoshin (Galarius) on 7/16/21.
 //
 
 #pragma once

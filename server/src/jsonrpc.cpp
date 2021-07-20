@@ -1,3 +1,10 @@
+//
+//  jsonrpc.cpp
+//  opencl-language-server
+//
+//  Created by Ilya Shoshin (Galarius) on 7/16/21.
+//
+
 #include "jsonrpc.hpp"
 #include <glogger.hpp>
 
@@ -43,7 +50,7 @@ void JsonRPC::Consume(char c)
             GLogDebug(TracePrefix);
 
             m_body = json::parse(m_buffer).as_object();
-            auto method = m_body["method"];
+            const auto method = m_body["method"];
             if (method.is_string())
             {
                 m_method = method.as_string();
@@ -107,22 +114,29 @@ void JsonRPC::Write(const json::object& data) const
 {
     assert(m_outputCallback);
 
-    json::object body = data;
-    body.emplace("jsonrpc", "2.0");
-    std::string content = json::serialize(json::value_from(body));
     std::string message;
-    message.append("Content-Length: " + std::to_string(content.size()) + "\r\n");
-    message.append("Content-Type: application/vscode-jsonrpc;charset=utf-8\r\n");
-    message.append("\r\n");
-    message.append(content);
+    try
+    {
+        json::object body = data;
+        body.emplace("jsonrpc", "2.0");
+        std::string content = json::serialize(json::value_from(body));
+        message.append("Content-Length: " + std::to_string(content.size()) + "\r\n");
+        message.append("Content-Type: application/vscode-jsonrpc;charset=utf-8\r\n");
+        message.append("\r\n");
+        message.append(content);
 
-    GLogDebug(TracePrefix);
-    GLogDebug(TracePrefix, "<<<<<<<<<<<<<<<<");
-    GLogDebug(message);
-    GLogDebug(TracePrefix, "<<<<<<<<<<<<<<<<");
-    GLogDebug(TracePrefix);
+        GLogDebug(TracePrefix);
+        GLogDebug(TracePrefix, "<<<<<<<<<<<<<<<<");
+        GLogDebug(message);
+        GLogDebug(TracePrefix, "<<<<<<<<<<<<<<<<");
+        GLogDebug(TracePrefix);
 
-    m_outputCallback(message);
+        m_outputCallback(message);
+    }
+    catch (std::exception& err)
+    {
+        GLogError(TracePrefix, "Failed to write message: ", message, ", error: ", err.what());
+    }
 }
 
 void JsonRPC::Reset()
@@ -138,46 +152,63 @@ void JsonRPC::Reset()
 
 void JsonRPC::LogTrace(const std::string& message, const std::string& verbose)
 {
-    if(!m_tracing)
+    if (!m_tracing)
     {
         GLogDebug(TracePrefix, "JRPC tracing is disabled");
         GLogTrace(TracePrefix, "The message was: ", message, ", verbose: ", verbose);
         return;
     }
-    
-    if(!verbose.empty() && !m_verbosity)
+
+    if (!verbose.empty() && !m_verbosity)
     {
         GLogDebug(TracePrefix, "JRPC verbose tracing is disabled");
         GLogTrace(TracePrefix, "The verbose message was: ", verbose);
         return;
     }
-        
-    Write(json::object({
-        {"method", "$/logTrace"},
-        {"params", {
-            {"message", message},
-            {"verbose", m_verbosity ? verbose : ""}
-        }}
-    }));
+
+    Write(json::object(
+        {{"method", "$/logTrace"}, {"params", {{"message", message}, {"verbose", m_verbosity ? verbose : ""}}}}));
 }
 
 void JsonRPC::OnInitialize()
 {
-    const auto traceValue = m_body["params"].as_object().at("trace").as_string();
-    m_tracing = traceValue != "off";
-    m_verbosity = traceValue == "verbose";
-    m_initialized = true;
-    GLogDebug(TracePrefix, "Tracing options: is verbose", m_verbosity ? "yes" : "no",
-              ", is on: ", m_tracing ? "yes" : "no");
+    try
+    {
+        const auto traceValue = m_body["params"].as_object().at("trace").as_string();
+        m_tracing = traceValue != "off";
+        m_verbosity = traceValue == "verbose";
+        m_initialized = true;
+        GLogDebug(
+            TracePrefix,
+            "Tracing options: is verbose",
+            m_verbosity ? "yes" : "no",
+            ", is on: ",
+            m_tracing ? "yes" : "no");
+    }
+    catch (std::exception& err)
+    {
+        GLogError(TracePrefix, "Failed to read tracing options", err.what());
+    }
 }
 
 void JsonRPC::OnTracingChanged(const json::object& data)
 {
-    auto traceValue = data.at("params").as_object().at("value").as_string();
-    m_tracing = traceValue != "off";
-    m_verbosity = traceValue == "verbose";
-    GLogDebug(TracePrefix, "Tracing options were changed: is verbose", m_verbosity ? "yes" : "no",
-              ", is on: ", m_tracing ? "yes" : "no");
+    try
+    {
+        const auto traceValue = data.at("params").as_object().at("value").as_string();
+        m_tracing = traceValue != "off";
+        m_verbosity = traceValue == "verbose";
+        GLogDebug(
+            TracePrefix,
+            "Tracing options were changed: is verbose",
+            m_verbosity ? "yes" : "no",
+            ", is on: ",
+            m_tracing ? "yes" : "no");
+    }
+    catch (std::exception& err)
+    {
+        GLogError(TracePrefix, "Failed to read tracing options", err.what());
+    }
 }
 
 bool JsonRPC::ReadHeader()
@@ -200,7 +231,7 @@ bool JsonRPC::ReadHeader()
 
 void JsonRPC::FireRespondCallback()
 {
-    if(m_respondCallback)
+    if (m_respondCallback)
     {
         GLogDebug(TracePrefix, "Calling handler for a client respond");
         m_respondCallback(m_body);
@@ -215,9 +246,13 @@ void JsonRPC::FireMethodCallback()
     {
         const bool isRequest = m_body["params"].as_object()["id"] != nullptr;
         const bool mustRespond = isRequest || m_method.rfind("$/", 0) == json::string::npos;
-        GLogDebug(TracePrefix, "Got request: ", isRequest ? "yes" : "no",
-                  ", respond is required: ", mustRespond ? "yes" : "no");
-        if(mustRespond)
+        GLogDebug(
+            TracePrefix,
+            "Got request: ",
+            isRequest ? "yes" : "no",
+            ", respond is required: ",
+            mustRespond ? "yes" : "no");
+        if (mustRespond)
         {
             WriteError(ErrorCode::MethodNotFound, "Method '" + m_method + "' is not supported.");
         }
@@ -229,7 +264,7 @@ void JsonRPC::FireMethodCallback()
             GLogDebug(TracePrefix, "Calling handler for method: ", m_method);
             callback->second(m_body);
         }
-        catch(std::exception& err)
+        catch (std::exception& err)
         {
             GLogError(TracePrefix, "Failed to handle method '", m_method, "'");
         }

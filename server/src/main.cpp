@@ -2,7 +2,7 @@
 //  main.cpp
 //  opencl-language-server
 //
-//  Created by is on 7/14/21.
+//  Created by Ilya Shoshin (Galarius) on 7/14/21.
 //
 
 #include <iostream>

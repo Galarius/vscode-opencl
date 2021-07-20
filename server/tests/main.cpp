@@ -2,7 +2,7 @@
 //  main.cpp
 //  opencl-language-server-tests
 //
-//  Created by is on 7/14/21.
+//  Created by Ilya Shoshin (Galarius) on 7/16/21.
 //
 
 #include <catch2/catch.hpp>
