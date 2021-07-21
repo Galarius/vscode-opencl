@@ -251,7 +251,7 @@ private:
             return level < m_minLevelConsole;
         else if(m_output == Both)
             return level < m_minLevelConsole && level < m_minLevelFile;
-        else if(m_output == Off)
+        else // m_output == Off
             return !m_recordEnabled || level < m_minLevelConsole;
     }
     
