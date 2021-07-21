@@ -111,6 +111,7 @@ void LSPServer::OnInitialize(const json::object& data)
                                 .at("maxNumberOfProblems").as_int64();
         // clang-format on
         m_diagnostics->SetBuildOptions(buildOptions);
+        m_diagnostics->SetMaxProblemsCount(maxNumberOfProblems);
     }
     catch (std::exception& err)
     {
