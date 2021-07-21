@@ -11,7 +11,13 @@ message(STATUS "OpenCL libraries: ${OPENCL_LIBRARIES}")
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Werror=return-type -Werror=exceptions -Werror=static-inline-explicit-instantiation -Werror=macro-redefined -Werror=return-stack-address -Werror=nonportable-include-path")
+
+set(CXX_WARNINGS_AS_ERRORS "-Werror=return-type -Werror=exceptions -Werror=static-inline-explicit-instantiation -Werror=macro-redefined -Werror=return-stack-address -Werror=nonportable-include-path")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${CXX_WARNINGS_AS_ERRORS}")
+
+if(APPLE)
+    set(CMAKE_OSX_DEPLOYMENT_TARGET "10.15")
+endif()
 
 message("CMake Generator:" ${CMAKE_GENERATOR})
 message("C++ Flags:" ${CMAKE_CXX_FLAGS})
