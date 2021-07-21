@@ -6,11 +6,11 @@
 //
 
 #include "diagnostics.hpp"
+#include "utils.hpp"
 
 #include <iostream>
 #include <stdexcept> // std::runtime_error, std::invalid_argument
 #include <regex>
-#include <filesystem>
 #include <glogger.hpp>
 
 #define __CL_ENABLE_EXCEPTIONS
@@ -26,18 +26,6 @@ using namespace boost;
 namespace {
 
 constexpr char TracePrefix[] = "#diagnostics ";
-
-std::vector<std::string> SplitString(const std::string& str, const std::string& pattern)
-{
-    std::vector<std::string> result;
-    const std::regex re(pattern);
-    std::sregex_token_iterator iter(str.begin(), str.end(), re, -1);
-    for (std::sregex_token_iterator end; iter != end; ++iter)
-    {
-        result.push_back(iter->str());
-    }
-    return result;
-}
 
 int ParseSeverity(const std::string& severity)
 {
@@ -209,7 +197,7 @@ std::string Diagnostics::BuildSource(const std::string& source, const std::strin
 boost::json::array Diagnostics::BuildDiagnostics(const std::string& buildLog, const std::string& name)
 {
     std::smatch matches;
-    auto errorLines = SplitString(buildLog, "\n");
+    auto errorLines = utils::SplitString(buildLog, "\n");
     json::array diagnostics;
     int count = 0;
     for (auto errLine : errorLines)
@@ -218,12 +206,12 @@ boost::json::array Diagnostics::BuildDiagnostics(const std::string& buildLog, co
         if (matches.size() != 7)
             continue;
 
-        if(count++ > m_maxNumberOfProblems)
+        if (count++ > m_maxNumberOfProblems)
         {
             GLogInfo(TracePrefix, "Maximum number of problems reached, other problems will be slipped");
             break;
         }
-        
+
         auto [source, line, col, severity, message] = ParseOutput(matches);
         json::object diagnostic;
         json::object range {
@@ -259,8 +247,8 @@ boost::json::array Diagnostics::Get(const Source& source)
 
     if (!source.uri.empty())
     {
-        srcName = std::filesystem::path(source.uri).filename();
-        kernelDir = std::filesystem::path(source.uri).parent_path();
+        srcName = utils::path::Basename(source.uri);
+        kernelDir = utils::path::Dirname(source.uri);
         const auto pos = kernelDir.find("file://");
         if (pos != std::string::npos)
             kernelDir.replace(pos, 7, "");

@@ -16,7 +16,7 @@ set(CXX_WARNINGS_AS_ERRORS "-Werror=return-type -Werror=exceptions -Werror=stati
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${CXX_WARNINGS_AS_ERRORS}")
 
 if(APPLE)
-    set(CMAKE_OSX_DEPLOYMENT_TARGET "10.15")
+    set(CMAKE_OSX_DEPLOYMENT_TARGET "10.13")
 endif()
 
 message("CMake Generator:" ${CMAKE_GENERATOR})

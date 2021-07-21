@@ -36,8 +36,7 @@ public:
     void Run();
 
 private:
-    void BuildDiagnosticsRespond(const std::string& uri,
-                                 const std::string& content);
+    void BuildDiagnosticsRespond(const std::string& uri, const std::string& content);
     void GetConfiguration();
     void OnInitialize(const json::object& data);
     void OnInitialized(const json::object& data);
@@ -117,7 +116,7 @@ void LSPServer::OnInitialize(const json::object& data)
     {
         GLogError(TracePrefix, "Failed to parse initialize parameters: ", err.what());
     }
-    
+
     // clang-format off
     json::object capabilities({
         {"textDocumentSync",
@@ -149,7 +148,7 @@ void LSPServer::OnInitialized(const json::object& data)
         GLogDebug(TracePrefix, "Does not support didChangeConfiguration registration");
         return;
     }
-    
+
     // clang-format off
     json::array registrations({{
         {"id", utils::GenerateId()},
@@ -223,18 +222,18 @@ void LSPServer::OnConfiguration(const json::object& data)
 {
     GLogDebug(TracePrefix, "Received 'configuration' respond");
     auto result = data.at("result").as_array();
-    if(result.empty())
+    if (result.empty())
     {
         GLogWarn(TracePrefix, "Empty result");
         return;
     }
-    
-    if(result.size() != 2)
+
+    if (result.size() != 2)
     {
         GLogWarn(TracePrefix, "Unexpected result items count");
         return;
     }
-    
+
     try
     {
         auto buildOptions = result.at(0).as_array();
@@ -271,7 +270,7 @@ void LSPServer::OnShutdown(const json::object& data)
 void LSPServer::OnExit()
 {
     GLogDebug(TracePrefix, "Received 'exit', after 'shutdown': ", m_shutdown ? "yes" : "no");
-    if(m_shutdown)
+    if (m_shutdown)
         exit(EXIT_SUCCESS);
     else
         exit(EXIT_FAILURE);
