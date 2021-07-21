@@ -6,3 +6,9 @@
 5. `npm run compile`
 6. Create extension package locally: `vsce package`
 7. Publish extesion`vsce publish`
+
+git submodule update --init
+
+Linux:
+
+apt-get install ocl-icd-opencl-dev opencl-headers

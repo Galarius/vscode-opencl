@@ -67,12 +67,12 @@ void LSPServer::GetConfiguration()
         return;
     }
     GLogDebug(TracePrefix, "Make configuration request");
-    json::object buildOptions({{{"section", "OpenCL.server.buildOptions"}}});
-    json::object maxNumberOfProblems({{{"section", "OpenCL.server.maxNumberOfProblems"}}});
+    json::object buildOptions({{"section", "OpenCL.server.buildOptions"}});
+    json::object maxNumberOfProblems({{"section", "OpenCL.server.maxNumberOfProblems"}});
     const auto requestId = utils::GenerateId();
     m_requests.push(std::make_pair("workspace/configuration", requestId));
     // clang-format off
-    m_outQueue.push(json::object({
+    m_outQueue.push(json::object(
         {
             {"id", requestId},
             {"method", "workspace/configuration"},
@@ -80,7 +80,7 @@ void LSPServer::GetConfiguration()
                 {"items", json::array({buildOptions, maxNumberOfProblems})}
             }}
         }
-    }));
+    ));
     // clang-format on
 }
 
@@ -128,7 +128,7 @@ void LSPServer::OnInitialize(const json::object& data)
              {"save", {{"includeText", false}}},
          }},
     });
-    m_outQueue.push(json::object({
+    m_outQueue.push(json::object(
         {
             {"id", data.at("id")},
             {"result", {
@@ -136,7 +136,7 @@ void LSPServer::OnInitialize(const json::object& data)
                 
             }}
         }
-    }));
+    ));
     // clang-format on
 }
 
@@ -157,13 +157,13 @@ void LSPServer::OnInitialized(const json::object& data)
     json::array params({{
         {"registrations", registrations},
     }});
-    m_outQueue.push(json::object({
+    m_outQueue.push(json::object(
         {
             {"id", utils::GenerateId()},
             {"method", "client/registerCapability"},
             {"params", params}
         }
-    }));
+    ));
     // clang-format on
 }
 
@@ -263,7 +263,7 @@ void LSPServer::OnRespond(const json::object& data)
 void LSPServer::OnShutdown(const json::object& data)
 {
     GLogDebug(TracePrefix, "Received 'shutdown' request");
-    m_outQueue.push(json::object({{{"id", data.at("id")}, {"result", nullptr}}}));
+    m_outQueue.push(json::object({{"id", data.at("id")}, {"result", nullptr}}));
     m_shutdown = true;
 }
 

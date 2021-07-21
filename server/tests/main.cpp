@@ -67,7 +67,7 @@ TEST_CASE( "JSON-RPC TESTS", "<->" )
         Send(message, jrpc);
     }
     SECTION( "Method/initialize" ) {
-        json::object obj ({
+        json::object obj (
             {
                 {"jsonrpc", "2.0"},
                 {"id", 0},
@@ -76,7 +76,7 @@ TEST_CASE( "JSON-RPC TESTS", "<->" )
                     {"processId", 60650}
                 }}
             }
-        });
+        );
         std::string request = BuildRequest(obj);
         JsonRPC jrpc;
         jrpc.RegisterMethodCallback("initialize", [](const boost::json::object& request) {

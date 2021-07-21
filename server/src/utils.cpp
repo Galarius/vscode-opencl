@@ -7,6 +7,7 @@
 
 #include <utils.hpp>
 
+#include <functional>
 #include <sstream>
 #include <random>
 #include <regex>
