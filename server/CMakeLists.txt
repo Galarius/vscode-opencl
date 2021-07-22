@@ -18,9 +18,9 @@ if(APPLE)
     set(CXX_WARNINGS_AS_ERRORS "-Werror=return-type -Werror=exceptions -Werror=static-inline-explicit-instantiation -Werror=macro-redefined -Werror=return-stack-address -Werror=nonportable-include-path")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${CXX_WARNINGS_AS_ERRORS}")
 elseif(WIN32)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17")
+    
 else()
-
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -static-libstdc++ -static-libgcc -fpie -Wl,-pie -fasynchronous-unwind-tables -fstack-clash-protection -fstack-protector-strong -pipe -O3 -DNDEBUG")
 endif()
 
 message("CMake Generator:" ${CMAKE_GENERATOR})
