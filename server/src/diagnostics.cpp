@@ -92,8 +92,12 @@ Diagnostics::Diagnostics()
     }
     catch (cl::Error& err)
     {
-        GLogError(TracePrefix, "No OpenCL platforms were found", err.what(), " (", err.err(), ")");
+        GLogError(TracePrefix, "No OpenCL platforms were found, ", err.what(), " (", err.err(), ")");
     }
+
+    GLogInfo(TracePrefix, "Found OpenCL platforms: ", platforms.size());
+    if(platforms.size() == 0)
+        return;
 
     cl::Platform platform = platforms.front();
     std::vector<cl::Device> devices;
@@ -104,8 +108,12 @@ Diagnostics::Diagnostics()
     }
     catch (cl::Error& err)
     {
-        GLogError(TracePrefix, "No OpenCL devices were found", err.what(), " (", err.err(), ")");
+        GLogError(TracePrefix, "No OpenCL devices were found, ", err.what(), " (", err.err(), ")");
     }
+
+    GLogInfo(TracePrefix, "Found OpenCL devices: ", devices.size());
+    if(devices.size() == 0)
+        return;
 
     size_t powerIndex = 0, maxPowerIndex = 0;
     GLogTrace(TracePrefix, "Selecting OpenCL device (total:", devices.size(), ")...");

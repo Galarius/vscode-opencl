@@ -60,14 +60,13 @@ public:
      Send trace message to client.
      */
     void LogTrace(const std::string& message, const std::string& verbose = "");
-
+    void WriteError(JsonRPC::ErrorCode errorCode, const std::string& message) const;
 private:
     void OnInitialize();
     void OnTracingChanged(const boost::json::object& data);
     bool ReadHeader();
     void FireMethodCallback();
     void FireRespondCallback();
-    void WriteError(JsonRPC::ErrorCode errorCode, const std::string& message) const;
 
 private:
     std::string m_method;

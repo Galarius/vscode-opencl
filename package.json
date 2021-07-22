@@ -101,22 +101,22 @@
                     "description": "Build options to be used for building the program executable. The list of supported options is described on https://www.khronos.org/registry/OpenCL/sdk/1.2/docs/man/xhtml/clBuildProgram.html."
                 },
                 "OpenCL.server.maxNumberOfProblems": {
-					"scope": "resource",
-					"type": "number",
-					"default": 100,
-					"description": "Controls the maximum number of problems produced by the server."
-				},
+                    "scope": "resource",
+                    "type": "number",
+                    "default": 100,
+                    "description": "Controls the maximum number of problems produced by the server."
+                },
                 "OpenCL.trace.server": {
-					"scope": "window",
-					"type": "string",
-					"enum": [
-						"off",
-						"messages",
-						"verbose"
-					],
-					"default": "off",
-					"description": "Traces the communication between VS Code and the OpenCL language server."
-				},
+                    "scope": "window",
+                    "type": "string",
+                    "enum": [
+                        "off",
+                        "messages",
+                        "verbose"
+                    ],
+                    "default": "off",
+                    "description": "Traces the communication between VS Code and the OpenCL language server."
+                },
                 "OpenCL.server.debug.enableFileLogging": {
                     "type": "boolean",
                     "description": "Traces the server's internal state. Server restart is required."
@@ -127,18 +127,18 @@
                 },
                 "OpenCL.server.debug.logLevel": {
                     "type": "integer",
-					"enum": [
-						0, 
+                    "enum": [
+                        0,
                         1,
                         2,
                         3,
                         4
-					],
+                    ],
                     "enumDescriptions": [
                         "Trace",
                         "Debug",
                         "Info",
-                        "Warn",  
+                        "Warn",
                         "Error"
                     ]
                 }

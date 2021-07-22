@@ -169,16 +169,25 @@ void LSPServer::OnInitialized(const json::object& data)
 
 void LSPServer::BuildDiagnosticsRespond(const std::string& uri, const std::string& content)
 {
-    // clang-format off
-    json::array diags = m_diagnostics->Get({uri, content});
-    m_outQueue.push(json::object({
-        {"method", "textDocument/publishDiagnostics"},
-        {"params", {
-          {"uri", uri},
-          {"diagnostics", diags},
-        }}
-    }));
-    // clang-format on
+    try
+    {
+        // clang-format off
+        json::array diags = m_diagnostics->Get({uri, content});
+        m_outQueue.push(json::object({
+            {"method", "textDocument/publishDiagnostics"},
+            {"params", {
+            {"uri", uri},
+            {"diagnostics", diags},
+            }}
+        }));
+        // clang-format on
+    }
+    catch (std::exception& err)
+    {
+        auto msg = std::string("Failed to get diagnostics") + err.what();
+        GLogError(TracePrefix, msg);
+        m_jrpc.WriteError(JsonRPC::ErrorCode::InternalError, msg);
+    }
 }
 
 void LSPServer::OnTextOpen(const json::object& data)
