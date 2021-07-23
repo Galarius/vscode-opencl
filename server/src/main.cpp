@@ -30,7 +30,7 @@ int main(int argc, char* argv[])
     if (shouldLogTofile)
     {
         GLogger::instance().SetOutputMode(GLogger::Output::File);
-        GLogger::instance().SetLogFilename(filename ?: "opencl-language-server.log");
+        GLogger::instance().SetLogFilename(filename ? filename : "opencl-language-server.log");
         GLogger::instance().SetMinLevel(GLogger::Output::File, level);
     }
 

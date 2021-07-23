@@ -14,10 +14,10 @@
 #include <glogger.hpp>
 
 #define __CL_ENABLE_EXCEPTIONS
-#if defined(__APPLE__) || defined(__MACOSX)
+#if defined(__APPLE__) || defined(__MACOSX) || defined(WIN32)
     #include "opencl/cl.hpp"
 #else
-    #include <CL/cl.hpp>
+    #include <CL/cl.h>
 #endif
 
 

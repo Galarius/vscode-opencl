@@ -12,3 +12,8 @@ git submodule update --init
 Linux:
 
 apt-get install ocl-icd-opencl-dev opencl-headers
+
+
+WIN32
+
+cmake -G "Visual Studio 16" -T v142 ..
