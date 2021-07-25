@@ -12,9 +12,9 @@
 				"--extensionDevelopmentPath=${workspaceFolder}"
 			],
 			"outFiles": [
-                "${workspaceRoot}/client/out/**/*.js"
+                "${workspaceFolder}/dist/**/*.js"
 			],
-			"preLaunchTask": "${defaultBuildTask}",
+			"preLaunchTask": "npm: webpack-dev",
             "env": {
                 "VSCODE_DEBUG_MODE": "true"
             }

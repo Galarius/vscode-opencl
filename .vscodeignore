@@ -1,10 +1,12 @@
+**/*.ts
+**/tsconfig.json
+**/webpack.config.json
+**/node_modules/**
 .vscode/**
-_build
-__mocks__
 test/**
-client/src/**
+client/**
+server/**
 dev/**
 **/*.map
 .gitignore
-tsconfig.json
-LICENSE.md
+.gitmodules
