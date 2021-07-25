@@ -10,13 +10,24 @@ import {
 } from 'vscode-languageclient/node';
 
 const createAndStartLanguageServer = (selector: vscode.DocumentFilter, context: vscode.ExtensionContext) => {
-    var serverModule = ''
-    var debugServerModule = ''
-    if(os.platform() == "darwin") { 
-        serverModule = context.asAbsolutePath(path.join('bin', 'darwin', 'opencl-language-server'));
-        debugServerModule = context.asAbsolutePath(path.join('server', 'build', 'bin', 'Debug', 'opencl-language-server'));
+    
+    var serverPath = ''
+    var debugServerPath = ''
+    let platform = os.platform()
+    let output: vscode.OutputChannel = vscode.window.createOutputChannel('OpenCL Language Server')
+
+    if(platform == "darwin") { 
+        serverPath = context.asAbsolutePath(path.join('bin', 'darwin', 'opencl-language-server'));
+        debugServerPath = context.asAbsolutePath(path.join('server', 'build', 'bin', 'Debug', 'opencl-language-server'));
+    } else if(platform == "linux") {
+        serverPath = context.asAbsolutePath(path.join('bin', 'linux', 'opencl-language-server'));
+        debugServerPath = context.asAbsolutePath(path.join('server', 'build', 'bin', 'opencl-language-server'));
+    } else if(platform == "win32") {
+        serverPath = context.asAbsolutePath(path.join('bin', 'win32', 'opencl-language-server.exe'));
+        debugServerPath = context.asAbsolutePath(path.join('server', 'build', 'bin', 'Debug', 'opencl-language-server'));
     } else {
-        // todo: add for win and linux
+        output.appendLine("OpenCL Language Server is not available for platform: " + platform)
+        return
     }
 
     let enableFileLogging = vscode.workspace.getConfiguration().get('OpenCL.server.debug.enableFileLogging', false)
@@ -32,15 +43,12 @@ const createAndStartLanguageServer = (selector: vscode.DocumentFilter, context: 
         args.push(logLevel)
     }
 
-    
     let serverOptions: ServerOptions = {
-        command: process.env.VSCODE_DEBUG_MODE === 'true' ? debugServerModule : serverModule,
+        command: process.env.VSCODE_DEBUG_MODE === 'true' ? debugServerPath : serverPath,
         args: args,
             transport: TransportKind.stdio,
     }; 
 
-    
-    let output: vscode.OutputChannel = vscode.window.createOutputChannel('OpenCL Language Server')
     let clientOptions: LanguageClientOptions = {
         documentSelector: [{scheme: selector.scheme, language: selector.language}],
         outputChannel: output,
@@ -59,7 +67,7 @@ const createAndStartLanguageServer = (selector: vscode.DocumentFilter, context: 
         },
     };
 
-    // Create the language client and start the client.
+    // Create and start
     let client = new LanguageClient(
         'opencl',
         'OpenCL Language Server',
