@@ -49,46 +49,93 @@ std::string ParseResponse(std::string str)
     return str;
 }
 
+void EnableTracing()
+{
+     GLogger::instance().SetOutputMode(GLogger::Output::Console);
+     GLogger::instance().SetMinLevel(GLogger::Output::Console, GLogger::Level::Trace);
+}
+
 }
 
 TEST_CASE( "JSON-RPC TESTS", "<->" )
 {
-
-    //GLogger::instance().SetOutputMode(GLogger::Output::Console);
-    //GLogger::instance().SetMinLevel(GLogger::Output::Console, GLogger::Level::Trace);
-
-    SECTION( "Corrupted request handling" ) {
-        std::string message = BuildRequest(R"!({"jsonrpc: 2.0", "id":0, [method]: "initialized"})!");
+    // EnableTracing();
+    
+    SECTION( "Invalid request handling" ) {
+        const std::string message = BuildRequest(R"!({"jsonrpc: 2.0", "id":0, [method]: "initialize"})!");
         JsonRPC jrpc;
         jrpc.RegisterOutputCallback([](const std::string& message) {
             auto response = boost::json::parse(ParseResponse(message)).as_object();
-            REQUIRE(response["error"].as_object()["code"] == -32700);
+            REQUIRE(response["error"].as_object()["code"] == JsonRPC::ParseError);
         });
         Send(message, jrpc);
     }
-    SECTION( "Method/initialize" ) {
-        json::object obj (
+    
+    SECTION( "Out of order request" ) {
+        const std::string message = BuildRequest(json::object(
             {
                 {"jsonrpc", "2.0"},
                 {"id", 0},
-                {"method", "initialize"},
-                {"params", {
-                    {"processId", 60650}
-                }}
+                {"method", "textDocument/didOpen"},
+                {"params", {}}
             }
-        );
-        std::string request = BuildRequest(obj);
+        ));
         JsonRPC jrpc;
+        jrpc.RegisterOutputCallback([](const std::string& message) {
+            auto response = boost::json::parse(ParseResponse(message)).as_object();
+            REQUIRE(response["error"].as_object()["code"] == JsonRPC::NotInitialized);
+        });
+        Send(message, jrpc);
+    }
+    
+    const std::string initRequest = BuildRequest(json::object(
+        {
+            {"jsonrpc", "2.0"},
+            {"id", 0},
+            {"method", "initialize"},
+            {"params", {
+                {"processId", 60650},
+                {"trace", "off"}
+            }}
+        }
+    ));
+        
+    SECTION( "Method/initialize" ) {
+        JsonRPC jrpc;
+        jrpc.RegisterOutputCallback([](const std::string&) {});
         jrpc.RegisterMethodCallback("initialize", [](const boost::json::object& request) {
            const auto& processId = request.at("params").as_object()
                                           .at("processId").as_int64();
            REQUIRE(processId == 60650);
         });
-        jrpc.RegisterOutputCallback([](const std::string& message){
-            REQUIRE(message.size() > 0);
+        Send(initRequest, jrpc);
+    }
+    
+    const auto InitializeJsonRPC = [&initRequest](JsonRPC& jrpc) {
+        jrpc.RegisterOutputCallback([](const std::string&) {});
+        
+        jrpc.RegisterMethodCallback("initialize", [](const boost::json::object& request) {});
+        Send(initRequest, jrpc);
+        jrpc.Reset();
+    };
+    
+    SECTION( "Respond to unsupported method" ) {
+        JsonRPC jrpc;
+        InitializeJsonRPC(jrpc);
+        // send unsupported request
+        const std::string request = BuildRequest(json::object(
+            {
+                {"jsonrpc", "2.0"},
+                {"id", 0},
+                {"method", "textDocument/didOpen"},
+                {"params", {}}
+            }
+        ));
+        jrpc.RegisterOutputCallback([](const std::string& message) {
+            auto response = boost::json::parse(ParseResponse(message)).as_object();
+            REQUIRE(response["error"].as_object()["code"] == JsonRPC::MethodNotFound);
         });
         Send(request, jrpc);
-        REQUIRE(true);
     }
 }
 
