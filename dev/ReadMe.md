@@ -1,4 +1,4 @@
-0. `git submodule update --init`
+
 1. Install npm if needed: `brew install npm`
 2. Install vsce if needed: `npm install -g vsce`
 3. For zsh: `echo 'source ~/.zshrc' > ~/.zshenv`
@@ -6,14 +6,3 @@
 5. `npm run compile`
 6. Create extension package locally: `vsce package`
 7. Publish extesion`vsce publish`
-
-git submodule update --init
-
-Linux:
-
-apt-get install ocl-icd-opencl-dev opencl-headers
-
-
-WIN32
-
-cmake -G "Visual Studio 16" -T v142 ..
