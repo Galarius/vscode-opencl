@@ -5,10 +5,12 @@ import * as path from 'path';
 import * as os from "os";
 var exec = require('child-process-promise').exec;
 
+import { EXTENSION_ID } from '../modules/constants'
+
 import * as cmd from './cmd';
 
 function findOclInfoPath(): string {
-    let extPath = vscode.extensions.getExtension("galarius.vscode-opencl").extensionPath
+    let extPath = vscode.extensions.getExtension(EXTENSION_ID).extensionPath
     switch (os.platform()) {
         case "win32":
             return path.join(extPath, "bin", "win32", "oclinfo.exe");
