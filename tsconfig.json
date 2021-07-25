@@ -4,19 +4,15 @@
         "module": "commonjs",
         "removeComments": true,
         "moduleResolution": "node",
-        "outDir": "./_build",
+        "outDir": "./client/out",
         "lib": [
             "es2019"
         ],
         "sourceMap": true,
         "rootDir": "./"
     },
-    "include": [
-        "src/**/*"
-    ],
     "exclude": [
-        "node_modules",
-        "old",
+        "node_modules"
     ],
     "references": [
 		{ "path": "./client" }
