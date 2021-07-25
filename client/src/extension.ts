@@ -3,10 +3,10 @@
 // Import the module and reference it with the alias vscode in your code below
 import * as path from 'path';
 import * as vscode from 'vscode';
-import * as opencl from "./providers/completion/opencl";
 import * as oclinfo from "./commands/oclinfo";
 import * as formatter from "./providers/formatter";
 
+import { OPECL_LANGUAGE_ID } from './modules/common'
 import { OpenCLCompletionItemProvider } from './providers/completion/completion';
 import { OpenCLHoverProvider } from './providers/hover/hover';
 import { getOpenCLTasks, buildTask, OpenCLDeviceDetector } from './providers/task';
@@ -22,17 +22,17 @@ export function activate(context: vscode.ExtensionContext) {
 
   // Completion
   let completionProvider = new OpenCLCompletionItemProvider();
-  context.subscriptions.push(vscode.languages.registerCompletionItemProvider(opencl.OPECL_LANGUAGE_ID, completionProvider));
+  context.subscriptions.push(vscode.languages.registerCompletionItemProvider(OPECL_LANGUAGE_ID, completionProvider));
 
   // Signature Helper
   let signatureHelpProvider = new OpenCLHoverProvider();
-  context.subscriptions.push(vscode.languages.registerHoverProvider(opencl.OPECL_LANGUAGE_ID, signatureHelpProvider));
+  context.subscriptions.push(vscode.languages.registerHoverProvider(OPECL_LANGUAGE_ID, signatureHelpProvider));
   context.subscriptions.push(vscode.languages.registerHoverProvider({ language: "c", scheme: "file" }, signatureHelpProvider));
   context.subscriptions.push(vscode.languages.registerHoverProvider({ language: "cpp", scheme: "file" }, signatureHelpProvider));
 
   // Formating
   let formattingProvider = new formatter.OpenCLDocumentFormattingEditProvider();
-  context.subscriptions.push(vscode.languages.registerDocumentFormattingEditProvider(opencl.OPECL_LANGUAGE_ID, formattingProvider));
+  context.subscriptions.push(vscode.languages.registerDocumentFormattingEditProvider(OPECL_LANGUAGE_ID, formattingProvider));
 
   // Tasks
   let workspaces = vscode.workspace.workspaceFolders;
@@ -51,7 +51,7 @@ export function activate(context: vscode.ExtensionContext) {
       oclFileWatcher.onDidCreate(() => openclPromise = undefined);
       oclFileWatcher.onDidDelete(() => openclPromise = undefined);
   }
-  context.subscriptions.push(vscode.tasks.registerTaskProvider(opencl.OPECL_LANGUAGE_ID.language, { 
+  context.subscriptions.push(vscode.tasks.registerTaskProvider(OPECL_LANGUAGE_ID.language, { 
       provideTasks: async () => {
           if (!openclPromise) {
               await deviceDetector.detect()
@@ -79,6 +79,6 @@ export function activate(context: vscode.ExtensionContext) {
   // Language Server
   if(vscode.workspace.getConfiguration().get('OpenCL.server.enable', true))
   {
-    createAndStartLanguageServer(context)
+    createAndStartLanguageServer(OPECL_LANGUAGE_ID, context)
   }
 }

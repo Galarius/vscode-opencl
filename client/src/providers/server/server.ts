@@ -9,7 +9,7 @@ import {
     TransportKind
 } from 'vscode-languageclient/node';
 
-const createAndStartLanguageServer = (context) => {
+const createAndStartLanguageServer = (selector: vscode.DocumentFilter, context: vscode.ExtensionContext) => {
     var serverModule = ''
     var debugServerModule = ''
     if(os.platform() == "darwin") { 
@@ -42,7 +42,7 @@ const createAndStartLanguageServer = (context) => {
     
     let output: vscode.OutputChannel = vscode.window.createOutputChannel('OpenCL Language Server')
     let clientOptions: LanguageClientOptions = {
-        documentSelector: [{ scheme: 'file', language: 'opencl' }],
+        documentSelector: [{scheme: selector.scheme, language: selector.language}],
         outputChannel: output,
         outputChannelName: 'OpenCL Language Server',
         traceOutputChannel: output,
@@ -66,7 +66,6 @@ const createAndStartLanguageServer = (context) => {
         serverOptions,
         clientOptions
     );
-    //client.trace = Trace.Verbose;
 
     output.appendLine("OpenCL Language Server started")
     let disposable = client.start();

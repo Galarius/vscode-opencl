@@ -2,8 +2,6 @@
 
 import * as vscode from 'vscode';
 
-export const OPECL_LANGUAGE_ID: vscode.DocumentFilter = { language: "opencl", scheme: "file" };
-
 export const CONFIG: vscode.LanguageConfiguration = {
     wordPattern: /(-?\d*\.\d\w*)|([^\`\~\!\#\^\&\*\(\)\-\=\+\[\{\]\}\\\|\;\:\'\"\,\.\<\>\/\?\s]+)/g
 }
