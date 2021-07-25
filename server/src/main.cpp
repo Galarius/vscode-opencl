@@ -13,6 +13,10 @@
 #include <glogger.hpp>
 #include <boost/json/src.hpp>
 
+#ifndef VERSION
+#error version is required
+#endif
+
 using namespace vscode::opencl;
 
 bool isArgOption(char** begin, char** end, const char* option);
@@ -20,6 +24,12 @@ char* getArgOption(char** begin, char** end, const char* option);
 
 int main(int argc, char* argv[])
 {
+    if(isArgOption(argv, argv + argc, "--version"))
+    {
+        std::cout << VERSION << std::endl;
+        exit(0);
+    }
+    
     const bool shouldLogTofile = isArgOption(argv, argv + argc, "--enable-file-tracing");
     char* filename = getArgOption(argv, argv + argc, "--filename");
     char* levelStr = getArgOption(argv, argv + argc, "--level");

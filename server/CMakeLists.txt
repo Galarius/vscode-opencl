@@ -37,6 +37,7 @@ add_executable (${PROJECT_NAME} ${SOURCES} ${HEADERS})
 target_compile_definitions(${PROJECT_NAME} PRIVATE 
     BOOST_JSON_STANDALONE
     CL_SILENCE_DEPRECATION
+    VERSION="0.1"
 )
 
 target_include_directories(${PROJECT_NAME}
