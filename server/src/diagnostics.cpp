@@ -17,7 +17,7 @@
 #if defined(__APPLE__) || defined(__MACOSX) || defined(WIN32)
     #include "opencl/cl.hpp"
 #else
-    #include <CL/cl.h>
+    #include <CL/cl.hpp>
 #endif
 
 
