@@ -9,22 +9,20 @@ import {
     TransportKind
 } from 'vscode-languageclient/node';
 
-const createAndStartLanguageServer = (selector: vscode.DocumentFilter, context: vscode.ExtensionContext) => {
-    
+function createLanguageServer(selector: vscode.DocumentFilter, output: vscode.OutputChannel, extensionUri: vscode.Uri): LanguageClient {    
     var serverPath = ''
     var debugServerPath = ''
     let platform = os.platform()
-    let output: vscode.OutputChannel = vscode.window.createOutputChannel('OpenCL Language Server')
 
     if(platform == "darwin") { 
-        serverPath = context.asAbsolutePath(path.join('bin', 'darwin', 'opencl-language-server'));
-        debugServerPath = context.asAbsolutePath(path.join('server', 'build', 'bin', 'Debug', 'opencl-language-server'));
+        serverPath = vscode.Uri.joinPath(extensionUri, path.join('bin', 'darwin', 'opencl-language-server')).fsPath;
+        debugServerPath = vscode.Uri.joinPath(extensionUri, path.join('server', 'build', 'bin', 'Debug', 'opencl-language-server')).fsPath;
     } else if(platform == "linux") {
-        serverPath = context.asAbsolutePath(path.join('bin', 'linux', 'opencl-language-server'));
-        debugServerPath = context.asAbsolutePath(path.join('server', 'build', 'bin', 'opencl-language-server'));
+        serverPath = vscode.Uri.joinPath(extensionUri, path.join('bin', 'linux', 'opencl-language-server')).fsPath;
+        debugServerPath = vscode.Uri.joinPath(extensionUri, path.join('server', 'build', 'bin', 'opencl-language-server')).fsPath;
     } else if(platform == "win32") {
-        serverPath = context.asAbsolutePath(path.join('bin', 'win32', 'opencl-language-server.exe'));
-        debugServerPath = context.asAbsolutePath(path.join('server', 'build', 'bin', 'Debug', 'opencl-language-server'));
+        serverPath = vscode.Uri.joinPath(extensionUri, path.join('bin', 'win32', 'opencl-language-server.exe')).fsPath;
+        debugServerPath = vscode.Uri.joinPath(extensionUri, path.join('server', 'build', 'bin', 'Debug', 'opencl-language-server.exe')).fsPath;
     } else {
         output.appendLine("OpenCL Language Server is not available for platform: " + platform)
         return
@@ -46,7 +44,7 @@ const createAndStartLanguageServer = (selector: vscode.DocumentFilter, context: 
     let serverOptions: ServerOptions = {
         command: process.env.VSCODE_DEBUG_MODE === 'true' ? debugServerPath : serverPath,
         args: args,
-            transport: TransportKind.stdio,
+        transport: TransportKind.stdio
     }; 
 
     let clientOptions: LanguageClientOptions = {
@@ -56,28 +54,23 @@ const createAndStartLanguageServer = (selector: vscode.DocumentFilter, context: 
         traceOutputChannel: output,
         revealOutputChannelOn: RevealOutputChannelOn.Never,
         initializationOptions: {
-        configuration: {
-            buildOptions: vscode.workspace.getConfiguration().get('OpenCL.server.buildOptions', []),
-            maxNumberOfProblems: vscode.workspace.getConfiguration().get('OpenCL.server.maxNumberOfProblems', 100)
-        }
+            configuration: {
+                buildOptions: vscode.workspace.getConfiguration().get('OpenCL.server.buildOptions', []),
+                maxNumberOfProblems: vscode.workspace.getConfiguration().get('OpenCL.server.maxNumberOfProblems', 100)
+            }
         },
         initializationFailedHandler: error => {
-        output.appendLine(`Failed to initialize language server due to ${error && error.toString()}`);
-        return true;
-        },
+            output.appendLine(`Failed to initialize language server due to ${error && error.path}`);
+            return true;
+        }
     };
 
-    // Create and start
-    let client = new LanguageClient(
+    return new LanguageClient(
         'opencl',
         'OpenCL Language Server',
         serverOptions,
         clientOptions
     );
-
-    output.appendLine("OpenCL Language Server started")
-    let disposable = client.start();
-    context.subscriptions.push(disposable);
 }
 
-export { createAndStartLanguageServer }
+export { createLanguageServer }

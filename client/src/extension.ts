@@ -10,7 +10,8 @@ import { OPECL_LANGUAGE_ID } from './modules/common'
 import { OpenCLCompletionItemProvider } from './providers/completion/completion';
 import { OpenCLHoverProvider } from './providers/hover/hover';
 import { getOpenCLTasks, buildTask, OpenCLDeviceDetector } from './providers/task';
-import { createAndStartLanguageServer } from "./providers/server/server";
+import { createLanguageServer } from "./providers/server/server";
+import { Trace } from 'vscode-languageclient';
 
 export function activate(context: vscode.ExtensionContext) {
   
@@ -79,6 +80,10 @@ export function activate(context: vscode.ExtensionContext) {
   // Language Server
   if(vscode.workspace.getConfiguration().get('OpenCL.server.enable', true))
   {
-    createAndStartLanguageServer(OPECL_LANGUAGE_ID, context)
+    let output: vscode.OutputChannel = vscode.window.createOutputChannel('OpenCL Language Server')
+    let client = createLanguageServer(OPECL_LANGUAGE_ID, output, context.extensionUri)
+    let disposable = client.start();
+    context.subscriptions.push(disposable);
+    output.appendLine("OpenCL Language Server started")
   }
 }
