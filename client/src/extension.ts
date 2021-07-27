@@ -82,8 +82,15 @@ export function activate(context: vscode.ExtensionContext) {
   {
     let output: vscode.OutputChannel = vscode.window.createOutputChannel('OpenCL Language Server')
     let client = createLanguageServer(OPECL_LANGUAGE_ID, output, context.extensionUri)
+    client.trace = Trace.Verbose;
+    client.onDidChangeState( (e) => {
+        // Stopped = 1, Starting = 3, Running = 2
+        output.appendLine(`State changed: ${e.oldState} -> ${e.newState}`)
+    })
+    client.onReady().then(() => {
+        console.log(client.initializeResult)
+    })
     let disposable = client.start();
     context.subscriptions.push(disposable);
-    output.appendLine("OpenCL Language Server started")
   }
 }

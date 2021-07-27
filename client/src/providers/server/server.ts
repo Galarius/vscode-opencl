@@ -1,3 +1,5 @@
+'use strict';
+
 import * as vscode from 'vscode';
 import * as path from 'path';
 import * as os from 'os';
@@ -41,11 +43,10 @@ function createLanguageServer(selector: vscode.DocumentFilter, output: vscode.Ou
         args.push(logLevel)
     }
 
-    let serverOptions: ServerOptions = {
-        command: process.env.VSCODE_DEBUG_MODE === 'true' ? debugServerPath : serverPath,
-        args: args,
-        transport: TransportKind.stdio
-    }; 
+    const serverOptions: ServerOptions = {
+        run:{command:serverPath,args:args,transport:TransportKind.stdio},
+        debug:{command:debugServerPath,args:args,transport:TransportKind.stdio}
+    }
 
     let clientOptions: LanguageClientOptions = {
         documentSelector: [{scheme: selector.scheme, language: selector.language}],

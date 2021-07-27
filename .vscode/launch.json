@@ -15,9 +15,6 @@
                 "${workspaceFolder}/dist/**/*.js"
 			],
 			"preLaunchTask": "npm: webpack-dev",
-            "env": {
-                "VSCODE_DEBUG_MODE": "true"
-            }
 		}
     ]
 }
