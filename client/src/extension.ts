@@ -88,7 +88,7 @@ export function activate(context: vscode.ExtensionContext) {
         output.appendLine(`State changed: ${e.oldState} -> ${e.newState}`)
     })
     client.onReady().then(() => {
-        console.log(client.initializeResult)
+        output.appendLine('Ready')
     })
     let disposable = client.start();
     context.subscriptions.push(disposable);
