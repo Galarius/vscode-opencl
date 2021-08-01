@@ -5,7 +5,8 @@
 //  Created by Ilya Shoshin (Galarius) on 7/21/21.
 //
 
-#include <utils.hpp>
+#include "utils.hpp"
+#include <filesystem.hpp>
 
 #include <functional>
 #include <sstream>
@@ -34,16 +35,8 @@ std::string GenerateId()
 
 void Trim(std::string& s)
 {
-#ifdef _WIN32
-    bool if_ascii = std::all_of(s.begin(), s.end(), [](char c) { return c >= -1 && c < 255; });
-    if (if_ascii)
-#endif
-    {
-        // ltrim
-        s.erase(s.begin(), find_if(s.begin(), s.end(), std::not_fn(::isspace)));
-        // rtrim
-        s.erase(find_if(s.rbegin(), s.rend(), std::not_fn(::isspace)).base(), s.end());
-    }
+    s.erase(s.begin(), std::find_if(s.begin(), s.end(), [](unsigned char ch) { return !std::isspace(ch); }));
+    s.erase(std::find_if(s.rbegin(), s.rend(), [](unsigned char ch) { return !std::isspace(ch); }).base(), s.end());
 }
 
 std::vector<std::string> SplitString(const std::string& str, const std::string& pattern)
@@ -52,39 +45,20 @@ std::vector<std::string> SplitString(const std::string& str, const std::string& 
     const std::regex re(pattern);
     std::sregex_token_iterator iter(str.begin(), str.end(), re, -1);
     for (std::sregex_token_iterator end; iter != end; ++iter)
-    {
         result.push_back(iter->str());
-    }
     return result;
 }
 
 namespace path {
 
-#ifdef _WIN32
-inline char separator()
-{
-    return '\\';
-}
-#else
-inline char separator()
-{
-    return '/';
-}
-#endif
-
-
 std::string Basename(const std::string& pathname)
 {
-    return std::string(
-        std::find_if(pathname.rbegin(), pathname.rend(), [](char ch) { return ch == separator(); }).base(),
-        pathname.end());
+    return std::filesystem::path(pathname).filename().string();
 }
 
 std::string Dirname(const std::string& pathname)
 {
-    return std::string(
-        pathname.begin(),
-        (std::find_if(pathname.rbegin(), pathname.rend(), [](char ch) { return ch == separator(); }) + 1).base());
+    return std::filesystem::path(pathname).parent_path().string();
 }
 } // namespace path
 
