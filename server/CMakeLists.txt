@@ -13,7 +13,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
 if(APPLE)
-    set(CMAKE_OSX_DEPLOYMENT_TARGET "10.13")
+    set(CMAKE_OSX_DEPLOYMENT_TARGET "10.15")
     set(CXX_WARNINGS_AS_ERRORS "-Werror=return-type -Werror=exceptions -Werror=static-inline-explicit-instantiation -Werror=macro-redefined -Werror=return-stack-address -Werror=nonportable-include-path")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${CXX_WARNINGS_AS_ERRORS}")
 elseif(WIN32)
@@ -58,9 +58,10 @@ target_include_directories(${PROJECT_NAME}
 set_target_properties(${PROJECT_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/bin)
 
 set(LIBS ${OpenCL_LIBRARIES})
-if(UNIX)
+if(APPLE)
+elseif(UNIX)
     set(LIBS ${LIBS} stdc++fs)
-endif(UNIX)
+endif()
 
 target_link_libraries (${PROJECT_NAME} ${LIBS})
 
