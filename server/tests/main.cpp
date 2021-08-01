@@ -66,7 +66,8 @@ TEST_CASE( "JSON-RPC TESTS", "<->" )
         JsonRPC jrpc;
         jrpc.RegisterOutputCallback([](const std::string& message) {
             auto response = boost::json::parse(ParseResponse(message)).as_object();
-            REQUIRE(response["error"].as_object()["code"] == JsonRPC::ParseError);
+            const auto code = response["error"].as_object()["code"].as_int64(); 
+            REQUIRE(code == static_cast<int64_t>(JsonRPC::ErrorCode::ParseError));
         });
         Send(message, jrpc);
     }
@@ -83,7 +84,8 @@ TEST_CASE( "JSON-RPC TESTS", "<->" )
         JsonRPC jrpc;
         jrpc.RegisterOutputCallback([](const std::string& message) {
             auto response = boost::json::parse(ParseResponse(message)).as_object();
-            REQUIRE(response["error"].as_object()["code"] == JsonRPC::NotInitialized);
+            const auto code = response["error"].as_object()["code"].as_int64();
+            REQUIRE(code == static_cast<int64_t>(JsonRPC::ErrorCode::NotInitialized));
         });
         Send(message, jrpc);
     }
@@ -133,7 +135,8 @@ TEST_CASE( "JSON-RPC TESTS", "<->" )
         ));
         jrpc.RegisterOutputCallback([](const std::string& message) {
             auto response = boost::json::parse(ParseResponse(message)).as_object();
-            REQUIRE(response["error"].as_object()["code"] == JsonRPC::MethodNotFound);
+            const auto code = response["error"].as_object()["code"].as_int64();
+            REQUIRE(code == static_cast<int64_t>(JsonRPC::ErrorCode::MethodNotFound));
         });
         Send(request, jrpc);
     }

@@ -11,10 +11,19 @@
 
 #define __glogger_implementation__ // define this only once
 #include <glogger.hpp>
+
+#pragma warning(push, 0)
 #include <boost/json/src.hpp>
+#pragma warning(pop)
 
 #ifndef VERSION
 #error version is required
+#endif
+
+#if defined(WIN32)    
+#include <stdio.h>
+#include <fcntl.h>
+#include <io.h>
 #endif
 
 using namespace vscode::opencl;
@@ -43,6 +52,15 @@ int main(int argc, char* argv[])
         GLogger::instance().SetLogFilename(filename ? filename : "opencl-language-server.log");
         GLogger::instance().SetMinLevel(GLogger::Output::File, level);
     }
+
+    
+#if defined(WIN32)
+    // to handle CRLF
+    if (_setmode(_fileno(stdin), _O_BINARY) == -1)
+        GLogError("Cannot set stdin mode to _O_BINARY");
+    if (_setmode(_fileno(stdout), _O_BINARY) == -1)
+        GLogError("Cannot set stdout mode to _O_BINARY");
+#endif
 
     auto server = CreateLSPServer();
     server->Run();

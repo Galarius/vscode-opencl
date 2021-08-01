@@ -12,7 +12,10 @@
 #include <optional>
 #include <functional>
 #include <unordered_map>
+
+#pragma warning(push, 0)
 #include <boost/json.hpp>
+#pragma warning(pop)
 
 namespace vscode::opencl {
 
@@ -22,7 +25,7 @@ class JsonRPC
     using OutputCallbackFunc = std::function<void(const std::string&)>;
 
 public:
-    enum ErrorCode : int
+    enum class ErrorCode : int
     {
         ///@{
         ParseError = -32700,     ///< Parse error    Invalid JSON was received by the server. An error occurred on the
@@ -36,6 +39,12 @@ public:
         NotInitialized = -32002 ///< The first client's message is not equal to "initialize"
                                 ///@}
     };
+
+    friend std::ostream& operator<<(std::ostream& out, ErrorCode const& code)
+    {
+        out << static_cast<int64_t>(code);
+        return out;
+    }
 
     /**
      Register callback to be notified on the specific method notification.

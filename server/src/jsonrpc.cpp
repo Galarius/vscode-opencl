@@ -12,7 +12,10 @@ using namespace boost;
 
 namespace vscode::opencl {
 
-constexpr char TracePrefix[] = "#jrpc ";
+namespace {
+    constexpr char TracePrefix[] = "#jrpc ";
+    constexpr char LE[] = "\r\n";
+}
 
 void JsonRPC::RegisterMethodCallback(const std::string& method, InputCallbackFunc&& func)
 {
@@ -89,7 +92,7 @@ void JsonRPC::Consume(char c)
         if (ReadHeader())
             m_buffer.clear();
 
-        if (m_buffer == "\r\n")
+        if (m_buffer == LE)
         {
             m_buffer.clear();
             m_validHeader = m_contentLength > 0;
@@ -266,7 +269,7 @@ void JsonRPC::FireMethodCallback()
         }
         catch (std::exception& err)
         {
-            GLogError(TracePrefix, "Failed to handle method '", m_method, "'");
+            GLogError(TracePrefix, "Failed to handle method '", m_method, "', err: ", err.what());
         }
     }
 }

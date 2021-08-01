@@ -9,13 +9,16 @@
 
 #include <memory>
 #include <string>
+
+#pragma warning(push, 0)
 #include <boost/json.hpp>
+#pragma warning(pop)
 
 namespace vscode::opencl {
 
 struct Source
 {
-    std::string uri;
+    std::string filePath;
     std::string text;
 };
 

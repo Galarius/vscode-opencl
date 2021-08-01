@@ -15,10 +15,6 @@ namespace vscode::opencl::utils {
 std::string GenerateId();
 void Trim(std::string& s);
 std::vector<std::string> SplitString(const std::string& str, const std::string& pattern);
-
-namespace path {
-std::string Basename(const std::string& pathname);
-std::string Dirname(const std::string& pathname);
-} // namespace path
+std::string UriToPath(const std::string& uri);
 
 } // namespace vscode::opencl::utils

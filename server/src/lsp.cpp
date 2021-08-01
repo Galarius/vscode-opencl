@@ -43,7 +43,6 @@ private:
     void OnTextOpen(const json::object& data);
     void OnTextChanged(const json::object& data);
     void OnConfiguration(const json::object& data);
-    void OnTraceConfiguration(const json::object& data);
     void OnRespond(const json::object& data);
     void OnShutdown(const json::object& data);
     void OnExit();
@@ -56,8 +55,6 @@ private:
     std::queue<std::pair<std::string, std::string>> m_requests;
     bool m_shutdown = false;
 };
-
-#pragma mark -
 
 void LSPServer::GetConfiguration()
 {
@@ -110,7 +107,7 @@ void LSPServer::OnInitialize(const json::object& data)
                                 .at("maxNumberOfProblems").as_int64();
         // clang-format on
         m_diagnostics->SetBuildOptions(buildOptions);
-        m_diagnostics->SetMaxProblemsCount(maxNumberOfProblems);
+        m_diagnostics->SetMaxProblemsCount(static_cast<int>(maxNumberOfProblems));
     }
     catch (std::exception& err)
     {
@@ -172,7 +169,10 @@ void LSPServer::BuildDiagnosticsRespond(const std::string& uri, const std::strin
     try
     {
         // clang-format off
-        json::array diags = m_diagnostics->Get({uri, content});
+        const auto filePath = utils::UriToPath(uri);
+        GLogDebug("Converted uri '", uri, "' to path '", filePath, "'");
+        
+        json::array diags = m_diagnostics->Get({filePath, content});
         m_outQueue.push(json::object({
             {"method", "textDocument/publishDiagnostics"},
             {"params", {
@@ -248,7 +248,7 @@ void LSPServer::OnConfiguration(const json::object& data)
         auto buildOptions = result.at(0).as_array();
         auto maxProblemsCount = result.at(1).as_int64();
         m_diagnostics->SetBuildOptions(buildOptions);
-        m_diagnostics->SetMaxProblemsCount(maxProblemsCount);
+        m_diagnostics->SetMaxProblemsCount(static_cast<int>(maxProblemsCount));
     }
     catch (std::exception& err)
     {
@@ -327,10 +327,15 @@ void LSPServer::Run()
     // Register handler for message delivery
     m_jrpc.RegisterOutputCallback([](const std::string& message)
     {
-        std::cout << message << std::flush;
+        #if defined(WIN32)
+            printf_s("%s", message.c_str());
+            fflush(stdout);
+        #else
+            std::cout << message << std::flush;
+        #endif    
     });
     // clang-format off
-
+    
     GLogInfo("Listening...");
     char c;
     while (std::cin.get(c))
@@ -347,6 +352,7 @@ void LSPServer::Run()
             }
         }
     }
+//#endif
 }
 
 std::shared_ptr<ILSPServer> CreateLSPServer()

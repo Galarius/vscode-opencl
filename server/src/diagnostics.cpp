@@ -11,14 +11,18 @@
 #include <iostream>
 #include <stdexcept> // std::runtime_error, std::invalid_argument
 #include <regex>
+
 #include <glogger.hpp>
+#include <filesystem.hpp>
 
 #define __CL_ENABLE_EXCEPTIONS
+#pragma warning(push, 0)
 #if defined(__APPLE__) || defined(__MACOSX) || defined(WIN32)
     #include "opencl/cl.hpp"
 #else
     #include <CL/cl.hpp>
 #endif
+#pragma warning(pop)
 
 
 using namespace boost;
@@ -253,32 +257,14 @@ boost::json::array Diagnostics::Get(const Source& source)
     std::string srcName;
     std::string kernelDir;
 
-    if (!source.uri.empty())
+    if (!source.filePath.empty())
     {
-        srcName = utils::path::Basename(source.uri);
-        kernelDir = utils::path::Dirname(source.uri);
-        const auto pos = kernelDir.find("file://");
-        if (pos != std::string::npos)
-            kernelDir.replace(pos, 7, "");
+        auto filePath = std::filesystem::path(source.filePath).string();  
+        srcName = std::filesystem::path(filePath).filename().string();
+        kernelDir = std::filesystem::path(filePath).parent_path().string();
     }
 
-    if (source.text.empty())
-    {
-        if (source.uri.empty())
-            return json::array();
-
-        std::ifstream srcFile(source.uri);
-        if (srcFile.fail())
-            GLogError("Failed to open file: ", source.uri);
-        std::string text = std::string((std::istreambuf_iterator<char>(srcFile)), std::istreambuf_iterator<char>());
-        srcFile.close();
-        buildLog = BuildSource(text, kernelDir);
-    }
-    else
-    {
-        buildLog = BuildSource(source.text, kernelDir);
-    }
-
+    buildLog = BuildSource(source.text, kernelDir);
     GLogTrace(TracePrefix, "BuildLog:\n", buildLog);
 
     return BuildDiagnostics(buildLog, srcName);

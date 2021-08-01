@@ -6,7 +6,7 @@
 //
 
 #include "utils.hpp"
-#include <filesystem.hpp>
+#include <glogger.hpp>
 
 #include <functional>
 #include <sstream>
@@ -49,17 +49,43 @@ std::vector<std::string> SplitString(const std::string& str, const std::string& 
     return result;
 }
 
-namespace path {
-
-std::string Basename(const std::string& pathname)
+// Limited file uri -> path converter
+std::string UriToPath(const std::string& uri)
 {
-    return std::filesystem::path(pathname).filename().string();
-}
+    try
+    {
+        std::string str = uri;
+        auto pos = str.find("file://");
+        if (pos != std::string::npos)
+            str.replace(pos, 7, "");
+        do
+        {
+            pos = str.find("%3A");
+            if (pos != std::string::npos)
+                str.replace(pos, 3, ":");
+        } while (pos != std::string::npos);
 
-std::string Dirname(const std::string& pathname)
-{
-    return std::filesystem::path(pathname).parent_path().string();
+        do
+        {
+            pos = str.find("%20");
+            if (pos != std::string::npos)
+                str.replace(pos, 3, " ");
+        } while (pos != std::string::npos);
+
+#if defined(WIN32)
+        // remove first /
+        if (str.rfind("/", 0) == 0)
+        {
+            str.replace(0, 1, "");
+        }
+#endif
+        return str;
+    }
+    catch (std::exception& e)
+    {
+        GLogError("Failed to convert file uri to path: ", e.what());
+    }
+    return uri;
 }
-} // namespace path
 
 } // namespace vscode::opencl::utils
