@@ -138,7 +138,7 @@ Diagnostics::Diagnostics()
         }
         catch (cl::Error& err)
         {
-            GLogWarn(TracePrefix, "Failed to get info for a device", err.what(), " (", err.err(), ")");
+            GLogWarn(TracePrefix, "Failed to get info for a device, ", err.what(), " (", err.err(), ")");
             continue;
         }
 

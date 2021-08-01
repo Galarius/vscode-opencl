@@ -184,7 +184,7 @@ void LSPServer::BuildDiagnosticsRespond(const std::string& uri, const std::strin
     }
     catch (std::exception& err)
     {
-        auto msg = std::string("Failed to get diagnostics") + err.what();
+        auto msg = std::string("Failed to get diagnostics: ") + err.what();
         GLogError(TracePrefix, msg);
         m_jrpc.WriteError(JsonRPC::ErrorCode::InternalError, msg);
     }

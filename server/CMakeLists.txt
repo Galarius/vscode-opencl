@@ -57,7 +57,12 @@ target_include_directories(${PROJECT_NAME}
 
 set_target_properties(${PROJECT_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/bin)
 
-target_link_libraries (${PROJECT_NAME} ${OpenCL_LIBRARIES})
+set(LIBS ${OpenCL_LIBRARIES})
+if(UNIX)
+    set(LIBS ${LIBS} stdc++fs)
+endif(UNIX)
+
+target_link_libraries (${PROJECT_NAME} ${LIBS})
 
 ########### TESTS ############
 
