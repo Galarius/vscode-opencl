@@ -51,14 +51,14 @@
                     ".cl",
                     ".ocl"
                 ],
-                "configuration": "./language-configuration.json"
+                "configuration": "./contributes/language-configuration.json"
             }
         ],
         "grammars": [
             {
                 "language": "opencl",
                 "scopeName": "source.opencl",
-                "path": "./syntaxes/opencl.tmLanguage.json"
+                "path": "./contributes/opencl.tmLanguage.json"
             }
         ],
         "snippets": [
