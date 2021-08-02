@@ -1,19 +1,5 @@
 # Contributing
 
-There are several possible improvements:
-
-* Language Server
-
-* Tree View for OpenCL platforms/devices
-
-* Auto-Completion for OpenCL C++ Standard Library
-
-* Kernel Debugger
-
-* More Code Snippets (check [current progress](https://raw.githubusercontent.com/Galarius/vscode-opencl/master/snippets/code.snippets.progress.md))
-
-* Check for [open issues](https://github.com/Galarius/vscode-opencl/issues)
-
 Here's a quick guide on `pull requests`:
 
 1. [Check for open issues](https://github.com/galarius/vscode-opencl/issues), or

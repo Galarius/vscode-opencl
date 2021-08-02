@@ -8,160 +8,62 @@ This extension adds [OpenCL C/C++](https://en.wikipedia.org/wiki/OpenCL) languag
 ## Features
 
 * OpenCL Compute Kernel Support [`*.cl`, `*.ocl`]
+* OpenCL Language Server (version 0.7.0, *work in progress*)
 * OpenCL C/C++ Syntax Highlighting
-* Auto Completion of Built-in OpenCL Symbols
 * Offline Kernel Compilation
+* Auto Completion of Built-in OpenCL Symbols
 * Built-in OpenCL API Reference
-* Code Snippets ([details](https://raw.githubusercontent.com/Galarius/vscode-opencl/master/snippets/code.snippets.progress.md))
+* Code Snippets
 * Clang-Format Support
 * OpenCL Platforms & Devices Info
-
-[Features Preview](https://github.com/Galarius/vscode-opencl/blob/master/PREVIEW.md) (GIFs)
 
 
 ## Prerequisites
 
-* Extension [ms-vscode.cpptools](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools)
-* OpenCL Drivers [[Intel](https://software.intel.com/en-us/articles/opencl-drivers), [NVidia](http://www.nvidia.com/Download/index.aspx), [AMD](http://support.amd.com/en-us/download)]
-* [Intel® SDK for OpenCL™ 2019](https://software.intel.com/en-us/articles/opencl-drivers) [Windows, Linux]
-or `OpenCL.framework` [macOS] (shipped with XCode)
+* Formatting feature requires [`clang-format`](https://clang.llvm.org/docs/ClangFormat.html). By default the extension searches for the utility inside [ms-vscode.cpptools](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools) extension.
+
+* Offline kernel compilation feature requires [Intel® SDK for OpenCL™ 2019](https://software.intel.com/en-us/articles/opencl-drivers) [Windows, Linux] or `OpenCL.framework` [macOS] (shipped with XCode).
+
+* OpenCL Language Server and `OpenCL: Info` command require OpenCL Runtime [[Intel](https://software.intel.com/en-us/articles/opencl-drivers), [NVidia](http://www.nvidia.com/Download/index.aspx), [AMD](http://support.amd.com/en-us/download)]
 
 ---
 
 ## Content
 
-- [How to use this extension?](#how-to-use-this-extension)
+- [Language Server](#language-server)
 - [Offline Kernel Compilation](#offline-kernel-compilation)
-    - [Run Predefined Task](#run-predefined-task)
-    - [Configure Default Build Task](#configure-default-build-task)
-    - [Customize Build Task](#customize-build-task)
 - [Formatting Configuration](#formatting-configuration)
 - [Commands](#commands)
-- [Known Issues](#known-issues)
 - [Contributing](#contributing)
 - [Change Log](#change-log)
 - [License](#license)
 
 ---
 
+## Language Server
+
+Language server will automatically select an OpenCL device.
+
+Diagnostics will be published on `*.cl` open/change events.
+
+### Configuration
+
+* `OpenCL.server.enable` - Enables OpenCL Language Server.
+* `OpenCL.server.buildOptions` - Build options to be used for building the program executable. The list of [supported](https://www.khronos.org/registry/OpenCL/sdk/1.2/docs/man/xhtml/clBuildProgram.html.) build options.
+* `OpenCL.server.maxNumberOfProblems` - Controls the maximum number of problems produced by the server.
+* `OpenCL.trace.server` - Traces the communication between VS Code and the OpenCL language server.
+
 ## Offline Kernel Compilation
 
-This extension provides predefined set of VS Code tasks for kernel compilation using `ioc32/ioc64` or `openclc` (on macOS). To run compilation/build task:
+This extension provides predefined set of VS Code tasks for kernel compilation using `ioc32/ioc64` or `openclc` (on macOS).
 
-### Run Predefined Task
+See [TASKS.md](https://github.com/Galarius/vscode-opencl/blob/master/TASKS.md) for details.
 
-1. Press `Terminal > Run Task...` (fig. 1)
-
-2. Press `Run Task...` and select one of the predefined `opencl` tasks for file `kernel.cl`. The set of tasks (fig. 2) is generated for each kernel file that was found in the current workspace.
-
-|   |   |
-|---|---|
-|![fig 1](https://raw.githubusercontent.com/Galarius/vscode-opencl/master/images/vscode-opencl-clc-1.png)|![fig 2](https://raw.githubusercontent.com/Galarius/vscode-opencl/master/images/vscode-opencl-clc-2.png)|
-|*Figure 1. `Terminal` menu.*|*Figure 2. Predefined Tasks for `openclc` compiler.*|
-
-### Configure Default Build Task
-
-Press `Terminal > Configure Default Build Task...`. Select one of the predefined `opencl` tasks. File `tasks.json` will be created (or extended) with configuration of the selected task. Press `Ctrl+Shift+B` to call it with the shortcut.
-
-It is possible to override selected  task definition. **It is important** to change the field `type` of the task from `opencl` to `shell`, otherwise the task will be ignored.
-
-An example of configurable task for an `openclc` offline compiler:
-
-<details>
-<summary>tasks.json</summary>
-
-```json
-{
-    "version": "2.0.0",
-    "tasks": [
-        {
-            "type": "shell", // replace `opencl` with `shell`
-            "label": "opencl: custom build [kernel] {gpu_64}",
-            "command": "/System/Library/Frameworks/OpenCL.framework/Libraries/openclc",
-            "args": [
-                "-emit-llvm",
-                "-c",
-                "-arch",
-                "gpu_64",
-                "kernel.cl",
-                "-o kernel.gpu_64.bc"
-            ],
-            "problemMatcher": [
-                "$opencl.common",
-                "$opencl.openclc"
-            ],
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            }
-        }
-    ]
-}
-```
-
-</details>
-
-### Customize Build Task
-
-Press `Terminal > Configure Tasks...`. Select one of the predefined `opencl` tasks. File `tasks.json` will be created (or extended) with configuration of the selected task.
-
-**It is important** to change the field `type` of a task from `opencl` to `shell`, otherwise the task will be ignored. Fields `command` and `args` may be overridden for using another compiler. Field `label` is a displayed task name. `problemMatcher` should be overridden to match a compiler's errors and warnings so messages could be displayed in `Problems` view.
-
-An example of modified `tasks.json` configuration file for using [AMD Mali](https://developer.arm.com/products/software-development-tools/graphics-development-tools/mali-offline-compiler) as OpenCL offline compiler:
-
-<details>
-<summary>tasks.json</summary>
-
-```json
-{
-    "version": "2.0.0",
-    "tasks": [
-        {
-            "type": "shell",
-            "label": "opencl: malisc compile",
-            "command": "malisc",
-            "args": [
-                "--name kernelName",
-                "kernel.cl"
-            ],
-            "problemMatcher": [
-                {
-                    "owner": "opencl",
-                    "fileLocation": ["relative", "${workspaceFolder}"],
-                    "pattern": {
-                        "regexp": "^(ERROR|WARNING): <(.*)>:(\\d+):(\\d+): (error|warning): (.*)$",
-                        "file": 2,
-                        "line": 3,
-                        "column": 4,
-                        "severity": 1,
-                        "message": 6
-                    }
-                }
-            ],
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            }
-        }
-    ]
-}
-```
-
-</details>
-
-This code will execute `malisc --name kernelName kernel.cl` on `Ctrl+Shift+B` press. Field `problemMatcher` is also customized to parse error/warning messages generated by `malisc` e.g.:
-
-```
-ERROR: <source>:56:25: error: used type 'float' where floating point type is not allowed
-                        float cN = eval_func ? exponential(abs(deltaN), thresh)
-                                   ~~~~~~~~~ ^
-```
-
-Customized tasks can also be bound to a custom shortcuts (See [Binding keyboard shortcuts to tasks](https://code.visualstudio.com/Docs/editor/tasks#_binding-keyboard-shortcuts-to-tasks)).
+See [FAQ.md](https://github.com/Galarius/vscode-opencl/blob/master/FAQ.md) for known issues.
 
 ## Formatting Configuration
 
-* `OpenCL.formatting.name` - Default formatting utility is 'clang-format', which is shipped with 'ms-vscode.cpptools' extension. Specify an absolute path to use another version of 'clang-format'.
+* `OpenCL.formatting.name` - Default formatting utility is 'clang-format', which is shipped with [ms-vscode.cpptools](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools) extension. Specify an absolute path to use another version of `clang-format`.
 
 ## Commands
 
