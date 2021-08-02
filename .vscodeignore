@@ -1,6 +1,7 @@
 **/*.ts
 **/tsconfig.json
 **/webpack.config.json
+**/babel.config.js
 **/node_modules/**
 .vscode/**
 test/**
