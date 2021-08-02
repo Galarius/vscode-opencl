@@ -1,5 +1,7 @@
-_build
+dist
+out
 node_modules
 .DS_Store
 ._*
 *.vsix
+*.tsbuildinfo

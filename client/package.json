@@ -1,0 +1,25 @@
+{
+	"name": "vscode-opencl-client",
+	"description": "OpenCL for Visual Studio Code",
+	"author": "galarius",
+	"license": "MIT",
+	"version": "0.7.0",
+	"publisher": "galarius",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/Galarius/vscode-opencl"
+	},
+	"engines": {
+		"vscode": "^1.52.0"
+	},
+	"dependencies": {
+		"child-process-promise": "^1.1.0",
+		"hoek": "^5.0.4",
+		"querystringify": "^2.0.0",
+		"tree-kill": "^1.2.2",
+		"vscode-languageclient": "^7.0.0"
+	},
+	"devDependencies": {
+		"@types/vscode": "^1.52.0"
+	}
+}

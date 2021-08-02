@@ -2,7 +2,7 @@
     "name": "vscode-opencl",
     "displayName": "OpenCL",
     "description": "OpenCL for Visual Studio Code",
-    "version": "0.6.6",
+    "version": "0.7.0",
     "publisher": "galarius",
     "icon": "images/OpenCL_128x.png",
     "author": {
@@ -38,7 +38,7 @@
         "onCommand:opencl.info",
         "onCommand:workbench.action.tasks.runTask"
     ],
-    "main": "./_build/src/extension",
+    "main": "./dist/extension",
     "contributes": {
         "languages": [
             {
@@ -86,10 +86,61 @@
             "type": "object",
             "title": "OpenCL",
             "properties": {
-                "opencl.formatting.name": {
+                "OpenCL.formatting.name": {
                     "type": "string",
                     "default": "clang-format",
                     "description": "Default formatting utility is 'clang-format', which is shipped with 'ms-vscode.cpptools' extension. Specify an absolute path to use another version of 'clang-format'."
+                },
+                "OpenCL.server.enable": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Enables OpenCL Language Server."
+                },
+                "OpenCL.server.buildOptions": {
+                    "type": "array",
+                    "description": "Build options to be used for building the program executable. The list of supported options is described on https://www.khronos.org/registry/OpenCL/sdk/1.2/docs/man/xhtml/clBuildProgram.html."
+                },
+                "OpenCL.server.maxNumberOfProblems": {
+                    "scope": "resource",
+                    "type": "number",
+                    "default": 100,
+                    "description": "Controls the maximum number of problems produced by the server."
+                },
+                "OpenCL.trace.server": {
+                    "scope": "window",
+                    "type": "string",
+                    "enum": [
+                        "off",
+                        "messages",
+                        "verbose"
+                    ],
+                    "default": "off",
+                    "description": "Traces the communication between VS Code and the OpenCL language server."
+                },
+                "OpenCL.server.debug.enableFileLogging": {
+                    "type": "boolean",
+                    "description": "Traces the server's internal state. Server restart is required."
+                },
+                "OpenCL.server.debug.logFileName": {
+                    "type": "string",
+                    "default": "opencl-language-server.log"
+                },
+                "OpenCL.server.debug.logLevel": {
+                    "type": "integer",
+                    "enum": [
+                        0,
+                        1,
+                        2,
+                        3,
+                        4
+                    ],
+                    "enumDescriptions": [
+                        "Trace",
+                        "Debug",
+                        "Info",
+                        "Warn",
+                        "Error"
+                    ]
                 }
             }
         },
@@ -154,33 +205,28 @@
         ]
     },
     "scripts": {
-        "vscode:prepublish": "tsc -p ./",
-        "compile": "tsc -watch -p ./",
-        "postinstall": "node ./node_modules/vscode/bin/install",
+        "vscode:prepublish": "webpack --mode production",
+        "webpack": "webpack --mode development",
+        "webpack-dev": "webpack --mode development",
+        "postinstall": "cd client && npm install && cd ..",
         "test": "jest"
     },
     "devDependencies": {
         "@babel/core": "^7.8.4",
         "@babel/preset-env": "^7.8.4",
+        "@types/jest": "^25.1.3",
         "@types/node": "^8.10.58",
         "babel-jest": "^25.1.0",
         "jest": "^25.1.0",
+        "ts-loader": "^9.2.4",
         "typescript": "^3.6.4",
-        "vscode": "^1.1.36"
-    },
-    "dependencies": {
-        "@types/jest": "^25.1.3",
-        "child-process-promise": "^1.1.0",
-        "hoek": "^5.0.4",
-        "querystringify": "^2.0.0"
+        "vscode": "^0.9.9",
+        "webpack": "^5.46.0",
+        "webpack-cli": "^4.7.2"
     },
     "jest": {
-        "modulePathIgnorePatterns": [
-            "_build"
-        ],
         "testPathIgnorePatterns": [
             "/node_modules/",
-            "/_build/",
             "/test/",
             "/man/"
         ]
