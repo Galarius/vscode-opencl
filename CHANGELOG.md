@@ -1,5 +1,10 @@
 # OpenCL for Visual Studio Code Change Log
 
+## Version 0.7.0: Aug 04, 2021
+
+* Added language server to provide diagnostics for an OpenCL kernel
+* Security updates
+
 ## Version 0.6.6: Jun 14, 2020
 
 * Updated task provider to support `ioc` compiler shipped with [Intel® SDK for OpenCL™ 2019](https://software.intel.com/content/www/us/en/develop/tools/opencl-sdk/choose-download.html)

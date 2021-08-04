@@ -8,7 +8,7 @@ This extension adds [OpenCL C/C++](https://en.wikipedia.org/wiki/OpenCL) languag
 ## Features
 
 * OpenCL Compute Kernel Support [`*.cl`, `*.ocl`]
-* OpenCL Language Server (version 0.7.0, *work in progress*)
+* OpenCL Language Server
 * OpenCL C/C++ Syntax Highlighting
 * Offline Kernel Compilation
 * Auto Completion of Built-in OpenCL Symbols
@@ -20,7 +20,7 @@ This extension adds [OpenCL C/C++](https://en.wikipedia.org/wiki/OpenCL) languag
 
 ## Prerequisites
 
-* Formatting feature requires [`clang-format`](https://clang.llvm.org/docs/ClangFormat.html). By default the extension searches for the utility inside [ms-vscode.cpptools](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools) extension.
+* Formatting feature requires [`clang-format`](https://clang.llvm.org/docs/ClangFormat.html). By default, the extension searches for the utility inside [ms-vscode.cpptools](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools) extension.
 
 * Offline kernel compilation feature requires [Intel® SDK for OpenCL™ 2019](https://software.intel.com/en-us/articles/opencl-drivers) [Windows, Linux] or `OpenCL.framework` [macOS] (shipped with XCode).
 
@@ -42,16 +42,18 @@ This extension adds [OpenCL C/C++](https://en.wikipedia.org/wiki/OpenCL) languag
 
 ## Language Server
 
+Provides an OpenCL kernel diagnostics.
+
 Language server will automatically select an OpenCL device.
 
-Diagnostics will be published on `*.cl` open/change events.
+Diagnostics will be published on `*.[o]cl` open/change events.
 
 ### Configuration
 
 * `OpenCL.server.enable` - Enables OpenCL Language Server.
-* `OpenCL.server.buildOptions` - Build options to be used for building the program executable. The list of [supported](https://www.khronos.org/registry/OpenCL/sdk/1.2/docs/man/xhtml/clBuildProgram.html.) build options.
+* `OpenCL.server.buildOptions` - Build options to be used for building the program. The list of [supported](https://www.khronos.org/registry/OpenCL/sdk/1.2/docs/man/xhtml/clBuildProgram.html.) build options.
 * `OpenCL.server.maxNumberOfProblems` - Controls the maximum number of problems produced by the server.
-* `OpenCL.trace.server` - Traces the communication between VS Code and the OpenCL language server.
+* `opencl.trace.server` - Traces the communication between VS Code and the OpenCL language server.
 
 ## Offline Kernel Compilation
 
