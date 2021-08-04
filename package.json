@@ -23,8 +23,10 @@
         "ocl",
         "kernel",
         "compiler",
-        "highlighting",
-        "completion"
+        "snippets",
+        "diagnostics",
+        "language-server",
+        "syntax-highlighting"
     ],
     "categories": [
         "Programming Languages",
