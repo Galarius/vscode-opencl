@@ -1,6 +1,5 @@
 **/*.ts
 **/tsconfig.json
-**/webpack.config.json
 **/babel.config.js
 **/node_modules/**
 .vscode/**
@@ -11,3 +10,4 @@ dev/**
 **/*.map
 .gitignore
 .gitmodules
+webpack.config.js
