@@ -51,7 +51,7 @@ Diagnostics will be published on `*.[o]cl` open/change events.
 ### Configuration
 
 * `OpenCL.server.enable` - Enables OpenCL Language Server.
-* `OpenCL.server.buildOptions` - Build options to be used for building the program. The list of [supported](https://www.khronos.org/registry/OpenCL/sdk/1.2/docs/man/xhtml/clBuildProgram.html.) build options.
+* `OpenCL.server.buildOptions` - Build options to be used for building the program. The list of [supported](https://www.khronos.org/registry/OpenCL/sdk/1.2/docs/man/xhtml/clBuildProgram.html) build options.
 * `OpenCL.server.maxNumberOfProblems` - Controls the maximum number of problems produced by the server.
 * `opencl.trace.server` - Traces the communication between VS Code and the OpenCL language server.
 
