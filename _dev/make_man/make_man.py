@@ -103,7 +103,7 @@ def get_description(file):
     prev = ''
     with open(file, 'r') as f:
         for line in f:
-            if not keep and line.startswith('-----'):
+            if not keep and (line.startswith('-----') or line.startswith('##')):
                 keep = True
                 desc_lines.insert(0, prev)
             if keep:
@@ -114,16 +114,14 @@ def get_description(file):
 
 def get_brief(file):
     brief_lines = []
-    skip = 3
     with open(file, 'r') as f:
         for line in f:
-            if skip:   
-                skip -= 1
+            if line.startswith('#'):
                 continue
-
-            if len(brief_lines) and line.isspace():
+            if len(brief_lines) == 0 and line == "\n":
+                continue
+            if len(brief_lines) > 0 and line == "\n":
                 break
-            
             brief_lines.append(line.rstrip())
     return ' '.join(brief_lines)
 
@@ -186,6 +184,8 @@ def main():
     if not os.path.exists(RESULT_DIR):
         os.makedirs(RESULT_DIR)
 
+    cwd = os.path.dirname(sys.argv[0])
+
     for opt, arg in opts:
         if opt == '-h':
             print_usage(sys.argv[0])
@@ -198,6 +198,10 @@ def main():
         elif opt == '-c':
             tmp = os.path.join(RESULT_DIR, TMP_FILE) 
             for func in OPENCL_RUNTIME:
+                converter = os.path.join(cwd, GRID2PHP_TBL)
+                if not os.path.exists(converter):
+                    print("Failed to find {} ", converter)
+                    exit(1)
                 src = os.path.join(DOWNLOAD_DIR, func + '.html')
                 dst = os.path.join(RESULT_DIR, func + '.md')
                 print('Converting {} with `pandoc`...'.format(func))
@@ -207,11 +211,11 @@ def main():
                 #
                 #   some text    
                 print('Converting {} with `grid2php`...'.format(func))
-                os.system('{} {} {}'.format(GRID2PHP_TBL, tmp, dst))
+                os.system('{} {} {}'.format(converter, tmp, dst))
             os.remove(tmp)
         elif opt == '-u':
             for func in OPENCL_RUNTIME:
-                md = os.path.join(RESULT_DIR, func + '.md')
+                md = os.path.join(cwd, RESULT_DIR, func + '.md')
                 dst_sig = os.path.join(MAN_SIG_DIR, func + '.txt')
                 dst_desc = os.path.join(MAN_DESC_DIR, func + '.md')
                 
