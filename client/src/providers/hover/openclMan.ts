@@ -1604,5 +1604,23 @@ popcount:	{
 		signature: path.join(MAN_SIG,'popcount.txt'),
 		description: path.join(MAN_DESC,'popcount.md'),
 		reference: 'http://man.opencl.org/popcount.html',
+	},
+vec_step:	{
+		brief: 'Takes a built-in scalar or vector data type argument and returns an integer value representing the number of elements in the scalar or vector.',
+		signature: path.join(MAN_SIG,'vec_step.txt'),
+		description: path.join(MAN_DESC,'vec_step.md'),
+		reference: 'http://man.opencl.org/vec_step.html',
+	},
+shuffle:	{
+		brief: 'Constructs a permutation of elements from one (or two) input vectors.',
+		signature: path.join(MAN_SIG,'shuffle.txt'),
+		description: path.join(MAN_DESC,'shuffle.md'),
+		reference: 'http://man.opencl.org/shuffle.html',
+	},
+shuffle2:	{
+		brief: 'Constructs a permutation of elements from one (or two) input vectors.',
+		signature: path.join(MAN_SIG,'shuffle.txt'),
+		description: path.join(MAN_DESC,'shuffle.md'),
+		reference: 'http://man.opencl.org/shuffle.html',
 	}
 };

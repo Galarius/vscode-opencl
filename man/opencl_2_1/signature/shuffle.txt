@@ -1,0 +1,5 @@
+    gentype n shuffle(gentype m x,
+                      ugentype n mask)
+    gentype n shuffle2(gentype m x,
+                       gentype m y,
+                       ugentype n mask)

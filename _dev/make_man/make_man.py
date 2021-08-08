@@ -114,6 +114,8 @@ OPENCL_MAN = [
 ### 'read_imagef', 'read_imagei', 'read_imageui', 'read_imageh', 'write_imagef', 'write_imagei', 'write_imageui', 'write_imageh',
 ## Integer Built-In Functions
 ['abs','abs_diff'],'add_sat',['hadd','rhadd'],['clamp_integer', 'clamp'],'clz','ctz','mad_hi','mad24','mad_sat',['integerMax', 'max','min'],'mul_hi','mul24','rotate','sub_sat','upsample','popcount',
+## Miscellaneous Vector Functions
+'vec_step', ['shuffle', 'shuffle2']
 ]
 
 def print_usage(name):
