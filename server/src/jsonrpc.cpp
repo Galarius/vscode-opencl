@@ -123,9 +123,9 @@ void JsonRPC::Write(const json::object& data) const
         json::object body = data;
         body.emplace("jsonrpc", "2.0");
         std::string content = json::serialize(json::value_from(body));
-        message.append("Content-Length: " + std::to_string(content.size()) + "\r\n");
-        message.append("Content-Type: application/vscode-jsonrpc;charset=utf-8\r\n");
-        message.append("\r\n");
+        message.append("Content-Length: " + std::to_string(content.size()) + LE);
+        message.append("Content-Type: application/vscode-jsonrpc;charset=utf-8" + LE);
+        message.append(LE);
         message.append(content);
 
         GLogDebug(TracePrefix);
