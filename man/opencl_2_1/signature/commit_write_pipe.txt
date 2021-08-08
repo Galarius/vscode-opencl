@@ -1,0 +1,2 @@
+    void commit_write_pipe(write_only pipe gentype p,
+                           reserve_id_t reserve_id)

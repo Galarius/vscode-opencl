@@ -1,0 +1,6 @@
+    int read_pipe(read_only pipe gentype p,
+                  gentype *ptr)
+    int read_pipe(read_only pipe gentype p,
+                  reserve_id_t reserve_id,
+                  uint index,
+                  gentype *ptr)

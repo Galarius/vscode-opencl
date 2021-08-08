@@ -92,6 +92,8 @@ OPENCL_MAN = [
 'vloadn','vstoren','vload_half','vload_halfn','vstore_half','vstore_halfn','vloada_halfn','vstorea_halfn',
 ## Work-Item Built-In Functions
 'get_work_dim','get_global_size','get_global_id','get_local_size','get_enqueued_local_size','get_local_id','get_num_groups','get_group_id','get_global_offset','get_global_linear_id','get_local_linear_id',
+## Pipe Functions
+'read_pipe','write_pipe','reserve_read_pipe','reserve_write_pipe','commit_read_pipe','commit_write_pipe','is_valid_reserve_id','work_group_reserve_read_pipe','work_group_reserve_write_pipe','work_group_commit_read_pipe','work_group_commit_write_pipe','get_pipe_num_packets','get_pipe_max_packets',
 ]
 
 def print_usage(name):

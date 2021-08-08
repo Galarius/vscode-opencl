@@ -1,0 +1,2 @@
+    reserve_id_t work_group_reserve_write_pipe(pipe gentype p,
+                                               uint num_packets)

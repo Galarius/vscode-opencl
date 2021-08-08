@@ -1,0 +1,2 @@
+    void work_group_commit_write_pipe(pipe gentype p,
+                                      reserve_id_t reserve_id)

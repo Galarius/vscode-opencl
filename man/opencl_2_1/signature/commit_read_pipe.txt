@@ -1,0 +1,2 @@
+    void commit_read_pipe(read_only pipe gentype p,
+                          reserve_id_t reserve_id)

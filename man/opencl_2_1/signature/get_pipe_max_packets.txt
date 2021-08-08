@@ -1,0 +1,1 @@
+    uint get_pipe_max_packets(pipe gentype p)

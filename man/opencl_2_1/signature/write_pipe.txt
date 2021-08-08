@@ -1,0 +1,6 @@
+    int write_pipe(write_only pipe gentype p,
+                   const gentype *ptr)
+    int write_pipe(write_only pipe gentype p,
+                   reserve_id_t reserve_id,
+                   uint index,
+                   const gentype *ptr)

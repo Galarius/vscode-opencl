@@ -1,0 +1,2 @@
+    reserve_id_t reserve_read_pipe(read_only pipe gentype p,
+                                   uint num_packets)

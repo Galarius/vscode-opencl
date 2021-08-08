@@ -1856,5 +1856,83 @@ get_local_linear_id:	{
 		signature: path.join(MAN_SIG,'get_local_linear_id.txt'),
 		description: path.join(MAN_DESC,'get_local_linear_id.md'),
 		reference: 'http://man.opencl.org/get_local_linear_id.html',
+	},
+read_pipe:	{
+		brief: 'Read packet from `pipe` into `ptr`.',
+		signature: path.join(MAN_SIG,'read_pipe.txt'),
+		description: path.join(MAN_DESC,'read_pipe.md'),
+		reference: 'http://man.opencl.org/read_pipe.html',
+	},
+write_pipe:	{
+		brief: 'Read packet from `pipe` into `ptr`.',
+		signature: path.join(MAN_SIG,'write_pipe.txt'),
+		description: path.join(MAN_DESC,'write_pipe.md'),
+		reference: 'http://man.opencl.org/write_pipe.html',
+	},
+reserve_read_pipe:	{
+		brief: 'Reserve entries for reading from pipe.',
+		signature: path.join(MAN_SIG,'reserve_read_pipe.txt'),
+		description: path.join(MAN_DESC,'reserve_read_pipe.md'),
+		reference: 'http://man.opencl.org/reserve_read_pipe.html',
+	},
+reserve_write_pipe:	{
+		brief: 'Reserve entries for writing to pipe.',
+		signature: path.join(MAN_SIG,'reserve_write_pipe.txt'),
+		description: path.join(MAN_DESC,'reserve_write_pipe.md'),
+		reference: 'http://man.opencl.org/reserve_write_pipe.html',
+	},
+commit_read_pipe:	{
+		brief: 'Indicates that all reads to `num_packets` associated with a reservation are completed.',
+		signature: path.join(MAN_SIG,'commit_read_pipe.txt'),
+		description: path.join(MAN_DESC,'commit_read_pipe.md'),
+		reference: 'http://man.opencl.org/commit_read_pipe.html',
+	},
+commit_write_pipe:	{
+		brief: 'Indicates that all writes to `num_packets` associated with a reservation are completed.',
+		signature: path.join(MAN_SIG,'commit_write_pipe.txt'),
+		description: path.join(MAN_DESC,'commit_write_pipe.md'),
+		reference: 'http://man.opencl.org/commit_write_pipe.html',
+	},
+is_valid_reserve_id:	{
+		brief: 'Test for a valid reservation ID.',
+		signature: path.join(MAN_SIG,'is_valid_reserve_id.txt'),
+		description: path.join(MAN_DESC,'is_valid_reserve_id.md'),
+		reference: 'http://man.opencl.org/is_valid_reserve_id.html',
+	},
+work_group_reserve_read_pipe:	{
+		brief: 'Reserve entries for reading from pipe.',
+		signature: path.join(MAN_SIG,'work_group_reserve_read_pipe.txt'),
+		description: path.join(MAN_DESC,'work_group_reserve_read_pipe.md'),
+		reference: 'http://man.opencl.org/work_group_reserve_read_pipe.html',
+	},
+work_group_reserve_write_pipe:	{
+		brief: 'Reserve entries for writing to pipe.',
+		signature: path.join(MAN_SIG,'work_group_reserve_write_pipe.txt'),
+		description: path.join(MAN_DESC,'work_group_reserve_write_pipe.md'),
+		reference: 'http://man.opencl.org/work_group_reserve_write_pipe.html',
+	},
+work_group_commit_read_pipe:	{
+		brief: 'Indicates that all reads to `num_packets` associated with a reservation are completed.',
+		signature: path.join(MAN_SIG,'work_group_commit_read_pipe.txt'),
+		description: path.join(MAN_DESC,'work_group_commit_read_pipe.md'),
+		reference: 'http://man.opencl.org/work_group_commit_read_pipe.html',
+	},
+work_group_commit_write_pipe:	{
+		brief: 'Indicates that all writes to `num_packets` associated with a reservation are completed.',
+		signature: path.join(MAN_SIG,'work_group_commit_write_pipe.txt'),
+		description: path.join(MAN_DESC,'work_group_commit_write_pipe.md'),
+		reference: 'http://man.opencl.org/work_group_commit_write_pipe.html',
+	},
+get_pipe_num_packets:	{
+		brief: 'Returns the number of available entries in the pipe.',
+		signature: path.join(MAN_SIG,'get_pipe_num_packets.txt'),
+		description: path.join(MAN_DESC,'get_pipe_num_packets.md'),
+		reference: 'http://man.opencl.org/get_pipe_num_packets.html',
+	},
+get_pipe_max_packets:	{
+		brief: 'Returns the maximum number of packets specified when pipe was created.',
+		signature: path.join(MAN_SIG,'get_pipe_max_packets.txt'),
+		description: path.join(MAN_DESC,'get_pipe_max_packets.md'),
+		reference: 'http://man.opencl.org/get_pipe_max_packets.html',
 	}
 };
