@@ -5,3 +5,4 @@ node_modules
 ._*
 *.vsix
 *.tsbuildinfo
+.vscode/settings.json
