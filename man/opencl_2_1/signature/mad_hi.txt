@@ -1,0 +1,3 @@
+    gentype mad_hi(gentype a,
+                   gentype b,
+                   gentype c)

@@ -1,0 +1,2 @@
+    gentype sub_sat(gentype x,
+                    gentype y)

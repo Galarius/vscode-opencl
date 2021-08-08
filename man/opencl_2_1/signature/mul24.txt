@@ -1,0 +1,2 @@
+    gentype mul24(gentype x,
+                  gentype y)

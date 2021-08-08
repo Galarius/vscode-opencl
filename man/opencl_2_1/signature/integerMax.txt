@@ -1,0 +1,8 @@
+    gentype max(gentype x,
+                gentype y)
+    gentype max(gentype x,
+                sgentype y)
+    gentype min(gentype x,
+                gentype y)
+    gentype min(gentype x,
+                sgentype y)

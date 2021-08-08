@@ -1,0 +1,2 @@
+    gentype add_sat(gentype x,
+                    gentype y)

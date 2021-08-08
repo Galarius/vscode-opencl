@@ -1,0 +1,4 @@
+    gentype hadd(gentype x,
+                 gentype y)
+    gentype rhadd(gentype x,
+                  gentype y)

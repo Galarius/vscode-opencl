@@ -112,6 +112,8 @@ OPENCL_MAN = [
 'get_image_width','get_image_height','get_image_depth','get_image_channel_data_type','get_image_channel_order','get_image_dim','get_image_array_size','get_image_num_mip_levels','get_image_num_samples',
 ### @todo: support overridden functions (1d,2d,3d)
 ### 'read_imagef', 'read_imagei', 'read_imageui', 'read_imageh', 'write_imagef', 'write_imagei', 'write_imageui', 'write_imageh',
+## Integer Built-In Functions
+['abs','abs_diff'],'add_sat',['hadd','rhadd'],['clamp_integer', 'clamp'],'clz','ctz','mad_hi','mad24','mad_sat',['integerMax', 'max','min'],'mul_hi','mul24','rotate','sub_sat','upsample','popcount',
 ]
 
 def print_usage(name):

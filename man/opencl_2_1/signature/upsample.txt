@@ -1,0 +1,24 @@
+    short upsample(char hi,
+                   uchar lo)
+    ushort upsample(uchar hi,
+                    uchar lo)
+    short n upsample(char n hi,
+                     uchar n lo)
+    ushort n upsample(uchar n hi,
+                      uchar n lo)
+    int upsample(short hi,
+                 ushort lo)
+    uint upsample(ushort hi,
+                  ushort lo)
+    int n upsample(short n hi,
+                   ushort n lo)
+    uint n upsample(ushort n hi,
+                    ushort n lo)
+    long upsample(int hi,
+                  uint lo)
+    ulong upsample(uint hi,
+                   uint lo)
+    long n upsample(int n hi,
+                    uint n lo)
+    ulong n upsample(uint n hi,
+                     uint n lo)

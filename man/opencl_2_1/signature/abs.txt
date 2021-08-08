@@ -1,0 +1,3 @@
+    ugentype abs(gentype x)
+    ugentype abs_diff(gentype x,
+                      gentype y)

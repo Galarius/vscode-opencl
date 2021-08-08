@@ -1,0 +1,3 @@
+    gentype mad_sat(gentype a,
+                    gentype b,
+                    gentype c)

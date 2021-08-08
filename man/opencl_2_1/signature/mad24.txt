@@ -1,0 +1,3 @@
+    gentype mad24(gentype x,
+                  gentype y,
+                  gentype z)
