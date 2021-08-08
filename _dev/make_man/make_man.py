@@ -108,19 +108,17 @@ def get_signature(file):
     sig_lines = []
     in_sig = False
     with open(file, 'r') as f:
+        for _ in range(2):
+            next(f)
         for line in f:
             if in_sig:
-                if line.isspace():
-                    in_sig = False
+                if line.startswith('##'):
                     break
+                elif line == '\n':
+                    continue
                 else:
                     sig_lines.append(line)
-
-            if line.startswith('\tcl_') or \
-               line.startswith('\tvoid') or \
-               line.startswith('    cl_') or \
-               line.startswith('    void'):
-               sig_lines.append(line)
+            elif line == '\n':
                in_sig = True
     return ''.join(sig_lines)
 
@@ -142,9 +140,8 @@ def get_description(file):
 def get_brief(file):
     brief_lines = []
     with open(file, 'r') as f:
+        next(f)
         for line in f:
-            if line.startswith('#'):
-                continue
             if len(brief_lines) == 0 and line == "\n":
                 continue
             if len(brief_lines) > 0 and line == "\n":
