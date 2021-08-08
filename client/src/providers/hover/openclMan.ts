@@ -1424,5 +1424,59 @@ fast_normalize:	{
 		signature: path.join(MAN_SIG,'fast_normalize.txt'),
 		description: path.join(MAN_DESC,'fast_normalize.md'),
 		reference: 'http://man.opencl.org/fast_normalize.html',
+	},
+get_image_width:	{
+		brief: 'Return the image width in pixels.',
+		signature: path.join(MAN_SIG,'get_image_width.txt'),
+		description: path.join(MAN_DESC,'get_image_width.md'),
+		reference: 'http://man.opencl.org/get_image_width.html',
+	},
+get_image_height:	{
+		brief: 'Return the image height in pixels.',
+		signature: path.join(MAN_SIG,'get_image_height.txt'),
+		description: path.join(MAN_DESC,'get_image_height.md'),
+		reference: 'http://man.opencl.org/get_image_height.html',
+	},
+get_image_depth:	{
+		brief: 'Return the 3D image depth in pixels.',
+		signature: path.join(MAN_SIG,'get_image_depth.txt'),
+		description: path.join(MAN_DESC,'get_image_depth.md'),
+		reference: 'http://man.opencl.org/get_image_depth.html',
+	},
+get_image_channel_data_type:	{
+		brief: 'Return the channel data type.',
+		signature: path.join(MAN_SIG,'get_image_channel_data_type.txt'),
+		description: path.join(MAN_DESC,'get_image_channel_data_type.md'),
+		reference: 'http://man.opencl.org/get_image_channel_data_type.html',
+	},
+get_image_channel_order:	{
+		brief: 'Return the image channel data order.',
+		signature: path.join(MAN_SIG,'get_image_channel_order.txt'),
+		description: path.join(MAN_DESC,'get_image_channel_order.md'),
+		reference: 'http://man.opencl.org/get_image_channel_order.html',
+	},
+get_image_dim:	{
+		brief: 'Return the image dimensions.',
+		signature: path.join(MAN_SIG,'get_image_dim.txt'),
+		description: path.join(MAN_DESC,'get_image_dim.md'),
+		reference: 'http://man.opencl.org/get_image_dim.html',
+	},
+get_image_array_size:	{
+		brief: 'Return the number of images in an image array.',
+		signature: path.join(MAN_SIG,'get_image_array_size.txt'),
+		description: path.join(MAN_DESC,'get_image_array_size.md'),
+		reference: 'http://man.opencl.org/get_image_array_size.html',
+	},
+get_image_num_mip_levels:	{
+		brief: 'Return the number of mip-levels.',
+		signature: path.join(MAN_SIG,'get_image_num_mip_levels.txt'),
+		description: path.join(MAN_DESC,'get_image_num_mip_levels.md'),
+		reference: 'http://man.opencl.org/get_image_num_mip_levels.html',
+	},
+get_image_num_samples:	{
+		brief: 'Return the number of samples in the 2D MSAA image.',
+		signature: path.join(MAN_SIG,'get_image_num_samples.txt'),
+		description: path.join(MAN_DESC,'get_image_num_samples.md'),
+		reference: 'http://man.opencl.org/get_image_num_samples.html',
 	}
 };

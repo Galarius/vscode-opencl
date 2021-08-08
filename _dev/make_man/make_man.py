@@ -108,6 +108,10 @@ OPENCL_MAN = [
     'retain_event','release_event','create_user_event','is_valid_event','set_user_event_status','capture_event_profiling_info',
 ## Geometric Built-In Functions
     'cross','dot','distance','length','normalize','fast_distance','fast_length','fast_normalize',
+## Image Read and Write Functions
+'get_image_width','get_image_height','get_image_depth','get_image_channel_data_type','get_image_channel_order','get_image_dim','get_image_array_size','get_image_num_mip_levels','get_image_num_samples',
+### @todo: support overridden functions (1d,2d,3d)
+### 'read_imagef', 'read_imagei', 'read_imageui', 'read_imageh', 'write_imagef', 'write_imagei', 'write_imageui', 'write_imageh',
 ]
 
 def print_usage(name):

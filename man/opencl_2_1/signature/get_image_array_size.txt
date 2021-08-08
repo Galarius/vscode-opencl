@@ -1,0 +1,4 @@
+    size_t get_image_array_size(aQual image2d_array_t image)
+    size_t get_image_array_size(aQual image1d_array_t image)
+    size_t get_image_array_size(aQual image2d_array_depth_t image)
+    size_t get_image_array_size(image2d_array_msaa_depth_t image)

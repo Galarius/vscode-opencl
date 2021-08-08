@@ -1,0 +1,4 @@
+    int get_image_num_samples(image2d_msaa_t image)
+    int get_image_num_samples(image2d_array_msaa_t image)
+    int get_image_num_samples(image2d_msaa_depth_t image)
+    int get_image_num_samples(image2d_array_msaa_depth_t image)

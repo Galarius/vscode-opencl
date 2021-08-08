@@ -1,0 +1,7 @@
+    int get_image_num_mip_levels(image1d_t image)
+    int get_image_num_mip_levels(image2d_t image)
+    int get_image_num_mip_levels(image3d_t image)
+    int get_image_num_mip_levels(image1d_array_t image)
+    int get_image_num_mip_levels(image2d_array_t image)
+    int get_image_num_mip_levels(image2d_depth_t image)
+    int get_image_num_mip_levels(image2d_array_depth_t image)
