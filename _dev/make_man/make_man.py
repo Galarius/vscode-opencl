@@ -242,8 +242,8 @@ def main():
                     func = func[0]
                 fname = func + '.html'
                 url = BASE_LINK + fname
-                dest = os.path.join(DOWNLOAD_DIR, fname)
-                if os.path.exists(dest):
+                dst = os.path.join(DOWNLOAD_DIR, fname)
+                if os.path.exists(dst):
                     print('File {} exists'.format(fname))
                 else:
                     print('Downloading {} with `wget`...'.format(func))
@@ -259,15 +259,18 @@ def main():
                     exit(1)
                 src = os.path.join(DOWNLOAD_DIR, func + '.html')
                 dst = os.path.join(RESULT_DIR, func + '.md')
-                print('Converting {} with `pandoc`...'.format(func))
-                os.system('pandoc -f html -t markdown_strict+grid_tables {} > {}'.format(src, tmp))
-                # In some file may occur the following:
-                # -   
-                #
-                #   some text    
-                print('Converting {} with `grid2php`...'.format(func))
-                os.system('{} {} {}'.format(converter, tmp, dst))
-            os.remove(tmp)
+                if os.path.exists(dst):
+                    print('File {} already converted'.format(func + '.html'))
+                else:
+                    print('Converting {} with `pandoc`...'.format(func))
+                    os.system('pandoc -f html -t markdown_strict+grid_tables {} > {}'.format(src, tmp))
+                    # In some file may occur the following:
+                    # -   
+                    #
+                    #   some text    
+                    print('Converting {} with `grid2php`...'.format(func))
+                    os.system('{} {} {}'.format(converter, tmp, dst))
+                    os.remove(tmp)
         elif opt == '-u':
             for func in OPENCL_MAN:
                 if type(func) == list:
