@@ -7,3 +7,9 @@
 * wget
 * pandoc
 * grid2php
+
+## Usage
+
+* Download html documentation files: `python3 make_man.py -d`
+* Convert html to markdown: `python3 make_man.py -c`
+* Generate files for the vscode hover provider: `python3 make_man.py -u`
