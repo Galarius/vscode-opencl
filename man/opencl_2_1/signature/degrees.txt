@@ -1,0 +1,1 @@
+    gentype degrees(gentype radians)

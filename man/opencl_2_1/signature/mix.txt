@@ -1,0 +1,11 @@
+    gentype mix(gentype x,
+                gentype y,
+                gentype a)
+    gentypef mix(gentypef x,
+                 gentypef y,
+                 float a)
+    gentyped mix(gentyped x,
+                 gentyped y,
+                 double a)
+    gentype mix (gentype x,
+                  gentype y, half a)      // if half extension enabled

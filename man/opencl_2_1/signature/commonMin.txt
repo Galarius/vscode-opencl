@@ -1,0 +1,8 @@
+    gentype min(gentype x,
+                gentype y)
+    gentypef min(gentypef x,
+                 float y)
+    gentyped min(gentyped x,
+                 double y)
+    gentype min (gentype x,
+                 half y)      // if half extension enabled

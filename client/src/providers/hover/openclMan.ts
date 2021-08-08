@@ -1268,5 +1268,77 @@ atomic_flag_clear_explicit:	{
 		signature: path.join(MAN_SIG,'atomic_flag_clear.txt'),
 		description: path.join(MAN_DESC,'atomic_flag_clear.md'),
 		reference: 'http://man.opencl.org/atomic_flag_clear.html',
+	},
+clamp_common:	{
+		brief: 'Clamp `x` to range given by `min`, `max`',
+		signature: path.join(MAN_SIG,'clamp_common.txt'),
+		description: path.join(MAN_DESC,'clamp_common.md'),
+		reference: 'http://man.opencl.org/clamp_common.html',
+	},
+clamp:	{
+		brief: 'Clamp `x` to range given by `min`, `max`',
+		signature: path.join(MAN_SIG,'clamp_common.txt'),
+		description: path.join(MAN_DESC,'clamp_common.md'),
+		reference: 'http://man.opencl.org/clamp_common.html',
+	},
+degrees:	{
+		brief: 'Converts radians to degrees.',
+		signature: path.join(MAN_SIG,'degrees.txt'),
+		description: path.join(MAN_DESC,'degrees.md'),
+		reference: 'http://man.opencl.org/degrees.html',
+	},
+commonMax:	{
+		brief: 'Returns the greater of two values.',
+		signature: path.join(MAN_SIG,'commonMax.txt'),
+		description: path.join(MAN_DESC,'commonMax.md'),
+		reference: 'http://man.opencl.org/commonMax.html',
+	},
+max:	{
+		brief: 'Returns the greater of two values.',
+		signature: path.join(MAN_SIG,'commonMax.txt'),
+		description: path.join(MAN_DESC,'commonMax.md'),
+		reference: 'http://man.opencl.org/commonMax.html',
+	},
+commonMin:	{
+		brief: 'Returns the lesser of two values.',
+		signature: path.join(MAN_SIG,'commonMin.txt'),
+		description: path.join(MAN_DESC,'commonMin.md'),
+		reference: 'http://man.opencl.org/commonMin.html',
+	},
+min:	{
+		brief: 'Returns the lesser of two values.',
+		signature: path.join(MAN_SIG,'commonMin.txt'),
+		description: path.join(MAN_DESC,'commonMin.md'),
+		reference: 'http://man.opencl.org/commonMin.html',
+	},
+mix:	{
+		brief: 'Linear blend of `x` and `y`.',
+		signature: path.join(MAN_SIG,'mix.txt'),
+		description: path.join(MAN_DESC,'mix.md'),
+		reference: 'http://man.opencl.org/mix.html',
+	},
+radians:	{
+		brief: 'Converts degrees to radians.',
+		signature: path.join(MAN_SIG,'radians.txt'),
+		description: path.join(MAN_DESC,'radians.md'),
+		reference: 'http://man.opencl.org/radians.html',
+	},
+sign:	{
+		brief: 'Sign of a value.',
+		signature: path.join(MAN_SIG,'sign.txt'),
+		description: path.join(MAN_DESC,'sign.md'),
+		reference: 'http://man.opencl.org/sign.html',
+	},
+smoothstep:	{
+		brief: 'Step and interpolate.',
+		signature: path.join(MAN_SIG,'smoothstep.txt'),
+		description: path.join(MAN_DESC,'smoothstep.md'),
+		reference: 'http://man.opencl.org/smoothstep.html',
+	},
+step:	{
+		brief: 'Returns 0.0 if `x` &lt; `edge`, else 1.0.',
+		signature: path.join(MAN_SIG,'step.txt'),
+		description: path.join(MAN_DESC,'step.md'),
+		reference: 'http://man.opencl.org/step.html',
 	}
 };

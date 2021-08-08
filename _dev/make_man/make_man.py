@@ -98,6 +98,12 @@ OPENCL_MAN = [
     ['atomic_fetch_key','atomic_fetch_key_explicit'],
     ['atomic_flag_test_and_set','atomic_flag_test_and_set_explicit'],
     ['atomic_flag_clear','atomic_flag_clear_explicit'],
+## Common Built-In Functions
+    ['clamp_common', 'clamp'],
+    'degrees',
+    ['commonMax', 'max'],
+    ['commonMin', 'min'],
+    'mix', 'radians', 'sign', 'smoothstep', 'step',
 ]
 
 def print_usage(name):

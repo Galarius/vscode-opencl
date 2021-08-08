@@ -1,0 +1,8 @@
+    gentype step(gentype edge,
+                 gentype x)
+    gentypef step(float edge,
+                  gentypef x)
+    gentyped step(double edge,
+                  gentyped x)
+    gentype step (half edge,
+                  gentype x)     // if half extension enabled

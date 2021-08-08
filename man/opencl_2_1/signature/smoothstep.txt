@@ -1,0 +1,12 @@
+    gentype smoothstep(gentype edge0,
+                       gentype edge1,
+                       gentype x)
+    gentypef smoothstep(float edge0,
+                        float edge1,
+                        gentypef x)
+    gentyped smoothstep(double edge0,
+                        double edge1,
+                        gentyped x)
+    gentype smoothstep (half edge0,
+                  half edge1,
+                  gentype x)   // if half extension enabled

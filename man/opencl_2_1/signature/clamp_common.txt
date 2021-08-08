@@ -1,0 +1,12 @@
+    gentype clamp(gentype x,
+                  gentype minval,
+                  gentype maxval)
+    gentypef clamp(gentypef x,
+                   float minval,
+                   float maxval)
+    gentyped clamp(gentyped x,
+                   double minval,
+                   double maxval)
+    gentype clamp(gentype x,
+                  half minval,
+                  half maxval)
