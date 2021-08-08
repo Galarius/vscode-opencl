@@ -23,7 +23,7 @@ GRID2PHP_TBL = './grid2php'
 
 
 BASE_LINK = 'http://man.opencl.org/'
-OPENCL_RUNTIME = [
+OPENCL_MAN = [
 # OpenCL Runtime
 ## Query Platform Info
 'clGetPlatformIDs', 'clGetPlatformInfo',
@@ -62,6 +62,33 @@ OPENCL_RUNTIME = [
 'clCreatePipe','clGetPipeInfo',
 ### Shared Virtual Memory (SVM)
 'clSVMAlloc','clSVMFree','clEnqueueSVMFree','clEnqueueSVMMap','clEnqueueSVMMemcpy','clEnqueueSVMMemFill','clEnqueueSVMMigrateMem','clEnqueueSVMUnmap',
+
+# OpenCL Compiler
+## Math Built-In Functions
+    ['acos', 'acosh', 'acospi'], 
+    ['asin', 'asinh', 'asinpi'], 
+    ['atan', 'atan2', 'atanh', 'atanpi', 'atan2pi'], 
+    'cbrt', 'ceil', 'copysign', 
+    ['cos', 'cosh', 'cospi', 'half_cos', 'native_cos'], 
+    ['erf', 'erfc'],
+    ['exp', 'exp2', 'exp10', 'expm1', 
+    'half_exp', 'half_exp2', 'half_exp10',
+    'native_exp', 'native_exp2', 'native_exp10'], 
+    'fabs', 'fdim', 'floor', 'fma', 'fmax', 'fmin', 'fmod', 'fract', 'frexp', 'hypot', 'ilogb', 'ldexp',
+    ['lgamma', 'lgamma_r'],
+    ['log', 'log2', 'log10', 'log1p', 'logb',
+    'half_log', 'half_log2', 'half_log10',
+    'native_log', 'native_log2', 'native_log10'], 
+    'mad', 
+    ['mag', 'maxmag', 'minmag'], 
+    'modf', 'nan', 'nextafter', 
+    ['pow', 'pown', 'powr', 'half_powr', 'native_powr'],
+    'remainder', 'remquo', 'rint', 'rootn', 'round', 
+    ['sin', 'sincos', 'sinh', 'sinpi', 'half_sin', 'native_sin'], 
+    ['sqrt', 'rsqrt' ],
+    ['tan', 'tanh'],
+    ['divide', 'half_divide', 'native_divide'],
+    ['recip', 'half_recip', 'native_recip'],
 ]
 
 def print_usage(name):
@@ -125,6 +152,22 @@ def get_brief(file):
             brief_lines.append(line.rstrip())
     return ' '.join(brief_lines)
 
+def get_openclman_ts_item(func, variation = ''):
+    if len(variation) == 0:
+        variation = func
+    print('Generating brief for {}...'.format(variation))
+    md = os.path.join(RESULT_DIR, func + '.md')
+    brief = get_brief(md)
+    item = [
+        "%s:\t{" % (variation),
+        "\t\tbrief: '{}',".format(brief.rstrip()),
+        "\t\tsignature: path.join(MAN_SIG,'{}.txt'),".format(func),
+        "\t\tdescription: path.join(MAN_DESC,'{}.md'),".format(func),
+        "\t\treference: '{}{}.html',".format(BASE_LINK, func),
+        "\t},\n"
+    ]
+    return item
+
 def generate_openclman_ts():
     lines = []
     header = """/* !!! THIS FILE IS GENERATED WITH `make_man.py` SCRIPT !!!! */
@@ -147,19 +190,16 @@ export var OpenCLSignatures: IEntries = {
 """
     footer = "};"
     lines.append(header)
-    for func in OPENCL_RUNTIME:
-        print('Generating brief for {}...'.format(func))
-        md = os.path.join(RESULT_DIR, func + '.md')
-        brief = get_brief(md)
-        item = [
-        "%s:\t{" % (func),
-        "\t\tbrief: '{}',".format(brief.rstrip()),
-        "\t\tsignature: path.join(MAN_SIG,'{}.txt'),".format(func),
-        "\t\tdescription: path.join(MAN_DESC,'{}.md'),".format(func),
-        "\t\treference: '{}{}.html',".format(BASE_LINK, func),
-        "\t},\n"
-        ]
-        lines.append('\n'.join(item))
+    for obj in OPENCL_MAN:
+        item = []
+        if(type(obj) == list):
+            general_func = obj[0] # like 'cos'
+            for func in obj:      # other functions (e.g. 'cosh' or 'cospi') has the same documentation as general one ('cos') 
+                item = get_openclman_ts_item(general_func, func)
+                lines.append('\n'.join(item))
+        else:
+            item = get_openclman_ts_item(obj)
+            lines.append('\n'.join(item))
     last = lines[-1]
     last = last[:-2]
     last += '\n'
@@ -191,13 +231,17 @@ def main():
             print_usage(sys.argv[0])
             sys.exit(0)
         elif opt == '-d':
-            for func in OPENCL_RUNTIME:
+            for func in OPENCL_MAN:
+                if type(func) == list:
+                    func = func[0]
                 url = BASE_LINK + func + '.html'
                 print('Downloading {} with `wget`...'.format(func))
                 os.system('wget --directory-prefix={} {}'.format(DOWNLOAD_DIR, url))
         elif opt == '-c':
             tmp = os.path.join(RESULT_DIR, TMP_FILE) 
-            for func in OPENCL_RUNTIME:
+            for func in OPENCL_MAN:
+                if type(func) == list:
+                    func = func[0]
                 converter = os.path.join(cwd, GRID2PHP_TBL)
                 if not os.path.exists(converter):
                     print("Failed to find {} ", converter)
@@ -214,7 +258,9 @@ def main():
                 os.system('{} {} {}'.format(converter, tmp, dst))
             os.remove(tmp)
         elif opt == '-u':
-            for func in OPENCL_RUNTIME:
+            for func in OPENCL_MAN:
+                if type(func) == list:
+                    func = func[0]
                 md = os.path.join(cwd, RESULT_DIR, func + '.md')
                 dst_sig = os.path.join(MAN_SIG_DIR, func + '.txt')
                 dst_desc = os.path.join(MAN_DESC_DIR, func + '.md')
