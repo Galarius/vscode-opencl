@@ -1790,5 +1790,71 @@ vstorea_halfn:	{
 		signature: path.join(MAN_SIG,'vstorea_halfn.txt'),
 		description: path.join(MAN_DESC,'vstorea_halfn.md'),
 		reference: 'http://man.opencl.org/vstorea_halfn.html',
+	},
+get_work_dim:	{
+		brief: 'Returns the number of dimensions in use.',
+		signature: path.join(MAN_SIG,'get_work_dim.txt'),
+		description: path.join(MAN_DESC,'get_work_dim.md'),
+		reference: 'http://man.opencl.org/get_work_dim.html',
+	},
+get_global_size:	{
+		brief: 'Returns the number of global work-items specified for dimension identified by `dimindx`.',
+		signature: path.join(MAN_SIG,'get_global_size.txt'),
+		description: path.join(MAN_DESC,'get_global_size.md'),
+		reference: 'http://man.opencl.org/get_global_size.html',
+	},
+get_global_id:	{
+		brief: 'Returns the unique global work-item ID value for dimension identified by `dimindx`.',
+		signature: path.join(MAN_SIG,'get_global_id.txt'),
+		description: path.join(MAN_DESC,'get_global_id.md'),
+		reference: 'http://man.opencl.org/get_global_id.html',
+	},
+get_local_size:	{
+		brief: 'Returns the number of local work-items in the specified dimension.',
+		signature: path.join(MAN_SIG,'get_local_size.txt'),
+		description: path.join(MAN_DESC,'get_local_size.md'),
+		reference: 'http://man.opencl.org/get_local_size.html',
+	},
+get_enqueued_local_size:	{
+		brief: 'Same as get\_local\_size(dimindx) if the kernel is executed with a uniform work-group size.',
+		signature: path.join(MAN_SIG,'get_enqueued_local_size.txt'),
+		description: path.join(MAN_DESC,'get_enqueued_local_size.md'),
+		reference: 'http://man.opencl.org/get_enqueued_local_size.html',
+	},
+get_local_id:	{
+		brief: 'Returns the unique local work-item ID.',
+		signature: path.join(MAN_SIG,'get_local_id.txt'),
+		description: path.join(MAN_DESC,'get_local_id.md'),
+		reference: 'http://man.opencl.org/get_local_id.html',
+	},
+get_num_groups:	{
+		brief: 'Returns the number of work-groups that will execute a kernel for a specified dimension.',
+		signature: path.join(MAN_SIG,'get_num_groups.txt'),
+		description: path.join(MAN_DESC,'get_num_groups.md'),
+		reference: 'http://man.opencl.org/get_num_groups.html',
+	},
+get_group_id:	{
+		brief: 'Returns the work-group ID.',
+		signature: path.join(MAN_SIG,'get_group_id.txt'),
+		description: path.join(MAN_DESC,'get_group_id.md'),
+		reference: 'http://man.opencl.org/get_group_id.html',
+	},
+get_global_offset:	{
+		brief: 'Returns the offset values specified in `global_work_offset` argument to [`clEnqueueNDRangeKernel`](clEnqueueNDRangeKernel.html).',
+		signature: path.join(MAN_SIG,'get_global_offset.txt'),
+		description: path.join(MAN_DESC,'get_global_offset.md'),
+		reference: 'http://man.opencl.org/get_global_offset.html',
+	},
+get_global_linear_id:	{
+		brief: 'Returns the work-items 1-dimensional global ID.',
+		signature: path.join(MAN_SIG,'get_global_linear_id.txt'),
+		description: path.join(MAN_DESC,'get_global_linear_id.md'),
+		reference: 'http://man.opencl.org/get_global_linear_id.html',
+	},
+get_local_linear_id:	{
+		brief: 'Returns the work-items 1-dimensional global ID.',
+		signature: path.join(MAN_SIG,'get_local_linear_id.txt'),
+		description: path.join(MAN_DESC,'get_local_linear_id.md'),
+		reference: 'http://man.opencl.org/get_local_linear_id.html',
 	}
 };
