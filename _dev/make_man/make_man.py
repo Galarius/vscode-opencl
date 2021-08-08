@@ -89,11 +89,15 @@ OPENCL_MAN = [
     ['tan', 'tanh'],
     ['divide', 'half_divide', 'native_divide'],
     ['recip', 'half_recip', 'native_recip'],
-# Async Copy and Prefetch Functions
-    'async_work_group_copy',
-    'async_work_group_strided_copy',
-    'wait_group_events',
-    'prefetch',
+## Async Copy and Prefetch Functions
+    'async_work_group_copy', 'async_work_group_strided_copy', 'wait_group_events', 'prefetch',
+## Atomic Functions
+    'atomic_init','atomic_work_item_fence',
+    ['atomic_store', 'atomic_store_explicit', 'atomic_exchange', 'atomic_exchange_explicit'],
+    ['atomic_compare_exchange', 'atomic_compare_exchange_strong','atomic_compare_exchange_strong_explicit', 'atomic_compare_exchange_weak','atomic_compare_exchange_weak_explicit'],
+    ['atomic_fetch_key','atomic_fetch_key_explicit'],
+    ['atomic_flag_test_and_set','atomic_flag_test_and_set_explicit'],
+    ['atomic_flag_clear','atomic_flag_clear_explicit'],
 ]
 
 def print_usage(name):
@@ -236,9 +240,14 @@ def main():
             for func in OPENCL_MAN:
                 if type(func) == list:
                     func = func[0]
-                url = BASE_LINK + func + '.html'
-                print('Downloading {} with `wget`...'.format(func))
-                os.system('wget --directory-prefix={} {}'.format(DOWNLOAD_DIR, url))
+                fname = func + '.html'
+                url = BASE_LINK + fname
+                dest = os.path.join(DOWNLOAD_DIR, fname)
+                if os.path.exists(dest):
+                    print('File {} exists'.format(fname))
+                else:
+                    print('Downloading {} with `wget`...'.format(func))
+                    os.system('wget --directory-prefix={} {}'.format(DOWNLOAD_DIR, url))
         elif opt == '-c':
             tmp = os.path.join(RESULT_DIR, TMP_FILE) 
             for func in OPENCL_MAN:

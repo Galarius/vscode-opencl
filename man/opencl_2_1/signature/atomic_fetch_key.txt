@@ -1,0 +1,9 @@
+    C atomic_fetch_key(volatile A *object,
+                       M operand)
+    C atomic_fetch_key_explicit(volatile A *object,
+                                M operand,
+                                memory_order order)
+    C atomic_fetch_key_explicit(volatile A *object,
+                                M operand,
+                                memory_order order,
+                                memory_scope scope)

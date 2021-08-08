@@ -1,0 +1,9 @@
+    C atomic_exchange(volatile A *object,
+                      C desired)
+    C atomic_exchange_explicit(volatile A *object,
+                               C desired,
+                               memory_order order)
+    C atomic_exchange_explicit(volatile A *object,
+                               C desired,
+                               memory_order order,
+                               memory_scope scope)

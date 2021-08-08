@@ -1,0 +1,28 @@
+    bool atomic_compare_exchange_strong(volatile A *object,
+                                        C *expected,
+                                        C desired)
+    bool atomic_compare_exchange_strong_explicit(volatile A *object,
+                                                 C *expected,
+                                                 C desired,
+                                                 memory_order success,
+                                                 memory_order failure)
+    bool atomic_compare_exchange_strong_explicit(volatile A *object,
+                                                 C *expected,
+                                                 C desired,
+                                                 memory_order success,
+                                                 memory_order failure,
+                                                 memory_scope scope)
+    bool atomic_compare_exchange_weak(volatile A *object,
+                                      C *expected,
+                                      C desired)
+    bool atomic_compare_exchange_weak_explicit(volatile A *object,
+                                               C *expected,
+                                               C desired,
+                                               memory_order success,
+                                               memory_order failure)
+    bool atomic_compare_exchange_weak_explicit(volatile A *object,
+                                               C *expected,
+                                               C desired,
+                                               memory_order success,
+                                               memory_order failure,
+                                               memory_scope scope)

@@ -1,0 +1,9 @@
+    void atomic_store(volatile A *object,
+                      C desired)
+    void atomic_store_explicit(volatile A *object,
+                               C desired,
+                               memory_order order)
+    void atomic_store_explicit(volatile A *object,
+                               C desired,
+                               memory_order order,
+                               memory_scope scope)
