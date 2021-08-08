@@ -1,0 +1,14 @@
+    int isgreaterequal(float x,
+                       float y)
+    int n isgreaterequal(float n x,
+                         float n y)
+    int isgreaterequal(double x,
+                       double y)
+    long n isgreaterequal(double n x,
+                          double n y)
+    int isgreaterequal
+         (half x,
+           half y)   // if half extension enabled
+    shortn isgreaterequal
+         (halfn x,
+           halfn y)   // if half extension enabled

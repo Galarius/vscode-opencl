@@ -1,0 +1,5 @@
+    gentype bitselect(gentype a,
+                      gentype b,
+                      gentype c)
+    halfn bitselect (halfn a, halfn b,
+                  halfn c)      // if half extension enabled

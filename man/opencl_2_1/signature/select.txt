@@ -1,0 +1,10 @@
+    gentype select(gentype a,
+                   gentype b,
+                   igentype c)
+    gentype select(gentype a,
+                   gentype b,
+                   ugentype c)
+    halfn select (halfn a, halfn b,
+                shortn c)      // if half extension enabled
+    halfn select (halfn a, halfn b,
+                ushortn c)      // if half extension enabled

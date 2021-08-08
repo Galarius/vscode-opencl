@@ -1,0 +1,6 @@
+    int isfinite(float)
+    int n isfinite(float n)
+    int isfinite(double)
+    long n isfinite(double n)
+    int isfinite (half)      // if half extension enabled
+    shortn isfinite (halfn)      // if half extension enabled

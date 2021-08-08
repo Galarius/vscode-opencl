@@ -1,0 +1,14 @@
+    int isless(float x,
+               float y)
+    int n isless(float n x,
+                 float n y)
+    int isless(double x,
+               double y)
+    long n isless(double n x,
+                  double n y)
+    int isless
+         (half x,
+           half y)   // if half extension enabled
+    shortn isless
+         (halfn x,
+           halfn y)   // if half extension enabled

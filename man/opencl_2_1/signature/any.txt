@@ -1,0 +1,2 @@
+    int any(igentype x)
+    int all(igentype x)

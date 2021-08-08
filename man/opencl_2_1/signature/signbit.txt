@@ -1,0 +1,6 @@
+    int signbit(float)
+    int n signbit(float n)
+    int signbit(double)
+    long n signbit(double n)
+    int signbit (half)      // if half extension enabled
+    shortn signbit (halfn)      // if half extension enabled

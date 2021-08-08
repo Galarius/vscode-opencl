@@ -1,0 +1,6 @@
+    int isnormal(float)
+    int n isnormal(float n)
+    int isnormal(double)
+    long n isnormal(double n)
+    int isnormal (half)      // if half extension enabled
+    shortn isnormal (halfn)      // if half extension enabled

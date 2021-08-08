@@ -65,49 +65,17 @@ OPENCL_MAN = [
 
 # OpenCL Compiler
 ## Math Built-In Functions
-    ['acos', 'acosh', 'acospi'], 
-    ['asin', 'asinh', 'asinpi'], 
-    ['atan', 'atan2', 'atanh', 'atanpi', 'atan2pi'], 
-    'cbrt', 'ceil', 'copysign', 
-    ['cos', 'cosh', 'cospi', 'half_cos', 'native_cos'], 
-    ['erf', 'erfc'],
-    ['exp', 'exp2', 'exp10', 'expm1', 
-    'half_exp', 'half_exp2', 'half_exp10',
-    'native_exp', 'native_exp2', 'native_exp10'], 
-    'fabs', 'fdim', 'floor', 'fma', 'fmax', 'fmin', 'fmod', 'fract', 'frexp', 'hypot', 'ilogb', 'ldexp',
-    ['lgamma', 'lgamma_r'],
-    ['log', 'log2', 'log10', 'log1p', 'logb',
-    'half_log', 'half_log2', 'half_log10',
-    'native_log', 'native_log2', 'native_log10'], 
-    'mad', 
-    ['mag', 'maxmag', 'minmag'], 
-    'modf', 'nan', 'nextafter', 
-    ['pow', 'pown', 'powr', 'half_powr', 'native_powr'],
-    'remainder', 'remquo', 'rint', 'rootn', 'round', 
-    ['sin', 'sincos', 'sinh', 'sinpi', 'half_sin', 'native_sin'], 
-    ['sqrt', 'rsqrt' ],
-    ['tan', 'tanh'],
-    ['divide', 'half_divide', 'native_divide'],
-    ['recip', 'half_recip', 'native_recip'],
+['acos', 'acosh', 'acospi'], ['asin', 'asinh', 'asinpi'], ['atan', 'atan2', 'atanh', 'atanpi', 'atan2pi'], 'cbrt', 'ceil', 'copysign', ['cos', 'cosh', 'cospi', 'half_cos', 'native_cos'], ['erf', 'erfc'],['exp', 'exp2', 'exp10', 'expm1', 'half_exp', 'half_exp2', 'half_exp10','native_exp', 'native_exp2', 'native_exp10'], 'fabs', 'fdim', 'floor', 'fma', 'fmax', 'fmin', 'fmod', 'fract', 'frexp', 'hypot', 'ilogb', 'ldexp',['lgamma', 'lgamma_r'],['log', 'log2', 'log10', 'log1p', 'logb','half_log', 'half_log2', 'half_log10','native_log', 'native_log2', 'native_log10'], 'mad', ['mag', 'maxmag', 'minmag'], 'modf', 'nan', 'nextafter', ['pow', 'pown', 'powr', 'half_powr', 'native_powr'],'remainder', 'remquo', 'rint', 'rootn', 'round', ['sin', 'sincos', 'sinh', 'sinpi', 'half_sin', 'native_sin'], ['sqrt', 'rsqrt' ],['tan', 'tanh'],['divide', 'half_divide', 'native_divide'],['recip', 'half_recip', 'native_recip'],
 ## Async Copy and Prefetch Functions
-    'async_work_group_copy', 'async_work_group_strided_copy', 'wait_group_events', 'prefetch',
+'async_work_group_copy', 'async_work_group_strided_copy', 'wait_group_events', 'prefetch',
 ## Atomic Functions
-    'atomic_init','atomic_work_item_fence',
-    ['atomic_store', 'atomic_store_explicit', 'atomic_exchange', 'atomic_exchange_explicit'],
-    ['atomic_compare_exchange', 'atomic_compare_exchange_strong','atomic_compare_exchange_strong_explicit', 'atomic_compare_exchange_weak','atomic_compare_exchange_weak_explicit'],
-    ['atomic_fetch_key','atomic_fetch_key_explicit'],
-    ['atomic_flag_test_and_set','atomic_flag_test_and_set_explicit'],
-    ['atomic_flag_clear','atomic_flag_clear_explicit'],
+'atomic_init','atomic_work_item_fence',['atomic_store', 'atomic_store_explicit', 'atomic_exchange', 'atomic_exchange_explicit'],['atomic_compare_exchange', 'atomic_compare_exchange_strong','atomic_compare_exchange_strong_explicit', 'atomic_compare_exchange_weak','atomic_compare_exchange_weak_explicit'],['atomic_fetch_key','atomic_fetch_key_explicit'],['atomic_flag_test_and_set','atomic_flag_test_and_set_explicit'],['atomic_flag_clear','atomic_flag_clear_explicit'],
 ## Common Built-In Functions
-    ['clamp_common', 'clamp'],
-    'degrees',
-    ['commonMax', 'max'],
-    ['commonMin', 'min'],
-    'mix', 'radians', 'sign', 'smoothstep', 'step',
+['clamp_common', 'clamp'],'degrees',['commonMax', 'max'],['commonMin', 'min'],'mix', 'radians', 'sign', 'smoothstep', 'step',
 ## Event Built-In Functions
-    'retain_event','release_event','create_user_event','is_valid_event','set_user_event_status','capture_event_profiling_info',
+'retain_event','release_event','create_user_event','is_valid_event','set_user_event_status','capture_event_profiling_info',
 ## Geometric Built-In Functions
-    'cross','dot','distance','length','normalize','fast_distance','fast_length','fast_normalize',
+'cross','dot','distance','length','normalize','fast_distance','fast_length','fast_normalize',
 ## Image Read and Write Functions
 'get_image_width','get_image_height','get_image_depth','get_image_channel_data_type','get_image_channel_order','get_image_dim','get_image_array_size','get_image_num_mip_levels','get_image_num_samples',
 ### @todo: support overridden functions (1d,2d,3d)
@@ -115,7 +83,9 @@ OPENCL_MAN = [
 ## Integer Built-In Functions
 ['abs','abs_diff'],'add_sat',['hadd','rhadd'],['clamp_integer', 'clamp'],'clz','ctz','mad_hi','mad24','mad_sat',['integerMax', 'max','min'],'mul_hi','mul24','rotate','sub_sat','upsample','popcount',
 ## Miscellaneous Vector Functions
-'vec_step', ['shuffle', 'shuffle2']
+'vec_step', ['shuffle', 'shuffle2'],
+## Relational Built-In Functions
+'isequal','isnotequal','isgreater','isgreaterequal','isless','islessequal','islessgreater','isfinite','isinf','isnan','isnormal','isordered','isunordered','signbit',['any','all'],'bitselect','select',
 ]
 
 def print_usage(name):

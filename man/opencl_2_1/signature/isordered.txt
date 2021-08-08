@@ -1,0 +1,14 @@
+    int isordered(float x,
+                  float y)
+    int n isordered(float n x,
+                    float n y)
+    int isordered(double x,
+                  double y)
+    long n isordered(double n x,
+                     double n y)
+    int isordered
+         (half x,
+           half y)   // if half extension enabled
+    shortn isordered
+         (halfn x,
+           halfn y)   // if half extension enabled

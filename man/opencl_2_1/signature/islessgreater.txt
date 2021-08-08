@@ -1,0 +1,14 @@
+    int islessgreater(float x,
+                      float y)
+    int n islessgreater(float n x,
+                        float n y)
+    int islessgreater(double x,
+                      double y)
+    long n islessgreater(double n x,
+                         double n y)
+    int islessgreater
+         (half x,
+           half y)   // if half extension enabled
+    shortn islessgreater
+         (halfn x,
+           halfn y)   // if half extension enabled

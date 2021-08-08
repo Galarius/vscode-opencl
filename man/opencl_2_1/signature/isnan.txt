@@ -1,0 +1,6 @@
+    int isnan(float)
+    int n isnan(float n)
+    int isnan(double)
+    long n isnan(double n)
+    int isnan (half)      // if half extension enabled
+    shortn isnan (halfn)      // if half extension enabled

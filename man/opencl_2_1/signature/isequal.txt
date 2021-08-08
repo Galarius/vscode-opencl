@@ -1,0 +1,14 @@
+    int isequal(float x,
+                float y)
+    int n isequal(float n x,
+                  float n y)
+    int isequal(double x,
+                double y)
+    long n isequal(double n x,
+                   double n y)
+    int isequal
+         (half x,
+           half y)   // if half extension enabled
+    shortn isequal
+         (halfn x,
+           halfn y)   // if half extension enabled

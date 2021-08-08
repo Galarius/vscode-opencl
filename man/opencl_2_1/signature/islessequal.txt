@@ -1,0 +1,14 @@
+    int islessequal(float x,
+                    float y)
+    int n islessequal(float n x,
+                      float n y)
+    int islessequal(double x,
+                    double y)
+    long n islessequal(double n x,
+                       double n y)
+    int islessequal
+         (half x,
+           half y)   // if half extension enabled
+    shortn islessequal
+         (halfn x,
+           halfn y)   // if half extension enabled

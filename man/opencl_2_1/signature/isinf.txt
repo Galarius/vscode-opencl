@@ -1,0 +1,6 @@
+    int isinf(float)
+    int n isinf(float n)
+    int isinf(double)
+    long n isinf(double n)
+    int isinf (half)      // if half extension enabled
+    shortn isinf (halfn)      // if half extension enabled

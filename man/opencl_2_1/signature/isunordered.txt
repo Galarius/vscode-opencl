@@ -1,0 +1,14 @@
+    int isunordered(float x,
+                    float y)
+    int n isunordered(float n x,
+                      float n y)
+    int isunordered(double x,
+                    double y)
+    long n isunordered(double n x,
+                       double n y)
+    int isunordered
+         (half x,
+           half y)   // if half extension enabled
+    shortn isunordered
+         (halfn x,
+           halfn y)   // if half extension enabled
