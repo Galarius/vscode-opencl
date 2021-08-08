@@ -86,6 +86,8 @@ OPENCL_MAN = [
 'vec_step', ['shuffle', 'shuffle2'],
 ## Relational Built-In Functions
 'isequal','isnotequal','isgreater','isgreaterequal','isless','islessequal','islessgreater','isfinite','isinf','isnan','isnormal','isordered','isunordered','signbit',['any','all'],'bitselect','select',
+## Synchronization and Memory Fence Functions
+'work_group_barrier', 'barrier',
 ]
 
 def print_usage(name):

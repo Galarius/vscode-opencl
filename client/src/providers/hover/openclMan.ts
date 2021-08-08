@@ -1730,5 +1730,17 @@ select:	{
 		signature: path.join(MAN_SIG,'select.txt'),
 		description: path.join(MAN_DESC,'select.md'),
 		reference: 'http://man.opencl.org/select.html',
+	},
+work_group_barrier:	{
+		brief: 'All work-items in a work-group executing the kernel on a processor must execute this function before any are allowed to continue execution beyond the work\_group\_barrier.',
+		signature: path.join(MAN_SIG,'work_group_barrier.txt'),
+		description: path.join(MAN_DESC,'work_group_barrier.md'),
+		reference: 'http://man.opencl.org/work_group_barrier.html',
+	},
+barrier:	{
+		brief: 'See [`work_group_barrier`](work_group_barrier.html).',
+		signature: path.join(MAN_SIG,'barrier.txt'),
+		description: path.join(MAN_DESC,'barrier.md'),
+		reference: 'http://man.opencl.org/barrier.html',
 	}
 };
