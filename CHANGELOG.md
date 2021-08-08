@@ -1,5 +1,24 @@
 # OpenCL for Visual Studio Code Change Log
 
+## Version 0.7.1: Aug 08, 2021
+
+Built-in OpenCL API reference was extended with:
+
+* Async Copy and Prefetch Functions
+* Atomic Functions
+* Common Functions
+* Event Functions
+* Geometric Functions
+* Image Functions
+* Integer Functions
+* Math Functions
+* Misc. Vector Functions
+* Relational Functions
+* Sync Functions
+* Vector Data Load and Store Functions
+* Work-Item Functions
+* Pipe Functions
+
 ## Version 0.7.0: Aug 04, 2021
 
 * Added language server to provide diagnostics for an OpenCL kernel

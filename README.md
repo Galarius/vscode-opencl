@@ -8,7 +8,7 @@ This extension adds [OpenCL C/C++](https://en.wikipedia.org/wiki/OpenCL) languag
 ## Features
 
 * OpenCL Compute Kernel Support [`*.cl`, `*.ocl`]
-* OpenCL Language Server
+* OpenCL Language Server (***new feature***)
 * OpenCL C/C++ Syntax Highlighting
 * Offline Kernel Compilation
 * Auto Completion of Built-in OpenCL Symbols
@@ -37,6 +37,7 @@ This extension adds [OpenCL C/C++](https://en.wikipedia.org/wiki/OpenCL) languag
 - [Contributing](#contributing)
 - [Change Log](#change-log)
 - [License](#license)
+- [Disclaimer](#disclaimer)
 
 ---
 
@@ -85,3 +86,7 @@ This command opens a new VS Code tab filled with information about available Ope
 ## License
 
 [MIT License](https://raw.githubusercontent.com/Galarius/vscode-opencl/master/LICENSE.txt)
+
+## Disclaimer
+
+OpenCL is the trademark of Apple Inc.
