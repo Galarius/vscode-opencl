@@ -1742,5 +1742,53 @@ barrier:	{
 		signature: path.join(MAN_SIG,'barrier.txt'),
 		description: path.join(MAN_DESC,'barrier.md'),
 		reference: 'http://man.opencl.org/barrier.html',
+	},
+vloadn:	{
+		brief: 'Read vectors from a pointer to memory.',
+		signature: path.join(MAN_SIG,'vloadn.txt'),
+		description: path.join(MAN_DESC,'vloadn.md'),
+		reference: 'http://man.opencl.org/vloadn.html',
+	},
+vstoren:	{
+		brief: 'Write sizeof bytes (`gentypen`) to memory.',
+		signature: path.join(MAN_SIG,'vstoren.txt'),
+		description: path.join(MAN_DESC,'vstoren.md'),
+		reference: 'http://man.opencl.org/vstoren.html',
+	},
+vload_half:	{
+		brief: 'Read a half float from a pointer to memory.',
+		signature: path.join(MAN_SIG,'vload_half.txt'),
+		description: path.join(MAN_DESC,'vload_half.md'),
+		reference: 'http://man.opencl.org/vload_half.html',
+	},
+vload_halfn:	{
+		brief: 'Read a half float vector from a pointer to memory.',
+		signature: path.join(MAN_SIG,'vload_halfn.txt'),
+		description: path.join(MAN_DESC,'vload_halfn.md'),
+		reference: 'http://man.opencl.org/vload_halfn.html',
+	},
+vstore_half:	{
+		brief: 'Convert float to half and write to a pointer to memory.',
+		signature: path.join(MAN_SIG,'vstore_half.txt'),
+		description: path.join(MAN_DESC,'vstore_half.md'),
+		reference: 'http://man.opencl.org/vstore_half.html',
+	},
+vstore_halfn:	{
+		brief: 'Convert float vector to half vector and write to a pointer to memory.',
+		signature: path.join(MAN_SIG,'vstore_halfn.txt'),
+		description: path.join(MAN_DESC,'vstore_halfn.md'),
+		reference: 'http://man.opencl.org/vstore_halfn.html',
+	},
+vloada_halfn:	{
+		brief: 'Read half float vector from a pointer to memory.',
+		signature: path.join(MAN_SIG,'vloada_halfn.txt'),
+		description: path.join(MAN_DESC,'vloada_halfn.md'),
+		reference: 'http://man.opencl.org/vloada_halfn.html',
+	},
+vstorea_halfn:	{
+		brief: 'Convert float vector to half vector and write to a pointer to memory.',
+		signature: path.join(MAN_SIG,'vstorea_halfn.txt'),
+		description: path.join(MAN_DESC,'vstorea_halfn.md'),
+		reference: 'http://man.opencl.org/vstorea_halfn.html',
 	}
 };

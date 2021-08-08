@@ -88,6 +88,8 @@ OPENCL_MAN = [
 'isequal','isnotequal','isgreater','isgreaterequal','isless','islessequal','islessgreater','isfinite','isinf','isnan','isnormal','isordered','isunordered','signbit',['any','all'],'bitselect','select',
 ## Synchronization and Memory Fence Functions
 'work_group_barrier', 'barrier',
+## Vector Data Load and Store Functions
+'vloadn','vstoren','vload_half','vload_halfn','vstore_half','vstore_halfn','vloada_halfn','vstorea_halfn',
 ]
 
 def print_usage(name):

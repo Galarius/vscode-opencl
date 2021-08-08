@@ -1,0 +1,30 @@
+    void vstore_half n(float n data,
+                       size_t offset,
+                       half *p)
+    void vstore_half n _rte(float n data,
+                            size_t offset,
+                            half *p)
+    void vstore_half n _rtz(float n data,
+                            size_t offset,
+                            half *p)
+    void vstore_half n _rtp(float n data,
+                            size_t offset,
+                            half *p)
+    void vstore_half n _rtn(float n data,
+                            size_t offset,
+                            half *p)
+    void vstore_half n(double n data,
+                       size_t offset,
+                       half *p)
+    void vstore_half n _rte(double n data,
+                            size_t offset,
+                            half *p)
+    void vstore_half n _rtz(double n data,
+                            size_t offset,
+                            half *p)
+    void vstore_half n _rtp(double n data,
+                            size_t offset,
+                            half *p)
+    void vstore_half n _rtn(double n data,
+                            size_t offset,
+                            half *p)

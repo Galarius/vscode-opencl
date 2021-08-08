@@ -1,0 +1,4 @@
+    float vload_half(size_t offset,
+                     const half *p)
+    float vload_half(size_t offset,
+                     const constant half *p)

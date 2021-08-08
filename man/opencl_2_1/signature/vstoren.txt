@@ -1,0 +1,3 @@
+    void vstore n(gentype n data,
+                  size_t offset,
+                  gentype *p)
