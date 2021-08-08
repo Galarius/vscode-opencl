@@ -1,0 +1,3 @@
+    float n normalize(float n p)
+    double n normalize(double n p)
+    gentype normalize (gentype p)      // if half extension enabled

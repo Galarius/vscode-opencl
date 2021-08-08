@@ -1,0 +1,14 @@
+    float4 cross(float4 p0,
+                 float4 p1)
+    float3 cross(float3 p0,
+                 float3 p1)
+    double4 cross(double4 p0,
+                  double4 p1)
+    double3 cross(double3 p0,
+                  double3 p1)
+    half4 cross
+         (half4 p0,
+           half4 p1)   // if half extension enabled
+    half3 cross
+         (half3 p0,
+           half3 p1)   // if half extension enabled

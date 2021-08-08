@@ -1376,5 +1376,53 @@ capture_event_profiling_info:	{
 		signature: path.join(MAN_SIG,'capture_event_profiling_info.txt'),
 		description: path.join(MAN_DESC,'capture_event_profiling_info.md'),
 		reference: 'http://man.opencl.org/capture_event_profiling_info.html',
+	},
+cross:	{
+		brief: 'Cross product.',
+		signature: path.join(MAN_SIG,'cross.txt'),
+		description: path.join(MAN_DESC,'cross.md'),
+		reference: 'http://man.opencl.org/cross.html',
+	},
+dot:	{
+		brief: 'Dot product.',
+		signature: path.join(MAN_SIG,'dot.txt'),
+		description: path.join(MAN_DESC,'dot.md'),
+		reference: 'http://man.opencl.org/dot.html',
+	},
+distance:	{
+		brief: 'Vector distance.',
+		signature: path.join(MAN_SIG,'distance.txt'),
+		description: path.join(MAN_DESC,'distance.md'),
+		reference: 'http://man.opencl.org/distance.html',
+	},
+length:	{
+		brief: 'Vector length.',
+		signature: path.join(MAN_SIG,'length.txt'),
+		description: path.join(MAN_DESC,'length.md'),
+		reference: 'http://man.opencl.org/length.html',
+	},
+normalize:	{
+		brief: 'Normal vector length 1.',
+		signature: path.join(MAN_SIG,'normalize.txt'),
+		description: path.join(MAN_DESC,'normalize.md'),
+		reference: 'http://man.opencl.org/normalize.html',
+	},
+fast_distance:	{
+		brief: 'Vector distance.',
+		signature: path.join(MAN_SIG,'fast_distance.txt'),
+		description: path.join(MAN_DESC,'fast_distance.md'),
+		reference: 'http://man.opencl.org/fast_distance.html',
+	},
+fast_length:	{
+		brief: 'Vector length.',
+		signature: path.join(MAN_SIG,'fast_length.txt'),
+		description: path.join(MAN_DESC,'fast_length.md'),
+		reference: 'http://man.opencl.org/fast_length.html',
+	},
+fast_normalize:	{
+		brief: 'Normal vector length 1.',
+		signature: path.join(MAN_SIG,'fast_normalize.txt'),
+		description: path.join(MAN_DESC,'fast_normalize.md'),
+		reference: 'http://man.opencl.org/fast_normalize.html',
 	}
 };

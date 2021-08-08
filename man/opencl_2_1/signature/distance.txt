@@ -1,0 +1,6 @@
+    float distance(float n p0,
+                   float n p1)
+    double distance(double n p0,
+                    double n p1)
+    half distance (gentype p0,
+                 gentype p1)     // if half extension enabled

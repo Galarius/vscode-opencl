@@ -106,6 +106,8 @@ OPENCL_MAN = [
     'mix', 'radians', 'sign', 'smoothstep', 'step',
 ## Event Built-In Functions
     'retain_event','release_event','create_user_event','is_valid_event','set_user_event_status','capture_event_profiling_info',
+## Geometric Built-In Functions
+    'cross','dot','distance','length','normalize','fast_distance','fast_length','fast_normalize',
 ]
 
 def print_usage(name):

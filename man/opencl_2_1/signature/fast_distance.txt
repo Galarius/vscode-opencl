@@ -1,0 +1,2 @@
+    float fast_distance(float n p0,
+                        float n p1)

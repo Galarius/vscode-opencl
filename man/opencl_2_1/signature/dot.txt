@@ -1,0 +1,6 @@
+    float dot(float n p0,
+              float n p1)
+    double dot(double n p0,
+               double n p1)
+    half dot (gentype p0,
+            gentype p1)     // if half extension enabled
