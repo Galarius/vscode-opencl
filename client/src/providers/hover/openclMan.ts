@@ -1509,18 +1509,6 @@ rhadd:	{
 		description: path.join(MAN_DESC,'hadd.md'),
 		reference: 'http://man.opencl.org/hadd.html',
 	},
-clamp_integer:	{
-		brief: 'Clamp `x` to range given by `minval`, `maxval`.',
-		signature: path.join(MAN_SIG,'clamp_integer.txt'),
-		description: path.join(MAN_DESC,'clamp_integer.md'),
-		reference: 'http://man.opencl.org/clamp_integer.html',
-	},
-clamp:	{
-		brief: 'Clamp `x` to range given by `minval`, `maxval`.',
-		signature: path.join(MAN_SIG,'clamp_integer.txt'),
-		description: path.join(MAN_DESC,'clamp_integer.md'),
-		reference: 'http://man.opencl.org/clamp_integer.html',
-	},
 clz:	{
 		brief: 'Returns the number of leading 0-bits in `x`.',
 		signature: path.join(MAN_SIG,'clz.txt'),
@@ -1550,24 +1538,6 @@ mad_sat:	{
 		signature: path.join(MAN_SIG,'mad_sat.txt'),
 		description: path.join(MAN_DESC,'mad_sat.md'),
 		reference: 'http://man.opencl.org/mad_sat.html',
-	},
-integerMax:	{
-		brief: 'Returns the greater or lesser of `x` or `y`.',
-		signature: path.join(MAN_SIG,'integerMax.txt'),
-		description: path.join(MAN_DESC,'integerMax.md'),
-		reference: 'http://man.opencl.org/integerMax.html',
-	},
-max:	{
-		brief: 'Returns the greater or lesser of `x` or `y`.',
-		signature: path.join(MAN_SIG,'integerMax.txt'),
-		description: path.join(MAN_DESC,'integerMax.md'),
-		reference: 'http://man.opencl.org/integerMax.html',
-	},
-min:	{
-		brief: 'Returns the greater or lesser of `x` or `y`.',
-		signature: path.join(MAN_SIG,'integerMax.txt'),
-		description: path.join(MAN_DESC,'integerMax.md'),
-		reference: 'http://man.opencl.org/integerMax.html',
 	},
 mul_hi:	{
 		brief: 'Returns the high half of the product of `x` and `y`.',

@@ -81,7 +81,10 @@ OPENCL_MAN = [
 ### @todo: support overridden functions (1d,2d,3d)
 ### 'read_imagef', 'read_imagei', 'read_imageui', 'read_imageh', 'write_imagef', 'write_imagei', 'write_imageui', 'write_imageh',
 ## Integer Built-In Functions
-['abs','abs_diff'],'add_sat',['hadd','rhadd'],['clamp_integer', 'clamp'],'clz','ctz','mad_hi','mad24','mad_sat',['integerMax', 'max','min'],'mul_hi','mul24','rotate','sub_sat','upsample','popcount',
+['abs','abs_diff'],'add_sat',['hadd','rhadd'],'clz','ctz','mad_hi','mad24','mad_sat','mul_hi','mul24','rotate','sub_sat','upsample','popcount',
+### duplicates
+### ['integerMax', 'max','min'],
+### ['clamp_integer', 'clamp'],
 ## Miscellaneous Vector Functions
 'vec_step', ['shuffle', 'shuffle2'],
 ## Relational Built-In Functions

@@ -1,6 +1,0 @@
-    gentype clamp(gentype x,
-                  gentype minval,
-                  gentype maxval)
-    gentype clamp(gentype x,
-                  sgentype minval,
-                  sgentype maxval)
