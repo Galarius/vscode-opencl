@@ -1,5 +1,5 @@
-Parameters
-----------
+
+## Parameters
 
 `context`  
 A valid OpenCL context used to create the SVM buffer.
@@ -15,6 +15,7 @@ The following table describes the possible values for `flags`.
 |  `CL_MEM_READ_ONLY`                |  This flag specifies that the SVM    buffer object is a read-only        memory object when used inside a    kernel.                             Writing to a SVM buffer created     with `CL_MEM_READ_ONLY` inside a    kernel is undefined.                `CL_MEM_READ_WRITE` or              `CL_MEM_WRITE_ONLY` and             `CL_MEM_READ_ONLY` are mutually     exclusive.                        |
 |  `CL_MEM_SVM_FINE_GRAIN_BUFFER`    |  This specifies that the             application wants the OpenCL        implementation to do a              fine-grained allocation.          |
 |  `CL_MEM_SVM_ATOMICS`              |  This flag is valid only if          `CL_MEM_SVM_FINE_GRAIN_BUFFER` is   specified in `flags`. It is used    to indicate that SVM atomic         operations can control visibility   of memory accesses in this SVM      buffer.                           |
+
 `size`  
 The size in bytes of the SVM buffer to be allocated.
 
@@ -27,8 +28,7 @@ device supports 64-bit integers; otherwise it is `int16`. If alignment
 is 0, a default alignment will be used that is equal to the size of
 largest data type supported by the OpenCL implementation.
 
-Notes
------
+## Notes
 
 If `CL_MEM_SVM_FINE_GRAIN_BUFFER` is not specified, the buffer can be
 created as a coarse grained SVM allocation. Similarly, if
@@ -68,8 +68,7 @@ the buffer’s underlying shared memory can be operated on using atomic
 operations to the device’s level of support as defined in the memory
 model.
 
-Errors
-------
+## Errors
 
 Returns a valid non-NULL shared virtual memory address if the SVM buffer
 is successfully allocated. Otherwise, like malloc, it returns a NULL
@@ -90,8 +89,8 @@ pointer value. `clSVMAlloc` will fail if:
 -   The values specified in `flags` are not valid i.e. don’t match those
     defined in the table above.
 
--   `size` is 0 or &gt; `CL_DEVICE_MAX_MEM_ALLOC_SIZE` value for any
-    device in `context`.
+-   `size` is 0 or > `CL_DEVICE_MAX_MEM_ALLOC_SIZE` value for any device
+    in `context`.
 
 -   `alignment` is not a power of two or the OpenCL implementation
     cannot support the specified alignment for at least one device in
@@ -99,19 +98,16 @@ pointer value. `clSVMAlloc` will fail if:
 
 -   There was a failure to allocate resources.
 
-Also see
---------
+## Also see
 
 [`clSVMFree`](clSVMFree.html), [Shared Virtual Memory
 Functions](sharedVirtualMemory.html)
 
-Specification
--------------
+## Specification
 
 [OpenCL 2.1 API Specification, page
 175](https://www.khronos.org/registry/cl/specs/opencl-2.1.pdf#page=175)
 
-Copyright
----------
+## Copyright
 
 [Copyright © 2007-2017 The Khronos Group Inc.](copyright.html)

@@ -1,5 +1,5 @@
-Parameters
-----------
+
+## Parameters
 
 `command_queue`  
 A valid host command-queue. A native user function can only be executed
@@ -28,7 +28,7 @@ memory region pointed to by `args` can be reused by the application.
 The number of buffer objects that are passed in `args`.
 
 `mem_list`  
-A list of valid buffer objects, if `num_mem_objects` &gt; 0. The buffer
+A list of valid buffer objects, if `num_mem_objects` > 0. The buffer
 object values specified in `mem_list` are memory object handles
 (`cl_mem` values) returned by [`clCreateBuffer`](clCreateBuffer.html) or
 NULL.
@@ -51,8 +51,7 @@ associated with events in `event_wait_list` and `command_queue` must be
 the same. The memory associated with `event_wait_list` can be reused or
 freed after the function returns.
 
-Notes
------
+## Notes
 
 The total number of read-only images specified as arguments to a kernel
 cannot exceed `CL_DEVICE_MAX_READ_IMAGE_ARGS`. Each image array argument
@@ -68,8 +67,7 @@ cannot exceed `CL_DEVICE_MAX_READ_WRITE_IMAGE_ARGS`. Each image array
 argument to a kernel declared with the `read_write` qualifier counts as
 one image.
 
-Errors
-------
+## Errors
 
 Returns `CL_SUCCESS` if the user function execution instance was
 successfully queued. Otherwise, it returns one of the following errors:
@@ -82,12 +80,12 @@ successfully queued. Otherwise, it returns one of the following errors:
 
 -   `CL_INVALID_VALUE` if `user_func` is NULL.
 
--   `CL_INVALID_VALUE` if `args` is a NULL value and `cb_args` &gt; 0,
-    or if `args` is a NULL value and `num_mem_objects` &gt; 0.
+-   `CL_INVALID_VALUE` if `args` is a NULL value and `cb_args` > 0, or
+    if `args` is a NULL value and `num_mem_objects` > 0.
 
 -   `CL_INVALID_VALUE` if `args` is not NULL and `cb_args` is 0.
 
--   `CL_INVALID_VALUE` if `num_mem_objects` &gt; 0 and `mem_list` or
+-   `CL_INVALID_VALUE` if `num_mem_objects` > 0 and `mem_list` or
     `args_mem_loc` are NULL.
 
 -   `CL_INVALID_VALUE` if `num_mem_objects` = 0 and `mem_list` or
@@ -108,8 +106,8 @@ successfully queued. Otherwise, it returns one of the following errors:
     arguments to `kernel`.
 
 -   `CL_INVALID_EVENT_WAIT_LIST` if `event_wait_list` is NULL and
-    `num_events_in_wait_list` &gt; 0, or `event_wait_list` is not NULL
-    and `num_events_in_wait_list` is 0, or if event objects in
+    `num_events_in_wait_list` > 0, or `event_wait_list` is not NULL and
+    `num_events_in_wait_list` is 0, or if event objects in
     `event_wait_list` are not valid events.
 
 -   `CL_INVALID_OPERATION` if SVM pointers are passed as arguments to a
@@ -124,8 +122,7 @@ successfully queued. Otherwise, it returns one of the following errors:
 -   `CL_OUT_OF_HOST_MEMORY` if there is a failure to allocate resources
     required by the OpenCL implementation on the host.
 
-Also see
---------
+## Also see
 
 [`clEnqueueNDRangeKernel`](clEnqueueNDRangeKernel.html),
 [`clEnqueueNativeKernel`](#),
@@ -133,13 +130,11 @@ Also see
 [`clCreateBuffer`](clCreateBuffer.html),
 [`clGetDeviceInfo`](clGetDeviceInfo.html)
 
-Specification
--------------
+## Specification
 
 [OpenCL 2.1 API Specification, page
 246](https://www.khronos.org/registry/cl/specs/opencl-2.1.pdf#page=246)
 
-Copyright
----------
+## Copyright
 
 [Copyright © 2007-2017 The Khronos Group Inc.](copyright.html)

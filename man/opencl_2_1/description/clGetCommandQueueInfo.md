@@ -1,5 +1,5 @@
-Parameters
-----------
+
+## Parameters
 
 `command_queue`  
 Specifies the command-queue being queried.
@@ -30,11 +30,11 @@ below.
 |  `CL_QUEUE_CONTEXT`                |  returned in param\_value            Return type: `cl_context`           Return the context specified when |
 |  `CL_QUEUE_DEVICE`                 |  the command-queue is created.       Return type: `cl_device_id`         Return the device specified when  |
 |  `CL_QUEUE_REFERENCE_COUNT`        |  the command-queue is created.       Return type: `cl_uint`              Return the command-queue            reference count.                    The reference count returned with   `CL_QUEUE_REFERENCE_COUNT` should   be considered immediately stale.    It is unsuitable for general use    in applications. This feature is    provided for identifying memory   |
-|  `CL_QUEUE_PROPERTIES`             |  leaks.                              Return type:                        `cl_command_queue_properties`       Return the currently specified      properties for the command-queue.   These properties are specified by   the value associated with the       `CL_COMMAND_QUEUE_PROPERTIES`       passed in `properties` argument     in                                  [`clCreateCommandQueueWithPropert   ies`](clCreateCommandQueueWithPro |
-|  `CL_QUEUE_SIZE`                   |  perties.html).                      Return type: `cl_uint`              Return the currently specified      size for the device                 command-queue. This query is only   supported for device command      |
+|  `CL_QUEUE_PROPERTIES`             |  leaks.                              Return type:                        `cl_command_queue_properties`       Return the currently specified      properties for the command-queue.   These properties are specified by   the value associated with the       `CL_COMMAND_QUEUE_PROPERTIES`       passed in `properties` argument     in                                  [`clCreateComm                      andQueueWithProperties`](clCreate |
+|  `CL_QUEUE_SIZE`                   |  CommandQueueWithProperties.html).   Return type: `cl_uint`              Return the currently specified      size for the device                 command-queue. This query is only   supported for device command      |
 |  `CL_QUEUE_DEVICE_DEFAULT`         |  queues.                             Return type: `cl_command_queue`     Return the current default          command queue for the underlying  |
-Notes
------
+
+## Notes
 
 It is possible that a device(s) becomes unavailable after a context and
 command-queues that use this device(s) have been created and commands
@@ -45,8 +45,7 @@ when the context is created can be used to record appropriate
 information in the `errinfo`, `private_info` arguments passed to the
 callback function when the device becomes unavailable.
 
-Errors
-------
+## Errors
 
 Returns `CL_SUCCESS` if the function is executed successfully.
 Otherwise, it returns one of the following errors:
@@ -65,20 +64,17 @@ Otherwise, it returns one of the following errors:
 -   `CL_OUT_OF_HOST_MEMORY` if there is a failure to allocate resources
     required by the OpenCL implementation on the host.
 
-Also see
---------
+## Also see
 
 [`clCreateCommandQueueWithProperties`](clCreateCommandQueueWithProperties.html),
 [`clReleaseCommandQueue`](clReleaseCommandQueue.html),
 [`clRetainCommandQueue`](clRetainCommandQueue.html)
 
-Specification
--------------
+## Specification
 
 [OpenCL 2.1 API Specification, page
 101](https://www.khronos.org/registry/cl/specs/opencl-2.1.pdf#page=101)
 
-Copyright
----------
+## Copyright
 
 [Copyright © 2007-2017 The Khronos Group Inc.](copyright.html)

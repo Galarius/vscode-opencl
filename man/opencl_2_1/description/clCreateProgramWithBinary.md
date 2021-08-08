@@ -1,5 +1,5 @@
-Parameters
-----------
+
+## Parameters
 
 `context`  
 Must be a valid OpenCL context.
@@ -58,8 +58,7 @@ ignored.
 Returns an appropriate error code. If `errcode_ret` is NULL, no error
 code is returned.
 
-Notes
------
+## Notes
 
 OpenCL allows applications to create a program object using the program
 source or binary and build appropriate program executables. This can be
@@ -72,8 +71,7 @@ program executables. The cached executables can be read and loaded by
 the application, which can help significantly reduce the application
 initialization time.
 
-Errors
-------
+## Errors
 
 Returns a valid non-zero program object and `errcode_ret` is set to
 `CL_SUCCESS` if the program object is created successfully. Otherwise,
@@ -101,8 +99,7 @@ in `errcode_ret`:
 -   `CL_OUT_OF_HOST_MEMORY` if there is a failure to allocate resources
     required by the OpenCL implementation on the host.
 
-Also see
---------
+## Also see
 
 [`clCreateProgramWithSource`](clCreateProgramWithSource.html),
 [`clCreateProgramWithBuiltInKernels`](clCreateProgramWithBuiltInKernels.html),
@@ -110,13 +107,11 @@ Also see
 [`clRetainProgram`](clRetainProgram.html), [Cardinality
 Diagram](classDiagram.html)
 
-Specification
--------------
+## Specification
 
 [OpenCL 2.1 API Specification, page
 196](https://www.khronos.org/registry/cl/specs/opencl-2.1.pdf#page=196)
 
-Copyright
----------
+## Copyright
 
 [Copyright © 2007-2017 The Khronos Group Inc.](copyright.html)

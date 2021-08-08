@@ -1,5 +1,5 @@
-Parameters
-----------
+
+## Parameters
 
 `context`  
 Must be a valid OpenCL context.
@@ -19,8 +19,7 @@ is greater than zero excludes the null terminator in its count.
 Returns an appropriate error code. If `errcode_ret` is NULL, no error
 code is returned.
 
-Description
------------
+## Description
 
 This function creates a program object for a context, and loads the
 source code specified by the text strings in the `strings` array into
@@ -31,8 +30,7 @@ implementation-defined source for custom devices that support an online
 compiler. OpenCL C++ is not supported as an online-compiled kernel
 language through this interface.
 
-Errors
-------
+## Errors
 
 `clCreateProgramWithSource` returns a valid non-zero program object and
 `errcode_ret` is set to `CL_SUCCESS` if the program object is created
@@ -50,21 +48,18 @@ following error values returned in `errcode_ret`:
 -   `CL_OUT_OF_HOST_MEMORY` if there is a failure to allocate resources
     required by the OpenCL implementation on the host.
 
-Also see
---------
+## Also see
 
 [`clCreateProgramWithBinary`](clCreateProgramWithBinary.html),
 [`clReleaseProgram`](clReleaseProgram.html),
 [`clRetainProgram`](clRetainProgram.html), [Cardinality
 Diagram](classDiagram.html)
 
-Specification
--------------
+## Specification
 
 [OpenCL 2.1 API Specification, page
 194](https://www.khronos.org/registry/cl/specs/opencl-2.1.pdf#page=194)
 
-Copyright
----------
+## Copyright
 
 [Copyright © 2007-2017 The Khronos Group Inc.](copyright.html)

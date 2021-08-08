@@ -1,5 +1,5 @@
-Parameters
-----------
+
+## Parameters
 
 `context`  
 Must be a valid OpenCL context.
@@ -13,11 +13,9 @@ implementation-defined intermediate language.
 Returns an appropriate error code. If `errcode_ret` is NULL, no error
 code is returned.
 
-Notes
------
+## Notes
 
-Errors
-------
+## Errors
 
 Returns a valid non-zero program object and `errcode_ret` is set to
 `CL_SUCCESS` if the program object is created successfully. Otherwise,
@@ -38,20 +36,17 @@ in `errcode_ret`:
 -   `CL_OUT_OF_HOST_MEMORY` if there is a failure to allocate resources
     required by the OpenCL implementation on the host.
 
-Also see
---------
+## Also see
 
 [`clCreateProgramWithSource`](clCreateProgramWithSource.html),
 [`clCreateProgramWithBuiltInKernels`](clCreateProgramWithBuiltInKernels.html),
 [`clCreateProgramWithBinary`](clCreateProgramWithBinary.html)
 
-Specification
--------------
+## Specification
 
 [OpenCL 2.1 API Specification, page
 195](https://www.khronos.org/registry/cl/specs/opencl-2.1.pdf#page=195)
 
-Copyright
----------
+## Copyright
 
 [Copyright © 2007-2017 The Khronos Group Inc.](copyright.html)

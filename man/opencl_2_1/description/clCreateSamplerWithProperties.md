@@ -1,5 +1,5 @@
-Parameters
-----------
+
+## Parameters
 
 `context`  
 Must be a valid OpenCL context.
@@ -13,20 +13,22 @@ property and its value is not specified in `sampler_properties`, its
 default value will be used. `sampler_properties` can be NULL in which
 case the default values for supported sampler properties will be used.
 
-| cl\_sampler\_properti | Property Value        | Description           |
+| cl\                  | Property Value       | Description           |
 | --- | --- | --- |
-|  es                      enum                    `CL_SAMPLER_NORMALIZE   D_COORDS`             |  `cl_bool`             |  A boolean value that    specifies whether the   image coordinates       specified are           normalized or not.      The default value       (i.e. the value used    if this property is     not specified in      |
-|  `CL_SAMPLER_ADDRESSIN   G_MODE`               |  `cl_addressing_mode`  |  `sampler_properties`)   is `CL_TRUE`.           Specifies how           out-of-range image      coordinates are         handled when reading    from an image.          Valid values are:       -   `CL_ADDRESS_MIRRO   RED_REPEAT`             -   `CL_ADDRESS_REPEA   T`                      -   `CL_ADDRESS_CLAMP   _TO_EDGE`               -   `CL_ADDRESS_CLAMP   `                       -   `CL_ADDRESS_NONE` |
-|  `CL_SAMPLER_FILTER_MO   DE`                   |  `cl_filter_mode`      |  The default is          `CL_ADDRESS_CLAMP`.     Specifies the type of   filter that must be     applied when reading    an image. Valid         values are:             -   `CL_FILTER_NEARES   T`                      -   `CL_FILTER_LINEAR   `                     |
+|  _sampler\_properties   enum                   `CL_SAMPLE             R_NORMALIZED_COORDS` |  `cl_bool`            |  A boolean value that    specifies whether the   image coordinates       specified are           normalized or not.      The default value       (i.e. the value used    if this property is     not specified in      |
+|  `CL_SAMP               LER_ADDRESSING_MODE` |  `cl_addressing_mode` |  `sampler_properties`)   is `CL_TRUE`.           Specifies how           out-of-range image      coordinates are         handled when reading    from an image.          Valid values are:       -   `CL_ADD             RESS_MIRRORED_REPEAT`   -                         `CL_ADDRESS_REPEAT`   -   `CL_A               DDRESS_CLAMP_TO_EDGE`   -                          `CL_ADDRESS_CLAMP`   -   `CL_ADDRESS_NONE` |
+|  `CL_                   SAMPLER_FILTER_MODE` |  `cl_filter_mode`     |  The default is          `CL_ADDRESS_CLAMP`.     Specifies the type of   filter that must be     applied when reading    an image. Valid         values are:             -                         `CL_FILTER_NEAREST`   -                          `CL_FILTER_LINEAR` |
+
 If the [`cl_khr_mipmap_image`](cl_khr_mipmap_image.html) extension is
 supported, the following sampler properties can be specified when a
 sampler object is created using `clCreateSamplerWithProperties`:
 
-| cl\_sampler\_properti | Property Value        | Default Value         |
+| cl\                  | Property Value       | Default Value         |
 | --- | --- | --- |
-|  es                      enum                  |||
-|  `CL_SAMPLER_MIP_FILTE   R_MODE_KHR`           |  `cl_filter_mode`      |  `CL_FILTER_NEAREST_KH   R`                    |
-|  `CL_SAMPLER_LOD_MIN_K   HR`                   |  `float`               |  `0.0f`                |
+|  _sampler\_properties   enum                 |||
+|  `CL_SAMPLER_           MIP_FILTER_MODE_KHR` |  `cl_filter_mode`     |  `C                      L_FILTER_NEAREST_KHR` |
+|  `CL_                   SAMPLER_LOD_MIN_KHR` |  `float`              |  `0.0f`                |
+
 If the [`cl_khr_mipmap_image`](cl_khr_mipmap_image.html) extension is
 supported, The sampler properties `CL_SAMPLER_MIP_FILTER_MODE_KHR`,
 `CL_SAMPLER_LOD_MIN_KHR` and `CL_SAMPLER_LOD_MAX_KHR` cannot be
@@ -40,8 +42,7 @@ argument to a kernel.
 Returns an appropriate error code. If `errcode_ret` is NULL, no error
 code is returned.
 
-Notes
------
+## Notes
 
 A sampler object describes how to sample an image when the image is read
 in the kernel. The built-in functions to read from an image in a kernel
@@ -62,8 +63,7 @@ specific values for these properties, a sampler object must be created
 with `clCreateSamplerWithProperties` and passed as an argument to a
 kernel.
 
-Errors
-------
+## Errors
 
 Returns a valid non-zero sampler object and `errcode_ret` is set to
 `CL_SUCCESS` if the sampler object is created successfully. Otherwise,
@@ -88,8 +88,7 @@ in `errcode_ret`:
 -   `CL_OUT_OF_HOST_MEMORY` if there is a failure to allocate resources
     required by the OpenCL implementation on the host.
 
-Also see
---------
+## Also see
 
 [`clRetainSampler`](clRetainSampler.html),
 [`clReleaseSampler`](clReleaseSampler.html),
@@ -97,13 +96,11 @@ Also see
 [`sampler_t`](sampler_t.html),
 [`cl_khr_mipmap_image`](cl_khr_mipmap_image.html)
 
-Specification
--------------
+## Specification
 
 [OpenCL 2.1 API Specification, page
 190](https://www.khronos.org/registry/cl/specs/opencl-2.1.pdf#page=190)
 
-Copyright
----------
+## Copyright
 
 [Copyright © 2007-2017 The Khronos Group Inc.](copyright.html)

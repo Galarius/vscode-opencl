@@ -1,5 +1,5 @@
-Parameters
-----------
+
+## Parameters
 
 `command_queue`  
 Is a valid host command-queue in which the write command will be queued.
@@ -57,8 +57,7 @@ this command to complete. If the `event_wait_list` and the `event`
 arguments are not NULL, the `event` argument should not refer to an
 element of the `event_wait_list` array
 
-Notes
------
+## Notes
 
 Calling `clEnqueueWriteBuffer` to update the latest bits in a region of
 the buffer object with the `ptr` argument value set to `host_ptr` +
@@ -77,8 +76,7 @@ avoid undefined behavior:
     are not used by any command-queue until the read command has
     finished execution.
 
-Errors
-------
+## Errors
 
 `clEnqueueWriteBuffer` returns `CL_SUCCESS` if the function is executed
 successfully. Otherwise, it returns one of the following errors:
@@ -96,8 +94,8 @@ successfully. Otherwise, it returns one of the following errors:
     (`offset`, `size`) is out of bounds or if `ptr` is a NULL value.
 
 -   `CL_INVALID_EVENT_WAIT_LIST` if `event_wait_list` is NULL and
-    `num_events_in_wait_list` &gt; 0, or `event_wait_list` is not NULL
-    and `num_events_in_wait_list` is 0, or if event objects in
+    `num_events_in_wait_list` > 0, or `event_wait_list` is not NULL and
+    `num_events_in_wait_list` is 0, or if event objects in
     `event_wait_list` are not valid events.
 
 -   `CL_MISALIGNED_SUB_BUFFER_OFFSET` if `buffer` is a sub-buffer object
@@ -122,21 +120,18 @@ successfully. Otherwise, it returns one of the following errors:
 -   `CL_OUT_OF_HOST_MEMORY` if there is a failure to allocate resources
     required by the OpenCL implementation on the host.
 
-Also see
---------
+## Also see
 
 [`clEnqueueCopyBuffer`](clEnqueueCopyBuffer.html),
 [`clEnqueueReadBuffer`](clEnqueueReadBuffer.html),
 [`clEnqueueReadBufferRect`](clEnqueueReadBufferRect.html),
 [`clEnqueueWriteBufferRect`](clEnqueueWriteBufferRect.html)
 
-Specification
--------------
+## Specification
 
 [OpenCL 2.1 API Specification, page
 110](https://www.khronos.org/registry/cl/specs/opencl-2.1.pdf#page=110)
 
-Copyright
----------
+## Copyright
 
 [Copyright © 2007-2017 The Khronos Group Inc.](copyright.html)

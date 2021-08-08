@@ -1,5 +1,5 @@
-Parameters
-----------
+
+## Parameters
 
 `command_queue`  
 Must be a valid host command-queue.
@@ -37,8 +37,7 @@ be used instead. If the `event_wait_list` and the `event` arguments are
 not NULL, the `event` argument should not refer to an element of the
 `event_wait_list` array.
 
-Notes
------
+## Notes
 
 Reads or writes from the host using the pointer returned by
 [`clEnqueueMapBuffer`](clEnqueueMapBuffer.html) or
@@ -120,8 +119,7 @@ argument value to [`clEnqueueReadBuffer`](clEnqueueReadBuffer.html),
 [`clEnqueueWriteImage`](clEnqueueWriteImage.html), provided the rules
 described above are adhered to.
 
-Errors
-------
+## Errors
 
 `clEnqueueUnmapMemObject` returns `CL_SUCCESS` if the function is
 executed successfully. Otherwise, it returns one of the following
@@ -138,8 +136,8 @@ errors:.
     [`clEnqueueMapImage`](clEnqueueMapImage.html) for `memobj`.
 
 -   `CL_INVALID_EVENT_WAIT_LIST` if `event_wait_list` is NULL and
-    `num_events_in_wait_list` &gt; 0, or `event_wait_list` is not NULL
-    and `num_events_in_wait_list` is 0, or if event objects in
+    `num_events_in_wait_list` > 0, or `event_wait_list` is not NULL and
+    `num_events_in_wait_list` is 0, or if event objects in
     `event_wait_list` are not valid events.
 
 -   `CL_OUT_OF_RESOURCES` if there is a failure to allocate resources
@@ -152,19 +150,16 @@ errors:.
     and `memobj` are not the same or if the context associated with
     `command_queue` and events in `event_wait_list` are not the same.
 
-Also see
---------
+## Also see
 
 [`clEnqueueMapBuffer`](clEnqueueMapBuffer.html),
 [`clEnqueueMapImage`](clEnqueueMapImage.html)
 
-Specification
--------------
+## Specification
 
 [OpenCL 2.1 API Specification, page
 165](https://www.khronos.org/registry/cl/specs/opencl-2.1.pdf#page=165)
 
-Copyright
----------
+## Copyright
 
 [Copyright © 2007-2017 The Khronos Group Inc.](copyright.html)

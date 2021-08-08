@@ -1,5 +1,5 @@
-Parameters
-----------
+
+## Parameters
 
 `context`  
 A valid OpenCL context used to create the SVM buffer.
@@ -8,8 +8,7 @@ A valid OpenCL context used to create the SVM buffer.
 Must be the value returned by a call to [`clSVMAlloc`](clSVMAlloc.html).
 If a NULL pointer is passed in `svm_pointer`, no action occurs.
 
-Notes
------
+## Notes
 
 Note that `clSVMFree` does not wait for previously enqueued commands
 that may be using `svm_pointer` to finish before freeing `svm_pointer`.
@@ -31,19 +30,16 @@ The [`clEnqueueSVMFree`](clEnqueueSVMFree.html) API can also be used to
 enqueue a callback to free the shared virtual memory buffer allocated
 using [`clSVMAlloc`](clSVMAlloc.html) or a shared system memory pointer.
 
-Also see
---------
+## Also see
 
 [`clSVMAlloc`](clSVMAlloc.html), [Shared Virtual Memory
 Functions](sharedVirtualMemory.html)
 
-Specification
--------------
+## Specification
 
 [OpenCL 2.1 API Specification, page
 178](https://www.khronos.org/registry/cl/specs/opencl-2.1.pdf#page=178)
 
-Copyright
----------
+## Copyright
 
 [Copyright © 2007-2017 The Khronos Group Inc.](copyright.html)

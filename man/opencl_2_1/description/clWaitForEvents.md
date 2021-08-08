@@ -1,5 +1,5 @@
-Parameters
-----------
+
+## Parameters
 
 `event_list`  
 == Notes
@@ -33,8 +33,7 @@ queue is submitted to the device. Explicit synchronization is most
 useful when an EGL client API context bound to another thread is
 accessing the memory objects."
 
-Errors
-------
+## Errors
 
 Returns `CL_SUCCESS` if the execution status of all events in
 `event_list` is `CL_COMPLETE`. Otherwise, it returns one of the
@@ -58,8 +57,7 @@ following errors:
 -   `CL_OUT_OF_HOST_MEMORY` if there is a failure to allocate resources
     required by the OpenCL implementation on the host.
 
-Also see
---------
+## Also see
 
 [`clGetEventInfo`](clGetEventInfo.html),
 [`clReleaseEvent`](clReleaseEvent.html),
@@ -67,13 +65,11 @@ Also see
 [`cl_khr_gl_event`](cl_khr_gl_event.html),
 [`cl_khr_egl_event`](cl_khr_egl_event.html)
 
-Specification
--------------
+## Specification
 
 [OpenCL 2.1 API Specification, page
 251](https://www.khronos.org/registry/cl/specs/opencl-2.1.pdf#page=251)
 
-Copyright
----------
+## Copyright
 
 [Copyright © 2007-2017 The Khronos Group Inc.](copyright.html)

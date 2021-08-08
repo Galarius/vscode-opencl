@@ -1,5 +1,5 @@
-Parameters
-----------
+
+## Parameters
 
 `program`  
 The program object that is the compilation target.
@@ -58,8 +58,7 @@ the callback function is thread-safe.
 Passed as an argument when `pfn_notify` is called. `user_data` can be
 NULL.
 
-Notes
------
+## Notes
 
 Compiles a program’s source for all the devices or a specific device(s)
 in the OpenCL context associated with `program`. The pre-processor runs
@@ -93,7 +92,7 @@ Predefine `name` as a macro, with definition 1.
 
 -D name=definition  
 The contents of `definition` are tokenized and processed as if they
-appeared during translation phase three in a '\#define' directive. In
+appeared during translation phase three in a '#define' directive. In
 particular, the definition will be truncated by embedded newline
 characters.
 
@@ -358,8 +357,7 @@ OpenCL programs are compiled and linked to support the following:
     libraries into a program executable or to create a library of
     compiled binaries.
 
-Errors
-------
+## Errors
 
 `clCompileProgram` returns `CL_SUCCESS` if the function is executed
 successfully. Otherwise, it returns one of the following errors:
@@ -412,8 +410,7 @@ successfully. Otherwise, it returns one of the following errors:
 -   `CL_OUT_OF_HOST_MEMORY` if there is a failure to allocate resources
     required by the OpenCL implementation on the host.
 
-Example
--------
+## Example
 
 For example, consider the following program source:
 
@@ -451,8 +448,7 @@ objects:
                      input_header_names,
                      NULL, NULL); // pfn_notify & user_data
 
-Also see
---------
+## Also see
 
 [`clGetDeviceInfo`](clGetDeviceInfo.html),
 [`clLinkProgram`](clLinkProgram.html),
@@ -461,13 +457,11 @@ Also see
 [`clCreateProgramWithSource`](clCreateProgramWithSource.html),
 [`clCreateProgramWithIL`](clCreateProgramWithIL.html)
 
-Specification
--------------
+## Specification
 
 [OpenCL 2.1 API Specification, page
 202](https://www.khronos.org/registry/cl/specs/opencl-2.1.pdf#page=202)
 
-Copyright
----------
+## Copyright
 
 [Copyright © 2007-2017 The Khronos Group Inc.](copyright.html)

@@ -1,5 +1,5 @@
-Parameters
-----------
+
+## Parameters
 
 `context`  
 A valid OpenCL context on which the image object is to be created.
@@ -40,6 +40,7 @@ with `mem_object`.
 |  `CL_MEM_HOST_WRITE_ONLY`          |  This flag specifies that the host   will only write to the memory       object (using OpenCL APIs that      enqueue a write or a map for        write). This can be used to         optimize write access from the      host (e.g. enable write-combined    allocations for memory objects      for devices that communicate with   the host over a system bus such     as PCIe).                         |
 |  `CL_MEM_HOST_READ_ONLY`           |  This flag specifies that the host   will only read the memory object    (using OpenCL APIs that enqueue a   read or a map for read).            `CL_MEM_HOST_WRITE_ONLY` and        `CL_MEM_HOST_READ_ONLY` are         mutually exclusive.               |
 |  `CL_MEM_HOST_NO_ACCESS`           |  This flag specifies that the host   will not read or write the memory   object.                             `CL_MEM_HOST_WRITE_ONLY` or         `CL_MEM_HOST_READ_ONLY` and         `CL_MEM_HOST_NO_ACCESS` are         mutually exclusive.               |
+
 `image_format`  
 A pointer to a structure that describes format properties of the image
 to be allocated. See [`cl_image_format`](cl_image_format.html) for a
@@ -59,10 +60,11 @@ buffer that `host_ptr` points to must be.
 | --- | --- |
 ||  points to                         |
 |  `CL_MEM_OBJECT_IMAGE1D`           |  `≥ image_row_pitch`               |
-|  `CL_MEM_OBJECT_IMAGE1D_BUFFER`      `CL_MEM_OBJECT_IMAGE2D`           |  `≥ image_row_pitch`                 `≥ image_row_pitch * image_height |
-|  `CL_MEM_OBJECT_IMAGE3D`           |  `                                   `≥ image_slice_pitch * image_dept |
-|  `CL_MEM_OBJECT_IMAGE1D_ARRAY`     |  h`                                  `≥ image_slice_pitch * image_arra |
-|  `CL_MEM_OBJECT_IMAGE2D_ARRAY`     |  y_size`                             `≥ image_slice_pitch * image_arra |
+|  `CL_MEM_OBJECT_IMAGE1D_BUFFER`      `CL_MEM_OBJECT_IMAGE2D`           |  `≥ image_row_pitch`                 `                                 |
+|  `CL_MEM_OBJECT_IMAGE3D`           |  ≥ image_row_pitch * image_height`   `≥                                |
+|  `CL_MEM_OBJECT_IMAGE1D_ARRAY`     |   image_slice_pitch * image_depth`   `≥ imag                           |
+|  `CL_MEM_OBJECT_IMAGE2D_ARRAY`     |  e_slice_pitch * image_array_size`   `≥ imag                           |
+
 `clCreateImage` can be used to create a 2D image from a buffer object or
 a 2D image from another 2D image object.
 
@@ -82,17 +84,17 @@ to create a new image object that shares the image data store with
 `mem_object` but views the pixels in the image with a different channel
 order and channel type. The restrictions are:
 
-(1) all the values specified in `image_desc` except for `mem_object`
+\(1\) all the values specified in `image_desc` except for `mem_object`
 must match the image descriptor information associated with
 `mem_object`.
 
-(2) The `image_desc` used for creation of `mem_object` may not be
+\(2\) The `image_desc` used for creation of `mem_object` may not be
 equivalent to image descriptor information associated with `mem_object`.
 To ensure the values in `image_desc` will match one can query
 `mem_object` for associated information using `clGetImageInfo` function
 described in section 5.3.7.
 
-(3) the channel data type specified in `image_format` must match the
+\(3\) the channel data type specified in `image_format` must match the
 channel data type associated with `mem_object`. The channel order values
 supported are:
 
@@ -107,8 +109,9 @@ supported are:
 |  `CL_RGB`                          |  `CL_sRGB`                         |
 |  `CL_sRGBx`                        |  `CL_RGBx`                         |
 |  `CL_RGBx`                         |  `CL_sRGBx`                        |
-(4) The channel order specified must have the same number of channels as
-the channel order of `mem_object`.
+
+\(4\) The channel order specified must have the same number of channels
+as the channel order of `mem_object`.
 
 This allows developers to create a sRGB view of the image from a linear
 RGB view or vice-versa i.e. the pixels stored in the image can be
@@ -132,8 +135,7 @@ adjacent elements.
 Will return an appropriate error code. If `errcode_ret` is NULL, no
 error code is returned.
 
-Notes
------
+## Notes
 
 If the [`cl_khr_mipmap_image`](cl_khr_mipmap_image.html) extension is
 enabled, then a mip-mapped 1D image, 1D image array, 2D image, 2D image
@@ -158,8 +160,7 @@ The following restrictions apply when mip-mapped images are created with
     `CL_MEM_OBJECT_IMAGE1D_BUFFER` images, depth images or multi-sampled
     (i.e. msaa) images.
 
-Errors
-------
+## Errors
 
 `clCreateImage` returns a valid non-zero image object and `errcode_ret`
 is set to `CL_SUCCESS` if the image object is created successfully.
@@ -228,21 +229,18 @@ values returned in `errcode_ret`:
 -   `CL_OUT_OF_HOST_MEMORY` if there is a failure to allocate resources
     required by the OpenCL implementation on the host.
 
-Also see
---------
+## Also see
 
 [`cl_image_desc`](cl_image_desc.html),
 [`cl_image_format`](cl_image_format.html), [Cardinality
 Diagram](classDiagram.html),
 [`cl_khr_mipmap_image`](cl_khr_mipmap_image.html)
 
-Specification
--------------
+## Specification
 
 [OpenCL 2.1 API Specification, page
 128](https://www.khronos.org/registry/cl/specs/opencl-2.1.pdf#page=128)
 
-Copyright
----------
+## Copyright
 
 [Copyright © 2007-2017 The Khronos Group Inc.](copyright.html)

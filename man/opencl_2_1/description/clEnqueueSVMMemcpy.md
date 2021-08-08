@@ -1,5 +1,5 @@
-Parameters
-----------
+
+## Parameters
 
 `command_queue`  
 Refers to the host command-queue in which the read / write command will
@@ -57,8 +57,7 @@ this command to complete. If the `event_wait_list` and the `event`
 arguments are not NULL, the `event` argument should not refer to an
 element of the `event_wait_list` array.
 
-Errors
-------
+## Errors
 
 Returns `CL_SUCCESS` if the function is executed successfully.
 Otherwise, it returns one of the following errors:
@@ -70,8 +69,8 @@ Otherwise, it returns one of the following errors:
     and events in `event_wait_list` are not the same.
 
 -   `CL_INVALID_EVENT_WAIT_LIST` if `event_wait_list` is NULL and
-    `num_events_in_wait_list` &gt; 0, or `event_wait_list` is not NULL
-    and `num_events_in_wait_list` is 0, or if event objects in
+    `num_events_in_wait_list` > 0, or `event_wait_list` is not NULL and
+    `num_events_in_wait_list` is 0, or if event objects in
     `event_wait_list` are not valid events.
 
 -   `CL_EXEC_STATUS_ERROR_FOR_EVENTS_IN_WAIT_LIST` if the copy operation
@@ -89,18 +88,15 @@ Otherwise, it returns one of the following errors:
 -   `CL_OUT_OF_HOST_MEMORY` if there is a failure to allocate resources
     required by the OpenCL implementation on the host.
 
-Also see
---------
+## Also see
 
 [Shared Virtual Memory Functions](sharedVirtualMemory.html)
 
-Specification
--------------
+## Specification
 
 [OpenCL 2.1 API Specification, page
 180](https://www.khronos.org/registry/cl/specs/opencl-2.1.pdf#page=180)
 
-Copyright
----------
+## Copyright
 
 [Copyright © 2007-2017 The Khronos Group Inc.](copyright.html)

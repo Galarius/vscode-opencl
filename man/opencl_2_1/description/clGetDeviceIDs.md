@@ -1,5 +1,5 @@
-Parameters
-----------
+
+## Parameters
 
 `platform`  
 Refers to the platform ID returned by
@@ -20,6 +20,7 @@ following table.
 |  `CL_DEVICE_TYPE_CUSTOM`           |  Dedicated accelerators that do      not support programs written in     OpenCL C.                         |
 |  `CL_DEVICE_TYPE_DEFAULT`          |  The default OpenCL device in the    system. The default device cannot   be a `CL_DEVICE_TYPE_CUSTOM`        device.                           |
 |  `CL_DEVICE_TYPE_ALL`              |  All OpenCL devices available in     the system except                   `CL_DEVICE_TYPE_CUSTOM` devices.  |
+
 `num_entries`  
 The number of `cl_device_id` entries that can be added to `devices`. If
 `devices` is not NULL, the `num_entries` must be greater than zero.
@@ -35,14 +36,12 @@ number of OpenCL devices whose type matches `device_type`.
 The number of OpenCL devices available that match `device_type`. If
 `num_devices` is NULL, this argument is ignored.
 
-Notes
------
+## Notes
 
 `clGetDeviceIDs` may return all or a subset of the actual physical
 devices present in the platform and that match `device_type`.
 
-Errors
-------
+## Errors
 
 `clGetDeviceIDs` returns `CL_SUCCESS` if the function is executed
 successfully. Otherwise it returns one of the following errors:
@@ -63,21 +62,18 @@ successfully. Otherwise it returns one of the following errors:
 -   `CL_OUT_OF_HOST_MEMORY` if there is a failure to allocate resources
     required by the OpenCL implementation on the host.
 
-Also see
---------
+## Also see
 
 [`clGetDeviceInfo`](clGetDeviceInfo.html),
 [`clGetPlatformIDs`](clGetPlatformIDs.html),
 [`clCreateContext`](clCreateContext.html), [Cardinality
 Diagram](classDiagram.html)
 
-Specification
--------------
+## Specification
 
 [OpenCL 2.1 API Specification, page
 64](https://www.khronos.org/registry/cl/specs/opencl-2.1.pdf#page=64)
 
-Copyright
----------
+## Copyright
 
 [Copyright © 2007-2017 The Khronos Group Inc.](copyright.html)

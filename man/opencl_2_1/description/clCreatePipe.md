@@ -1,5 +1,5 @@
-Parameters
-----------
+
+## Parameters
 
 `context`  
 A valid OpenCL context used to create the pipe object.
@@ -24,6 +24,7 @@ is used which is `CL_MEM_READ_WRITE` | `CL_MEM_HOST_NO_ACCESS`.
 |  `CL_MEM_HOST_WRITE_ONLY`          |  This flag specifies that the host   will only write to the memory       object (using OpenCL APIs that      enqueue a write or a map for        write). This can be used to         optimize write access from the      host (e.g. enable write-combined    allocations for memory objects      for devices that communicate with   the host over a system bus such     as PCIe).                         |
 |  `CL_MEM_HOST_READ_ONLY`           |  This flag specifies that the host   will only read the memory object    (using OpenCL APIs that enqueue a   read or a map for read).            `CL_MEM_HOST_WRITE_ONLY` and        `CL_MEM_HOST_READ_ONLY` are         mutually exclusive.               |
 |  `CL_MEM_HOST_NO_ACCESS`           |  This flag specifies that the host   will not read or write the memory   object.                             `CL_MEM_HOST_WRITE_ONLY` or         `CL_MEM_HOST_READ_ONLY` and         `CL_MEM_HOST_NO_ACCESS` are         mutually exclusive.               |
+
 `pipe_packet_size`  
 Size in bytes of a pipe packet.
 
@@ -41,16 +42,14 @@ be NULL.
 Will return an appropriate error code. If `errcode_ret` is NULL, no
 error code is returned.
 
-Notes
------
+## Notes
 
 Pipes follow the same memory consistency model as defined for buffer and
 image objects. The pipe state i.e. contents of the pipe across kernel
 executions (on the same or different devices) is enforced at a
 synchronization point.
 
-Errors
-------
+## Errors
 
 `clCreatePipe` returns a valid non-zero pipe object and `errcode_ret` is
 set to `CL_SUCCESS` if the pipe object is created successfully.
@@ -79,19 +78,16 @@ values returned in `errcode_ret`:
 -   `CL_OUT_OF_HOST_MEMORY` if there is a failure to allocate resources
     required by the OpenCL implementation on the host.
 
-Also see
---------
+## Also see
 
 [`clCreateBuffer`](clCreateBuffer.html),
 [`clCreateImage`](clCreateImage.html)
 
-Specification
--------------
+## Specification
 
 [OpenCL 2.1 API Specification, page
 160](https://www.khronos.org/registry/cl/specs/opencl-2.1.pdf#page=160)
 
-Copyright
----------
+## Copyright
 
 [Copyright © 2007-2017 The Khronos Group Inc.](copyright.html)

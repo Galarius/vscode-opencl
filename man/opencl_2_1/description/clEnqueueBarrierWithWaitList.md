@@ -1,5 +1,5 @@
-Parameters
-----------
+
+## Parameters
 
 `command_queue`  
 A valid host command queue.
@@ -29,8 +29,7 @@ this command to complete. If the `event_wait_list` and the `event`
 arguments are not NULL, the `event` argument should not refer to an
 element of the `event_wait_list` array.
 
-Notes
------
+## Notes
 
 Enqueues a barrier command which waits for either a list of events to
 complete, or if the list is empty it waits for all commands previously
@@ -42,8 +41,7 @@ on to insure that all events either in the `event_wait_list` or all
 previously enqueued commands, queued before this command to
 `command_queue`, have completed.
 
-Errors
-------
+## Errors
 
 Returns `CL_SUCCESS` if the function was successfully executed.
 Otherwise, it returns one of the following errors:
@@ -55,8 +53,8 @@ Otherwise, it returns one of the following errors:
     events in `event_wait_list` are not the same.
 
 -   `CL_INVALID_EVENT_WAIT_LIST` if `event_wait_list` is NULL and
-    `num_events_in_wait_list` &gt; 0, or `event_wait_list` is not NULL
-    and `num_events_in_wait_list` is 0, or if event objects in
+    `num_events_in_wait_list` > 0, or `event_wait_list` is not NULL and
+    `num_events_in_wait_list` is 0, or if event objects in
     `event_wait_list` are not valid events.
 
 -   `CL_OUT_OF_RESOURCES` if there is a failure to allocate resources
@@ -65,8 +63,7 @@ Otherwise, it returns one of the following errors:
 -   `CL_OUT_OF_HOST_MEMORY` if there is a failure to allocate resources
     required by the OpenCL implementation on the host.
 
-Also see
---------
+## Also see
 
 [`clEnqueueFillBuffer`](clEnqueueFillBuffer.html),
 [`clEnqueueCopyBuffer`](clEnqueueCopyBuffer.html),
@@ -77,13 +74,11 @@ Also see
 [`clEnqueueCopyBufferToImage`](clEnqueueCopyBufferToImage.html),
 [`clEnqueueUnmapMemObject`](clEnqueueUnmapMemObject.html)
 
-Specification
--------------
+## Specification
 
 [OpenCL 2.1 API Specification, page
 260](https://www.khronos.org/registry/cl/specs/opencl-2.1.pdf#page=260)
 
-Copyright
----------
+## Copyright
 
 [Copyright © 2007-2017 The Khronos Group Inc.](copyright.html)

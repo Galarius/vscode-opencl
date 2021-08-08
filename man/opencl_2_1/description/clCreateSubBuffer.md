@@ -1,5 +1,5 @@
-Parameters
-----------
+
+## Parameters
 
 `buffer`  
 A valid buffer object and cannot be a sub-buffer object.
@@ -32,6 +32,7 @@ with `buffer`.
 |  `CL_MEM_HOST_WRITE_ONLY`          |  This flag specifies that the host   will only write to the memory       object (using OpenCL APIs that      enqueue a write or a map for        write). This can be used to         optimize write access from the      host (e.g. enable write-combined    allocations for memory objects      for devices that communicate with   the host over a system bus such     as PCIe).                         |
 |  `CL_MEM_HOST_READ_ONLY`           |  This flag specifies that the host   will only read the memory object    (using OpenCL APIs that enqueue a   read or a map for read).            `CL_MEM_HOST_WRITE_ONLY` and        `CL_MEM_HOST_READ_ONLY` are         mutually exclusive.               |
 |  `CL_MEM_HOST_NO_ACCESS`           |  This flag specifies that the host   will not read or write the memory   object.                             `CL_MEM_HOST_WRITE_ONLY` or         `CL_MEM_HOST_READ_ONLY` and         `CL_MEM_HOST_NO_ACCESS` are         mutually exclusive.               |
+
 `buffer_create_type` and `buffer_create_info`  
 Describes the type of buffer object to be created. The list of supported
 values for `buffer_create_type` and corresponding descriptor that
@@ -39,9 +40,9 @@ values for `buffer_create_type` and corresponding descriptor that
 
 | cl\_buffer\_create\_type          | Description                       |
 | --- | --- |
-|  `CL_BUFFER_CREATE_TYPE_REGION`    |  Create a buffer object that         represents a specific region in     `buffer`.                           `buffer_create_info` is a pointer   to the following structure:             typedef struct _cl_buffer_reg   ion {                                       size_t origin;                      size_t size;                    } cl_buffer_region;             (`origin, size`) defines the        offset and size in bytes in         `buffer`.                           If `buffer` is created with         `CL_MEM_USE_HOST_PTR`, the          `host_ptr` associated with the      buffer object returned is           `host_ptr` + `origin`.              The buffer object returned          references the data store           allocated for `buffer` and points   to a specific region given by       (`origin, size`) in this data       store.                              `CL_INVALID_VALUE` is returned in   `errcode_ret` if the region         specified by (`origin, size`) is    out of bounds in `buffer`.          `CL_INVALID_BUFFER_SIZE` if         `size` is 0.                        `CL_MISALIGNED_SUB_BUFFER_OFFSET`   is returned in `errcode_ret` if     there are no devices in context     associated with `buffer` for        which the `origin` value is         aligned to the                      `CL_DEVICE_MEM_BASE_ADDR_ALIGN`     value.                            |
-Notes
------
+|  `CL_BUFFER_CREATE_TYPE_REGION`    |  Create a buffer object that         represents a specific region in     `buffer`.                           `buffer_create_info` is a pointer   to the following structure:             t                               ypedef struct _cl_buffer_region {           size_t origin;                      size_t size;                    } cl_buffer_region;             (`origin, size`) defines the        offset and size in bytes in         `buffer`.                           If `buffer` is created with         `CL_MEM_USE_HOST_PTR`, the          `host_ptr` associated with the      buffer object returned is           `host_ptr` + `origin`.              The buffer object returned          references the data store           allocated for `buffer` and points   to a specific region given by       (`origin, size`) in this data       store.                              `CL_INVALID_VALUE` is returned in   `errcode_ret` if the region         specified by (`origin, size`) is    out of bounds in `buffer`.          `CL_INVALID_BUFFER_SIZE` if         `size` is 0.                        `CL_MISALIGNED_SUB_BUFFER_OFFSET`   is returned in `errcode_ret` if     there are no devices in context     associated with `buffer` for        which the `origin` value is         aligned to the                      `CL_DEVICE_MEM_BASE_ADDR_ALIGN`     value.                            |
+
+## Notes
 
 Concurrent reading from, writing to and copying between both a buffer
 object and its sub-buffer object(s) is undefined. Concurrent reading
@@ -50,8 +51,7 @@ created with the same buffer object is undefined. Only reading from both
 a buffer object and its sub-buffer objects or reading from multiple
 overlapping sub-buffer objects is defined.
 
-Errors
-------
+## Errors
 
 Returns `CL_SUCCESS` if the function is executed successfully.
 Otherwise, it returns one of the following errors in `errcode_ret`
@@ -92,21 +92,18 @@ Otherwise, it returns one of the following errors in `errcode_ret`
 -   `CL_OUT_OF_HOST_MEMORY` if there is a failure to allocate resources
     required by the OpenCL implementation on the host.
 
-Also see
---------
+## Also see
 
 [`clCreateBuffer`](clCreateBuffer.html),
 [`clEnqueueReadBuffer`](clEnqueueReadBuffer.html),
 [`clEnqueueWriteBuffer`](clEnqueueWriteBuffer.html),
 [`clEnqueueCopyBuffer`](clEnqueueCopyBuffer.html)
 
-Specification
--------------
+## Specification
 
 [OpenCL 2.1 API Specification, page
 107](https://www.khronos.org/registry/cl/specs/opencl-2.1.pdf#page=107)
 
-Copyright
----------
+## Copyright
 
 [Copyright © 2007-2017 The Khronos Group Inc.](copyright.html)

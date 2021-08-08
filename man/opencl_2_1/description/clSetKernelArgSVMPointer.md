@@ -1,5 +1,5 @@
-Parameters
-----------
+
+## Parameters
 
 `kernel`  
 A valid kernel object.
@@ -24,8 +24,7 @@ The SVM pointer value specified as the argument value can be the pointer
 returned by [`clSVMAlloc`](clSVMAlloc.html) or can be a pointer + offset
 into the SVM region.
 
-Notes
------
+## Notes
 
 Multiple Host Threads
 
@@ -70,8 +69,7 @@ kernel arguments to be enqueued. Rather than attempt to share
 strongly encouraged to make additional `cl_kernel` objects for kernel
 functions for each host thread.
 
-Errors
-------
+## Errors
 
 `clSetKernelArgSVMPointer` returns `CL_SUCCESS` if the function is
 executed successfully. Otherwise, it returns one of the following
@@ -90,8 +88,7 @@ errors:
 -   `CL_OUT_OF_HOST_MEMORY` if there is a failure to allocate resources
     required by the OpenCL implementation on the host.
 
-Also see
---------
+## Also see
 
 [`clSetKernelArg`](clSetKernelArg.html),
 [`clCreateKernel`](clCreateKernel.html),
@@ -101,13 +98,11 @@ Also see
 [`clGetKernelInfo`](clGetKernelInfo.html),
 [`clGetKernelWorkGroupInfo`](clGetKernelWorkGroupInfo.html)
 
-Specification
--------------
+## Specification
 
 [OpenCL 2.1 API Specification, page
 226](https://www.khronos.org/registry/cl/specs/opencl-2.1.pdf#page=226)
 
-Copyright
----------
+## Copyright
 
 [Copyright © 2007-2017 The Khronos Group Inc.](copyright.html)

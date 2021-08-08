@@ -1,5 +1,5 @@
-Parameters
-----------
+
+## Parameters
 
 `command_queue`  
 Must be a valid host command-queue.
@@ -26,6 +26,7 @@ A bit-bield with the following supported values.
 |  `CL_MAP_READ`                     |  This flag specifies that the        region being mapped in the memory   object is being mapped for          reading.                            The pointer returned by             `clEnqueueMap{Buffer  guaranteed to contain the latest    bits in the region being mapped     when the                            `clEnqueueMap{Buffer  command has completed.            |
 |  `CL_MAP_WRITE`                    |  This flag specifies that the        region being mapped in the memory   object is being mapped for          writing.                            The pointer returned by             `clEnqueueMap{Buffer  guaranteed to contain the latest    bits in the region being mapped     when the                            `clEnqueueMap{Buffer  command has completed.            |
 |  `CL_MAP_WRITE_INVALIDATE_REGION`  |  This flag specifies that the        region being mapped in the memory   object is being mapped for          writing.                            The contents of the region being    mapped are to be discarded. This    is typically the case when the      region being mapped is              overwritten by the host. This       flag allows the implementation to   no longer guarantee that the        pointer returned by                 `clEnqueueMap{Buffer  contains the latest bits in the     region being mapped which can be    a significant performance           enhancement.                        `CL_MAP_READ` or `CL_MAP_WRITE`     and                                 `CL_MAP_WRITE_INVALIDATE_REGION`    are mutually exclusive.           |
+
 `svm_ptr` and `size`  
 A pointer to a memory region and size in bytes that will be updated by
 the host. If `svm_ptr` is allocated using
@@ -56,8 +57,7 @@ be used instead. If the `event_wait_list` and the `event` arguments are
 not NULL, the `event` argument should not refer to an element of the
 `event_wait_list` array.
 
-Notes
------
+## Notes
 
 Note that since we are enqueuing a command with a SVM buffer, the region
 is already mapped in the host address space.
@@ -66,8 +66,7 @@ is already mapped in the host address space.
 [`clEnqueueSVMUnmap`](clEnqueueSVMUnmap.html) act as synchronization
 points for the region of the SVM buffer specified in these calls.
 
-Errors
-------
+## Errors
 
 `clEnqueueSVMMap` returns `CL_SUCCESS` if the function is executed
 successfully. Otherwise, it returns one of the following errors:
@@ -84,8 +83,8 @@ successfully. Otherwise, it returns one of the following errors:
     `map_flags` are not valid.
 
 -   `CL_INVALID_EVENT_WAIT_LIST` if `event_wait_list` is NULL and
-    `num_events_in_wait_list` &gt; 0, or `event_wait_list` is not NULL
-    and `num_events_in_wait_list` is 0, or if event objects in
+    `num_events_in_wait_list` > 0, or `event_wait_list` is not NULL and
+    `num_events_in_wait_list` is 0, or if event objects in
     `event_wait_list` are not valid events.
 
 -   `CL_EXEC_STATUS_ERROR_FOR_EVENTS_IN_WAIT_LIST` if the map operation
@@ -98,18 +97,15 @@ successfully. Otherwise, it returns one of the following errors:
 -   `CL_OUT_OF_HOST_MEMORY` if there is a failure to allocate resources
     required by the OpenCL implementation on the host.
 
-Also see
---------
+## Also see
 
 [Shared Virtual Memory Functions](sharedVirtualMemory.html)
 
-Specification
--------------
+## Specification
 
 [OpenCL 2.1 API Specification, page
 184](https://www.khronos.org/registry/cl/specs/opencl-2.1.pdf#page=184)
 
-Copyright
----------
+## Copyright
 
 [Copyright © 2007-2017 The Khronos Group Inc.](copyright.html)

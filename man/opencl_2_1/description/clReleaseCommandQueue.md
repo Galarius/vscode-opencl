@@ -1,11 +1,10 @@
-Parameters
-----------
+
+## Parameters
 
 `command_queue`  
 Specifies the command-queue to release.
 
-Notes
------
+## Notes
 
 After the `command_queue` reference count becomes zero and all commands
 queued to `command_queue` have finished (e.g., kernel executions, memory
@@ -17,8 +16,7 @@ function to release a reference that was not obtained by creating the
 object or by calling [`clRetainCommandQueue`](clRetainCommandQueue.html)
 causes undefined behavior.
 
-Errors
-------
+## Errors
 
 Returns `CL_SUCCESS` if the function is executed successfully.
 Otherwise, it returns one of the following:
@@ -32,20 +30,17 @@ Otherwise, it returns one of the following:
 -   `CL_OUT_OF_HOST_MEMORY` if there is a failure to allocate resources
     required by the OpenCL implementation on the host.
 
-Also see
---------
+## Also see
 
 [`clCreateCommandQueueWithProperties`](clCreateCommandQueueWithProperties.html),
 [`clGetCommandQueueInfo`](clGetCommandQueueInfo.html),
 [`clRetainCommandQueue`](clRetainCommandQueue.html)
 
-Specification
--------------
+## Specification
 
 [OpenCL 2.1 API Specification, page
 100](https://www.khronos.org/registry/cl/specs/opencl-2.1.pdf#page=100)
 
-Copyright
----------
+## Copyright
 
 [Copyright © 2007-2017 The Khronos Group Inc.](copyright.html)

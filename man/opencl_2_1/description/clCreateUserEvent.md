@@ -1,5 +1,5 @@
-Parameters
-----------
+
+## Parameters
 
 `context`  
 A valid OpenCL context.
@@ -8,8 +8,7 @@ A valid OpenCL context.
 Returns an appropriate error code. If `errcode_ret` is NULL, no error
 code is returned.
 
-Notes
------
+## Notes
 
 User events allow applications to enqueue commands that wait on a user
 event to finish before the command is executed by the device.
@@ -17,8 +16,7 @@ event to finish before the command is executed by the device.
 The execution status of the user event object created is set to
 `CL_SUBMITTED`.
 
-Errors
-------
+## Errors
 
 Returns a valid non-zero event object and `errcode_ret` is set to
 `CL_SUCCESS` if the user event object is created successfully.
@@ -33,18 +31,15 @@ values returned in `errcode_ret`:
 -   `CL_OUT_OF_HOST_MEMORY` if there is a failure to allocate resources
     required by the OpenCL implementation on the host.
 
-Also see
---------
+## Also see
 
 [Cardinality Diagram](classDiagram.html)
 
-Specification
--------------
+## Specification
 
 [OpenCL 2.1 API Specification, page
 250](https://www.khronos.org/registry/cl/specs/opencl-2.1.pdf#page=250)
 
-Copyright
----------
+## Copyright
 
 [Copyright © 2007-2017 The Khronos Group Inc.](copyright.html)

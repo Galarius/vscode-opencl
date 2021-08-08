@@ -1,5 +1,5 @@
-Parameters
-----------
+
+## Parameters
 
 `command_queue`  
 A valid host command-queue. The specified set of memory objects in
@@ -20,7 +20,8 @@ describes the possible values for flags.
 | cl\_mem\_migration flags          | Description                       |
 | --- | --- |
 |  `CL_MIGRATE_MEM_OBJECT_HOST`      |  This flag indicates that the        specified set of memory objects     are to be migrated to the host,     regardless of the target            command-queue.                    |
-|  `CL_MIGRATE_MEM_OBJECT_- CONTENT_   UNDEFINED`                        |  This flag indicates that the        contents of the set of memory       objects are undefined after         migration. The specified set of     memory objects are migrated to      the device associated with          `command_queue` without incurring   the overhead of migrating their     contents.                         |
+|  `CL_MIGRAT                          E_MEM_OBJECT_- CONTENT_UNDEFINED` |  This flag indicates that the        contents of the set of memory       objects are undefined after         migration. The specified set of     memory objects are migrated to      the device associated with          `command_queue` without incurring   the overhead of migrating their     contents.                         |
+
 `event_wait_list, num_events_in_wait_list`  
 Specify events that need to complete before this particular command can
 be executed. If `event_wait_list` is NULL, then this particular command
@@ -42,8 +43,7 @@ this command to complete. If the `event_wait_list` and the `event`
 arguments are not NULL, the `event` argument should not refer to an
 element of the `event_wait_list` array.
 
-Notes
------
+## Notes
 
 This section describes a mechanism for assigning which device an OpenCL
 memory object resides. A user may wish to have more explicit control
@@ -81,8 +81,7 @@ with this command, in order to avoid overlapping access to memory
 objects. Improperly specified event dependencies passed to
 `clEnqueueMigrateMemObjects` could result in undefined results.
 
-Errors
-------
+## Errors
 
 `clEnqueueMigrateMemObjects` returns `CL_SUCCESS` if the function is
 executed successfully. Otherwise, it returns one of the following
@@ -106,8 +105,8 @@ errors:
     described in the table above.
 
 -   `CL_INVALID_EVENT_WAIT_LIST` if `event_wait_list` is NULL and
-    `num_events_in_wait_list` &gt; 0, or `event_wait_list` is not NULL
-    and `num_events_in_wait_list` is 0, or if event objects in
+    `num_events_in_wait_list` > 0, or `event_wait_list` is not NULL and
+    `num_events_in_wait_list` is 0, or if event objects in
     `event_wait_list` are not valid events.
 
 -   `CL_MEM_OBJECT_ALLOCATION_FAILURE` if there is a failure to allocate
@@ -119,19 +118,16 @@ errors:
 -   `CL_OUT_OF_HOST_MEMORY` if there is a failure to allocate resources
     required by the OpenCL implementation on the host.
 
-Also see
---------
+## Also see
 
 [`clEnqueueMapBuffer`](clEnqueueMapBuffer.html),
 [`clEnqueueMapImage`](clEnqueueMapImage.html)
 
-Specification
--------------
+## Specification
 
 [OpenCL 2.1 API Specification, page
 168](https://www.khronos.org/registry/cl/specs/opencl-2.1.pdf#page=168)
 
-Copyright
----------
+## Copyright
 
 [Copyright © 2007-2017 The Khronos Group Inc.](copyright.html)

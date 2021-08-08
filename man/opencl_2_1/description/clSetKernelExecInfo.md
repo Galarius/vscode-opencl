@@ -1,5 +1,5 @@
-Parameters
-----------
+
+## Parameters
 
 `kernel`  
 Specifies the kernel object being queried.
@@ -19,12 +19,12 @@ A pointer to memory where the appropriate values determined by
 | cl\_kernel\_exec\_info            | Type and Description              |
 | --- | --- |
 |  `CL_KERNEL_EXEC_INFO_SVM_PTRS`    |  Type: void \*\[\]                   SVM pointers used by a kernel       which are not passed as arguments   to `kernel`. These addresses may    be defined in SVM buffer(s) that    are passed as arguments to          `kernel`.                           These non-argument SVM pointers     must be specified using             `clSetKernelExecInfo` for           coarse-grain and fine-grain         buffer SVM allocations but not      for fine-grain system SVM           allocations.                      |
-|  `CL_KERNEL_EXEC_INFO_SVM_- FINE_G   RAIN_SYSTEM`                      |  Type: cl\_bool                      This flag indicates whether the     kernel uses pointers that are       fine grain system SVM               allocations. These fine grain       system SVM pointers may be passed   as arguments or defined in SVM      buffers that are passed as          argumentsto `kernel`.             |
-Notes
------
+|  `CL_KERNEL_E                        XEC_INFO_SVM_- FINE_GRAIN_SYSTEM` |  Type: cl\_bool                      This flag indicates whether the     kernel uses pointers that are       fine grain system SVM               allocations. These fine grain       system SVM pointers may be passed   as arguments or defined in SVM      buffers that are passed as          argumentsto `kernel`.             |
 
-1. Coarse-grain or fine-grain buffer SVM pointers used by a kernel which
-are not passed as a kernel arguments must be specified using
+## Notes
+
+1\. Coarse-grain or fine-grain buffer SVM pointers used by a kernel
+which are not passed as a kernel arguments must be specified using
 `clSetKernelExecInfo` with `CL_KERNEL_EXEC_INFO_SVM_PTRS`. For example,
 if SVM buffer A contains a pointer to another SVM buffer B, and the
 kernel dereferences that pointer, then a pointer to B must either be
@@ -48,7 +48,7 @@ kernel, each of these pointers can be the SVM pointer returned by
 SVM region. It is sufficient to provide one pointer for each SVM buffer
 used.
 
-2. `CL_KERNEL_EXEC_INFO_SVM_FINE_GRAIN_SYSTEM` is used to indicate
+2\. `CL_KERNEL_EXEC_INFO_SVM_FINE_GRAIN_SYSTEM` is used to indicate
 whether SVM pointers used by a kernel will refer to system allocations
 or not.
 
@@ -74,7 +74,7 @@ device on which the kernel is enqueued supports fine-grain system SVM
 allocations. If so, the default value used is `CL_TRUE` (system pointers
 might be passed); otherwise, the default is `CL_FALSE`.
 
-3. A call to `clSetKernelExecInfo` for a given value of `param_name`
+3\. A call to `clSetKernelExecInfo` for a given value of `param_name`
 replaces any prior value passed for that value of `param_name`. Only one
 `param_value` will be stored for each value of `param_name`.
 
@@ -119,8 +119,7 @@ kernel arguments to be enqueued. Rather than attempt to share
 strongly encouraged to make additional `cl_kernel` objects for kernel
 functions for each host thread.
 
-Errors
-------
+## Errors
 
 Returns `CL_SUCCESS` if the function is executed successfully.
 Otherwise, it returns one of the following errors:
@@ -141,8 +140,7 @@ Otherwise, it returns one of the following errors:
 -   `CL_OUT_OF_HOST_MEMORY` if there is a failure to allocate resources
     required by the OpenCL implementation on the host.
 
-Also see
---------
+## Also see
 
 [`clCreateKernel`](clCreateKernel.html),
 [`clGetKernelInfo`](clGetKernelInfo.html),
@@ -152,13 +150,11 @@ Also see
 [`clGetKernelWorkGroupInfo`](clGetKernelWorkGroupInfo.html),
 [`clEnqueueNDRangeKernel`](clEnqueueNDRangeKernel.html)
 
-Specification
--------------
+## Specification
 
 [OpenCL 2.1 API Specification, page
 227](https://www.khronos.org/registry/cl/specs/opencl-2.1.pdf#page=227)
 
-Copyright
----------
+## Copyright
 
 [Copyright © 2007-2017 The Khronos Group Inc.](copyright.html)

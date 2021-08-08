@@ -1,5 +1,5 @@
-Parameters
-----------
+
+## Parameters
 
 `device`  
 A device returned by [`clGetDeviceIDs`](clGetDeviceIDs.html).
@@ -10,8 +10,7 @@ resolution of the timer may be queried via
 [`clGetPlatformInfo`](clGetPlatformInfo.html) and the flag
 `CL_PLATFORM_HOST_TIMER_RESOLUTION`.
 
-Notes
------
+## Notes
 
 Return the current value of the host clock as seen by `device`. This
 value is in the same timebase as the host\_timestamp returned from
@@ -27,8 +26,7 @@ timestamp returned from
 on a device and a device timestamp queried from the same device will
 always be in the same timebase.
 
-Errors
-------
+## Errors
 
 `clGetHostTimer` will return `CL_SUCCESS` with a time value in
 `host_timestamp` if provided. Otherwise, it returns one of the following
@@ -44,19 +42,16 @@ errors:
 -   `CL_OUT_OF_HOST_MEMORY` if there is a failure to allocate resources
     required by the OpenCL implementation on the host.
 
-Also see
---------
+## Also see
 
 [`clGetDeviceAndHostTimer`](clGetDeviceAndHostTimer.html),
 [`clGetPlatformInfo`](clGetPlatformInfo.html)
 
-Specification
--------------
+## Specification
 
 [OpenCL 2.1 API Specification, page
 83](https://www.khronos.org/registry/cl/specs/opencl-2.1.pdf#page=83)
 
-Copyright
----------
+## Copyright
 
 [Copyright © 2007-2017 The Khronos Group Inc.](copyright.html)

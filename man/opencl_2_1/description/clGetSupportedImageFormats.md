@@ -1,5 +1,5 @@
-Parameters
-----------
+
+## Parameters
 
 `context`  
 A valid OpenCL context on which the image object(s) will be created.
@@ -29,6 +29,7 @@ clarification.
 |  `CL_MEM_HOST_WRITE_ONLY`          |  This flag specifies that the host   will only write to the memory       object (using OpenCL APIs that      enqueue a write or a map for        write). This can be used to         optimize write access from the      host (e.g. enable write-combined    allocations for memory objects      for devices that communicate with   the host over a system bus such     as PCIe).                         |
 |  `CL_MEM_HOST_READ_ONLY`           |  This flag specifies that the host   will only read the memory object    (using OpenCL APIs that enqueue a   read or a map for read).            `CL_MEM_HOST_WRITE_ONLY` and        `CL_MEM_HOST_READ_ONLY` are         mutually exclusive.               |
 |  `CL_MEM_HOST_NO_ACCESS`           |  This flag specifies that the host   will not read or write the memory   object.                             `CL_MEM_HOST_WRITE_ONLY` or         `CL_MEM_HOST_READ_ONLY` and         `CL_MEM_HOST_NO_ACCESS` are         mutually exclusive.               |
+
 `image_type`  
 Describes the image type and must be either `CL_MEM_OBJECT_IMAGE1D`,
 `CL_MEM_OBJECT_IMAGE1D_BUFFER`, `CL_MEM_OBJECT_IMAGE2D`,
@@ -50,8 +51,7 @@ The actual number of supported image formats for a specific `context`
 and values specified by `flags`. If `num_image_formats` is NULL, it is
 ignored.
 
-Notes
------
+## Notes
 
 `clGetSupportedImageFormats` can be used to get the list of image
 formats supported by an OpenCL implementation when the following
@@ -87,24 +87,26 @@ kernel but not both) that support images is described in the table below
 
 | ----            | ----            | ----            | ---- read/write |
 | --- | --- | --- | --- |
-|  num\_channels     ----                  1           |  channel\_order    ----                  CL_R        |  channel\_data\_   type              ----                  CL_UNORM_IN   T8                    CL_UNORM_IN   T16                   CL_SNORM_IN   T8                    CL_SNORM_IN   T16                   CL_SIGNED_I   NT8                   CL_SIGNED_I   NT16                  CL_SIGNED_I   NT32                  CL_UNSIGNED   _INT8                 CL_UNSIGNED   _INT16                CL_UNSIGNED   _INT32          |  ----                  read+write  |
-|      1           |      CL_DEPTH    |      CL_HALF_FLO   AT                    CL_FLOAT          CL_UNORM_IN   T16                   CL_FLOAT    |      read+write    `CL_DEPTH`        channel order     is supported      only for 2D     |
-|      2           |      CL_RG       |      CL_UNORM_IN   T8                    CL_UNORM_IN   T16                   CL_SNORM_IN   T8                    CL_SNORM_IN   T16                   CL_SIGNED_I   NT8                   CL_SIGNED_I   NT16                  CL_SIGNED_I   NT32                  CL_UNSIGNED   _INT8                 CL_UNSIGNED   _INT16                CL_UNSIGNED   _INT32          |  image and 2D      image array       objects.              read+write  |
-|      4           |      CL_RGBA     |      CL_HALF_FLO   AT                    CL_FLOAT          CL_UNORM_IN   T8                    CL_UNORM_IN   T16                   CL_SNORM_IN   T8                    CL_SNORM_IN   T16                   CL_SIGNED_I   NT8                   CL_SIGNED_I   NT16                  CL_SIGNED_I   NT32                  CL_UNSIGNED   _INT8                 CL_UNSIGNED   _INT16                CL_UNSIGNED   _INT32          |      read+write  |
-|||      CL_HALF_FLO   AT              ||
-|      4                 4           |      CL_BGRA           CL_sRGBA    |      CL_FLOAT          CL_UNORM_IN   T8                    CL_UNORM_IN   T8              |      read+write    read+write if     the               [`cl_khr_srgb_i   mage_writes`](c   l_khr_srgb_imag   e_writes.html)    extension is      supported, else   read only. sRGB   channel order     support is not    required for 1D   image buffers.    Writes to         images with       sRGB channel      orders requires   device support    of the            [`cl_khr_srgb_i   mage_writes`](c |
-|      1           |      CL_DEPTH_ST   ENCIL           |      CL_UNORM_IN   T24                   CL_FLOAT    |  l_khr_srgb_imag   e_writes.html)    extension.            read only (   applies if the        cl_khr_gl_d |
+|  num\_channels     ----                  1           |  channel\_order    ----                  CL_R        |  chan              nel\_data\_type   ----                CL_UNORM_INT8    CL_UNORM_INT16     CL_SNORM_INT8    CL_SNORM_INT16    CL_SIGNED_INT8   CL_SIGNED_INT16   CL_SIGNED_INT32       C             L_UNSIGNED_INT8       CL            _UNSIGNED_INT16       CL            _UNSIGNED_INT32 |  ----                  read+write  |
+|      1           |      CL_DEPTH    |    CL_HALF_FLOAT       CL_FLOAT       CL_UNORM_INT16       CL_FLOAT    |      read+write    `CL_DEPTH`        channel order     is supported      only for 2D     |
+|      2           |      CL_RG       |    CL_UNORM_INT8    CL_UNORM_INT16     CL_SNORM_INT8    CL_SNORM_INT16    CL_SIGNED_INT8   CL_SIGNED_INT16   CL_SIGNED_INT32       C             L_UNSIGNED_INT8       CL            _UNSIGNED_INT16       CL            _UNSIGNED_INT32 |  image and 2D      image array       objects.              read+write  |
+|      4           |      CL_RGBA     |    CL_HALF_FLOAT       CL_FLOAT        CL_UNORM_INT8    CL_UNORM_INT16     CL_SNORM_INT8    CL_SNORM_INT16    CL_SIGNED_INT8   CL_SIGNED_INT16   CL_SIGNED_INT32       C             L_UNSIGNED_INT8       CL            _UNSIGNED_INT16       CL            _UNSIGNED_INT32 |      read+write  |
+|||    CL_HALF_FLOAT ||
+|      4                 4           |      CL_BGRA           CL_sRGBA    |      CL_FLOAT        CL_UNORM_INT8     CL_UNORM_INT8 |      read+write    read+write if     the               [`cl_khr_srgb_    image_writes`](   cl_khr_srgb_ima   ge_writes.html)   extension is      supported, else   read only. sRGB   channel order     support is not    required for 1D   image buffers.    Writes to         images with       sRGB channel      orders requires   device support    of the            [`cl_khr_srgb_    image_writes`]( |
+|      1           |      C             L_DEPTH_STENCIL |   CL_UNORM_INT24       CL_FLOAT    |  cl_khr_srgb_ima   ge_writes.html)   extension.            read only     (applies if the       cl_khr_     |
+
 For 1D, 1D image from buffer, 2D, 3D image objects, 1D and 2D image
 array objects, the mandated minimum list of image formats that must be
 supported by all devices (that can be read from and written to by a
 kernel) that support images is described in the table below (Table
 5.8b):
 
-| ---- num\_channels    | ---- channel\_order   | ----                  |
+| ---- num\_channels   | ---- channel\_order  | ----                  |
 | --- | --- | --- |
-|  ----                        1                 |  ----                        CL_R              |  channel\_data\_type     ----                        CL_UNORM_INT8           CL_SIGNED_INT8          CL_SIGNED_INT16         CL_SIGNED_INT32         CL_UNSIGNED_INT8        CL_UNSIGNED_INT16       CL_UNSIGNED_INT32 |
-|      4                 |      CL_RGBA           |      CL_HALF_FLOAT           CL_FLOAT                CL_UNORM_INT8           CL_UNORM_INT16          CL_SIGNED_INT8          CL_SIGNED_INT16         CL_SIGNED_INT32         CL_UNSIGNED_INT8        CL_UNSIGNED_INT16       CL_UNSIGNED_INT32 |
-|      1                 |      CL_DEPTH_STENCIL    (applies if the             cl_khr_gl_depth_i   mages                 |      CL_HALF_FLOAT           CL_FLOAT                CL_UNORM_INT24          CL_FLOAT          |
+|  ----                       1                |  ----                       CL_R             |  channel\_data\_type     ----                        CL_UNORM_INT8           CL_SIGNED_INT8          CL_SIGNED_INT16         CL_SIGNED_INT32         CL_UNSIGNED_INT8        CL_UNSIGNED_INT16       CL_UNSIGNED_INT32 |
+|      4                |      CL_RGBA          |      CL_HALF_FLOAT           CL_FLOAT                CL_UNORM_INT8           CL_UNORM_INT16          CL_SIGNED_INT8          CL_SIGNED_INT16         CL_SIGNED_INT32         CL_UNSIGNED_INT8        CL_UNSIGNED_INT16       CL_UNSIGNED_INT32 |
+|      1                |      CL_DEPTH_STE       NCIL (applies if the       cl                 _khr_gl_depth_images |      CL_HALF_FLOAT           CL_FLOAT                CL_UNORM_INT24          CL_FLOAT          |
+
 . Image format mapping to OpenCL C image access qualifiers
 
 Image arguments to kernels may have the `read_only`, `write_only` or
@@ -122,6 +124,7 @@ parameter.
 |  `read_only`                       |  `CL_MEM_READ_ONLY`,                 `CL_MEM_READ_WRITE`,                `CL_MEM_KERNEL_READ_AND_WRITE`    |
 |  `write_only`                      |  `CL_MEM_WRITE_ONLY`,                `CL_MEM_READ_WRITE`,                `CL_MEM_KERNEL_READ_AND_WRITE`    |
 |  `read_write`                      |  `CL_MEM_KERNEL_READ_AND_WRITE`    |
+
 Additional notes if the
 [`cl_khr_gl_depth_images`](cl_khr_gl_depth_images.html) extension is
 enabled:
@@ -149,8 +152,7 @@ cannot be used as arguments to
 [`clEnqueueFillImage`](clEnqueueFillImage.html) and will return a
 `CL_INVALID_OPERATION` error.
 
-Errors
-------
+## Errors
 
 Returns `CL_SUCCESS` if the function is executed successfully.
 Otherwise, it returns one of the following errors:
@@ -166,19 +168,16 @@ Otherwise, it returns one of the following errors:
 -   `CL_OUT_OF_HOST_MEMORY` if there is a failure to allocate resources
     required by the OpenCL implementation on the host.
 
-Also see
---------
+## Also see
 
 [`cl_image_format`](cl_image_format.html),
 [`clGetDeviceInfo`](clGetDeviceInfo.html)
 
-Specification
--------------
+## Specification
 
 [OpenCL 2.1 API Specification, page
 136](https://www.khronos.org/registry/cl/specs/opencl-2.1.pdf#page=136)
 
-Copyright
----------
+## Copyright
 
 [Copyright © 2007-2017 The Khronos Group Inc.](copyright.html)

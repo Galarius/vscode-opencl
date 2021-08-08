@@ -1,11 +1,10 @@
-Parameters
-----------
+
+## Parameters
 
 `context`  
 The context to retain.
 
-Notes
------
+## Notes
 
 [`clCreateContext`](clCreateContext.html) and
 [`clCreateContextFromType`](clCreateContextFromType.html) perform an
@@ -16,8 +15,7 @@ informing the library. Allowing functions to attach to (i.e. retain) and
 release a context solves the problem of a context being used by a
 library no longer being valid.
 
-Errors
-------
+## Errors
 
 Returns `CL_SUCCESS` if the function is executed successfully.
 Otherwise, it returns one of the following values:
@@ -30,8 +28,7 @@ Otherwise, it returns one of the following values:
 -   `CL_OUT_OF_HOST_MEMORY` if there is a failure to allocate resources
     required by the OpenCL implementation on the host.
 
-Also see
---------
+## Also see
 
 [`clCreateContext`](clCreateContext.html),
 [`clCreateContextFromType`](clCreateContextFromType.html),
@@ -39,13 +36,11 @@ Also see
 [`clReleaseContext`](clReleaseContext.html),
 [`clGetContextInfo`](clGetContextInfo.html)
 
-Specification
--------------
+## Specification
 
 [OpenCL 2.1 API Specification, page
 93](https://www.khronos.org/registry/cl/specs/opencl-2.1.pdf#page=93)
 
-Copyright
----------
+## Copyright
 
 [Copyright © 2007-2017 The Khronos Group Inc.](copyright.html)

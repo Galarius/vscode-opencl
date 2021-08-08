@@ -1,5 +1,5 @@
-Parameters
-----------
+
+## Parameters
 
 `command_queue`  
 Refers to the host command-queue in which the fill command will be
@@ -52,8 +52,7 @@ be used instead. If the `event_wait_list` and the `event` arguments are
 not NULL, the `event` argument should not refer to an element of the
 `event_wait_list` array.
 
-Notes
------
+## Notes
 
 Enqueues a command to fill a buffer object with a pattern of a given
 pattern size. The usage information which indicates whether the memory
@@ -61,8 +60,7 @@ object can be read or written by a kernel and/or the host and is given
 by the `cl_mem_flags` argument value specified when `buffer` is created
 is ignored by `clEnqueueFillBuffer`.
 
-Errors
-------
+## Errors
 
 `clEnqueueFillBuffer` returns `CL_SUCCESS` if the function is executed
 successfully. Otherwise, it returns one of the following errors.
@@ -86,8 +84,8 @@ successfully. Otherwise, it returns one of the following errors.
     `pattern_size`.
 
 -   `CL_INVALID_EVENT_WAIT_LIST` if `event_wait_list` is NULL and
-    `num_events_in_wait_list` &gt; 0, or `event_wait_list` is not NULL
-    and `num_events_in_wait_list` is 0, or if event objects in
+    `num_events_in_wait_list` > 0, or `event_wait_list` is not NULL and
+    `num_events_in_wait_list` is 0, or if event objects in
     `event_wait_list` are not valid events.
 
 -   `CL_MISALIGNED_SUB_BUFFER_OFFSET` if `buffer` is a sub-buffer object
@@ -104,18 +102,15 @@ successfully. Otherwise, it returns one of the following errors.
 -   `CL_OUT_OF_HOST_MEMORY` if there is a failure to allocate resources
     required by the OpenCL implementation on the host.
 
-Also see
---------
+## Also see
 
 [`clEnqueueBarrierWithWaitList`](clEnqueueBarrierWithWaitList.html)
 
-Specification
--------------
+## Specification
 
 [OpenCL 2.1 API Specification, page
 122](https://www.khronos.org/registry/cl/specs/opencl-2.1.pdf#page=122)
 
-Copyright
----------
+## Copyright
 
 [Copyright © 2007-2017 The Khronos Group Inc.](copyright.html)

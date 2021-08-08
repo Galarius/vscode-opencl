@@ -1,5 +1,5 @@
-Parameters
-----------
+
+## Parameters
 
 `context`  
 A valid OpenCL context used to create the buffer object.
@@ -22,6 +22,7 @@ default is used which is `CL_MEM_READ_WRITE`.
 |  `CL_MEM_HOST_WRITE_ONLY`          |  This flag specifies that the host   will only write to the memory       object (using OpenCL APIs that      enqueue a write or a map for        write). This can be used to         optimize write access from the      host (e.g. enable write-combined    allocations for memory objects      for devices that communicate with   the host over a system bus such     as PCIe).                         |
 |  `CL_MEM_HOST_READ_ONLY`           |  This flag specifies that the host   will only read the memory object    (using OpenCL APIs that enqueue a   read or a map for read).            `CL_MEM_HOST_WRITE_ONLY` and        `CL_MEM_HOST_READ_ONLY` are         mutually exclusive.               |
 |  `CL_MEM_HOST_NO_ACCESS`           |  This flag specifies that the host   will not read or write the memory   object.                             `CL_MEM_HOST_WRITE_ONLY` or         `CL_MEM_HOST_READ_ONLY` and         `CL_MEM_HOST_NO_ACCESS` are         mutually exclusive.               |
+
 `size`  
 The size in bytes of the buffer memory object to be allocated.
 
@@ -34,8 +35,7 @@ application. The size of the buffer that `host_ptr` points to must be ≥
 Returns an appropriate error code. If `errcode_ret` is NULL, no error
 code is returned.
 
-Notes
------
+## Notes
 
 The user is responsible for ensuring that data passed into and out of
 OpenCL images are natively aligned relative to the start of the buffer
@@ -54,8 +54,7 @@ underlying storage. Locations in the buffer’s underlying shared memory
 can be operated on using atomic operations to the device’s level of
 support as defined in the memory model.
 
-Errors
-------
+## Errors
 
 Returns a valid non-zero buffer object and `errcode_ret` is set to
 `CL_SUCCESS` if the buffer object is created successfully. Otherwise, it
@@ -89,8 +88,7 @@ returns a NULL value with one of the following error values returned in
 -   `CL_OUT_OF_HOST_MEMORY` if there is a failure to allocate resources
     required by the OpenCL implementation on the host.
 
-Also see
---------
+## Also see
 
 [`clEnqueueReadBuffer`](clEnqueueReadBuffer.html),
 [`clEnqueueWriteBuffer`](clEnqueueWriteBuffer.html),
@@ -98,13 +96,11 @@ Also see
 [`clCreateSubBuffer`](clCreateSubBuffer.html), [Cardinality
 Diagram](classDiagram.html)
 
-Specification
--------------
+## Specification
 
 [OpenCL 2.1 API Specification, page
 104](https://www.khronos.org/registry/cl/specs/opencl-2.1.pdf#page=104)
 
-Copyright
----------
+## Copyright
 
 [Copyright © 2007-2017 The Khronos Group Inc.](copyright.html)

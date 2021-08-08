@@ -1,13 +1,12 @@
-Description
------------
+
+## Description
 
 An OpenCL context is created with one or more devices. Contexts are used
 by the OpenCL runtime for managing objects such as command-queues,
 memory, program and kernel objects and for executing kernels on one or
 more devices specified in the context.
 
-Parameters
-----------
+## Parameters
 
 properties  
 Specifies a list of context property names and their corresponding
@@ -46,30 +45,31 @@ on their default value.
 
 If the extension [`cl_khr_gl_sharing`](cl_khr_gl_sharing.html) is
 enabled, then `properties` points to an attribute list, which is a array
-of ordered &lt;attribute name, value&gt; pairs terminated with zero. If
-an attribute is not specified in `properties`, then its default value is
+of ordered &lt;attribute name, value> pairs terminated with zero. If an
+attribute is not specified in `properties`, then its default value is
 used (it is said to be specified implicitly). If `properties` is NULL or
 empty (points to a list whose first value is zero), all attributes take
 on their default values.
 
 List of supported `properties` (Table 4.5)
 
-| cl\_context\_properti | Property value        | Description           |
+| cl\                  | Property value       | Description           |
 | --- | --- | --- |
-|  es                      enum                  |||
-|  `CL_CONTEXT_PLATFORM`   `CL_CONTEXT_INTEROP_U   SER_SYNC`             |  cl\_platform\_id        cl\_bool              |  Specifies the           platform to use.        Specifies whether the   user is responsible     for synchronization     between OpenCL and      other APIs. Please      refer to the specific   sections in the         OpenCL 2.0 extension    specification that      describe sharing with   other APIs for          restrictions on using   this flag. If           `CL_CONTEXT_INTEROP_U   SER_SYNC`               is not specified, a     default of `CL_FALSE`   is assumed. OpenCL /    OpenGL sharing does     not support the         `CL_CONTEXT_INTEROP_U   SER_SYNC`               property defined in     table 4.5. Specifying   this property when      creating a context      with OpenCL / OpenGL  |
-|  `CL_CONTEXT_D3D10_DEV   ICE_KHR`              |  `ID3D10Device` \*     |  sharing will return     an appropriate error.   Specifies the           `ID3D10Device` \* to    use for Direct3D 10     interoperability. The   default value is NULL   (applies if the         extension               [`cl_khr_d3d10_sharin   g`](cl_khr_d3d10_shar |
-|  `CL_CONTEXT_ADAPTER_D   3D9_KHR`              |  `IDirect3DDevice9` \* |  ing.html)               is supported)           Specifies an            `IDirect3DDevice9` to   use for D3D9 interop    (applies if the         [`cl_khr_dx9_media_sh   aring`](cl_khr_dx9_me   dia_sharing.html)     |
-|  `CL_CONTEXT_ADAPTER_D   3D9EX_KHR`            |  `IDirect3DDeviceEx` \   *                     |  extension is            supported)              Specifies an            `IDirect3DDevice9Ex`    to use for D3D9         interop (applies if     the                     [`cl_khr_dx9_media_sh   aring`](cl_khr_dx9_me   dia_sharing.html)     |
-|  `CL_CONTEXT_ADAPTER_D   XVA_KHR`              |  `IDXVAHD_Device` \*   |  extension is            supported)              Specifies an            `IDXVAHD_Device` to     use for DXVA interop    (applies if the         [`cl_khr_dx9_media_sh   aring`](cl_khr_dx9_me   dia_sharing.html)     |
-|  `CL_GL_CONTEXT_KHR`   |  0, OpenGL context       handle                |  extension is            supported)              OpenGL context to       associated the OpenCL   context with            (available if the       [`cl_khr_gl_sharing`]   (cl_khr_gl_sharing.ht |
-|  `CL_CGL_SHAREGROUP_KH   R`                    |  0, CGL share group      handle                |  ml)                     extension is enabled)   CGL share group to      associate the OpenCL    context with            (available if the       [`cl_khr_gl_sharing`]   (cl_khr_gl_sharing.ht |
-|  `CL_EGL_DISPLAY_KHR`  |  `EGL_NO_DISPLAY`,       `EGLDisplay` handle   |  ml)                     extension is enabled)   EGLDisplay an OpenGL    context was created     with respect to         (available if the       [`cl_khr_gl_sharing`]   (cl_khr_gl_sharing.ht |
-|  `CL_GLX_DISPLAY_KHR`  |  None, X handle        |  ml)                     extension is enabled)   X Display an OpenGL     context was created     with respect to         (available if the       [`cl_khr_gl_sharing`]   (cl_khr_gl_sharing.ht |
-|  `CL_WGL_HDC_KHR`      |  0, HDC handle         |  ml)                     extension is enabled)   HDC an OpenGL context   was created with        respect to (available   if the                  [`cl_khr_gl_sharing`]   (cl_khr_gl_sharing.ht |
-|  `CL_CONTEXT_D3D11_DEV   ICE_KHR`              |  `ID3D11Device` \*     |  ml)                     extension is enabled)   Specifies the           `ID3D11Device` \* to    use for Direct3D 11     interoperability. The   default value is        NULL. (Applies if the   [`cl_khr_d3d11_sharin   g`](cl_khr_d3d11_shar   ing.html)             |
-|  `CL_CONTEXT_MEMORY_IN   ITIALIZE_KHR`         |  `cl_context_memory- _   initialize_khr`       |  extension is            supported.)             Describes which         memory types for the    context must be         initialized. This is    a bit-field, where      the following values    are currently           supported:              `CL_CONTEXT_MEMORY_IN   ITIALIZE_LOCAL_KHR` -   Initialize local        memory to zeros.        `CL_CONTEXT_MEMORY_IN   ITIALIZE_PRIVATE_KHR`    -                      Initialize private      memory to zeros.        (applies if the         [`cl_khr_initialize_m   emory`](cl_khr_initia   lize_memory.html)     |
-|  `CL_CONTEXT_TERMINATE   _KHR`                 |  `cl_bool`             |  extension is            supported)              Specifies whether the   context can be          terminated. The         default value is        `CL_FALSE`. (applies    if the                  [`cl_khr_terminate_co   ntext`](cl_khr_termin   ate_context.html)     |
+|  _context\_properties   enum                 |||
+|  `                      CL_CONTEXT_PLATFORM`   `CL_CONTEX             T_INTEROP_USER_SYNC` |  cl\_platform\_id       cl\_bool             |  Specifies the           platform to use.        Specifies whether the   user is responsible     for synchronization     between OpenCL and      other APIs. Please      refer to the specific   sections in the         OpenCL 2.0 extension    specification that      describe sharing with   other APIs for          restrictions on using   this flag. If           `CL_CONTE               XT_INTEROP_USER_SYNC`   is not specified, a     default of `CL_FALSE`   is assumed. OpenCL /    OpenGL sharing does     not support the         `CL_CONTE               XT_INTEROP_USER_SYNC`   property defined in     table 4.5. Specifying   this property when      creating a context      with OpenCL / OpenGL  |
+|  `CL_CONTE              XT_D3D10_DEVICE_KHR` |  `ID3D10Device` \*    |  sharing will return     an appropriate error.   Specifies the           `ID3D10Device` \* to    use for Direct3D 10     interoperability. The   default value is NULL   (applies if the         extension               [`cl_khr_               d3d10_sharing`](cl_kh |
+|  `CL_CONTE              XT_ADAPTER_D3D9_KHR` |  `                      IDirect3DDevice9` \* |  r_d3d10_sharing.html)   is supported)           Specifies an            `IDirect3DDevice9` to   use for D3D9 interop    (applies if the         [`cl_khr_dx9_medi       a_sharing`](cl_khr_dx   9_media_sharing.html) |
+|  `CL_CONTEXT            _ADAPTER_D3D9EX_KHR` |  `I                     Direct3DDeviceEx` \* |  extension is            supported)              Specifies an            `IDirect3DDevice9Ex`    to use for D3D9         interop (applies if     the                     [`cl_khr_dx9_medi       a_sharing`](cl_khr_dx   9_media_sharing.html) |
+|  `CL_CONTE              XT_ADAPTER_DXVA_KHR` |  `IDXVAHD_Device` \*  |  extension is            supported)              Specifies an            `IDXVAHD_Device` to     use for DXVA interop    (applies if the         [`cl_khr_dx9_medi       a_sharing`](cl_khr_dx   9_media_sharing.html) |
+|  `CL_GL_CONTEXT_KHR`  |  0, OpenGL context      handle               |  extension is            supported)              OpenGL context to       associated the OpenCL   context with            (available if the       [`c                     l_khr_gl_sharing`](cl |
+|  `CL                    _CGL_SHAREGROUP_KHR` |  0, CGL share group     handle               |  _khr_gl_sharing.html)   extension is enabled)   CGL share group to      associate the OpenCL    context with            (available if the       [`c                     l_khr_gl_sharing`](cl |
+|  `CL_EGL_DISPLAY_KHR` |  `EGL_NO_DISPLAY`,      `EGLDisplay` handle  |  _khr_gl_sharing.html)   extension is enabled)   EGLDisplay an OpenGL    context was created     with respect to         (available if the       [`c                     l_khr_gl_sharing`](cl |
+|  `CL_GLX_DISPLAY_KHR` |  None, X handle       |  _khr_gl_sharing.html)   extension is enabled)   X Display an OpenGL     context was created     with respect to         (available if the       [`c                     l_khr_gl_sharing`](cl |
+|  `CL_WGL_HDC_KHR`     |  0, HDC handle        |  _khr_gl_sharing.html)   extension is enabled)   HDC an OpenGL context   was created with        respect to (available   if the                  [`c                     l_khr_gl_sharing`](cl |
+|  `CL_CONTE              XT_D3D11_DEVICE_KHR` |  `ID3D11Device` \*    |  _khr_gl_sharing.html)   extension is enabled)   Specifies the           `ID3D11Device` \* to    use for Direct3D 11     interoperability. The   default value is        NULL. (Applies if the   [`cl_khr_               d3d11_sharing`](cl_kh   r_d3d11_sharing.html) |
+|  `CL_CONTEXT_ME         MORY_INITIALIZE_KHR` |  `cl_context_memo       ry- _initialize_khr` |  extension is            supported.)             Describes which         memory types for the    context must be         initialized. This is    a bit-field, where      the following values    are currently           supported:              `CL_CONTEXT_MEMORY_IN   ITIALIZE_LOCAL_KHR` -   Initialize local        memory to zeros.        `C                      L_CONTEXT_MEMORY_INIT   IALIZE_PRIVATE_KHR` -   Initialize private      memory to zeros.        (applies if the         [`cl_khr_initiali       ze_memory`](cl_khr_in   itialize_memory.html) |
+|  `CL_CO                 NTEXT_TERMINATE_KHR` |  `cl_bool`            |  extension is            supported)              Specifies whether the   context can be          terminated. The         default value is        `CL_FALSE`. (applies    if the                  [`cl_khr_terminat       e_context`](cl_khr_te   rminate_context.html) |
+
 `num_devices`  
 The number of devices specified in the `devices` argument.
 
@@ -100,6 +100,7 @@ information helpful in debugging the error.
 |   |   |
 ---|---|
 |  Note                              |  There are a number of cases where   error notifications need to be      delivered due to an error that      occurs outside a context. Such      notifications may not be            delivered through the               `pfn_notify` callback. Where        these notifications go is           implementation-defined.           |
+
 `user_data`  
 Passed as the `user_data` argument when `pfn_notify` is called.
 `user_data` can be NULL.
@@ -108,8 +109,7 @@ Passed as the `user_data` argument when `pfn_notify` is called.
 Returns an appropriate error code. If `errcode_ret` is NULL, no error
 code is returned.
 
-Notes
------
+## Notes
 
 `clCreateContext` and
 [`clCreateContextFromType`](clCreateContextFromType.html) perform an
@@ -168,8 +168,7 @@ attribute list, then memory objects may not be shared, and calling any
 of the commands in section 9.7 will result in a
 `CL_INVALID_GL_SHAREGROUP_REFERENCE_KHR` error.
 
-Errors
-------
+## Errors
 
 `clCreateContext` returns a valid non-zero context and `errcode_ret` is
 set to `CL_SUCCESS` if the context is created successfully. Otherwise,
@@ -338,8 +337,7 @@ it returns a NULL value with the following error values returned in
     [`cl_khr_d3d11_sharing`](cl_khr_d3d11_sharing.html) extension is
     supported).
 
-Also see
---------
+## Also see
 
 [`clGetDeviceIDs`](clGetDeviceIDs.html),
 [`clCreateContextFromType`](clCreateContextFromType.html),
@@ -347,13 +345,11 @@ Also see
 [`clReleaseContext`](clReleaseContext.html),
 [`clGetContextInfo`](clGetContextInfo.html)
 
-Specification
--------------
+## Specification
 
 [OpenCL 2.1 API Specification, page
 90](https://www.khronos.org/registry/cl/specs/opencl-2.1.pdf#page=90)
 
-Copyright
----------
+## Copyright
 
 [Copyright © 2007-2017 The Khronos Group Inc.](copyright.html)

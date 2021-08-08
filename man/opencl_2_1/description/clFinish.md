@@ -1,5 +1,5 @@
-Notes
------
+
+## Notes
 
 Blocks until all previously queued OpenCL commands in `command_queue`
 are issued to the associated device and have completed.
@@ -8,8 +8,7 @@ are issued to the associated device and have completed.
 `command_queue` have been processed and completed. `clFinish` is also a
 synchronization point.
 
-Errors
-------
+## Errors
 
 Returns `CL_SUCCESS` if the function call was executed successfully.
 Otherwise, it returns one of the following errors:
@@ -23,18 +22,15 @@ Otherwise, it returns one of the following errors:
 -   `CL_OUT_OF_HOST_MEMORY` if there is a failure to allocate resources
     required by the OpenCL implementation on the host.
 
-Also see
---------
+## Also see
 
 [`clFlush`](clFlush.html)
 
-Specification
--------------
+## Specification
 
 [OpenCL 2.1 API Specification, page
 266](https://www.khronos.org/registry/cl/specs/opencl-2.1.pdf#page=266)
 
-Copyright
----------
+## Copyright
 
 [Copyright © 2007-2017 The Khronos Group Inc.](copyright.html)

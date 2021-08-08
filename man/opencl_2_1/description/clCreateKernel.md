@@ -1,5 +1,5 @@
-Parameters
-----------
+
+## Parameters
 
 `program`  
 A program object with a successfully built executable.
@@ -12,8 +12,7 @@ A function name in the program declared with the
 Returns an appropriate error code. If `errcode_ret` is NULL, no error
 code is returned.
 
-Notes
------
+## Notes
 
 A kernel is a function declared in a program. A kernel is identified by
 the [`kernel`](functionQualifiers.html) qualifier applied to any
@@ -21,8 +20,7 @@ function in a program. A kernel object encapsulates the specific
 `kernel` function declared in a program and the argument values to be
 used when executing this `__kernel` function.
 
-Errors
-------
+## Errors
 
 `clCreateKernel` returns a valid non-zero kernel object and
 `errcode_ret` is set to `CL_SUCCESS` if the kernel object is created
@@ -49,8 +47,7 @@ following error values returned in `errcode_ret`:
 -   `CL_OUT_OF_HOST_MEMORY` if there is a failure to allocate resources
     required by the OpenCL implementation on the host.
 
-Also see
---------
+## Also see
 
 [`clCreateKernelsInProgram`](clCreateKernelsInProgram.html),
 [`clRetainKernel`](clRetainKernel.html),
@@ -59,13 +56,11 @@ Also see
 [`clGetKernelInfo`](clGetKernelInfo.html),
 [`clGetKernelWorkGroupInfo`](clGetKernelWorkGroupInfo.html)
 
-Specification
--------------
+## Specification
 
 [OpenCL 2.1 API Specification, page
 221](https://www.khronos.org/registry/cl/specs/opencl-2.1.pdf#page=221)
 
-Copyright
----------
+## Copyright
 
 [Copyright © 2007-2017 The Khronos Group Inc.](copyright.html)

@@ -1,5 +1,5 @@
-Members
--------
+
+## Members
 
 image\_type  
 Describes the image type and must be either `CL_MEM_OBJECT_IMAGE1D`,
@@ -9,7 +9,7 @@ Describes the image type and must be either `CL_MEM_OBJECT_IMAGE1D`,
 
 image\_width  
 The width of the image in pixels. For a 2D image and image array, the
-image width must be a value &gt;= 1 and ≤ `CL_DEVICE_IMAGE2D_MAX_WIDTH`.
+image width must be a value >= 1 and ≤ `CL_DEVICE_IMAGE2D_MAX_WIDTH`.
 For a 3D image, the image width must be a value ≥ 1 and ≤
 `CL_DEVICE_IMAGE3D_MAX_WIDTH`. For a 1D image buffer, the image width
 must be a value ≥ 1 and ≤ `CL_DEVICE_IMAGE_MAX_BUFFER_SIZE`. For a 1D
@@ -81,8 +81,7 @@ store. For an image object created from another image object, the values
 specified in the image descriptor except for `mem_object` must match the
 image descriptor information associated with `mem_object`.
 
-Note
-----
+## Note
 
 Concurrent reading from, writing to and copying between both a buffer
 object and 1D image buffer or 2D image object associated with the buffer
@@ -96,18 +95,15 @@ Similarly, writing to the buffer and reading from the image created from
 this buffer with appropriate synchronization between the writes and
 reads is undefined.
 
-Also see
---------
+## Also see
 
 [`cl_image_format`](cl_image_format.html)
 
-Specification
--------------
+## Specification
 
 [OpenCL 2.1 API Specification, page
 134](https://www.khronos.org/registry/cl/specs/opencl-2.1.pdf#page=134)
 
-Copyright
----------
+## Copyright
 
 [Copyright © 2007-2017 The Khronos Group Inc.](copyright.html)

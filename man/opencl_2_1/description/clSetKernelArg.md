@@ -1,5 +1,5 @@
-Parameters
-----------
+
+## Parameters
 
 `kernel`  
 A valid kernel object.
@@ -90,8 +90,7 @@ argument is of type `queue_t`, the `arg_size` value must be equal to
 `sizeof(cl_command_queue)`. For all other arguments, the size will be
 the size of argument type.
 
-Notes
------
+## Notes
 
 A kernel object does not update the reference count for objects such as
 memory, sampler objects specified as argument values by
@@ -149,8 +148,7 @@ kernel arguments to be enqueued. Rather than attempt to share
 strongly encouraged to make additional `cl_kernel` objects for kernel
 functions for each host thread.
 
-Errors
-------
+## Errors
 
 `clSetKernelArg` returns `CL_SUCCESS` if the function is executed
 successfully. Otherwise, it returns one of the following errors:
@@ -201,8 +199,7 @@ successfully. Otherwise, it returns one of the following errors:
 -   `CL_OUT_OF_HOST_MEMORY` if there is a failure to allocate resources
     required by the OpenCL implementation on the host.
 
-Example
--------
+## Example
 
     kernel void
     image_filter (int n, int m,
@@ -216,8 +213,7 @@ Example
 Argument index values for `image_filter` will be 0 for `n`, 1 for `m`, 2
 for `filter_weights`, 3 for `src_image` and 4 for `dst_image`.
 
-Also see
---------
+## Also see
 
 [`clEnqueueNDRangeKernel`](clEnqueueNDRangeKernel.html),
 [`clCreateKernel`](clCreateKernel.html),
@@ -228,13 +224,11 @@ Also see
 [`clGetKernelWorkGroupInfo`](clGetKernelWorkGroupInfo.html),
 [`clSetKernelArgSVMPointer`](clSetKernelArgSVMPointer.html)
 
-Specification
--------------
+## Specification
 
 [OpenCL 2.1 API Specification, page
 224](https://www.khronos.org/registry/cl/specs/opencl-2.1.pdf#page=224)
 
-Copyright
----------
+## Copyright
 
 [Copyright © 2007-2017 The Khronos Group Inc.](copyright.html)

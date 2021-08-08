@@ -1,5 +1,5 @@
-Parameters
-----------
+
+## Parameters
 
 `command_queue`  
 Refers to the host command-queue in which the copy command will be
@@ -71,8 +71,7 @@ be used instead. If the `event_wait_list` and the `event` arguments are
 not NULL, the `event` argument should not refer to an element of the
 `event_wait_list` array.
 
-Notes
------
+## Notes
 
 It is currently a requirement that the `src_image` and `dst_image` image
 memory objects for `clEnqueueCopyImage` must have the exact same image
@@ -101,8 +100,7 @@ the mip-level to use.
 If the mip level specified is not a valid value, these functions return
 the error `CL_INVALID_MIP_LEVEL`.
 
-Errors
-------
+## Errors
 
 `clEnqueueCopyImage` returns `CL_SUCCESS` if the function is executed
 successfully. Otherwise, it returns one of the following errors:
@@ -132,8 +130,8 @@ successfully. Otherwise, it returns one of the following errors:
     for `src_origin`, `dst_origin` and `region`.
 
 -   `CL_INVALID_EVENT_WAIT_LIST` if `event_wait_list` is NULL and
-    `num_events_in_wait_list` &gt; 0, or `event_wait_list` is not NULL
-    and `num_events_in_wait_list` is 0, or if event objects in
+    `num_events_in_wait_list` > 0, or `event_wait_list` is not NULL and
+    `num_events_in_wait_list` is 0, or if event objects in
     `event_wait_list` are not valid events.
 
 -   `CL_INVALID_IMAGE_SIZE` if image dimensions (image width, height,
@@ -161,20 +159,17 @@ successfully. Otherwise, it returns one of the following errors:
 -   `CL_MEM_COPY_OVERLAP` if `src_image` and `dst_image` are the same
     image object and the source and destination regions overlap.
 
-Also see
---------
+## Also see
 
 [`clEnqueueReadImage`](clEnqueueReadImage.html),
 [`clEnqueueWriteImage`](clEnqueueWriteImage.html),
 [`cl_khr_mipmap_image`](cl_khr_mipmap_image.html)
 
-Specification
--------------
+## Specification
 
 [OpenCL 2.1 API Specification, page
 144](https://www.khronos.org/registry/cl/specs/opencl-2.1.pdf#page=144)
 
-Copyright
----------
+## Copyright
 
 [Copyright © 2007-2017 The Khronos Group Inc.](copyright.html)

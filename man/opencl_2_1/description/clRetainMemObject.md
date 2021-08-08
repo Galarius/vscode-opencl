@@ -1,19 +1,17 @@
-Parameters
-----------
+
+## Parameters
 
 `memobj`  
 A valid memory object.
 
-Notes
------
+## Notes
 
 [`clCreateBuffer`](clCreateBuffer.html),
 [`clCreateSubBuffer`](clCreateSubBuffer.html),
 [`clCreateImage`](clCreateImage.html), and
 [`clCreatePipe`](clCreatePipe.html) perform an implicit retain.
 
-Errors
-------
+## Errors
 
 Returns `CL_SUCCESS` if the function is executed successfully.
 Otherwise, it returns one of the following errors:
@@ -27,8 +25,7 @@ Otherwise, it returns one of the following errors:
 -   `CL_OUT_OF_HOST_MEMORY` if there is a failure to allocate resources
     required by the OpenCL implementation on the host.
 
-Also see
---------
+## Also see
 
 [`clCreateBuffer`](clCreateBuffer.html),
 [`clEnqueueCopyBuffer`](clEnqueueCopyBuffer.html),
@@ -36,13 +33,11 @@ Also see
 [`clEnqueueWriteBuffer`](clEnqueueWriteBuffer.html),
 [`clReleaseMemObject`](clReleaseMemObject.html)
 
-Specification
--------------
+## Specification
 
 [OpenCL 2.1 API Specification, page
 163](https://www.khronos.org/registry/cl/specs/opencl-2.1.pdf#page=163)
 
-Copyright
----------
+## Copyright
 
 [Copyright © 2007-2017 The Khronos Group Inc.](copyright.html)

@@ -1,5 +1,5 @@
-Parameters
-----------
+
+## Parameters
 
 `source_kernel`  
 A valid `cl_kernel` object that will be copied. `source_kernel` will not
@@ -9,8 +9,7 @@ be modified in any way by this function.
 Assigned an appropriate error code. If `errcode_ret` is `NULL`, no error
 code is returned.
 
-Description
------------
+## Description
 
 Makes a shallow copy of the kernel object, its arguments and any
 information passed to the kernel object using
@@ -18,8 +17,7 @@ information passed to the kernel object using
 was ready to be enqueued before copying it, the clone of the kernel
 object is ready to enqueue.
 
-Notes
------
+## Notes
 
 The returned kernel object is an exact copy of `source_kernel`, with one
 caveat: the reference count on the returned kernel object is set as if
@@ -47,8 +45,7 @@ referenced by the kernel’s arguments are not copied. For example, if a
 buffer or pointer argument is set on a kernel object, the pointer is
 copied but the underlying memory allocation is not.
 
-Errors
-------
+## Errors
 
 Returns a valid non-zero kernel object and `errcode_ret` is set to
 `CL_SUCCESS` if the kernel is successfully copied. Otherwise it returns
@@ -63,18 +60,15 @@ a NULL value with one of the following error values returned in
 -   `CL_OUT_OF_HOST_MEMORY` if there is a failure to allocate resources
     required by the OpenCL implementation on the host
 
-Also see
---------
+## Also see
 
 [`clSetKernelExecInfo`](clSetKernelExecInfo.html)
 
-Specification
--------------
+## Specification
 
 [OpenCL 2.1 API Specification, page
 230](https://www.khronos.org/registry/cl/specs/opencl-2.1.pdf#page=230)
 
-Copyright
----------
+## Copyright
 
 [Copyright © 2007-2017 The Khronos Group Inc.](copyright.html)

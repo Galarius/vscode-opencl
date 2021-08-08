@@ -1,5 +1,5 @@
-Parameters
-----------
+
+## Parameters
 
 `event`  
 A valid event object.
@@ -46,8 +46,7 @@ function are:
 Will be passed as the `user_data` argument when `pfn_notify` is called.
 `user_data` can be NULL.
 
-Notes
------
+## Notes
 
 The registered callback function will be called when the execution
 status of command associated with `event` changes to an execution status
@@ -98,8 +97,7 @@ a command queue should either call [`clFlush`](clFlush.html) on the
 queue before returning or arrange for [`clFlush`](clFlush.html) to be
 called later on another thread.
 
-Errors
-------
+## Errors
 
 Returns `CL_SUCCESS` if the function is executed successfully.
 Otherwise, it returns one of the following errors:
@@ -116,13 +114,11 @@ Otherwise, it returns one of the following errors:
 -   `CL_OUT_OF_HOST_MEMORY` if there is a failure to allocate resources
     required by the OpenCL implementation on the host.
 
-Specification
--------------
+## Specification
 
 [OpenCL 2.1 API Specification, page
 255](https://www.khronos.org/registry/cl/specs/opencl-2.1.pdf#page=255)
 
-Copyright
----------
+## Copyright
 
 [Copyright © 2007-2017 The Khronos Group Inc.](copyright.html)

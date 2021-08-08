@@ -1,5 +1,5 @@
-Parameters
-----------
+
+## Parameters
 
 `command_queue`  
 Is is a valid host command-queue in which the write command will be
@@ -90,8 +90,7 @@ this command to complete. If the `event_wait_list` and the `event`
 arguments are not NULL, the `event` argument should not refer to an
 element of the `event_wait_list` array.
 
-Notes
------
+## Notes
 
 Calling `clEnqueueWriteBufferRect` to update the latest bits in a region
 of the buffer object with the `ptr` argument value set to `host_ptr` and
@@ -110,8 +109,7 @@ requirements in order to avoid undefined behavior:
     are not used by any command-queue until the write command has
     finished execution.
 
-Errors
-------
+## Errors
 
 `clEnqueueWriteBufferRect` returns `CL_SUCCESS` if the function is
 executed successfully. Otherwise, it returns one of the following
@@ -149,8 +147,8 @@ errors:
     `host_row_pitch`.
 
 -   `CL_INVALID_EVENT_WAIT_LIST` if `event_wait_list` is NULL and
-    `num_events_in_wait_list` &gt; 0, or `event_wait_list` is not NULL
-    and `num_events_in_wait_list` is 0, or if event objects in
+    `num_events_in_wait_list` > 0, or `event_wait_list` is not NULL and
+    `num_events_in_wait_list` is 0, or if event objects in
     `event_wait_list` are not valid events.
 
 -   `CL_MISALIGNED_SUB_BUFFER_OFFSET` if `buffer` is a sub-buffer object
@@ -175,8 +173,7 @@ errors:
 -   `CL_OUT_OF_HOST_MEMORY` if there is a failure to allocate resources
     required by the OpenCL implementation on the host.
 
-Also see
---------
+## Also see
 
 [`clEnqueueCopyBuffer`](clEnqueueCopyBuffer.html),
 [`clEnqueueCopyBufferRect`](clEnqueueCopyBufferRect.html),
@@ -184,13 +181,11 @@ Also see
 [`clEnqueueReadBufferRect`](clEnqueueReadBufferRect.html),
 [`clEnqueueReadBuffer`](clEnqueueReadBuffer.html)
 
-Specification
--------------
+## Specification
 
 [OpenCL 2.1 API Specification, page
 113](https://www.khronos.org/registry/cl/specs/opencl-2.1.pdf#page=113)
 
-Copyright
----------
+## Copyright
 
 [Copyright © 2007-2017 The Khronos Group Inc.](copyright.html)

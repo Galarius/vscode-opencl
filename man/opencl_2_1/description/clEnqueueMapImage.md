@@ -1,5 +1,5 @@
-Parameters
-----------
+
+## Parameters
 
 `command_queue`  
 Must be a valid host command-queue.
@@ -32,6 +32,7 @@ A bit-bield with the following supported values.
 |  `CL_MAP_READ`                     |  This flag specifies that the        region being mapped in the memory   object is being mapped for          reading.                            The pointer returned by             `clEnqueueMap{Buffer  guaranteed to contain the latest    bits in the region being mapped     when the                            `clEnqueueMap{Buffer  command has completed.            |
 |  `CL_MAP_WRITE`                    |  This flag specifies that the        region being mapped in the memory   object is being mapped for          writing.                            The pointer returned by             `clEnqueueMap{Buffer  guaranteed to contain the latest    bits in the region being mapped     when the                            `clEnqueueMap{Buffer  command has completed.            |
 |  `CL_MAP_WRITE_INVALIDATE_REGION`  |  This flag specifies that the        region being mapped in the memory   object is being mapped for          writing.                            The contents of the region being    mapped are to be discarded. This    is typically the case when the      region being mapped is              overwritten by the host. This       flag allows the implementation to   no longer guarantee that the        pointer returned by                 `clEnqueueMap{Buffer  contains the latest bits in the     region being mapped which can be    a significant performance           enhancement.                        `CL_MAP_READ` or `CL_MAP_WRITE`     and                                 `CL_MAP_WRITE_INVALIDATE_REGION`    are mutually exclusive.           |
+
 `origin`  
 Defines the (`x, y, z`) offset in pixels in the 1D, 2D or 3D image, the
 (`x, y`) offset and the image index in the 2D image array or the (`x`)
@@ -89,8 +90,7 @@ element of the `event_wait_list` array.
 Returns an appropriate error code. If `errcode_ret` is NULL, no error
 code is returned.
 
-Notes
------
+## Notes
 
 The pointer returned maps a 1D, 2D or 3D region starting at `origin` and
 is at least `region`\[0\] pixels in size for a 1D image, 1D image buffer
@@ -197,8 +197,7 @@ The mapped pointer returned by
 [`clEnqueueWriteImage`](clEnqueueWriteImage.html), provided the rules
 described above are adhered to.
 
-Errors
-------
+## Errors
 
 `clEnqueueMapImage` will return a pointer to the mapped region. The
 `errcode_ret` is set to `CL_SUCCESS`.
@@ -229,8 +228,8 @@ values returned in `errcode_ret`:
     object and `image_slice_pitch` is NULL.
 
 -   `CL_INVALID_EVENT_WAIT_LIST` if `event_wait_list` is NULL and
-    `num_events_in_wait_list` &gt; 0, or `event_wait_list` is not NULL
-    and `num_events_in_wait_list` is 0, or if event objects in
+    `num_events_in_wait_list` > 0, or `event_wait_list` is not NULL and
+    `num_events_in_wait_list` is 0, or if event objects in
     `event_wait_list` are not valid events.
 
 -   `CL_INVALID_IMAGE_SIZE` if image dimensions (image width, height,
@@ -274,21 +273,18 @@ values returned in `errcode_ret`:
 -   `CL_INVALID_OPERATION` if mapping would lead to overlapping regions
     being mapped for writing.
 
-Also see
---------
+## Also see
 
 [`clEnqueueMapBuffer`](clEnqueueMapBuffer.html),
 [`clEnqueueUnmapMemObject`](clEnqueueUnmapMemObject.html),
 [`clEnqueueSVMMap`](clEnqueueSVMMap.html),
 [`cl_khr_mipmap_image`](cl_khr_mipmap_image.html)
 
-Specification
--------------
+## Specification
 
 [OpenCL 2.1 API Specification, page
 154](https://www.khronos.org/registry/cl/specs/opencl-2.1.pdf#page=154)
 
-Copyright
----------
+## Copyright
 
 [Copyright © 2007-2017 The Khronos Group Inc.](copyright.html)

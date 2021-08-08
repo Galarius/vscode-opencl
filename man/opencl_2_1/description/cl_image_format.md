@@ -1,5 +1,5 @@
-Members
--------
+
+## Members
 
 image\_channel\_order  
 Specifies the number of channels and the channel layout i.e. the memory
@@ -17,7 +17,8 @@ described in the table (Table 5.6) below.
 |  `CL_RGBA`                         ||
 |  `CL_sRGB`, `CL_sRGBx`,              `CL_sRGBA`, `CL_sBGRA`            |  These formats can only be used if   channel data type =                 `CL_UNORM_INT8`.                  |
 |  `CL_ARGB`, `CL_BGRA`, `CL_ABGR`   |  These formats can only be used if   channel data type =                 `CL_UNORM_INT8`, `CL_SNORM_INT8`,   `CL_SIGNED_INT8` or                 `CL_UNSIGNED_INT8`.               |
-|  `CL_DEPTH_STENCIL`                |  This format can only be used if     channel data type =                 `CL_UNORM_INT24` or `CL_FLOAT`      (applies if the                     [`cl_khr_gl_depth_images`](cl_khr   _gl_depth_images.html)              extension is enabled).            |
+|  `CL_DEPTH_STENCIL`                |  This format can only be used if     channel data type =                 `CL_UNORM_INT24` or `CL_FLOAT`      (applies if the                     [`cl_khr_gl_depth_imag              es`](cl_khr_gl_depth_images.html)   extension is enabled).            |
+
 image\_channel\_data\_type  
 Describes the size of the channel data type. The number of bits per
 element determined by the `image_channel_data_type` and
@@ -41,10 +42,10 @@ values is described in the table (Table 5.7) below.
 |  `CL_UNSIGNED_INT32`               |  Each channel component is an        unnormalized unsigned 32-bit        integer value.                    |
 |  `CL_HALF_FLOAT`                   |  Each channel component is a         16-bit half-float value.          |
 |  `CL_FLOAT`                        |  Each channel component is a         single precision floating-point     value.                            |
-|  `CL_FLOAT`                        |  Each channel component is a         single precision floating point     value (applies if the               [`cl_khr_gl_depth_images`](cl_khr   _gl_depth_images.html)              extension is enabled).            |
-|  `CL_UNORM_INT24`                  |  Each channel component is a         normalized unsigned 24-bit          integer value (applies if the       [`cl_khr_gl_depth_images`](cl_khr   _gl_depth_images.html)              extension is enabled).            |
-Description
------------
+|  `CL_FLOAT`                        |  Each channel component is a         single precision floating point     value (applies if the               [`cl_khr_gl_depth_imag              es`](cl_khr_gl_depth_images.html)   extension is enabled).            |
+|  `CL_UNORM_INT24`                  |  Each channel component is a         normalized unsigned 24-bit          integer value (applies if the       [`cl_khr_gl_depth_imag              es`](cl_khr_gl_depth_images.html)   extension is enabled).            |
+
+## Description
 
 For example, to specify a normalized unsigned 8-bit / channel RGBA
 image:
@@ -72,21 +73,18 @@ specified by `image_channel_order`, and `image_channel_data_type` cannot
 be supported by the OpenCL implementation, then the call to
 [`clCreateImage`](clCreateImage.html) will return a NULL memory object.
 
-Also see
---------
+## Also see
 
 [cl\_image\_desc Image Descriptor](cl_image_desc.html),
 [EXTENSION](EXTENSION.html),
 [`clGetSupportedImageFormats`](clGetSupportedImageFormats.html),
 [`clCreateImage`](clCreateImage.html)
 
-Specification
--------------
+## Specification
 
 [OpenCL 2.1 API Specification, page
 131](https://www.khronos.org/registry/cl/specs/opencl-2.1.pdf#page=131)
 
-Copyright
----------
+## Copyright
 
 [Copyright © 2007-2017 The Khronos Group Inc.](copyright.html)

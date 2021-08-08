@@ -1,5 +1,5 @@
-Parameters
-----------
+
+## Parameters
 
 `program`  
 The program object.
@@ -40,8 +40,7 @@ ensure that the callback function is thread-safe.
 Passed as an argument when `pfn_notify` is called. `user_data` can be
 NULL.
 
-Notes
------
+## Notes
 
 Builds (compiles & links) a program executable from the program source
 or binary for all the devices or a specific device(s) in the OpenCL
@@ -90,7 +89,7 @@ Predefine `name` as a macro, with definition 1.
 
 -D name=definition  
 The contents of `definition` are tokenized and processed as if they
-appeared during translation phase three in a '\#define' directive. In
+appeared during translation phase three in a '#define' directive. In
 particular, the definition will be truncated by embedded newline
 characters.
 
@@ -355,8 +354,7 @@ OpenCL programs are compiled and linked to support the following:
     libraries into a program executable or to create a library of
     compiled binaries.
 
-Errors
-------
+## Errors
 
 `clBuildProgram` returns `CL_SUCCESS` if the function is executed
 successfully. Otherwise, it returns one of the following errors:
@@ -414,8 +412,7 @@ successfully. Otherwise, it returns one of the following errors:
 -   `CL_OUT_OF_HOST_MEMORY` if there is a failure to allocate resources
     required by the OpenCL implementation on the host.
 
-Also see
---------
+## Also see
 
 [`clGetDeviceInfo`](clGetDeviceInfo.html),
 [`clCreateProgramWithBinary`](clCreateProgramWithBinary.html),
@@ -424,13 +421,11 @@ Also see
 [`clCompileProgram`](clCompileProgram.html),
 [`clLinkProgram`](clLinkProgram.html)
 
-Specification
--------------
+## Specification
 
 [OpenCL 2.1 API Specification, page
 200](https://www.khronos.org/registry/cl/specs/opencl-2.1.pdf#page=200)
 
-Copyright
----------
+## Copyright
 
 [Copyright © 2007-2017 The Khronos Group Inc.](copyright.html)

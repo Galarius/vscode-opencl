@@ -1,5 +1,5 @@
-Parameters
-----------
+
+## Parameters
 
 `memobj`  
 A valid memory object.
@@ -21,8 +21,7 @@ function are:
 Will be passed as the `user_data` argument when `pfn_notify` is called.
 `user_data` can be NULL.
 
-Notes
------
+## Notes
 
 Each call to `clSetMemObjectDestructorCallback` registers the specified
 user callback function on a callback stack associated with `memobj`. The
@@ -79,8 +78,7 @@ The user callback function may not call OpenCL APIs with the memory
 object for which the callback function is invoked and for such cases the
 behavior of OpenCL APIs is considered to be undefined.
 
-Errors
-------
+## Errors
 
 Returns `CL_SUCCESS` if the function is executed successfully.
 Otherwise, it returns one of the following errors:
@@ -95,21 +93,18 @@ Otherwise, it returns one of the following errors:
 -   `CL_OUT_OF_HOST_MEMORY` if there is a failure to allocate resources
     required by the OpenCL implementation on the host.
 
-Also see
---------
+## Also see
 
 [`clCreateCommandQueueWithProperties`](clCreateCommandQueueWithProperties.html),
 [`clGetCommandQueueInfo`](clGetCommandQueueInfo.html),
 [`clReleaseCommandQueue`](clReleaseCommandQueue.html),
 [`clRetainCommandQueue`](clRetainCommandQueue.html)
 
-Specification
--------------
+## Specification
 
 [OpenCL 2.1 API Specification, page
 164](https://www.khronos.org/registry/cl/specs/opencl-2.1.pdf#page=164)
 
-Copyright
----------
+## Copyright
 
 [Copyright © 2007-2017 The Khronos Group Inc.](copyright.html)

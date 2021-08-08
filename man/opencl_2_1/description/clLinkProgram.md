@@ -1,5 +1,5 @@
-Parameters
-----------
+
+## Parameters
 
 `context`  
 Must be a valid OpenCL context.
@@ -62,8 +62,7 @@ linker has completed.
 Will be passed as an argument when `pfn_notify` is called. `user_data`
 can be NULL.
 
-Notes
------
+## Notes
 
 `clLinkProgram` creates a new program object which contains the library
 or executable. [`clLinkProgram`](#) creates a new program object which
@@ -83,8 +82,7 @@ and device resources needed to perform the link are available. If the
 linking operation can begin, `clLinkProgram` returns a valid non-zero
 program object.
 
-Errors
-------
+## Errors
 
 If `pfn_notify` is NULL, the `errcode_ret` will be set to `CL_SUCCESS`
 if the link operation was successful and `CL_LINK_FAILURE` if there is a
@@ -154,18 +152,15 @@ or not. The list of errors that can be returned are:
 -   `CL_OUT_OF_HOST_MEMORY` if there is a failure to allocate resources
     required by the OpenCL implementation on the host.
 
-Also see
---------
+## Also see
 
 [`clGetDeviceInfo`](clGetDeviceInfo.html)
 
-Specification
--------------
+## Specification
 
 [OpenCL 2.1 API Specification, page
 205](https://www.khronos.org/registry/cl/specs/opencl-2.1.pdf#page=205)
 
-Copyright
----------
+## Copyright
 
 [Copyright © 2007-2017 The Khronos Group Inc.](copyright.html)

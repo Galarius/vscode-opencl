@@ -1,5 +1,5 @@
-Parameters
-----------
+
+## Parameters
 
 `program`  
 A program object with a successfully built executable.
@@ -18,8 +18,7 @@ returned. If `kernels` is NULL, it is ignored. If `kernels` is not NULL,
 The number of kernels in `program`. If `num_kernels_ret` is NULL, it is
 ignored.
 
-Notes
------
+## Notes
 
 Creates kernel objects for all kernel functions in `program`. Kernel
 objects are not created for any [`__kernel`](functionQualifiers.html)
@@ -41,8 +40,7 @@ are the devices associated with `kernel`. Devices associated with a
 program object for which a valid program executable has been built can
 be used to execute kernels declared in the program object.
 
-Errors
-------
+## Errors
 
 Returns `CL_SUCCESS` if the kernel objects are successfully allocated.
 Otherwise, it returns one of the following errors:
@@ -61,8 +59,7 @@ Otherwise, it returns one of the following errors:
 -   `CL_OUT_OF_HOST_MEMORY` if there is a failure to allocate resources
     required by the OpenCL implementation on the host.
 
-Also see
---------
+## Also see
 
 [`clCreateKernel`](clCreateKernel.html),
 [`clRetainKernel`](clRetainKernel.html),
@@ -71,13 +68,11 @@ Also see
 [`clGetKernelInfo`](clGetKernelInfo.html),
 [`clGetKernelWorkGroupInfo`](clGetKernelWorkGroupInfo.html)
 
-Specification
--------------
+## Specification
 
 [OpenCL 2.1 API Specification, page
 222](https://www.khronos.org/registry/cl/specs/opencl-2.1.pdf#page=222)
 
-Copyright
----------
+## Copyright
 
 [Copyright © 2007-2017 The Khronos Group Inc.](copyright.html)

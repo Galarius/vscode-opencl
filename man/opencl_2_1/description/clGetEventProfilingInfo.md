@@ -1,5 +1,5 @@
-Parameters
-----------
+
+## Parameters
 
 `event`  
 Specifies the event object.
@@ -25,15 +25,15 @@ Returns the actual size in bytes of data copied to `param_value`. If
   
 The following is a table of `clGetEventProfilingInfo` parameter queries
 
-| cl\_profiling\_info   | Return Type           | Info. returned in     |
+| cl\_profiling\_info  | Return Type          | Info. returned in     |
 | --- | --- | --- |
-|  `CL_PROFILING_COMMAND   _QUEUED`              |  cl\_ulong             |  `param_value`           A 64-bit value that     describes the current   device time counter     in nanoseconds when     the command             identified by `event`   is enqueued in a        command-queue by the  |
-|  `CL_PROFILING_COMMAND   _SUBMIT`              |  cl\_ulong             |  host.                   A 64-bit value that     describes the current   device time counter     in nanoseconds when     the command             identified by `event`   that has been           enqueued is submitted   by the host to the      device associated       with the              |
-|  `CL_PROFILING_COMMAND   _START`               |  cl\_ulong             |  command-queue.          A 64-bit value that     describes the current   device time counter     in nanoseconds when     the command             identified by `event`   starts execution on   |
-|  `CL_PROFILING_COMMAND   _END`                 |  cl\_ulong             |  the device.             A 64-bit value that     describes the current   device time counter     in nanoseconds when     the command             identified by `event`   has finished            execution on the      |
-|  `CL_PROFILING_COMMAND   _COMPLETE`            |  cl\_ulong             |  device.                 A 64-bit value that     describes the current   device time counter     in nanoseconds when     the command             identified by `event`   and any child           commands enqueued by    this command on the     device have finished  |
-Notes
------
+|  `CL_PROFI              LING_COMMAND_QUEUED` |  cl\_ulong            |  `param_value`           A 64-bit value that     describes the current   device time counter     in nanoseconds when     the command             identified by `event`   is enqueued in a        command-queue by the  |
+|  `CL_PROFI              LING_COMMAND_SUBMIT` |  cl\_ulong            |  host.                   A 64-bit value that     describes the current   device time counter     in nanoseconds when     the command             identified by `event`   that has been           enqueued is submitted   by the host to the      device associated       with the              |
+|  `CL_PROF               ILING_COMMAND_START` |  cl\_ulong            |  command-queue.          A 64-bit value that     describes the current   device time counter     in nanoseconds when     the command             identified by `event`   starts execution on   |
+|  `CL_PR                 OFILING_COMMAND_END` |  cl\_ulong            |  the device.             A 64-bit value that     describes the current   device time counter     in nanoseconds when     the command             identified by `event`   has finished            execution on the      |
+|  `CL_PROFILI            NG_COMMAND_COMPLETE` |  cl\_ulong            |  device.                 A 64-bit value that     describes the current   device time counter     in nanoseconds when     the command             identified by `event`   and any child           commands enqueued by    this command on the     device have finished  |
+
+## Notes
 
 The unsigned 64-bit values returned can be used to measure the time in
 nano-seconds consumed by OpenCL commands.
@@ -50,8 +50,7 @@ either by using a command-queue created with `CL_QUEUE_PROFILING_ENABLE`
 flag set in `properties` argument to
 [`clCreateCommandQueueWithProperties`](clCreateCommandQueueWithProperties.html).
 
-Errors
-------
+## Errors
 
 Returns `CL_SUCCESS` if the function is executed successfully and the
 profiling information has been recorded. Otherwise, it returns one of
@@ -75,18 +74,15 @@ the following errors:
 -   `CL_OUT_OF_HOST_MEMORY` if there is a failure to allocate resources
     required by the OpenCL implementation on the host.
 
-Also see
---------
+## Also see
 
 [`clCreateCommandQueueWithProperties`](clCreateCommandQueueWithProperties.html)
 
-Specification
--------------
+## Specification
 
 [OpenCL 2.1 API Specification, page
 263](https://www.khronos.org/registry/cl/specs/opencl-2.1.pdf#page=263)
 
-Copyright
----------
+## Copyright
 
 [Copyright © 2007-2017 The Khronos Group Inc.](copyright.html)

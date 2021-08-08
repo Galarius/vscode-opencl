@@ -1,5 +1,5 @@
-Parameters
-----------
+
+## Parameters
 
 `command_queue`  
 A valid host command-queue. The kernel will be queued for execution on
@@ -122,8 +122,7 @@ particular kernel execution instance. If the `event_wait_list` and the
 `event` arguments are not NULL, the `event` argument should not refer to
 an element of the `event_wait_list` array.
 
-Errors
-------
+## Errors
 
 Returns `CL_SUCCESS` if the kernel execution was successfully queued.
 Otherwise, it returns one of the following errors:
@@ -217,8 +216,8 @@ Otherwise, it returns one of the following errors:
     specified as arguments to `kernel`.
 
 -   `CL_INVALID_EVENT_WAIT_LIST` if `event_wait_list` is NULL and
-    `num_events_in_wait_list` &gt; 0, or `event_wait_list` is not NULL
-    and `num_events_in_wait_list` is 0, or if event objects in
+    `num_events_in_wait_list` > 0, or `event_wait_list` is not NULL and
+    `num_events_in_wait_list` is 0, or if event objects in
     `event_wait_list` are not valid events.
 
 -   `CL_INVALID_OPERATION` if SVM pointers are passed as arguments to a
@@ -233,21 +232,18 @@ Otherwise, it returns one of the following errors:
 -   `CL_OUT_OF_HOST_MEMORY` if there is a failure to allocate resources
     required by the OpenCL implementation on the host.
 
-Also see
---------
+## Also see
 
 [`clCreateCommandQueueWithProperties`](clCreateCommandQueueWithProperties.html),
 [`clGetDeviceInfo`](clGetDeviceInfo.html),
 [`clEnqueueNativeKernel`](clEnqueueNativeKernel.html), [Work-Item
 Functions](workItemFunctions.html)
 
-Specification
--------------
+## Specification
 
 [OpenCL 2.1 API Specification, page
 242](https://www.khronos.org/registry/cl/specs/opencl-2.1.pdf#page=242)
 
-Copyright
----------
+## Copyright
 
 [Copyright © 2007-2017 The Khronos Group Inc.](copyright.html)

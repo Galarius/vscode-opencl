@@ -1,5 +1,5 @@
-Parameters
-----------
+
+## Parameters
 
 `event`  
 A user event object created using
@@ -12,8 +12,7 @@ causes all enqueued commands that wait on this user event to be
 terminated. `clSetUserEventStatus` can only be called once to change the
 execution status of `event`.
 
-Notes
------
+## Notes
 
 If there are enqueued commands with user events in the `event_wait_list`
 argument of `clEnqueue***` commands, the user must ensure that the
@@ -22,8 +21,7 @@ status of these user events being waited on are set using
 objects except for event objects are called; otherwise the behavior is
 undefined.
 
-Errors
-------
+## Errors
 
 Returns `CL_SUCCESS` if the function was executed successfully.
 Otherwise, it returns one of the following errors
@@ -42,8 +40,7 @@ Otherwise, it returns one of the following errors
 -   `CL_OUT_OF_HOST_MEMORY` if there is a failure to allocate resources
     required by the OpenCL implementation on the host.
 
-Example
--------
+## Example
 
 For example, the following code sequence will result in undefined
 behavior of [`clReleaseMemObject`](clReleaseMemObject.html).
@@ -62,18 +59,15 @@ The following code sequence, however, works correctly.
     clSetUserEventStatus(ev1, CL_COMPLETE);
     clReleaseMemObject(buf2);
 
-Also see
---------
+## Also see
 
 [`clCreateUserEvent`](clCreateUserEvent.html)
 
-Specification
--------------
+## Specification
 
 [OpenCL 2.1 API Specification, page
 250](https://www.khronos.org/registry/cl/specs/opencl-2.1.pdf#page=250)
 
-Copyright
----------
+## Copyright
 
 [Copyright © 2007-2017 The Khronos Group Inc.](copyright.html)

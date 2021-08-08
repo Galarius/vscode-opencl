@@ -1,5 +1,5 @@
-Parameters
-----------
+
+## Parameters
 
 `num_entries`  
 The number of [`cl_platform_id`](abstractDataTypes.html) entries that
@@ -18,8 +18,7 @@ OpenCL platforms returned is the mininum of the value specified by
 Returns the number of OpenCL platforms available. If `num_platforms` is
 NULL, this argument is ignored.
 
-Errors
-------
+## Errors
 
 Returns `CL_SUCCESS` if the function is executed successfully. If the
 [`cl_khr_icd`](cl_khr_icd.html) extension is enabled, `clGetPlatformIDs`
@@ -37,20 +36,17 @@ Otherwise it returns one of the following errors:
 -   `CL_PLATFORM_NOT_FOUND_KHR` if the [`cl_khr_icd`](cl_khr_icd.html)
     extension is enabled and no platforms are found.
 
-Also see
---------
+## Also see
 
 [`clGetPlatformInfo`](clGetPlatformInfo.html),
 [`clGetDeviceInfo`](clGetDeviceInfo.html), [Cardinality
 Diagram](classDiagram.html)
 
-Specification
--------------
+## Specification
 
 [OpenCL 2.1 API Specification, page
 62](https://www.khronos.org/registry/cl/specs/opencl-2.1.pdf#page=62)
 
-Copyright
----------
+## Copyright
 
 [Copyright © 2007-2017 The Khronos Group Inc.](copyright.html)

@@ -1,5 +1,5 @@
-Notes
------
+
+## Notes
 
 Decrements the `device` reference count if device is a valid sub-device
 created by a call to [`clCreateSubDevices`](clCreateSubDevices.html). If
@@ -13,8 +13,7 @@ object is deleted. Using this function to release a reference that was
 not obtained by creating the object or by calling
 [`clRetainDevice`](clRetainDevice.html) causes undefined behavior.
 
-Errors
-------
+## Errors
 
 Returns `CL_SUCCESS` if the function is executed successfully.
 Otherwise, it returns one of the following errors:
@@ -28,20 +27,17 @@ Otherwise, it returns one of the following errors:
 -   `CL_OUT_OF_HOST_MEMORY` if there is a failure to allocate resources
     required by the OpenCL implementation on the host.
 
-Also see
---------
+## Also see
 
 [`clCreateSubDevices`](clCreateSubDevices.html),
 [`clGetDeviceIDs`](clGetDeviceIDs.html),
 [`clRetainDevice`](clRetainDevice.html)
 
-Specification
--------------
+## Specification
 
 [OpenCL 2.1 API Specification, page
 88](https://www.khronos.org/registry/cl/specs/opencl-2.1.pdf#page=88)
 
-Copyright
----------
+## Copyright
 
 [Copyright © 2007-2017 The Khronos Group Inc.](copyright.html)
