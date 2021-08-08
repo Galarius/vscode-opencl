@@ -1,5 +1,4 @@
-# -*- coding: utf-8 -*-
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 """
     Helper script to provide OpenCL Runtime hover documentation 
@@ -16,11 +15,11 @@ import getopt
 TMP_FILE = '.tmp.md'
 DOWNLOAD_DIR = 'html'
 RESULT_DIR   = 'md'
-MAN_DIR      = os.path.join('..', 'man', 'opencl_2_1')
-MAN_DESC_DIR = os.path.join('..', 'man', 'opencl_2_1', 'description')
-MAN_SIG_DIR  = os.path.join('..', 'man', 'opencl_2_1', 'signature')
-OPENCL_MAN_TS = os.path.join('..', 'src', 'openclMan.ts')
-GRID2PHP_TBL = os.path.join('grid2php', 'cmake-build-debug', 'grid2php')
+MAN_DIR      = os.path.join('..', '..', 'man', 'opencl_2_1')
+MAN_DESC_DIR = os.path.join(MAN_DIR, 'description')
+MAN_SIG_DIR  = os.path.join(MAN_DIR, 'signature')
+OPENCL_MAN_TS = os.path.join('..', '..', 'client', 'src', 'providers', 'hover', 'openclMan.ts')
+GRID2PHP_TBL = './grid2php'
 
 
 BASE_LINK = 'http://man.opencl.org/'
@@ -66,7 +65,7 @@ OPENCL_RUNTIME = [
 ]
 
 def print_usage(name):
-    print """{0} <command>
+    print("""{0} <command>
     Commands:
         * -h - show this help message
         * -d - download html documentation
@@ -76,7 +75,7 @@ def print_usage(name):
         * wget
         * pandoc
         * grid2php
-""".format(name)
+""".format(name))
 
 def get_signature(file):
     sig_lines = []
@@ -151,7 +150,7 @@ export var OpenCLSignatures: IEntries = {
     footer = "};"
     lines.append(header)
     for func in OPENCL_RUNTIME:
-        print 'Generating brief for {}...'.format(func)
+        print('Generating brief for {}...'.format(func))
         md = os.path.join(RESULT_DIR, func + '.md')
         brief = get_brief(md)
         item = [
@@ -194,20 +193,20 @@ def main():
         elif opt == '-d':
             for func in OPENCL_RUNTIME:
                 url = BASE_LINK + func + '.html'
-                print 'Downloading {} with `wget`...'.format(func)
+                print('Downloading {} with `wget`...'.format(func))
                 os.system('wget --directory-prefix={} {}'.format(DOWNLOAD_DIR, url))
         elif opt == '-c':
             tmp = os.path.join(RESULT_DIR, TMP_FILE) 
             for func in OPENCL_RUNTIME:
                 src = os.path.join(DOWNLOAD_DIR, func + '.html')
                 dst = os.path.join(RESULT_DIR, func + '.md')
-                print 'Converting {} with `pandoc`...'.format(func)
+                print('Converting {} with `pandoc`...'.format(func))
                 os.system('pandoc -f html -t markdown_strict+grid_tables {} > {}'.format(src, tmp))
                 # In some file may occur the following:
                 # -   
                 #
                 #   some text    
-                print 'Converting {} with `grid2php`...'.format(func)
+                print('Converting {} with `grid2php`...'.format(func))
                 os.system('{} {} {}'.format(GRID2PHP_TBL, tmp, dst))
             os.remove(tmp)
         elif opt == '-u':
@@ -217,25 +216,25 @@ def main():
                 dst_desc = os.path.join(MAN_DESC_DIR, func + '.md')
                 
                 if not func.startswith('cl_'):
-                    print 'Creating file with {} signature...'.format(func)
+                    print('Creating file with {} signature...'.format(func))
                     # get signature from file
                     sig = get_signature(md)
                     with open(dst_sig, 'w') as f:
                         f.write(sig)
                 
-                print 'Creating file with {} description...'.format(func)
+                print('Creating file with {} description...'.format(func))
                 # get description from file
                 desc = get_description(md)
                 with open(dst_desc, 'w') as f:
                     f.write(desc)
 
-            print 'Generating openclMan.ts file...'
+            print('Generating openclMan.ts file...')
             content = generate_openclman_ts()
             with open(OPENCL_MAN_TS, 'w') as f:
                 f.write(content)                
         else:
-            print 'Unregognised option {}'.format(opt)
-    print 'Done!'
+            print('Unregognised option {}'.format(opt))
+    print('Done!')
     
 if __name__ == "__main__":
     main()
