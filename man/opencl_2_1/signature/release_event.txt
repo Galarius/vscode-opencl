@@ -1,0 +1,1 @@
+    void release_event(clk_event_t event)

@@ -1,0 +1,1 @@
+    void retain_event(clk_event_t event)

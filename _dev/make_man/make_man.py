@@ -104,6 +104,8 @@ OPENCL_MAN = [
     ['commonMax', 'max'],
     ['commonMin', 'min'],
     'mix', 'radians', 'sign', 'smoothstep', 'step',
+## Event Built-In Functions
+    'retain_event','release_event','create_user_event','is_valid_event','set_user_event_status','capture_event_profiling_info',
 ]
 
 def print_usage(name):

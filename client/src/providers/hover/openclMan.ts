@@ -1340,5 +1340,41 @@ step:	{
 		signature: path.join(MAN_SIG,'step.txt'),
 		description: path.join(MAN_DESC,'step.md'),
 		reference: 'http://man.opencl.org/step.html',
+	},
+retain_event:	{
+		brief: 'Increments the event reference count.',
+		signature: path.join(MAN_SIG,'retain_event.txt'),
+		description: path.join(MAN_DESC,'retain_event.md'),
+		reference: 'http://man.opencl.org/retain_event.html',
+	},
+release_event:	{
+		brief: 'Decrements the event reference count.',
+		signature: path.join(MAN_SIG,'release_event.txt'),
+		description: path.join(MAN_DESC,'release_event.md'),
+		reference: 'http://man.opencl.org/release_event.html',
+	},
+create_user_event:	{
+		brief: 'Creates and returns a user event.',
+		signature: path.join(MAN_SIG,'create_user_event.txt'),
+		description: path.join(MAN_DESC,'create_user_event.md'),
+		reference: 'http://man.opencl.org/create_user_event.html',
+	},
+is_valid_event:	{
+		brief: 'Returns true if event is a valid event.',
+		signature: path.join(MAN_SIG,'is_valid_event.txt'),
+		description: path.join(MAN_DESC,'is_valid_event.md'),
+		reference: 'http://man.opencl.org/is_valid_event.html',
+	},
+set_user_event_status:	{
+		brief: 'Sets the execution status of a user event.',
+		signature: path.join(MAN_SIG,'set_user_event_status.txt'),
+		description: path.join(MAN_DESC,'set_user_event_status.md'),
+		reference: 'http://man.opencl.org/set_user_event_status.html',
+	},
+capture_event_profiling_info:	{
+		brief: 'Captures the profiling information for command associated with `event`.',
+		signature: path.join(MAN_SIG,'capture_event_profiling_info.txt'),
+		description: path.join(MAN_DESC,'capture_event_profiling_info.md'),
+		reference: 'http://man.opencl.org/capture_event_profiling_info.html',
 	}
 };
