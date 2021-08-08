@@ -1,0 +1,3 @@
+    gentype mad(gentype a,
+                gentype b,
+                gentype c)

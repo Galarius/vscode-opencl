@@ -1,0 +1,5 @@
+    gentype cos(gentype)
+    gentype cosh(gentype)
+    gentype cospi(gentype x)
+    gentype half_cos(gentype x)
+    gentype native_cos(gentype x)

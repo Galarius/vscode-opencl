@@ -1,0 +1,20 @@
+    gentype pow(gentype x,
+                gentype y)
+    float n pown(float n x,
+                 int n y)
+    float pown(float x,
+               int y)
+    double n pown(double n x,
+                  int n y)
+    double pown(double x,
+                int y)
+    gentype powr(gentype x,
+                 gentype y)
+    gentype half_powr(gentype x,
+                      gentype y)
+    gentype native_powr(gentype x,
+                        gentype y)
+    half n pown(half n x,
+                int n y)
+    half pown(half x,
+              int y)

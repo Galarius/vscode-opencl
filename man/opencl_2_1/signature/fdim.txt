@@ -1,0 +1,2 @@
+    gentype fdim(gentype x,
+                 gentype y)

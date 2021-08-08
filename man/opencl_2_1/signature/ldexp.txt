@@ -1,0 +1,18 @@
+    float n ldexp(float n x,
+                  int n k)
+    float n ldexp(float n x,
+                  int k)
+    float ldexp(float x,
+                int k)
+    double n ldexp(double n x,
+                   int n k)
+    double n ldexp(double n x,
+                   int k)
+    double ldexp(double x,
+                 int n)
+    half n ldexp(half n x,
+                 int n k)
+    half n ldexp(half n x,
+                 int k)
+    half ldexp(half x,
+               int k)

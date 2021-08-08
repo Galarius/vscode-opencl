@@ -1,0 +1,6 @@
+    gentype sqrt(gentype)
+    gentype half_sqrt(gentype x)
+    gentype native_sqrt(gentype x)
+    gentype rsqrt(gentype)
+    gentype half_rsqrt(gentype x)
+    gentype native_rsqrt(gentype x)

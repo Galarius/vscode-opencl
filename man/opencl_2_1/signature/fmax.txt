@@ -1,0 +1,8 @@
+    gentype fmax(gentype x,
+                 gentype y)
+    gentypef fmax(gentypef x,
+                  float y)
+    gentyped fmax(gentyped x,
+                  double y)
+    gentype fmax (gentype x,
+                  half y)      // if half extension enabled

@@ -1,0 +1,2 @@
+    gentype remainder(gentype x,
+                      gentype y)

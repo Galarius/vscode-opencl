@@ -1,0 +1,2 @@
+    gentype fract(gentype x,
+                  gentype *itpr)

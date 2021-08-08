@@ -1,0 +1,4 @@
+    gentype maxmag(gentype x,
+                   gentype y)
+    gentype minmag(gentype x,
+                   gentype y)

@@ -1,0 +1,4 @@
+    gentype half_divide(gentype x,
+                        gentype y)
+    gentype native_divide(gentype x,
+                          gentype y)

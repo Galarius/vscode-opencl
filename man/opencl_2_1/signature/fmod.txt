@@ -1,0 +1,2 @@
+    gentype fmod(gentype x,
+                 gentype y)

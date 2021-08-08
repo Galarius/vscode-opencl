@@ -1,0 +1,24 @@
+    float n frexp(float n x,
+                  int n *exp)
+    float frexp(float x,
+                int *exp)
+    double n frexp(double n x,
+                   int n *exp)
+    double frexp(double x,
+                 int *exp)
+    half n frexp(half n x,
+                 __global int n *exp)
+    half n frexp(half n x,
+                 __local int n *exp)
+    half n frexp(half n x,
+                 __private int n *exp)
+    half n frexp(half n x,
+                 int n *exp)
+    half frexp(half x,
+               __global int *exp)
+    half frexp(half x,
+               __local int *exp)
+    half frexp(half x,
+               __private int *exp)
+    half frexp(half x,
+               int *exp)

@@ -1,0 +1,5 @@
+    gentype tan(gentype)
+    gentype tanh(gentype)
+    gentype tanpi(gentype x)
+    gentype half_tan(gentype x)
+    gentype native_tan(gentype x)

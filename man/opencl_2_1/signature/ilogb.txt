@@ -1,0 +1,6 @@
+    int n ilogb(float n x)
+    int ilogb(float x)
+    int n ilogb(double n x)
+    int ilogb(double x)
+    int n ilogb(half n x)
+    int ilogb(half x)

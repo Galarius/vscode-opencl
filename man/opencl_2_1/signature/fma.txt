@@ -1,0 +1,3 @@
+    gentype fma(gentype a,
+                gentype b,
+                gentype c)

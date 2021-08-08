@@ -1,0 +1,7 @@
+    gentype atan(gentype y_over_x)
+    gentype atan2(gentype y,
+                  gentype x)
+    gentype atanh(gentype)
+    gentype atanpi(gentype x)
+    gentype atan2pi(gentype y,
+                    gentype x)

@@ -1,0 +1,12 @@
+    float n rootn(float n x,
+                  int n y)
+    float rootn(float x,
+                int y)
+    double n rootn(double n x,
+                   int n y)
+    double n rootn(double x,
+                   int y)
+    half n rootn(half n x,
+                 int n y)
+    half rootn(half x,
+               int y)

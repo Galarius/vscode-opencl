@@ -1,0 +1,2 @@
+    gentype erf(gentype)
+    gentype erfc(gentype)

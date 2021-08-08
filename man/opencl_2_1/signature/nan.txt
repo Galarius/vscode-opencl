@@ -1,0 +1,6 @@
+    float n nan(uint n nancode)
+    float nan(uint nancode)
+    double n nan(ulong n nancode)
+    double nan(ulong nancode)
+    halfn nan (ushortn nancode)      // if half extension enabled
+    half nan (ushort nancode)

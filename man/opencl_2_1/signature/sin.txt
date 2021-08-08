@@ -1,0 +1,7 @@
+    gentype sin(gentype)
+    gentype sincos(gentype x,
+                   gentype *cosval)
+    gentype sinh(gentype)
+    gentype sinpi(gentype x)
+    gentype half_sin(gentype x)
+    gentype native_sin(gentype x)

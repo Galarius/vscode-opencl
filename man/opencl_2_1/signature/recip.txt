@@ -1,0 +1,2 @@
+    gentype half_recip(gentype x)
+    gentype native_recip(gentype x)

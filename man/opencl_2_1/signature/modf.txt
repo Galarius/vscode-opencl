@@ -1,0 +1,2 @@
+    gentype modf(gentype x,
+                 gentype *iptr)

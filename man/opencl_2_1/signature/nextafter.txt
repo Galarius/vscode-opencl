@@ -1,0 +1,2 @@
+    gentype nextafter(gentype x,
+                      gentype y)

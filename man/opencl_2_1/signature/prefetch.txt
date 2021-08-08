@@ -1,0 +1,2 @@
+    void prefetch(const __global gentype *p,
+                  size_t num_gentypes)

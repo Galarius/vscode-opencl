@@ -1,0 +1,25 @@
+    gentype lgamma(gentype x)
+    float n lgamma_r(float n x,
+                     int n *signp)
+    float lgamma_r(float x,
+                   int *signp)
+    double n lgamma_r(double n x,
+                      int n *signp)
+    double lgamma_r(double x,
+                    int n *signp)
+    half n lgamma_r(half n x,
+                    __global int n *signp)
+    half n lgamma_r(half n x,
+                    __local int n *signp)
+    half n lgamma_r(half n x,
+                    __private int n *signp)
+    half n lgamma_r(half n x,
+                    int n *signp)
+    half lgamma_r(half x,
+                  __global int *signp)
+    half lgamma_r(half x,
+                  __local int *signp)
+    half lgamma_r(half x,
+                  __private int *signp)
+    half lgamma_r(half x,
+                  int *signp)

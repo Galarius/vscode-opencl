@@ -1,0 +1,2 @@
+    gentype hypot(gentype x,
+                  gentype y)

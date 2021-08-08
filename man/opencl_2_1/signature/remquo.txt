@@ -1,0 +1,36 @@
+    float n remquo(float n x,
+                   float n y,
+                   int n *quo)
+    float remquo(float x,
+                 float y,
+                 int *quo)
+    double n remquo(double n x,
+                    double n y,
+                    int n *quo)
+    double remquo(double x,
+                  double y,
+                  int *quo)
+    half n remquo(half n x,
+                  half n y,
+                  __global int n *quo)
+    half n remquo(half n x,
+                  half n y,
+                  __local int n *quo)
+    half n remquo(half n x,
+                  half n y,
+                  __private int n *quo)
+    half n remquo(half n x,
+                  half n y,
+                  int n *quo)
+    half remquo(half x,
+                half y,
+                __global int *quo)
+    half remquo(half x,
+                half y,
+                __local int *quo)
+    half remquo(half x,
+                half y,
+                __private int *quo)
+    half remquo(half x,
+                half y,
+                int *quo)
