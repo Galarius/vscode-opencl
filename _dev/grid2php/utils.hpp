@@ -11,8 +11,6 @@
 
 #include <string>
 #include <vector>
-#include <sstream>
-#include <regex>
 
 namespace ext
 {
@@ -23,16 +21,12 @@ namespace ext
      @param[in] prefix prefix to test at the beginning of the str
      @return true if str starts with prefix
      */
-    bool starts_with(const std::string &s, const std::string &prefix, bool case_sensitive = false);
+    bool StartsWith(const std::string &s, const std::string &prefix, bool caseSensitive = false);
 
     /**
      Split text into tokens
-
-     @param text text to split
-     @param sep separator
-     @return tokens
      */
-    std::vector<std::string> split(const std::string &text, std::string sep);
+    std::vector<std::string> Split(const std::string &text, std::string sep);
 }
 
 #endif /* utils_hpp */

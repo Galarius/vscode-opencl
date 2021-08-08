@@ -3,10 +3,9 @@
 **/babel.config.js
 **/node_modules/**
 .vscode/**
-test/**
 client/**
 server/**
-dev/**
+_dev/**
 **/*.map
 .gitignore
 .gitmodules

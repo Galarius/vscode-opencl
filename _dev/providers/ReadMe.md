@@ -1,0 +1,1 @@
+> Samples for testing `syntax-highlighting` and `hover provider`

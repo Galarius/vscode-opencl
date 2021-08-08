@@ -1,0 +1,6 @@
+.idea/
+build/
+out/
+cmake-build-debug/
+fixtures/*
+!fixtures/src.md

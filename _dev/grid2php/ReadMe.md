@@ -4,7 +4,7 @@
  
  ## Usage 
  
- Run command `grid2php test/src.md test/dst.md` to convert grid table:
+ Run command `grid2php fixtures/src.md fixtures/dst.md` to convert grid table:
  
  
  ```
@@ -28,3 +28,26 @@
  |  Oranges       |  $2.10         |  - cures scurvy       - tasty            |
  ```
   
+## Build
+
+### macOS
+
+```
+mkdir build && cd build
+cmake -G Xcode ..
+```
+
+### Linux
+
+```
+mkdir build && cd build
+cmake ..
+make
+```
+
+### Win32
+
+```
+mkdir build && cd build
+cmake -G "Visual Studio 16" -T v142 ..
+```

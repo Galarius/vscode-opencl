@@ -38,57 +38,59 @@
 #include <vector>
 #include "utils.hpp"
 
+namespace {
+
 struct table
 {
     long ncols;
-    bool has_header;
+    bool hasHeader;
     std::vector<std::vector<std::string>> rows;
-    std::vector<int> lines_per_row;
+    std::vector<int> linesPerRow;
 };
 
-bool is_new_row(const std::string& line)
+bool IsNewRow(const std::string& line)
 {
     return std::all_of(line.begin(), line.end(), [](char c)
         { return c == '+' || c == '-' || c == ':'; });
 }
 
-bool is_header(const std::string& line)
+bool IsHeader(const std::string& line)
 {
     return std::all_of(line.begin(), line.end(), [](char c)
     { return c == '+' || c == '=' || c == ':'; });
 }
 
-bool is_space(const std::string& line)
+bool IsSpace(const std::string& line)
 {
     return std::all_of(line.begin(), line.end(), [](char c) { return std::isspace(c);});
 }
 
-bool table_processing(std::string& line, table& tbl)
+bool TableProcessing(std::string& line, table& tbl)
 {
-    if(ext::starts_with(line, "+="))        // header
+    if(ext::StartsWith(line, "+="))        // header
     {
-        tbl.has_header = is_header(line);
-        tbl.lines_per_row.push_back(0);
+        tbl.hasHeader = IsHeader(line);
+        tbl.linesPerRow.push_back(0);
     }
-    else if(ext::starts_with(line, "|"))    // line
+    else if(ext::StartsWith(line, "|"))    // line
     {
-        std::vector<std::string> cols = ext::split(line, "|");
+        std::vector<std::string> cols = ext::Split(line, "|");
         cols.erase(cols.begin(), cols.begin()+1);
         cols.pop_back();
         tbl.rows.push_back(cols);
-        tbl.lines_per_row[tbl.lines_per_row.size()-1] += 1;
+        tbl.linesPerRow[tbl.linesPerRow.size()-1] += 1;
     }
-    else if(ext::starts_with(line, "+-"))   // new row
+    else if(ext::StartsWith(line, "+-"))   // new row
     {
-        if(is_new_row(line)) {
-            tbl.lines_per_row.push_back(0); }
+        if(IsNewRow(line)) {
+            tbl.linesPerRow.push_back(0); }
     } else {
         return false;                       // end of table
     }
     return true;
 }
 
-void out_single_line_row(std::ofstream& out, const std::vector<std::string>& cols)
+void OutSingleLineRow(std::ofstream& out, const std::vector<std::string>& cols)
 {
     out << "|";
     for(auto& col : cols)
@@ -96,15 +98,15 @@ void out_single_line_row(std::ofstream& out, const std::vector<std::string>& col
     out << std::endl;
 }
 
-void generate_php_table(std::ofstream& out, const table& tbl)
+void GeneratePhpTable(std::ofstream& out, const table& tbl)
 {
     int row = 0;
     int line = 0;
 
-    if(tbl.has_header)
+    if(tbl.hasHeader)
     {
         auto cols = tbl.rows[0];
-        out_single_line_row(out, cols);
+        OutSingleLineRow(out, cols);
         out << "|";
         for(int i = 0; i < cols.size(); ++i)
             out << " --- |";
@@ -123,10 +125,10 @@ void generate_php_table(std::ofstream& out, const table& tbl)
         out << std::endl;
     }
 
-    for(;row < tbl.lines_per_row.size(); ++row)
+    for(;row < tbl.linesPerRow.size(); ++row)
     {
         int l = 0;
-        int lines = tbl.lines_per_row[row];
+        int lines = tbl.linesPerRow[row];
         std::vector<std::string> res_cols;
         for(int col = 0; col < tbl.ncols; ++col) {
             res_cols.push_back("");
@@ -135,68 +137,71 @@ void generate_php_table(std::ofstream& out, const table& tbl)
         for(; l < lines; ++l) {
             auto cols = tbl.rows[line + l];
             for(int col = 0; col < tbl.ncols; ++col) {
-                if(!is_space(cols[col]))
+                if(!IsSpace(cols[col]))
                     res_cols[col] += " " + cols[col];
             }
         }
 
-        out_single_line_row(out, res_cols);
+        OutSingleLineRow(out, res_cols);
         line += l;
     }
 }
 
-void reset(table& tbl)
+void Reset(table& tbl)
 {
     tbl.ncols = 0;
-    tbl.lines_per_row.clear();
+    tbl.linesPerRow.clear();
     tbl.rows.clear();
-    tbl.has_header = false;
+    tbl.hasHeader = false;
 }
 
-void process(std::ifstream& in, std::ofstream& out)
+void Process(std::ifstream& in, std::ofstream& out)
 {
     table tbl;                  /* markdown table description */
     std::string line;           /* current line */
-    bool in_table = false;      /* inside markdown table */
+    bool inTable = false;      /* inside markdown table */
     bool built = false;
-    bool table_exists = false;
+    bool tableExists = false;
 
     for(; !in.eof() && std::getline(in, line);) {
 
-        if(!in_table) {
-            if(ext::starts_with(line, "+-")) {   // in markdown table
+        if(!inTable) {
+            if(ext::StartsWith(line, "+-")) {   // in markdown table
                 // validate
-                in_table = is_new_row(line);
-                if (in_table) {
-                    reset(tbl);
+                inTable = IsNewRow(line);
+                if (inTable) {
+                    Reset(tbl);
                     built = false;
-                    table_exists = true;
+                    tableExists = true;
                     tbl.ncols = std::count(line.begin(), line.end(), '+') - 1;
-                    tbl.lines_per_row.push_back(0);
+                    tbl.linesPerRow.push_back(0);
                 }
             } else {
                 // other content
                 out << line << std::endl;
             }
         } else {
-            // table processing
-            in_table = table_processing(line, tbl);
-            if (!in_table) {
-                // finish table processing
-                tbl.lines_per_row.pop_back();
+            // table Processing
+            inTable = TableProcessing(line, tbl);
+            if (!inTable) {
+                // finish table Processing
+                tbl.linesPerRow.pop_back();
                 // generate `PHP Markdown Extra` table
-                generate_php_table(out, tbl);
+                GeneratePhpTable(out, tbl);
                 built = true;
+                out << std::endl;
             }
         }
     }
 
-    if(table_exists && !built) {
+    if(tableExists && !built) {
         // if table at the end without blank line
-        tbl.lines_per_row.pop_back();
-        generate_php_table(out, tbl);
+        tbl.linesPerRow.pop_back();
+        GeneratePhpTable(out, tbl);
     }
 }
+
+} // namespace ''
 
 int main(int argc, char* argv[])
 {
@@ -212,7 +217,7 @@ int main(int argc, char* argv[])
     if(in.good()) {
         std::ofstream out(argv[2]);
         if(out.good()) {
-            process(in, out);
+            Process(in, out);
         } else {
             std::cerr << "Failed to open output file." << std::endl;
         }
