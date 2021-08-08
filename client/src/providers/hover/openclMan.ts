@@ -1142,5 +1142,29 @@ native_recip:	{
 		signature: path.join(MAN_SIG,'recip.txt'),
 		description: path.join(MAN_DESC,'recip.md'),
 		reference: 'http://man.opencl.org/recip.html',
+	},
+async_work_group_copy:	{
+		brief: 'Perform an async copy.',
+		signature: path.join(MAN_SIG,'async_work_group_copy.txt'),
+		description: path.join(MAN_DESC,'async_work_group_copy.md'),
+		reference: 'http://man.opencl.org/async_work_group_copy.html',
+	},
+async_work_group_strided_copy:	{
+		brief: 'Performs an async gather of `num_elements` `gentype` elements from source to destination.',
+		signature: path.join(MAN_SIG,'async_work_group_strided_copy.txt'),
+		description: path.join(MAN_DESC,'async_work_group_strided_copy.md'),
+		reference: 'http://man.opencl.org/async_work_group_strided_copy.html',
+	},
+wait_group_events:	{
+		brief: 'Wait for events that identify the `async_work_group_copy` operations to complete.',
+		signature: path.join(MAN_SIG,'wait_group_events.txt'),
+		description: path.join(MAN_DESC,'wait_group_events.md'),
+		reference: 'http://man.opencl.org/wait_group_events.html',
+	},
+prefetch:	{
+		brief: 'Prefetch bytes into the global cache.',
+		signature: path.join(MAN_SIG,'prefetch.txt'),
+		description: path.join(MAN_DESC,'prefetch.md'),
+		reference: 'http://man.opencl.org/prefetch.html',
 	}
 };

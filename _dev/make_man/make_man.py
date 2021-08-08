@@ -89,6 +89,11 @@ OPENCL_MAN = [
     ['tan', 'tanh'],
     ['divide', 'half_divide', 'native_divide'],
     ['recip', 'half_recip', 'native_recip'],
+# Async Copy and Prefetch Functions
+    'async_work_group_copy',
+    'async_work_group_strided_copy',
+    'wait_group_events',
+    'prefetch',
 ]
 
 def print_usage(name):

@@ -1,0 +1,10 @@
+    event_t async_work_group_strided_copy(__local gentype *dst,
+                                          const __global gentype *src,
+                                          size_t num_gentypes,
+                                          size_t src_stride,
+                                          event_t event)
+    event_t async_work_group_strided_copy(__global gentype *dst,
+                                          const __local gentype *src,
+                                          size_t num_gentypes,
+                                          size_t dst_stride,
+                                          event_t event)

@@ -1,0 +1,8 @@
+    event_t async_work_group_copy(__local gentype *dst,
+                                  const __global gentype *src,
+                                  size_t num_gentypes,
+                                  event_t event)
+    event_t async_work_group_copy(__global gentype *dst,
+                                  const __local gentype *src,
+                                  size_t num_gentypes,
+                                  event_t event)
