@@ -1,5 +1,10 @@
 # OpenCL for Visual Studio Code Change Log
 
+## Version 0.7.2: Oct 05, 2021
+
+* Task provider error messages will only be visible in the developer console
+* Security updates
+
 ## Version 0.7.1: Aug 08, 2021
 
 Built-in OpenCL API reference was extended with:
