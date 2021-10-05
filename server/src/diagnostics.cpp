@@ -180,7 +180,7 @@ std::string Diagnostics::BuildSource(const std::string& source, const std::strin
         options += "-I " + dir;
     try
     {
-        GLogDebug(TracePrefix, "Building program with otions: ", options);
+        GLogDebug(TracePrefix, "Building program with options: ", options);
         program = cl::Program(context, source, false);
         program.build(ds, options.c_str());
     }
