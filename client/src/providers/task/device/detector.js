@@ -94,9 +94,9 @@ const detector = async (cmd) => {
         (err) => {
             console.error(`${LOG_PREFIX} ${err}`)
             if(err.code === 'ENOENT')
-                vscode.window.showErrorMessage(STR_COMPILER_NOT_FOUND)
-            else     
-                vscode.window.showErrorMessage(STR_COMPILER_PROCESS_FAILED)
+                console.error(STR_COMPILER_NOT_FOUND);
+            else  
+                console.error(STR_COMPILER_PROCESS_FAILED);
             return false
         }
     )
