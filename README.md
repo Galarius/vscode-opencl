@@ -10,7 +10,7 @@ This extension adds [OpenCL C/C++](https://en.wikipedia.org/wiki/OpenCL) languag
 ## Features
 
 * OpenCL Compute Kernel Support [`*.cl`, `*.ocl`]
-* OpenCL Language Server (***new feature***)
+* OpenCL Language Server
 * OpenCL C/C++ Syntax Highlighting
 * Offline Kernel Compilation
 * Auto Completion of Built-in OpenCL Symbols
