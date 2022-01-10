@@ -45,6 +45,8 @@ This extension adds [OpenCL C/C++](https://en.wikipedia.org/wiki/OpenCL) languag
 
 ## Language Server
 
+[opencl-language-server](https://github.com/Galarius/opencl-language-server)
+
 Provides an OpenCL kernel diagnostics.
 
 Language server will automatically select an OpenCL device.
