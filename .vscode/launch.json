@@ -5,17 +5,6 @@
 	"version": "0.2.0",
 	"configurations": [
 		{
-			"name": "Python: make_man.py",
-			"type": "python",
-			"request": "launch",
-			"cwd": "${workspaceFolder}/_dev/make_man/",
-			"program": "${workspaceFolder}/_dev/make_man/make_man.py",
-			"args": [
-				"-u"
-			],
-			"console": "integratedTerminal"
-		},
-		{
 			"name": "Run Extension",
 			"type": "extensionHost",
 			"request": "launch",
@@ -26,6 +15,17 @@
 				"${workspaceFolder}/dist/**/*.js"
 			],
 			"preLaunchTask": "npm: webpack-dev",
+		},
+		{
+			"name": "Python: make_man.py",
+			"type": "python",
+			"request": "launch",
+			"cwd": "${workspaceFolder}/_dev/make_man/",
+			"program": "${workspaceFolder}/_dev/make_man/make_man.py",
+			"args": [
+				"-u"
+			],
+			"console": "integratedTerminal"
 		}
 	]
 }

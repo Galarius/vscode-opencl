@@ -1,5 +1,9 @@
 # OpenCL for Visual Studio Code Change Log
 
+## Version 0.7.3: Mar 13, 2022
+
+* Updated [opencl-language-server](https://github.com/Galarius/opencl-language-server) version to [0.3](https://github.com/Galarius/opencl-language-server/releases/tag/0.3).
+
 ## Version 0.7.2: Oct 05, 2021
 
 * Task provider error messages will only be visible in the developer console
