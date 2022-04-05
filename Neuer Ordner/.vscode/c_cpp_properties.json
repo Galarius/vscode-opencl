@@ -1,4 +1,5 @@
 {
+<<<<<<< Updated upstream
   "configurations": [
     {
       "name": "windows-gcc-x64",
@@ -13,4 +14,21 @@
     }
   ],
   "version": 4
+=======
+    "configurations": [
+        {
+            "name": "windows-gcc-x64",
+            "includePath": [
+                "${workspaceFolder}/**"
+            ],
+            "compilerPath": "gcc",
+            "cStandard": "${default}",
+            "cppStandard": "${default}",
+            "intelliSenseMode": "windows-gcc-x64",
+            "compilerArgs": [],
+            "configurationProvider": "BartmanAbyss.amiga-debug"
+        }
+    ],
+    "version": 4
+>>>>>>> Stashed changes
 }
