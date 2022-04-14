@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Update mode="Client" Generator="ctest-3.22.22022201-MSVC_2">
+	<Site>Horst</Site>
+	<BuildName>Win32-MSBuild</BuildName>
+	<BuildStamp>20220405-0111-Continuous</BuildStamp>
+	<StartDateTime>Apr 05 03:11 Mitteleurop[NON-UTF-8-BYTE-0xE4]ische Sommerzeit</StartDateTime>
+	<StartTime>1649121075</StartTime>
+	<UpdateCommand>"C:/Program Files/Git/cmd/git.exe" "fetch"</UpdateCommand>
+	<UpdateType>GIT</UpdateType>
+	<Revision>510bc7f553c8309f03e1e9c7883bedb13ba82a24</Revision>
+	<EndDateTime>Apr 05 03:11 Mitteleurop[NON-UTF-8-BYTE-0xE4]ische Sommerzeit</EndDateTime>
+	<EndTime>1649121080</EndTime>
+	<ElapsedMinutes>0</ElapsedMinutes>
+	<UpdateReturnStatus/>
+</Update>
