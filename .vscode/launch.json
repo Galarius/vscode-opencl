@@ -1,4 +1,7 @@
 {
+<<<<<<< Updated upstream
+=======
+<<<<<<< Updated upstream
 	// Use IntelliSense to learn about possible attributes.
 	// Hover to view descriptions of existing attributes.
 	// For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
@@ -28,4 +31,63 @@
 			"console": "integratedTerminal"
 		}
 	]
+=======
+>>>>>>> Stashed changes
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Run Extension",
+      "type": "extensionHost",
+      "request": "launch",
+      "args": [
+        "--extensionDevelopmentPath=${workspaceFolder}"
+      ],
+      "outFiles": [
+        "${workspaceFolder}/dist/**/*.js"
+      ],
+      "preLaunchTask": "npm: webpack-dev"
+    },
+    {
+      "name": "Python: make_man.py",
+      "type": "python",
+      "request": "launch",
+      "cwd": "${workspaceFolder}/_dev/make_man/",
+      "program": "${workspaceFolder}/_dev/make_man/make_man.py",
+      "args": [
+        "-u"
+      ],
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "cppdbg",
+      "request": "launch",
+      "args": [],
+      "stopAtEntry": false,
+<<<<<<< Updated upstream
+      "cwd": "c:/Users/vrues/Documents/GitHub/vscode-opencl",
+      "environment": [],
+      "program": "c:/Users/vrues/Documents/GitHub/vscode-opencl/build/Debug/outDebug",
+=======
+      "cwd": "c:/Users/vrues/Documents/GitHub/vscode-opencl/_dev/make_man",
+      "environment": [],
+      "program": "c:/Users/vrues/Documents/GitHub/vscode-opencl/_dev/make_man/build/Debug/outDebug",
+>>>>>>> Stashed changes
+      "internalConsoleOptions": "openOnSessionStart",
+      "MIMode": "gdb",
+      "miDebuggerPath": "gdb",
+      "externalConsole": false,
+      "setupCommands": [
+        {
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        }
+      ]
+    }
+  ]
+<<<<<<< Updated upstream
+=======
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
 }

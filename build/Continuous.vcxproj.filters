@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\vrues\Documents\GitHub\vscode-opencl\build\CMakeFiles\22a45810d69037edcb8e238af1b1139e\Continuous.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\vrues\Documents\GitHub\vscode-opencl\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="C:\Users\vrues\Documents\GitHub\vscode-opencl\build\CMakeFiles\Continuous" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{68AEEE78-F23D-3DFA-A3F3-8FB32F82801F}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

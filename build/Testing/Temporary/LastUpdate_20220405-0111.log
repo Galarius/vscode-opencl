@@ -1,0 +1,29 @@
+--- Begin Cleanup ---
+--- End Cleanup ---
+"C:/Program Files/Git/cmd/git.exe" "rev-list" "-n" "1" "HEAD" "--"
+rl-out> 510bc7f553c8309f03e1e9c7883bedb13ba82a24
+--- Begin Update ---
+"C:/Program Files/Git/cmd/git.exe" "fetch"
+"C:/Program Files/Git/cmd/git.exe" "rev-parse" "--git-dir"
+rev-parse-out> .git
+FETCH_HEAD> 510bc7f553c8309f03e1e9c7883bedb13ba82a24		branch 'master' of https://github.com/Winslohw/vscode-opencl
+"C:/Program Files/Git/cmd/git.exe" "reset" "--hard" "510bc7f553c8309f03e1e9c7883bedb13ba82a24"
+reset-out> HEAD is now at 510bc7f Squashed commit of the following:
+"C:/Program Files/Git/cmd/git.exe" "rev-parse" "--show-cdup"
+rev-parse-out> 
+"C:/Program Files/Git/cmd/git.exe" "--version"
+version-out> git version 2.35.1.windows.2
+"C:/Program Files/Git/cmd/git.exe" "submodule" "sync" "--recursive"
+submodule-out> Synchronizing submodule url for 'server'
+submodule-out> Synchronizing submodule url for 'server/lib/catch'
+submodule-out> Synchronizing submodule url for 'server/lib/json'
+"C:/Program Files/Git/cmd/git.exe" "submodule" "update" "--recursive"
+--- End Update ---
+"C:/Program Files/Git/cmd/git.exe" "rev-list" "-n" "1" "HEAD" "--"
+rl-out> 510bc7f553c8309f03e1e9c7883bedb13ba82a24
+--- Begin Revisions ---
+"C:/Program Files/Git/cmd/git.exe" "rev-list" "--reverse" "510bc7f553c8309f03e1e9c7883bedb13ba82a24..510bc7f553c8309f03e1e9c7883bedb13ba82a24" "--" | "C:/Program Files/Git/cmd/git.exe" "diff-tree" "--stdin" "--always" "-z" "-r" "--pretty=raw" "--encoding=utf-8"
+dt-out> 
+"C:/Program Files/Git/cmd/git.exe" "update-index" "--refresh"
+"C:/Program Files/Git/cmd/git.exe" "diff-index" "-z" "HEAD" "--"
+--- End Revisions ---
