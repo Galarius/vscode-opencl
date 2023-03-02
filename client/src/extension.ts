@@ -5,6 +5,7 @@ import * as path from 'path';
 import * as vscode from 'vscode';
 import * as oclinfo from "./commands/oclinfo";
 import * as formatter from "./providers/formatter";
+import { LanguageClient } from 'vscode-languageclient/node';
 
 import { OPECL_LANGUAGE_ID } from './modules/common'
 import { OpenCLCompletionItemProvider } from './providers/completion/completion';
@@ -91,10 +92,13 @@ export function activate(context: vscode.ExtensionContext) {
             // Stopped = 1, Starting = 3, Running = 2
             output.appendLine(`State changed: ${e.oldState} -> ${e.newState}`)
         })
-        client.onReady().then(() => {
-            output.appendLine('Ready')
-        })
-        let disposable = client.start();
-        context.subscriptions.push(disposable);
+        client.start();
     }
+}
+
+export function deactivate(): Thenable<void> | undefined {
+	if (!client) {
+		return undefined;
+	}
+	return client.stop();
 }

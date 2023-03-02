@@ -3,7 +3,6 @@
 import * as vscode from 'vscode';
 import * as path from 'path';
 import * as os from "os";
-var exec = require('child-process-promise').exec;
 
 import { EXTENSION_ID } from '../modules/constants'
 
