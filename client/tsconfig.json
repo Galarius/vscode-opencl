@@ -8,8 +8,12 @@
 		"outDir": "out",
 		"rootDir": "src",
 		"sourceMap": true,
-		"composite": true
+		"composite": true,
+		"resolveJsonModule": true,
 	},
-	"include": ["src"],
+	"include": [
+		"src",
+		"src/providers/view/l10n/default.json"
+	],
 	"exclude": ["node_modules"]
 }

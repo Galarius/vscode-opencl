@@ -15,7 +15,10 @@
 * Create extension package locally: `vsce package`
 * Publish extesion: `vsce publish`
 
-## OpenCL:Info
+## How to update each dependency in package.json to the latest version?
 
-* On Windows & macOS: [ocl-info](https://github.com/Galarius/ocl-info)
-* On Linux: [clinfo](https://github.com/Oblomov/clinfo)
+```
+npm i -g npm-check-updates
+ncu -u
+npm install
+```

@@ -1,46 +1,42 @@
 'use strict';
 
 import * as vscode from 'vscode';
-import * as path from 'path';
 import * as os from "os";
 
-import { EXTENSION_ID } from '../modules/constants'
+import { GetLanguageServerPath, GetLanguageServerDebugPath } from '../providers/server/server';
+import { isDebugMode } from '../modules/debug';
 
 import * as cmd from './cmd';
 
-function findOclInfoPath(): string {
-    let extPath = vscode.extensions.getExtension(EXTENSION_ID).extensionPath
-    switch (os.platform()) {
-        case "win32":
-            return path.join(extPath, "bin", "win32", "oclinfo.exe");
-        case "darwin":
-            return path.join(extPath, "bin", "darwin", "oclinfo");
-        case "linux":
-            return path.join(extPath, "bin", "linux", "clinfo");
-        default:
-            return "";
-    }
-}
+export function oclinfoDumpAll(extensionUri: vscode.Uri) {
 
-export function oclinfoDumpAll() {
-    let oclinfoPath = findOclInfoPath();
-    if(oclinfoPath) {
-        let command = cmd.buildCommand([oclinfoPath, "-pds"])
-        cmd.execute(command).then(function(output){
-            vscode.workspace.openTextDocument({language: 'text'}).then((doc: vscode.TextDocument) => {
-                vscode.window.showTextDocument(doc, 1, false).then(e => {
-                    e.edit(edit => {
-                        edit.insert(new vscode.Position(0, 0), output.toString("utf-8"));
-                    });
-                });
-            }, (error: any) => {
-                console.error(error);
-                vscode.window.showErrorMessage(error);
-            });
-        });
+    var serverPath = ''
+		
+    if(isDebugMode()) {
+        serverPath = GetLanguageServerDebugPath(extensionUri)
     } else {
-        let error = "Not available for your OS!";
+        serverPath = GetLanguageServerPath(extensionUri)
+    }
+    if(!serverPath) {  
+        let error = "OpenCL Language Server is not available for platform: " + os.platform();
         console.error(error);
         vscode.window.showErrorMessage("Error: " + error);
     }
+    let command = cmd.buildCommand([serverPath, "--clinfo"])
+    cmd.execute(command).then((output) => {
+        let clinfoDict = JSON.parse(output.toString("utf-8"));
+        vscode.workspace.openTextDocument({language: 'json'}).then((doc: vscode.TextDocument) => {
+            vscode.window.showTextDocument(doc, 1, false).then(e => {
+                e.edit(edit => {
+                    edit.insert(new vscode.Position(0, 0), JSON.stringify(clinfoDict, null, 2));
+                });
+            });
+        }, (error: any) => {
+            console.error(error);
+            vscode.window.showErrorMessage(error);
+        });
+    }).catch(function(error) {
+        console.error(error);
+        vscode.window.showErrorMessage(error);
+    });
 }
