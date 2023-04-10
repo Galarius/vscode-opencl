@@ -39,7 +39,7 @@ function CreateLanguageServer(selector: vscode.DocumentFilter, output: vscode.Ou
     var serverPath = GetLanguageServerPath(extensionUri)
     if(!serverPath ) { 
         output.appendLine("OpenCL Language Server is not available for platform: " + os.platform())
-        return
+        return undefined
     }
     var debugServerPath = GetLanguageServerDebugPath(extensionUri)
     let enableFileLogging = vscode.workspace.getConfiguration().get('OpenCL.server.debug.enableFileLogging', false)

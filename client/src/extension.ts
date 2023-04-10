@@ -17,13 +17,6 @@ import { OpenCLDevicesProvider, OpenCLDeviceTreeItem } from "./providers/view/de
 let client: LanguageClient;
 
 export function activate(context: vscode.ExtensionContext) {
-
-    // Commands
-    let openclInfo = vscode.commands.registerCommand('opencl.info', () => {
-        oclinfo.oclinfoDumpAll();
-    });
-    context.subscriptions.push(openclInfo);
-
     // Completion
     let completionProvider = new OpenCLCompletionItemProvider();
     context.subscriptions.push(vscode.languages.registerCompletionItemProvider(OPECL_LANGUAGE_ID, completionProvider));
@@ -85,10 +78,51 @@ export function activate(context: vscode.ExtensionContext) {
         }
     }));
 
+    // Tree View
+    const nodeDependenciesProvider = new OpenCLDevicesProvider(context.extensionUri);
+    vscode.window.registerTreeDataProvider('opencl-devices-explorer', nodeDependenciesProvider);
+
+    // Commands
+    let openclInfo = vscode.commands.registerCommand('opencl.info', () => {
+        oclinfo.oclinfoDumpAll(context.extensionUri);
+    });
+    context.subscriptions.push(openclInfo);
+
+    let openclSelect = vscode.commands.registerCommand('opencl.select', async (node: OpenCLDeviceTreeItem) => {
+        if (typeof node === 'undefined') {
+            let format_label = (label, identifier) => `${label} [${identifier}]`
+            let devices = nodeDependenciesProvider.getDevices()
+            let choices = devices.map(val => (format_label(val.label, val.identifier)))
+            const result = await vscode.window.showQuickPick(choices, {
+                onDidSelectItem: item => {
+                    let device = devices.find(obj => format_label(obj.label, obj.identifier) === item)
+                    const configuration = vscode.workspace.getConfiguration()
+                    configuration.update('OpenCL.server.deviceID', device.identifier, vscode.ConfigurationTarget.Workspace, true)
+                }
+            });
+        } else {
+            const configuration = vscode.workspace.getConfiguration()
+            configuration.update('OpenCL.server.deviceID', node.identifier, vscode.ConfigurationTarget.Workspace, true)
+            vscode.window.showInformationMessage(`Use OpenCL device '${node.label}' for diagnostics.`)
+        }
+    });
+    context.subscriptions.push(openclSelect);
+
+    let toogleExplorerView = vscode.commands.registerCommand('opencl.toggle-explorer-view', () => {
+        const configuration = vscode.workspace.getConfiguration()
+        let isLocalized = vscode.workspace.getConfiguration().get('OpenCL.explorer.localizedProperties', true)
+        configuration.update('OpenCL.explorer.localizedProperties', !isLocalized, vscode.ConfigurationTarget.Workspace, true)
+        nodeDependenciesProvider.refresh()
+    });
+    context.subscriptions.push(toogleExplorerView);
+
     // Language Server
     if (vscode.workspace.getConfiguration().get('OpenCL.server.enable', true)) {
         let output: vscode.OutputChannel = vscode.window.createOutputChannel('OpenCL Language Server')
         let client = CreateLanguageServer(OPECL_LANGUAGE_ID, output, context.extensionUri)
+        if (typeof client === 'undefined') {
+            return
+        }
         client.onDidChangeState((e) => {
             // Stopped = 1, Starting = 3, Running = 2
             output.appendLine(`State changed: ${e.oldState} -> ${e.newState}`)
@@ -98,8 +132,8 @@ export function activate(context: vscode.ExtensionContext) {
 }
 
 export function deactivate(): Thenable<void> | undefined {
-	if (!client) {
-		return undefined;
-	}
-	return client.stop();
+    if (!client) {
+        return undefined;
+    }
+    return client.stop();
 }

@@ -79,9 +79,51 @@
             {
                 "command": "opencl.info",
                 "title": "OpenCL: Info",
-                "description": "Show OpenCL platforms/devices info."
+                "description": "Show OpenCL devices information in JSON format",
+                "icon": "$(json)"
+            },
+            {
+                "command": "opencl.select",
+                "title": "OpenCL: Select",
+                "description": "Select the OpenCL device for diagnostics",
+                "icon": "$(plug)"
+            },
+            {
+                "command": "opencl.toggle-explorer-view",
+                "title": "OpenCL: Toggle View",
+                "description": "OpenCL: Toggle the explorer view (localized or raw properties)",
+                "icon": "$(eye)"
             }
         ],
+        "views": {
+            "explorer": [
+                {
+                    "id": "opencl-devices-explorer",
+                    "name": "OpenCL Devices"
+                }
+            ]
+        },
+        "menus": {
+            "view/title": [
+                {
+                    "command": "opencl.toggle-explorer-view",
+                    "when": "view == opencl-devices-explorer",
+                    "group": "navigation"
+                },
+                {
+                    "command": "opencl.info",
+                    "when": "view == opencl-devices-explorer",
+                    "group": "navigation"
+                }
+            ],
+            "view/item/context": [
+                {
+                    "command": "opencl.select",
+                    "when": "view == opencl-devices-explorer && viewItem == opencl-device",
+                    "group": "inline"
+                }
+            ]
+        },
         "configuration": {
             "type": "object",
             "title": "OpenCL",
@@ -91,6 +133,11 @@
                     "default": "clang-format",
                     "description": "Default formatting utility is 'clang-format', which is shipped with 'ms-vscode.cpptools' extension. Specify an absolute path to use another version of 'clang-format'."
                 },
+                "OpenCL.explorer.localizedProperties": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Show localized properties of OpenCL devices in the explorer view (uncheck to show raw OpenCL properties)."
+                },
                 "OpenCL.server.enable": {
                     "type": "boolean",
                     "default": true,
@@ -99,6 +146,12 @@
                 "OpenCL.server.buildOptions": {
                     "type": "array",
                     "description": "Build options to be used for building the program executable. The list of supported options is described on https://www.khronos.org/registry/OpenCL/sdk/1.2/docs/man/xhtml/clBuildProgram.html."
+                },
+                "OpenCL.server.deviceID": {
+                    "scope": "resource",
+                    "type": "number",
+                    "default": 0,
+                    "description": "ID or 0 (automatic selection) of the OpenCL device to be used for diagnostics. Use the 'OpenCL: Select' command or the 'OpenCL Devices' explorer actions to specify the identifier."
                 },
                 "OpenCL.server.maxNumberOfProblems": {
                     "scope": "resource",
