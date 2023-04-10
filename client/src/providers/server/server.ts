@@ -11,25 +11,37 @@ import {
     TransportKind
 } from 'vscode-languageclient/node';
 
-function createLanguageServer(selector: vscode.DocumentFilter, output: vscode.OutputChannel, extensionUri: vscode.Uri): LanguageClient {    
-    var serverPath = ''
-    var debugServerPath = ''
+function GetLanguageServerPath(extensionUri: vscode.Uri): string | undefined {
     let platform = os.platform()
-
     if(platform == "darwin") { 
-        serverPath = vscode.Uri.joinPath(extensionUri, path.join('bin', 'darwin', 'opencl-language-server')).fsPath;
-        debugServerPath = vscode.Uri.joinPath(extensionUri, path.join('server', 'build', 'bin', 'Debug', 'opencl-language-server')).fsPath;
+        return vscode.Uri.joinPath(extensionUri, path.join('bin', 'darwin', 'opencl-language-server')).fsPath;
     } else if(platform == "linux") {
-        serverPath = vscode.Uri.joinPath(extensionUri, path.join('bin', 'linux', 'opencl-language-server')).fsPath;
-        debugServerPath = vscode.Uri.joinPath(extensionUri, path.join('server', 'build', 'bin', 'opencl-language-server')).fsPath;
+        return vscode.Uri.joinPath(extensionUri, path.join('bin', 'linux', 'opencl-language-server')).fsPath;
     } else if(platform == "win32") {
-        serverPath = vscode.Uri.joinPath(extensionUri, path.join('bin', 'win32', 'opencl-language-server.exe')).fsPath;
-        debugServerPath = vscode.Uri.joinPath(extensionUri, path.join('server', 'build', 'bin', 'Debug', 'opencl-language-server.exe')).fsPath;
-    } else {
-        output.appendLine("OpenCL Language Server is not available for platform: " + platform)
+        return vscode.Uri.joinPath(extensionUri, path.join('bin', 'win32', 'opencl-language-server.exe')).fsPath;
+    }
+    return undefined
+}
+
+function GetLanguageServerDebugPath(extensionUri: vscode.Uri): string | undefined {
+    let platform = os.platform()
+    if(platform == "darwin") { 
+        return vscode.Uri.joinPath(extensionUri, path.join('server', 'build', 'bin', 'Debug', 'opencl-language-server')).fsPath;
+    } else if(platform == "linux") {
+        return vscode.Uri.joinPath(extensionUri, path.join('server', 'build', 'bin', 'opencl-language-server')).fsPath;
+    } else if(platform == "win32") {
+        return vscode.Uri.joinPath(extensionUri, path.join('server', 'build', 'bin', 'Debug', 'opencl-language-server.exe')).fsPath;
+    }
+    return undefined
+}
+
+function CreateLanguageServer(selector: vscode.DocumentFilter, output: vscode.OutputChannel, extensionUri: vscode.Uri): LanguageClient {    
+    var serverPath = GetLanguageServerPath(extensionUri)
+    if(!serverPath ) { 
+        output.appendLine("OpenCL Language Server is not available for platform: " + os.platform())
         return
     }
-
+    var debugServerPath = GetLanguageServerDebugPath(extensionUri)
     let enableFileLogging = vscode.workspace.getConfiguration().get('OpenCL.server.debug.enableFileLogging', false)
     let logFileName = vscode.workspace.getConfiguration().get('OpenCL.server.debug.logFileName', 'opencl-language-server.log')
     let logLevel = vscode.workspace.getConfiguration().get('OpenCL.server.debug.logLevel', 0)
@@ -57,6 +69,7 @@ function createLanguageServer(selector: vscode.DocumentFilter, output: vscode.Ou
         initializationOptions: {
             configuration: {
                 buildOptions: vscode.workspace.getConfiguration().get('OpenCL.server.buildOptions', []),
+                deviceID: vscode.workspace.getConfiguration().get('OpenCL.server.deviceID', 0),
                 maxNumberOfProblems: vscode.workspace.getConfiguration().get('OpenCL.server.maxNumberOfProblems', 100)
             }
         },
@@ -74,4 +87,4 @@ function createLanguageServer(selector: vscode.DocumentFilter, output: vscode.Ou
     );
 }
 
-export { createLanguageServer }
+export { CreateLanguageServer, GetLanguageServerPath, GetLanguageServerDebugPath}
