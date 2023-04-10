@@ -11,8 +11,10 @@ import { OPECL_LANGUAGE_ID } from './modules/common'
 import { OpenCLCompletionItemProvider } from './providers/completion/completion';
 import { OpenCLHoverProvider } from './providers/hover/hover';
 import { getOpenCLTasks, buildTask, OpenCLDeviceDetector } from './providers/task';
-import { createLanguageServer } from "./providers/server/server";
-import { Trace } from 'vscode-languageclient';
+import { CreateLanguageServer } from "./providers/server/server";
+import { OpenCLDevicesProvider, OpenCLDeviceTreeItem } from "./providers/view/devices";
+
+let client: LanguageClient;
 
 export function activate(context: vscode.ExtensionContext) {
 
@@ -86,8 +88,7 @@ export function activate(context: vscode.ExtensionContext) {
     // Language Server
     if (vscode.workspace.getConfiguration().get('OpenCL.server.enable', true)) {
         let output: vscode.OutputChannel = vscode.window.createOutputChannel('OpenCL Language Server')
-        let client = createLanguageServer(OPECL_LANGUAGE_ID, output, context.extensionUri)
-        client.trace = Trace.Verbose;
+        let client = CreateLanguageServer(OPECL_LANGUAGE_ID, output, context.extensionUri)
         client.onDidChangeState((e) => {
             // Stopped = 1, Starting = 3, Running = 2
             output.appendLine(`State changed: ${e.oldState} -> ${e.newState}`)
