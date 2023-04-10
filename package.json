@@ -34,10 +34,8 @@
         "Formatters"
     ],
     "activationEvents": [
-        "onLanguage:opencl",
         "onLanguage:c",
         "onLanguage:cpp",
-        "onCommand:opencl.info",
         "onCommand:workbench.action.tasks.runTask"
     ],
     "main": "./dist/extension",
