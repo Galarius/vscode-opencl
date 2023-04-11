@@ -24,9 +24,7 @@ const getClangBinaryPath = () => {
         return undefined
 
     const baseDir = path.join(extension.extensionPath, 'LLVM', 'bin')
-    if(process.platform == 'darwin') {
-        return path.join(baseDir, 'clang-format.darwin')
-    } else if(process.platform == 'win32') {
+    if(process.platform == 'win32') {
         return path.join(baseDir, 'clang-format.exe')
     }
     return path.join(baseDir, 'clang-format')
