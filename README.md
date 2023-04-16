@@ -1,8 +1,8 @@
 # OpenCL for Visual Studio Code
 
-[![Install Count](https://vsmarketplacebadges.dev/installs-short/galarius.vscode-opencl.svg)](https://marketplace.visualstudio.com/items?itemName=galarius.vscode-opencl)
-[![Downloads](https://vsmarketplacebadges.dev/downloads-short/galarius.vscode-opencl.svg)](https://marketplace.visualstudio.com/items?itemName=galarius.vscode-opencl)
-[![Rating](https://vsmarketplacebadges.dev/rating-star/galarius.vscode-opencl.svg)](https://marketplace.visualstudio.com/items?itemName=galarius.vscode-opencl)
+[![Install Count](https://vsmarketplacebadges.dev/installs-short/galarius.vscode-opencl.png)](https://marketplace.visualstudio.com/items?itemName=galarius.vscode-opencl)
+[![Downloads](https://vsmarketplacebadges.dev/downloads-short/galarius.vscode-opencl.png)](https://marketplace.visualstudio.com/items?itemName=galarius.vscode-opencl)
+[![Rating](https://vsmarketplacebadges.dev/rating-star/galarius.vscode-opencl.png)](https://marketplace.visualstudio.com/items?itemName=galarius.vscode-opencl)
 
 This extension adds [OpenCL C/C++](https://en.wikipedia.org/wiki/OpenCL) language support to [VS Code](https://code.visualstudio.com).
 
