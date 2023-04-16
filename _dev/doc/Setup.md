@@ -3,7 +3,7 @@
 ## Setup OpenCL VS Code Extension
 
 * Install npm if needed: `brew install npm`
-* Install vsce if needed: `npm install -g vsce`
+* Install vsce if needed: `npm install -g @vscode/vsce`
 * Install packages for extension: `npm install`
 
 ## Setup OpenCL Language Server
