@@ -14,7 +14,7 @@
         "url": "https://github.com/Galarius/vscode-opencl"
     },
     "engines": {
-        "vscode": "^1.74.0"
+        "vscode": "^1.76.0"
     },
     "markdown": "github",
     "keywords": [
