@@ -1,7 +1,6 @@
 'use strict';
 
 import * as vscode from 'vscode';
-import * as path from 'path';
 import * as os from 'os';
 import * as cmd from '../../commands/cmd';
 
@@ -175,7 +174,7 @@ export class OpenCLDevicesProvider implements vscode.TreeDataProvider<vscode.Tre
 		return items.sort((a, b) => a.label.localeCompare(b.label))
 	}
 
-	private getDescriptionOrKey(key): string {
+	private getDescriptionOrKey(key: string): string {
 		if (vscode.workspace.getConfiguration().get('OpenCL.explorer.localizedProperties', true)) {
 			if (key in l10nDefault) {
 				return l10nDefault[key]
@@ -184,7 +183,7 @@ export class OpenCLDevicesProvider implements vscode.TreeDataProvider<vscode.Tre
 		return key
 	}
 
-	private getLocalizedPair(key, value): string {
+	private getLocalizedPair(key: string, value: string): string {
 		return `${this.getDescriptionOrKey(key)}: ${this.getDescriptionOrKey(value)}`
 	}
 }

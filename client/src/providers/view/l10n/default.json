@@ -83,9 +83,9 @@
 
     "CL_FP_DENORM":"Denorms are supported",
     "CL_FP_INF_NAN":"INF and NaNs are supported", 
-    "CL_FP_ROUND_TO_NEAREST":"Round to nearest even rounding mode supported",
-    "CL_FP_ROUND_TO_ZERO":"Round to zero rounding mode supported",
-    "CL_FP_ROUND_TO_INF":"Round to +ve and -ve infinity rounding modes supported",
+    "CL_FP_ROUND_TO_NEAREST":"Round to nearest even rounding mode is supported",
+    "CL_FP_ROUND_TO_ZERO":"Round to zero rounding mode is supported",
+    "CL_FP_ROUND_TO_INF":"Round to +ve and -ve infinity rounding modes are supported",
     "CL_FP_FMA":"IEEE754-2008 fused multiply-add is supported",
 
     "CL_TRUE": "Yes",
