@@ -36,7 +36,7 @@ This extension adds [OpenCL C/C++](https://en.wikipedia.org/wiki/OpenCL) languag
 | Kernel Diagnostics |
 | `OpenCL.server.enable` | Enables OpenCL Language Server. |
 | `OpenCL.server.buildOptions` | Build options to be used for building the program. The list of [supported](https://www.khronos.org/registry/OpenCL/sdk/1.2/docs/man/xhtml/clBuildProgram.html) build options. |
-| `OpenCL.server.deviceID` | ID or 0 (automatic selection) of the OpenCL device to be used for diagnostics. Use the `OpenCL: Select` command or the `OpenCL Devices` explorer actions to specify the identifier. |
+| `OpenCL.server.deviceID` | Device ID or 0 (automatic selection) of the OpenCL device to be used for diagnostics. Use the `OpenCL: Select` command or the `OpenCL Devices` explorer actions to specify the identifier. |
 | `OpenCL.server.maxNumberOfProblems` | Controls the maximum number of problems produced by the server. |
 | `opencl.trace.server` | Traces the communication between VS Code and the OpenCL language server. |
 | OpenCL Devices Information | |
@@ -51,8 +51,8 @@ This extension adds [OpenCL C/C++](https://en.wikipedia.org/wiki/OpenCL) languag
 | Command | Description |
 | ------- | ----------- |
 | `OpenCL: Info` | This command opens a new VS Code tab filled with the information about available OpenCL devices |
-| `OpenCL: Select` | Select the OpenCL device for diagnostics |
-| `OpenCL: Toggle View` | OpenCL: Toggle the explorer view (localized or raw properties) |
+| `OpenCL: Select` | Select the OpenCL device for kernel diagnostics |
+| `OpenCL: Toggle View` | Toggle the explorer view (display localized or raw properties) |
 
 ---
 

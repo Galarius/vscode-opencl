@@ -1,5 +1,37 @@
 # OpenCL for Visual Studio Code Change Log
 
+## Version 0.8.0: April 30, 2023
+
+This version introduces an explorer view extension to display information about available OpenCL devices.
+
+![](https://raw.githubusercontent.com/Galarius/vscode-opencl/master/images/vscode-opencl-explorer-view.png)
+
+### New commands
+
+|  |  |
+| ------- | ----------- |
+| `OpenCL: Select` | Select the OpenCL device for kernel diagnostics |
+| `OpenCL: Toggle View` | Toggle the explorer view (display localized or raw properties) |
+
+### New settings
+
+|  |  |
+| ------- | ------------ |
+| `OpenCL.server.deviceID` | Device ID or 0 (automatic selection) of the OpenCL device to be used for diagnostics. Use the `OpenCL: Select` command or the `OpenCL Devices` explorer actions to specify the identifier. |
+| `OpenCL.explorer.localizedProperties` | Show localized properties of OpenCL devices in the explorer view (uncheck to show raw OpenCL properties). |
+
+### Other changes
+
+* Distribution of the `clinfo` and `oclinfo` binary utilities has been discontinued in favor of `opencl-language-server/0.4`.
+
+* The `OpenCL: Info` command now displays non-localized information about OpenCL devices in JSON format and corresponds to content displayed in the explorer view.
+
+* Fixed code formatting with `clang-format` supplied with the `ms-vscode.cpptools` extension on macOS.
+
+* Security updates.
+
+---
+
 ## Version 0.7.4: May 5, 2022
 
 * Security updates
@@ -172,8 +204,6 @@ An example of modified `tasks.json` configuration file for using [AMD Mali](http
 ## Version 0.1.3: October 29, 2017
 
 Added command `OpenCL: Info` to show OpenCL platforms/devices info.
-
-![vscode-opencl-cmd-oclinfo](https://raw.githubusercontent.com/Galarius/vscode-opencl/master/images/vscode-opencl-cmd-oclinfo.gif)
 
 *Only Win32 and macOS are supported.*
 

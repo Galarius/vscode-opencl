@@ -2,7 +2,7 @@
     "name": "vscode-opencl",
     "displayName": "OpenCL",
     "description": "OpenCL for Visual Studio Code",
-    "version": "0.7.4",
+    "version": "0.8.0",
     "publisher": "galarius",
     "icon": "images/OpenCL_128x.png",
     "author": {
@@ -91,7 +91,7 @@
             {
                 "command": "opencl.toggle-explorer-view",
                 "title": "OpenCL: Toggle View",
-                "description": "OpenCL: Toggle the explorer view (localized or raw properties)",
+                "description": "OpenCL: Toggle the explorer view (display localized or raw properties)",
                 "icon": "$(eye)"
             }
         ],
@@ -151,7 +151,7 @@
                     "scope": "resource",
                     "type": "number",
                     "default": 0,
-                    "description": "ID or 0 (automatic selection) of the OpenCL device to be used for diagnostics. Use the 'OpenCL: Select' command or the 'OpenCL Devices' explorer actions to specify the identifier."
+                    "description": "Device ID or 0 (automatic selection) of the OpenCL device to be used for diagnostics. Use the 'OpenCL: Select' command or the 'OpenCL Devices' explorer actions to specify the identifier."
                 },
                 "OpenCL.server.maxNumberOfProblems": {
                     "scope": "resource",
