@@ -1,5 +1,10 @@
 # OpenCL for Visual Studio Code Change Log
 
+## Version 0.8.1: May 3, 2023
+
+The language server for linux has been recompiled on Ubuntu-20.04 and is bundled with this update.
+This ensures compatibility with older systems for which GLIBC_2.32 is not available.
+
 ## Version 0.8.0: April 30, 2023
 
 This version introduces an explorer view extension to display information about available OpenCL devices.

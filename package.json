@@ -2,7 +2,7 @@
     "name": "vscode-opencl",
     "displayName": "OpenCL",
     "description": "OpenCL for Visual Studio Code",
-    "version": "0.8.0",
+    "version": "0.8.1",
     "publisher": "galarius",
     "icon": "images/OpenCL_128x.png",
     "author": {
