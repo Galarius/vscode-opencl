@@ -66,6 +66,10 @@ See [FAQ.md](https://github.com/Galarius/vscode-opencl/blob/master/FAQ.md) for k
 
 ---
 
+## Development
+
+See [development notes](DEV.md).
+
 ## Contributing
 
 [Contributing Guide](https://github.com/Galarius/vscode-opencl/blob/master/CONTRIBUTING.md)

@@ -10,3 +10,5 @@ _dev/**
 .gitignore
 .gitmodules
 webpack.config.js
+bin/**/.keep
+bin/.gitignore

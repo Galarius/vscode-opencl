@@ -22,7 +22,7 @@ export function oclinfoDumpAll(extensionUri: vscode.Uri) {
         console.error(error);
         vscode.window.showErrorMessage("Error: " + error);
     }
-    let command = cmd.buildCommand([serverPath, "--clinfo"])
+    let command = cmd.buildCommand([serverPath, "clinfo"])
     cmd.execute(command).then((output) => {
         let clinfoDict = JSON.parse(output.toString("utf-8"));
         vscode.workspace.openTextDocument({language: 'json'}).then((doc: vscode.TextDocument) => {

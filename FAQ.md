@@ -8,7 +8,7 @@ The extension uses a set of tools to provide offline compilation and OpenCL devi
 
 ---
 
-> Why ioc32/ioc64 doesn't work with `#include`?
+> Why doesn't `ioc32`/`ioc64` work with `#include`?
 
 * **Problem matcher doesn't work on Windows for kernal file with `#include` statements** ([#13](https://github.com/Galarius/vscode-opencl/issues/13))
 
@@ -74,15 +74,3 @@ The extension uses a set of tools to provide offline compilation and OpenCL devi
 
     </details>
 
----
-
-> Why `OpenCL: Info` command shows error?
-
-The command needs OpenCL drivers and run-time libraries to be installed on your system. They can be obtained e.g. from [Intel](https://software.intel.com/en-us/articles/opencl-drivers).
-
-
----
-
-> I am on Linux. `OpenCL: Info` seems very overwhelming compared to other operating systems?
-
-`OpenCL: Info` on Linux uses another tool to extract the information about the system.

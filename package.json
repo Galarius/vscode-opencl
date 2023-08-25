@@ -156,10 +156,10 @@
                 "OpenCL.server.maxNumberOfProblems": {
                     "scope": "resource",
                     "type": "number",
-                    "default": 100,
+                    "default": 127,
                     "description": "Controls the maximum number of problems produced by the server."
                 },
-                "OpenCL.trace.server": {
+                "opencl.trace.server": {
                     "scope": "window",
                     "type": "string",
                     "enum": [
@@ -272,7 +272,7 @@
         "@babel/preset-env": "^7.22.10",
         "@types/jest": "^29.5.4",
         "@types/node": "20.x",
-        "@types/vscode": "^1.81.0",
+        "@types/vscode": "^1.76.0",
         "babel-jest": "^29.6.4",
         "jest": "^29.6.4",
         "ts-loader": "^9.4.4",

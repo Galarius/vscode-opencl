@@ -24,15 +24,7 @@ function GetLanguageServerPath(extensionUri: vscode.Uri): string | undefined {
 }
 
 function GetLanguageServerDebugPath(extensionUri: vscode.Uri): string | undefined {
-    let platform = os.platform()
-    if(platform == "darwin") { 
-        return vscode.Uri.joinPath(extensionUri, path.join('server', 'build', 'bin', 'Debug', 'opencl-language-server')).fsPath;
-    } else if(platform == "linux") {
-        return vscode.Uri.joinPath(extensionUri, path.join('server', 'build', 'bin', 'opencl-language-server')).fsPath;
-    } else if(platform == "win32") {
-        return vscode.Uri.joinPath(extensionUri, path.join('server', 'build', 'bin', 'Debug', 'opencl-language-server.exe')).fsPath;
-    }
-    return undefined
+    return process.env.OPENCL_LANGUAGE_SERVER
 }
 
 function CreateLanguageServer(selector: vscode.DocumentFilter, output: vscode.OutputChannel, extensionUri: vscode.Uri): LanguageClient {    
@@ -42,16 +34,17 @@ function CreateLanguageServer(selector: vscode.DocumentFilter, output: vscode.Ou
         return undefined
     }
     var debugServerPath = GetLanguageServerDebugPath(extensionUri)
-    let enableFileLogging = vscode.workspace.getConfiguration().get('OpenCL.server.debug.enableFileLogging', false)
-    let logFileName = vscode.workspace.getConfiguration().get('OpenCL.server.debug.logFileName', 'opencl-language-server.log')
-    let logLevel = vscode.workspace.getConfiguration().get('OpenCL.server.debug.logLevel', 0)
+    let debugConfiguration = vscode.workspace.getConfiguration('OpenCL.server.debug', null)
+    let enableFileLogging = debugConfiguration.get('enableFileLogging', false)
+    let logFileName = debugConfiguration.get('logFileName', 'opencl-language-server.log')
+    let logLevel = debugConfiguration.get('logLevel', 0)
     let args: Array<any> = []
     if(enableFileLogging)
     {
-        args.push('--enable-file-tracing')
-        args.push('--filename')
+        args.push('--enable-file-logging')
+        args.push('--log-file')
         args.push(logFileName)
-        args.push('--level')
+        args.push('--log-level')
         args.push(logLevel)
     }
 
@@ -60,6 +53,7 @@ function CreateLanguageServer(selector: vscode.DocumentFilter, output: vscode.Ou
         debug:{command:debugServerPath,args:args,transport:TransportKind.stdio}
     }
 
+    let configuration = vscode.workspace.getConfiguration('OpenCL.server', null)
     let clientOptions: LanguageClientOptions = {
         documentSelector: [{scheme: selector.scheme, language: selector.language}],
         outputChannel: output,
@@ -68,9 +62,9 @@ function CreateLanguageServer(selector: vscode.DocumentFilter, output: vscode.Ou
         revealOutputChannelOn: RevealOutputChannelOn.Never,
         initializationOptions: {
             configuration: {
-                buildOptions: vscode.workspace.getConfiguration().get('OpenCL.server.buildOptions', []),
-                deviceID: vscode.workspace.getConfiguration().get('OpenCL.server.deviceID', 0),
-                maxNumberOfProblems: vscode.workspace.getConfiguration().get('OpenCL.server.maxNumberOfProblems', 100)
+                buildOptions: configuration.get('buildOptions', []),
+                deviceID: configuration.get('deviceID', 0),
+                maxNumberOfProblems: configuration.get('maxNumberOfProblems', 127)
             }
         },
         initializationFailedHandler: error => {

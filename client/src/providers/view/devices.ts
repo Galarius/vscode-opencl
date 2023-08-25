@@ -42,7 +42,7 @@ export class OpenCLDevicesProvider implements vscode.TreeDataProvider<vscode.Tre
 			Promise.resolve([]);
 		}
 		if (element === undefined) {
-			let command = cmd.buildCommand([serverPath, "--clinfo"])
+			let command = cmd.buildCommand([serverPath, "clinfo"])
 			return new Promise((resolve, reject) => {
 				cmd.execute(command).then((output) => {
 					this.clinfoDict = JSON.parse(output.toString("utf-8"));
