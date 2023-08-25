@@ -6,3 +6,4 @@ node_modules
 *.vsix
 *.tsbuildinfo
 .vscode/settings.json
+/server/

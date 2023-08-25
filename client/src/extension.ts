@@ -5,7 +5,7 @@ import * as path from 'path';
 import * as vscode from 'vscode';
 import * as oclinfo from "./commands/oclinfo";
 import * as formatter from "./providers/formatter";
-import { LanguageClient } from 'vscode-languageclient/node';
+import { LanguageClient, State } from 'vscode-languageclient/node';
 
 import { OPECL_LANGUAGE_ID } from './modules/common'
 import { OpenCLCompletionItemProvider } from './providers/completion/completion';
@@ -15,6 +15,15 @@ import { CreateLanguageServer } from "./providers/server/server";
 import { OpenCLDevicesProvider, OpenCLDeviceTreeItem } from "./providers/view/devices";
 
 let client: LanguageClient;
+
+function stateToString(state: State): string {
+    const stateMap: { [key in State]?: string } = {
+        [State.Stopped]: "Stopped",
+        [State.Starting]: "Starting",
+        [State.Running]: "Running"
+    };
+    return stateMap[state] || "Unknown";
+}
 
 export function activate(context: vscode.ExtensionContext) {
     // Completion
@@ -93,31 +102,33 @@ export function activate(context: vscode.ExtensionContext) {
             let format_label = (label, identifier) => `${label} [${identifier}]`
             let devices = nodeDependenciesProvider.getDevices()
             let choices = devices.map(val => (format_label(val.label, val.identifier)))
-            const result = await vscode.window.showQuickPick(choices, {
+            await vscode.window.showQuickPick(choices, {
                 onDidSelectItem: item => {
                     let device = devices.find(obj => format_label(obj.label, obj.identifier) === item)
-                    const configuration = vscode.workspace.getConfiguration()
-                    configuration.update('OpenCL.server.deviceID', device.identifier, vscode.ConfigurationTarget.Workspace, true)
+                    let configuration = vscode.workspace.getConfiguration("OpenCL.server", null)
+                    configuration.update('deviceID', device.identifier, vscode.ConfigurationTarget.Workspace, true)
                 }
             });
         } else {
-            const configuration = vscode.workspace.getConfiguration()
-            configuration.update('OpenCL.server.deviceID', node.identifier, vscode.ConfigurationTarget.Workspace, true)
+            let configuration = vscode.workspace.getConfiguration("OpenCL.server")
+            configuration.update('deviceID', node.identifier, vscode.ConfigurationTarget.Workspace, true)
             vscode.window.showInformationMessage(`Use OpenCL device '${node.label}' for diagnostics.`)
         }
     });
     context.subscriptions.push(openclSelect);
 
     let toogleExplorerView = vscode.commands.registerCommand('opencl.toggle-explorer-view', () => {
-        const configuration = vscode.workspace.getConfiguration()
-        let isLocalized = vscode.workspace.getConfiguration().get('OpenCL.explorer.localizedProperties', true)
-        configuration.update('OpenCL.explorer.localizedProperties', !isLocalized, vscode.ConfigurationTarget.Workspace, true)
+        let configuration = vscode.workspace.getConfiguration("OpenCL.explorer", null)
+        let isLocalized = configuration.get('localizedProperties', true)
+        configuration.update('localizedProperties', !isLocalized, vscode.ConfigurationTarget.Workspace, true)
         nodeDependenciesProvider.refresh()
     });
     context.subscriptions.push(toogleExplorerView);
 
     // Language Server
-    if (vscode.workspace.getConfiguration().get('OpenCL.server.enable', true)) {
+
+    let configuration = vscode.workspace.getConfiguration('OpenCL.server', null)
+    if (configuration.get('enable', true)) {
         let output: vscode.OutputChannel = vscode.window.createOutputChannel('OpenCL Language Server')
         let client = CreateLanguageServer(OPECL_LANGUAGE_ID, output, context.extensionUri)
         if (typeof client === 'undefined') {
@@ -125,7 +136,7 @@ export function activate(context: vscode.ExtensionContext) {
         }
         client.onDidChangeState((e) => {
             // Stopped = 1, Starting = 3, Running = 2
-            output.appendLine(`State changed: ${e.oldState} -> ${e.newState}`)
+            output.appendLine(`State changed: ${stateToString(e.oldState)} -> ${stateToString(e.newState)}`)
         })
         client.start();
     }

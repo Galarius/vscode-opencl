@@ -16,7 +16,8 @@
 			],
 			"preLaunchTask": "npm: webpack-dev",
 			"env": {
-				"VSCODE_DEBUG_MODE": "true"
+				"VSCODE_DEBUG_MODE": "true",
+				"OPENCL_LANGUAGE_SERVER":"${workspaceFolder}/server/.build/opencl-language-server"
 			}
 		},
 		{
