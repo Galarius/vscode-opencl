@@ -1,5 +1,12 @@
 # OpenCL for Visual Studio Code Change Log
 
+## Version 0.8.2: August 26, 2023
+
+This release adopts `opencl-language-server` version [0.6.0](https://github.com/Galarius/opencl-language-server/releases/tag/0.6.0). 
+It offers performance enhancements and resolves various bugs.
+
+Dependencies have been updated to address potential vulnerabilities.
+
 ## Version 0.8.1: May 3, 2023
 
 The language server for linux has been recompiled on Ubuntu-20.04 and is bundled with this update.
