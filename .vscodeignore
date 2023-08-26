@@ -3,12 +3,14 @@
 **/babel.config.js
 **/node_modules/**
 .vscode/**
+.github/**
 client/**
 server/**
 _dev/**
 **/*.map
 .gitignore
-.gitmodules
 webpack.config.js
-bin/**/.keep
+bin/*/.keep
 bin/.gitignore
+scripts/.gitignore
+scripts/*.o
