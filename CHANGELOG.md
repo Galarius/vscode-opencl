@@ -1,5 +1,11 @@
 # OpenCL for Visual Studio Code Change Log
 
+## Version 0.8.3: February 25, 2024
+
+This release introduces a language server for Linux ARM64 (AArch64).
+
+Dependencies have been updated to address potential vulnerabilities.
+
 ## Version 0.8.2: August 26, 2023
 
 This release adopts `opencl-language-server` version [0.6.0](https://github.com/Galarius/opencl-language-server/releases/tag/0.6.0). 
