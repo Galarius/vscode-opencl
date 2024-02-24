@@ -16,7 +16,10 @@ function GetLanguageServerPath(extensionUri: vscode.Uri): string | undefined {
     if(platform == "darwin") { 
         return vscode.Uri.joinPath(extensionUri, path.join('bin', 'darwin', 'opencl-language-server')).fsPath;
     } else if(platform == "linux") {
-        return vscode.Uri.joinPath(extensionUri, path.join('bin', 'linux', 'opencl-language-server')).fsPath;
+        let arch = os.arch()
+        if(arch == "x64" || arch == "arm64") {
+            return vscode.Uri.joinPath(extensionUri, path.join('bin', 'linux', arch, 'opencl-language-server')).fsPath;
+        }
     } else if(platform == "win32") {
         return vscode.Uri.joinPath(extensionUri, path.join('bin', 'win32', 'opencl-language-server.exe')).fsPath;
     }
@@ -30,7 +33,7 @@ function GetLanguageServerDebugPath(extensionUri: vscode.Uri): string | undefine
 function CreateLanguageServer(selector: vscode.DocumentFilter, output: vscode.OutputChannel, extensionUri: vscode.Uri): LanguageClient {    
     var serverPath = GetLanguageServerPath(extensionUri)
     if(!serverPath ) { 
-        output.appendLine("OpenCL Language Server is not available for platform: " + os.platform())
+        output.appendLine("OpenCL Language Server is not available for platform: " + os.platform() + ", arch: " + os.arch())
         return undefined
     }
     var debugServerPath = GetLanguageServerDebugPath(extensionUri)
