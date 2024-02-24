@@ -31,59 +31,73 @@ Setting up the development environment for the `vscode-opencl` extension.
 ### macOS
 
 ```shell
-cd bin/darwin
+pushd ./bin/darwin
 curl --remote-name-all --location  $( curl -s https://api.github.com/repos/Galarius/opencl-language-server/releases/latest | grep "browser_download_url.*darwin-universal" | cut -d : -f 2,3 | tr -d \" )
 tar -xzvf opencl-language-server-darwin-universal.tar.gz
 rm opencl-language-server-darwin-universal.tar.gz
+popd
 ```
 
 Sign the executable
 
 ```shell
-codesign -s {your developer id} --timestamp --force --options runtime opencl-language-server
+codesign -s $SIGNING_IDENTITY --timestamp --force --options runtime ./bin/darwin/opencl-language-server
+codesign -vvvv ./bin/darwin/opencl-language-server
 ```
 
 Archive the executable
 
 ```shell
-zip opencl-language-server.zip opencl-language-server`
+(cd ./bin/darwin; zip opencl-language-server.zip opencl-language-server)
 ```
 
 Perform the notarization
 
 ```shell
-xcrun notarytool submit opencl-language-server.zip --keychain-profile {your profile name} --wait
+pushd ./bin/darwin
+xcrun notarytool submit opencl-language-server.zip --keychain-profile $PROFILE --wait
+xcrun notarytool history --keychain-profile $PROFILE
+xcrun notarytool info --keychain-profile $PROFILE $SUBMISSION_ID
+xcrun notarytool log --keychain-profile $PROFILE $SUBMISSION_ID
+popd
+```
+
+Verify the notarization
+
+```shell
+spctl --assess -vv --type install ./bin/darwin/opencl-language-server
 ```
 
 Remove the archive
 
 ```shell
-rm opencl-language-server.zip
-```
-
-Verify the signing and the notarization
-
-```shell
-codesign --verify -vvvv opencl-language-server
-spctl --assess -vv --type install opencl-language-server
+rm ./bin/darwin/opencl-language-server.zip
 ```
 
 ### Linux
 
 ```shell
-cd ../linux
-curl --remote-name-all --location  $( curl -s https://api.github.com/repos/Galarius/opencl-language-server/releases/latest | grep "browser_download_url.*linux" | cut -d : -f 2,3 | tr -d \" )
+pushd ./bin/linux/x64
+curl --remote-name-all --location  $( curl -s https://api.github.com/repos/Galarius/opencl-language-server/releases/latest | grep "browser_download_url.*linux-x86_64" | cut -d : -f 2,3 | tr -d \" )
 tar -xzvf opencl-language-server-linux-x86_64.tar.gz
 rm opencl-language-server-linux-x86_64.tar.gz
+popd
+
+pushd ./bin/linux/arm64
+curl --remote-name-all --location  $( curl -s https://api.github.com/repos/Galarius/opencl-language-server/releases/latest | grep "browser_download_url.*linux-arm64" | cut -d : -f 2,3 | tr -d \" )
+tar -xzvf opencl-language-server-linux-arm64.tar.gz
+rm opencl-language-server-linux-arm64.tar.gz
+popd
 ```
 
 ### Windows
 
 ```shell
-cd ../win32
+pushd ./bin/win32
 curl --remote-name-all --location  $( curl -s https://api.github.com/repos/Galarius/opencl-language-server/releases/latest | grep "browser_download_url.*win32" | cut -d : -f 2,3 | tr -d \" )
 tar -xzvf opencl-language-server-win32-x86_64.zip
 rm opencl-language-server-win32-x86_64.zip
+popd
 ```
 
 ## Publishing the extension to the Visual Studio Marketplace 
