@@ -135,11 +135,14 @@ export class OpenCLDevicesProvider implements vscode.TreeDataProvider<vscode.Tre
 		let platforms = this.clinfoDict["PLATFORMS"]
 		let result = platforms.find(obj => obj["PLATFORM_ID"] === platformIdentifier);
 		let devices = result["DEVICES"]
-		var items: OpenCLDeviceTreeItem[] = []
-		for (const device of devices) {
-			items.push(new OpenCLDeviceTreeItem(device["CL_DEVICE_NAME"], device["DEVICE_ID"], platformIdentifier));
+		if(devices) {
+			var items: OpenCLDeviceTreeItem[] = []
+			for (const device of devices) {
+				items.push(new OpenCLDeviceTreeItem(device["CL_DEVICE_NAME"], device["DEVICE_ID"], platformIdentifier));
+			}
+			return items.sort((a, b) => a.label.localeCompare(b.label))
 		}
-		return items.sort((a, b) => a.label.localeCompare(b.label))
+		return []
 	}
 
 	getDeviceProperties(deviceIdentifier: string, platformIdentifier: string): OpenCLDeviceInfoTreeItem[] {
