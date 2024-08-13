@@ -54,8 +54,13 @@ Archive the executable
 Perform the notarization
 
 ```shell
+(cd ./bin/darwin; xcrun notarytool submit opencl-language-server.zip --keychain-profile $PROFILE --wait)
+```
+
+Troubleshooting
+
+```shell
 pushd ./bin/darwin
-xcrun notarytool submit opencl-language-server.zip --keychain-profile $PROFILE --wait
 xcrun notarytool history --keychain-profile $PROFILE
 xcrun notarytool info --keychain-profile $PROFILE $SUBMISSION_ID
 xcrun notarytool log --keychain-profile $PROFILE $SUBMISSION_ID
