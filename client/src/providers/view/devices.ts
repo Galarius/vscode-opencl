@@ -2,7 +2,10 @@
 
 import * as vscode from 'vscode';
 import * as os from 'os';
+import * as fs from 'fs';
+import * as path from 'path';
 import * as cmd from '../../commands/cmd';
+import * as tmp from '../../commands/tmp';
 
 import * as l10nDefault from './l10n/default.json';
 
@@ -21,6 +24,46 @@ export class OpenCLDevicesProvider implements vscode.TreeDataProvider<vscode.Tre
 
 	refresh(): void {
 		this._onDidChangeTreeData.fire();
+	}
+
+	execute(serverPath: string): Promise<Buffer> {
+		let tmpdir = tmp.mktmp()
+		let logFilePath: string = null
+		let args: Array<any> = [serverPath]
+		if(tmpdir) {
+			logFilePath = path.join(tmpdir, 'clinfo.log')
+			args.push('--enable-file-logging')
+			args.push('--log-file')
+			args.push(logFilePath)
+			args.push('--log-level')
+			args.push(0)
+		}
+		args.push("clinfo")
+		let command = cmd.buildCommand(args)
+		return new Promise((resolve, reject) => {
+			cmd.execute(command).then((output) => {
+				if(logFilePath) {
+					fs.readFile(logFilePath, (err, data) => {
+						if (err) {
+							console.error("Failed to read clinfo's log file: {}", err)
+						} else {
+							console.log("[OpenCL] CLInfo log: {}", data.toString("utf8"));
+						}
+						if(tmpdir) { 
+							tmp.rmtmp(tmpdir) 
+						}
+						resolve(output)
+					});
+				} else {
+					resolve(output)
+				}
+			}).catch(function (reason) { 
+				if(tmpdir) { 
+					tmp.rmtmp(tmpdir) 
+				}
+				reject(reason) 
+			});
+		});
 	}
 
 	getTreeItem(element: vscode.TreeItem): vscode.TreeItem {
@@ -42,12 +85,13 @@ export class OpenCLDevicesProvider implements vscode.TreeDataProvider<vscode.Tre
 			Promise.resolve([]);
 		}
 		if (element === undefined) {
-			let command = cmd.buildCommand([serverPath, "clinfo"])
-			return new Promise((resolve, reject) => {
-				cmd.execute(command).then((output) => {
+			return new Promise((resolve, reject) => { 
+				this.execute(serverPath).then( (output) => {
 					this.clinfoDict = JSON.parse(output.toString("utf-8"));
-					resolve(this.getPlatforms())
-				}).catch(function (reason) { reject(reason) });
+					resolve(this.getPlatforms());
+				}).catch( (reason) => { 
+					reject(reason) 
+				});
 			});
 		} else if (element instanceof OpenCLPlatformTreeItem) {
 			let platform = element as OpenCLPlatformTreeItem
