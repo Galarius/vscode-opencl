@@ -105,6 +105,16 @@ rm opencl-language-server-win32-x86_64.zip
 popd
 ```
 
+### Licenses
+
+```shell
+pushd ./bin
+curl --remote-name-all --location  $( curl -s https://api.github.com/repos/Galarius/opencl-language-server/releases/latest | grep "licenses.tar.gz" | tail -n -1 | cut -d : -f 2,3 | tr -d \" )
+tar -xzvf licenses.tar.gz
+rm licenses.tar.gz
+popd
+```
+
 ## Publishing the extension to the Visual Studio Marketplace 
 
 1. Install `vsce`: `npm install -g @vscode/vsce`.
