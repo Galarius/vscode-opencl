@@ -1,5 +1,11 @@
 # OpenCL for Visual Studio Code Change Log
 
+## Version 0.8.5: August 15, 2024
+
+This release resolves the issue in the 'OpenCL Devices' explorer view where an invalid JSON error would occur.
+
+`opencl-language-server` version: [0.6.3](https://github.com/Galarius/opencl-language-server/releases/tag/0.6.3)
+
 ## Version 0.8.4: August 13, 2024
 
 This release improves the logging system.
