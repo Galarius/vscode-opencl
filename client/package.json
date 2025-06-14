@@ -14,7 +14,7 @@
 	},
 	"dependencies": {
 		"child-process-promise": "^2.2.1",
-		"hoek": "^5.0.4",
+		"@hapi/hoek": "^11.0.7",
 		"querystringify": "^2.2.0",
 		"tree-kill": "^1.2.2",
 		"vscode-languageclient": "^8.1.0"
