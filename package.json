@@ -1,290 +1,284 @@
 {
-    "name": "vscode-opencl",
-    "displayName": "OpenCL",
-    "description": "OpenCL for Visual Studio Code",
-    "version": "0.8.5",
-    "publisher": "galarius",
-    "icon": "images/OpenCL_128x.png",
-    "author": {
-        "name": "Galarius"
-    },
-    "license": "MIT",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/Galarius/vscode-opencl"
-    },
-    "engines": {
-        "vscode": "^1.76.0"
-    },
-    "markdown": "github",
-    "keywords": [
-        "OpenCL",
-        "cl",
-        "ocl",
-        "kernel",
-        "compiler",
-        "snippets",
-        "diagnostics",
-        "language-server",
-        "syntax-highlighting"
+  "name": "vscode-opencl",
+  "displayName": "OpenCL",
+  "description": "OpenCL for Visual Studio Code",
+  "version": "0.8.5",
+  "publisher": "galarius",
+  "icon": "images/OpenCL_128x.png",
+  "author": {
+    "name": "Galarius"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Galarius/vscode-opencl"
+  },
+  "engines": {
+    "vscode": "^1.76.0"
+  },
+  "markdown": "github",
+  "keywords": [
+    "OpenCL",
+    "cl",
+    "ocl",
+    "kernel",
+    "compiler",
+    "snippets",
+    "diagnostics",
+    "language-server",
+    "syntax-highlighting"
+  ],
+  "categories": [
+    "Programming Languages",
+    "Snippets",
+    "Formatters"
+  ],
+  "activationEvents": [
+    "onLanguage:c",
+    "onLanguage:cpp",
+    "onCommand:workbench.action.tasks.runTask"
+  ],
+  "main": "./dist/extension",
+  "contributes": {
+    "languages": [
+      {
+        "id": "opencl",
+        "aliases": [
+          "OpenCL",
+          "opencl"
+        ],
+        "extensions": [
+          ".cl",
+          ".ocl"
+        ],
+        "configuration": "./contributes/language-configuration.json"
+      }
     ],
-    "categories": [
-        "Programming Languages",
-        "Snippets",
-        "Formatters"
+    "grammars": [
+      {
+        "language": "opencl",
+        "scopeName": "source.opencl",
+        "path": "./contributes/opencl.tmLanguage.json"
+      }
     ],
-    "activationEvents": [
-        "onLanguage:c",
-        "onLanguage:cpp",
-        "onCommand:workbench.action.tasks.runTask"
+    "snippets": [
+      {
+        "language": "opencl",
+        "path": "./snippets/opencl.device.tmSnippets.json"
+      },
+      {
+        "language": "c",
+        "path": "./snippets/opencl.host.tmSnippets.json"
+      },
+      {
+        "language": "cpp",
+        "path": "./snippets/opencl.host.tmSnippets.json"
+      }
     ],
-    "main": "./dist/extension",
-    "contributes": {
-        "languages": [
-            {
-                "id": "opencl",
-                "aliases": [
-                    "OpenCL",
-                    "opencl"
-                ],
-                "extensions": [
-                    ".cl",
-                    ".ocl"
-                ],
-                "configuration": "./contributes/language-configuration.json"
-            }
-        ],
-        "grammars": [
-            {
-                "language": "opencl",
-                "scopeName": "source.opencl",
-                "path": "./contributes/opencl.tmLanguage.json"
-            }
-        ],
-        "snippets": [
-            {
-                "language": "opencl",
-                "path": "./snippets/opencl.device.tmSnippets.json"
-            },
-            {
-                "language": "c",
-                "path": "./snippets/opencl.host.tmSnippets.json"
-            },
-            {
-                "language": "cpp",
-                "path": "./snippets/opencl.host.tmSnippets.json"
-            }
-        ],
-        "commands": [
-            {
-                "command": "opencl.info",
-                "title": "OpenCL: Info",
-                "description": "Show OpenCL devices information in JSON format",
-                "icon": "$(json)"
-            },
-            {
-                "command": "opencl.select",
-                "title": "OpenCL: Select",
-                "description": "Select the OpenCL device for diagnostics",
-                "icon": "$(plug)"
-            },
-            {
-                "command": "opencl.toggle-explorer-view",
-                "title": "OpenCL: Toggle View",
-                "description": "OpenCL: Toggle the explorer view (display localized or raw properties)",
-                "icon": "$(eye)"
-            }
-        ],
-        "views": {
-            "explorer": [
-                {
-                    "id": "opencl-devices-explorer",
-                    "name": "OpenCL Devices"
-                }
-            ]
+    "commands": [
+      {
+        "command": "opencl.info",
+        "title": "OpenCL: Info",
+        "description": "Show OpenCL devices information in JSON format",
+        "icon": "$(json)"
+      },
+      {
+        "command": "opencl.select",
+        "title": "OpenCL: Select",
+        "description": "Select the OpenCL device for diagnostics",
+        "icon": "$(plug)"
+      },
+      {
+        "command": "opencl.toggle-explorer-view",
+        "title": "OpenCL: Toggle View",
+        "description": "OpenCL: Toggle the explorer view (display localized or raw properties)",
+        "icon": "$(eye)"
+      }
+    ],
+    "views": {
+      "explorer": [
+        {
+          "id": "opencl-devices-explorer",
+          "name": "OpenCL Devices"
+        }
+      ]
+    },
+    "menus": {
+      "view/title": [
+        {
+          "command": "opencl.toggle-explorer-view",
+          "when": "view == opencl-devices-explorer",
+          "group": "navigation"
         },
-        "menus": {
-            "view/title": [
-                {
-                    "command": "opencl.toggle-explorer-view",
-                    "when": "view == opencl-devices-explorer",
-                    "group": "navigation"
-                },
-                {
-                    "command": "opencl.info",
-                    "when": "view == opencl-devices-explorer",
-                    "group": "navigation"
-                }
-            ],
-            "view/item/context": [
-                {
-                    "command": "opencl.select",
-                    "when": "view == opencl-devices-explorer && viewItem == opencl-device",
-                    "group": "inline"
-                }
-            ]
+        {
+          "command": "opencl.info",
+          "when": "view == opencl-devices-explorer",
+          "group": "navigation"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "opencl.select",
+          "when": "view == opencl-devices-explorer && viewItem == opencl-device",
+          "group": "inline"
+        }
+      ]
+    },
+    "configuration": {
+      "type": "object",
+      "title": "OpenCL",
+      "properties": {
+        "OpenCL.formatting.name": {
+          "type": "string",
+          "default": "clang-format",
+          "description": "Default formatting utility is 'clang-format', which is shipped with 'ms-vscode.cpptools' extension. Specify an absolute path to use another version of 'clang-format'."
         },
-        "configuration": {
+        "OpenCL.explorer.localizedProperties": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show localized properties of OpenCL devices in the explorer view (uncheck to show raw OpenCL properties)."
+        },
+        "OpenCL.server.enable": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enables OpenCL Language Server."
+        },
+        "OpenCL.server.buildOptions": {
+          "type": "array",
+          "description": "Build options to be used for building the program executable. The list of supported options is described on https://www.khronos.org/registry/OpenCL/sdk/1.2/docs/man/xhtml/clBuildProgram.html."
+        },
+        "OpenCL.server.deviceID": {
+          "scope": "resource",
+          "type": "number",
+          "default": 0,
+          "description": "Device ID or 0 (automatic selection) of the OpenCL device to be used for diagnostics. Use the 'OpenCL: Select' command or the 'OpenCL Devices' explorer actions to specify the identifier."
+        },
+        "OpenCL.server.maxNumberOfProblems": {
+          "scope": "resource",
+          "type": "number",
+          "default": 127,
+          "description": "Controls the maximum number of problems produced by the server."
+        },
+        "opencl.trace.server": {
+          "scope": "window",
+          "type": "string",
+          "enum": [
+            "off",
+            "messages",
+            "verbose"
+          ],
+          "default": "off",
+          "description": "Traces the communication between VS Code and the OpenCL language server."
+        },
+        "OpenCL.server.debug.enableFileLogging": {
+          "type": "boolean",
+          "description": "Traces the server's internal state. Server restart is required."
+        },
+        "OpenCL.server.debug.logFileName": {
+          "type": "string",
+          "default": "opencl-language-server.log"
+        },
+        "OpenCL.server.debug.logLevel": {
+          "type": "integer",
+          "enum": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "enumDescriptions": [
+            "Trace",
+            "Debug",
+            "Info",
+            "Warn",
+            "Error"
+          ]
+        }
+      }
+    },
+    "taskDefinitions": [
+      {
+        "type": "opencl",
+        "required": [
+          "label",
+          "command"
+        ],
+        "properties": {
+          "label": {
+            "type": "string",
+            "description": "Task name"
+          },
+          "command": {
+            "type": "string",
+            "description": "The offline compiler command"
+          },
+          "args": {
+            "type": "array",
+            "description": "The offline compiler command-line arguments"
+          },
+          "osx": {
             "type": "object",
-            "title": "OpenCL",
-            "properties": {
-                "OpenCL.formatting.name": {
-                    "type": "string",
-                    "default": "clang-format",
-                    "description": "Default formatting utility is 'clang-format', which is shipped with 'ms-vscode.cpptools' extension. Specify an absolute path to use another version of 'clang-format'."
-                },
-                "OpenCL.explorer.localizedProperties": {
-                    "type": "boolean",
-                    "default": true,
-                    "description": "Show localized properties of OpenCL devices in the explorer view (uncheck to show raw OpenCL properties)."
-                },
-                "OpenCL.server.enable": {
-                    "type": "boolean",
-                    "default": true,
-                    "description": "Enables OpenCL Language Server."
-                },
-                "OpenCL.server.buildOptions": {
-                    "type": "array",
-                    "description": "Build options to be used for building the program executable. The list of supported options is described on https://www.khronos.org/registry/OpenCL/sdk/1.2/docs/man/xhtml/clBuildProgram.html."
-                },
-                "OpenCL.server.deviceID": {
-                    "scope": "resource",
-                    "type": "number",
-                    "default": 0,
-                    "description": "Device ID or 0 (automatic selection) of the OpenCL device to be used for diagnostics. Use the 'OpenCL: Select' command or the 'OpenCL Devices' explorer actions to specify the identifier."
-                },
-                "OpenCL.server.maxNumberOfProblems": {
-                    "scope": "resource",
-                    "type": "number",
-                    "default": 127,
-                    "description": "Controls the maximum number of problems produced by the server."
-                },
-                "opencl.trace.server": {
-                    "scope": "window",
-                    "type": "string",
-                    "enum": [
-                        "off",
-                        "messages",
-                        "verbose"
-                    ],
-                    "default": "off",
-                    "description": "Traces the communication between VS Code and the OpenCL language server."
-                },
-                "OpenCL.server.debug.enableFileLogging": {
-                    "type": "boolean",
-                    "description": "Traces the server's internal state. Server restart is required."
-                },
-                "OpenCL.server.debug.logFileName": {
-                    "type": "string",
-                    "default": "opencl-language-server.log"
-                },
-                "OpenCL.server.debug.logLevel": {
-                    "type": "integer",
-                    "enum": [
-                        0,
-                        1,
-                        2,
-                        3,
-                        4
-                    ],
-                    "enumDescriptions": [
-                        "Trace",
-                        "Debug",
-                        "Info",
-                        "Warn",
-                        "Error"
-                    ]
-                }
-            }
-        },
-        "taskDefinitions": [
-            {
-                "type": "opencl",
-                "required": [
-                    "label",
-                    "command"
-                ],
-                "properties": {
-                    "label": {
-                        "type": "string",
-                        "description": "Task name"
-                    },
-                    "command": {
-                        "type": "string",
-                        "description": "The offline compiler command"
-                    },
-                    "args": {
-                        "type": "array",
-                        "description": "The offline compiler command-line arguments"
-                    },
-                    "osx": {
-                        "type": "object",
-                        "description": "Overrides for macOS"
-                    },
-                    "linux": {
-                        "type": "object",
-                        "description": "Overrides for Linux"
-                    },
-                    "windows": {
-                        "type": "object",
-                        "description": "Overrides for Windows"
-                    }
-                }
-            }
-        ],
-        "problemMatchers": [
-            {
-                "name": "opencl.common",
-                "owner": "opencl",
-                "fileLocation": "absolute",
-                "pattern": {
-                    "regexp": "^(.*):(\\d+):(\\d+): ((fatal )?error|warning|Scholar): (.*)$",
-                    "file": 1,
-                    "line": 2,
-                    "column": 3,
-                    "severity": 4,
-                    "message": 6
-                }
-            },
-            {
-                "name": "opencl.openclc",
-                "owner": "opencl",
-                "pattern": {
-                    "regexp": "^openclc: (error|warning): (.*)$",
-                    "severity": 1,
-                    "message": 2
-                }
-            }
-        ]
-    },
-    "scripts": {
-        "vscode:prepublish": "webpack --mode production",
-        "webpack": "webpack --mode development",
-        "webpack-dev": "webpack --mode development",
-        "postinstall": "cd client && npm install && cd ..",
-        "test": "jest"
-    },
-    "dependencies": {
-        "spawn-sync": "^2.0.0"
-    },
-    "devDependencies": {
-        "@babel/core": "^7.23.9",
-        "@babel/preset-env": "^7.23.9",
-        "@types/jest": "^29.5.12",
-        "@types/node": "20.x",
-        "@types/vscode": "^1.76.0",
-        "babel-jest": "^29.7.0",
-        "jest": "^29.7.0",
-        "ts-loader": "^9.5.1",
-        "typescript": "^5.3.3",
-        "webpack": "^5.90.3",
-        "webpack-cli": "^5.1.4"
-    },
-    "jest": {
-        "testPathIgnorePatterns": [
-            "/node_modules/",
-            "/test/",
-            "/man/"
-        ]
-    }
+            "description": "Overrides for macOS"
+          },
+          "linux": {
+            "type": "object",
+            "description": "Overrides for Linux"
+          },
+          "windows": {
+            "type": "object",
+            "description": "Overrides for Windows"
+          }
+        }
+      }
+    ],
+    "problemMatchers": [
+      {
+        "name": "opencl.common",
+        "owner": "opencl",
+        "fileLocation": "absolute",
+        "pattern": {
+          "regexp": "^(.*):(\\d+):(\\d+): ((fatal )?error|warning|Scholar): (.*)$",
+          "file": 1,
+          "line": 2,
+          "column": 3,
+          "severity": 4,
+          "message": 6
+        }
+      },
+      {
+        "name": "opencl.openclc",
+        "owner": "opencl",
+        "pattern": {
+          "regexp": "^openclc: (error|warning): (.*)$",
+          "severity": 1,
+          "message": 2
+        }
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "webpack --mode production",
+    "webpack": "webpack --mode development",
+    "webpack-dev": "webpack --mode development",
+    "postinstall": "cd client && npm install && cd ..",
+    "test": "jest"
+  },
+  "dependencies": {
+    "spawn-sync": "^2.0.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.23.9",
+    "@babel/preset-env": "^7.23.9",
+    "@babel/preset-typescript": "^7.27.1",
+    "@types/jest": "^29.5.12",
+    "@types/node": "20.x",
+    "@types/vscode": "^1.76.0",
+    "babel-jest": "^29.7.0",
+    "jest": "^29.7.0",
+    "ts-loader": "^9.5.1",
+    "typescript": "^5.3.3",
+    "webpack": "^5.90.3",
+    "webpack-cli": "^5.1.4"
+  }
 }
