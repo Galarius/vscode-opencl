@@ -1,5 +1,11 @@
 # OpenCL for Visual Studio Code Change Log
 
+## Version 0.8.6: June 14, 2025
+
+This release includes a fix for the issue that occurs when the path to the extension contains spaces.
+
+Dependencies have been updated to address potential vulnerabilities.
+
 ## Version 0.8.5: August 15, 2024
 
 This release resolves the issue in the 'OpenCL Devices' explorer view where an invalid JSON error would occur.
