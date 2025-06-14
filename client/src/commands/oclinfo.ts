@@ -4,14 +4,14 @@ import * as vscode from 'vscode';
 import * as os from "os";
 
 import { GetLanguageServerPath, GetLanguageServerDebugPath } from '../providers/server/server';
+import { OpenCLLanguageServerCLI } from '../providers/server/cli';
 import { isDebugMode } from '../modules/debug';
 
 import * as cmd from './cmd';
 
 export function oclinfoDumpAll(extensionUri: vscode.Uri) {
-
     var serverPath = ''
-		
+
     if(isDebugMode()) {
         serverPath = GetLanguageServerDebugPath(extensionUri)
     } else {
@@ -22,7 +22,9 @@ export function oclinfoDumpAll(extensionUri: vscode.Uri) {
         console.error(error);
         vscode.window.showErrorMessage("Error: " + error);
     }
-    let command = cmd.buildCommand([serverPath, "clinfo"])
+
+    let cli = new OpenCLLanguageServerCLI(serverPath).setSubcommand("clinfo");
+    let command = cli.buildCommand();
     cmd.execute(command).then((output) => {
         let clinfoDict = JSON.parse(output.toString("utf-8"));
         vscode.workspace.openTextDocument({language: 'json'}).then((doc: vscode.TextDocument) => {
