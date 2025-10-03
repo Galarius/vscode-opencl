@@ -1,5 +1,9 @@
 # OpenCL for Visual Studio Code Change Log
 
+## Version 0.8.7: October 3, 2025
+
+This release includes a fix for an issue that occurred when the 'OpenCL: Select' command was activated while the 'OpenCL Devices' view was hidden.
+
 ## Version 0.8.6: June 14, 2025
 
 This release includes a fix for the issue that occurs when the path to the extension contains spaces.
