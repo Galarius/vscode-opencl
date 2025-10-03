@@ -23,6 +23,10 @@ export class OpenCLDevicesProvider implements vscode.TreeDataProvider<vscode.Tre
 	constructor(private extensionUri: vscode.Uri) {
 	}
 
+	hasInfo(): boolean {
+		return !!(this.clinfoDict)
+	}
+
 	refresh(): void {
 		this._onDidChangeTreeData.fire();
 	}
@@ -122,6 +126,9 @@ export class OpenCLDevicesProvider implements vscode.TreeDataProvider<vscode.Tre
 	}
 
 	getDevices(): OpenCLDeviceTreeItem[] {
+		if (!this.hasInfo()) {
+			return []
+		}
 		let platforms = this.clinfoDict["PLATFORMS"]
 		var items: OpenCLDeviceTreeItem[] = []
 		for (const platform of platforms) {
@@ -134,6 +141,9 @@ export class OpenCLDevicesProvider implements vscode.TreeDataProvider<vscode.Tre
 	}
 
 	getPlatforms(): OpenCLPlatformTreeItem[] {
+		if (!this.hasInfo()) {
+			return []
+		}
 		let platforms = this.clinfoDict["PLATFORMS"]
 		var items: OpenCLPlatformTreeItem[] = []
 		for (let platform of platforms) {
@@ -147,6 +157,9 @@ export class OpenCLDevicesProvider implements vscode.TreeDataProvider<vscode.Tre
 	}
 
 	getPlatformProperties(platformIdentifier: string): OpenCLPlatformInfoTreeItem[] {
+		if (!this.hasInfo()) {
+			return []
+		}
 		let platforms = this.clinfoDict["PLATFORMS"]
 		let result = platforms.find(obj => obj["PLATFORM_ID"] === platformIdentifier);
 		let name = this.getLocalizedPair('CL_PLATFORM_NAME', result["CL_PLATFORM_NAME"])
@@ -164,6 +177,9 @@ export class OpenCLDevicesProvider implements vscode.TreeDataProvider<vscode.Tre
 	}
 
 	getPlatformExtension(platformIdentifier: string): OpenCLPlatformInfoTreeItem[] {
+		if (!this.hasInfo()) {
+			return []
+		}
 		let platforms = this.clinfoDict["PLATFORMS"]
 		let result = platforms.find(obj => obj["PLATFORM_ID"] === platformIdentifier);
 		let extensions = result["CL_PLATFORM_EXTENSIONS"]
@@ -175,6 +191,9 @@ export class OpenCLDevicesProvider implements vscode.TreeDataProvider<vscode.Tre
 	}
 
 	getPlatformDevices(platformIdentifier: string): OpenCLDeviceTreeItem[] {
+		if (!this.hasInfo()) {
+			return []
+		}
 		let platforms = this.clinfoDict["PLATFORMS"]
 		let result = platforms.find(obj => obj["PLATFORM_ID"] === platformIdentifier);
 		let devices = result["DEVICES"]
@@ -189,6 +208,9 @@ export class OpenCLDevicesProvider implements vscode.TreeDataProvider<vscode.Tre
 	}
 
 	getDeviceProperties(deviceIdentifier: string, platformIdentifier: string): OpenCLDeviceInfoTreeItem[] {
+		if (!this.hasInfo()) {
+			return []
+		}
 		let platforms = this.clinfoDict["PLATFORMS"]
 		let platform = platforms.find(obj => obj["PLATFORM_ID"] === platformIdentifier);
 		let devices = platform["DEVICES"]

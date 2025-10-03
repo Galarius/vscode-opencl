@@ -25,6 +25,19 @@ function stateToString(state: State): string {
     return stateMap[state] || "Unknown";
 }
 
+async function showDevicePicker(provider: OpenCLDevicesProvider) {
+    let format_label = (label, identifier) => `${label} [${identifier}]`
+    let devices = provider.getDevices()
+    let choices = devices.map(val => (format_label(val.label, val.identifier)))
+    await vscode.window.showQuickPick(choices, {
+        onDidSelectItem: item => {
+            let device = devices.find(obj => format_label(obj.label, obj.identifier) === item)
+            let configuration = vscode.workspace.getConfiguration("OpenCL.server", null)
+            configuration.update('deviceID', device.identifier, vscode.ConfigurationTarget.Workspace, true)
+        }
+    });
+}
+
 export function activate(context: vscode.ExtensionContext) {
     // Completion
     let completionProvider = new OpenCLCompletionItemProvider();
@@ -99,16 +112,20 @@ export function activate(context: vscode.ExtensionContext) {
 
     let openclSelect = vscode.commands.registerCommand('opencl.select', async (node: OpenCLDeviceTreeItem) => {
         if (typeof node === 'undefined') {
-            let format_label = (label, identifier) => `${label} [${identifier}]`
-            let devices = nodeDependenciesProvider.getDevices()
-            let choices = devices.map(val => (format_label(val.label, val.identifier)))
-            await vscode.window.showQuickPick(choices, {
-                onDidSelectItem: item => {
-                    let device = devices.find(obj => format_label(obj.label, obj.identifier) === item)
-                    let configuration = vscode.workspace.getConfiguration("OpenCL.server", null)
-                    configuration.update('deviceID', device.identifier, vscode.ConfigurationTarget.Workspace, true)
-                }
-            });
+            if (nodeDependenciesProvider.hasInfo()) {
+                await showDevicePicker(nodeDependenciesProvider);
+            } else {
+                 vscode.window.withProgress({
+                    location: vscode.ProgressLocation.Notification,
+                    cancellable: true,
+                    title: 'Loading OpenCL Info...'
+                }, async (progress) => {
+                    progress.report({  increment: 30 });
+                    await Promise.resolve(nodeDependenciesProvider.getChildren());
+                    progress.report({ increment: 100 });
+                    showDevicePicker(nodeDependenciesProvider);
+                });
+            }
         } else {
             let configuration = vscode.workspace.getConfiguration("OpenCL.server")
             configuration.update('deviceID', node.identifier, vscode.ConfigurationTarget.Workspace, true)
