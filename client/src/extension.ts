@@ -14,7 +14,7 @@ import { getOpenCLTasks, buildTask, OpenCLDeviceDetector } from './providers/tas
 import { CreateLanguageServer } from "./providers/server/server";
 import { OpenCLDevicesProvider, OpenCLDeviceTreeItem } from "./providers/view/devices";
 
-let client: LanguageClient;
+let client: LanguageClient | undefined;
 
 function stateToString(state: State): string {
     const stateMap: { [key in State]?: string } = {
@@ -147,7 +147,7 @@ export function activate(context: vscode.ExtensionContext) {
     let configuration = vscode.workspace.getConfiguration('OpenCL.server', null)
     if (configuration.get('enable', true)) {
         let output: vscode.OutputChannel = vscode.window.createOutputChannel('OpenCL Language Server')
-        let client = CreateLanguageServer(OPECL_LANGUAGE_ID, output, context.extensionUri)
+        client = CreateLanguageServer(OPECL_LANGUAGE_ID, output, context.extensionUri)
         if (typeof client === 'undefined') {
             return
         }
