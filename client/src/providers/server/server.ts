@@ -30,7 +30,7 @@ function GetLanguageServerDebugPath(extensionUri: vscode.Uri): string | undefine
     return process.env.OPENCL_LANGUAGE_SERVER
 }
 
-function CreateLanguageServer(selector: vscode.DocumentFilter, output: vscode.OutputChannel, extensionUri: vscode.Uri): LanguageClient {    
+function CreateLanguageServer(selector: vscode.DocumentFilter, output: vscode.OutputChannel, extensionUri: vscode.Uri): LanguageClient | undefined {
     var serverPath = GetLanguageServerPath(extensionUri)
     if(!serverPath ) { 
         output.appendLine("OpenCL Language Server is not available for platform: " + os.platform() + ", arch: " + os.arch())
