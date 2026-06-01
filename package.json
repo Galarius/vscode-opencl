@@ -99,7 +99,8 @@
       "explorer": [
         {
           "id": "opencl-devices-explorer",
-          "name": "OpenCL Devices"
+          "name": "OpenCL Devices",
+          "icon": "$(symbol-constructor)"
         }
       ]
     },
