@@ -1,5 +1,11 @@
 # OpenCL for Visual Studio Code Change Log
 
+## Version 0.8.8: June 1, 2026
+
+This release includes a fix for the OpenCL language server not stopping upon deactivation.
+
+Dependencies have been updated to address potential vulnerabilities.
+
 ## Version 0.8.7: October 3, 2025
 
 This release includes a fix for an issue that occurred when the 'OpenCL: Select' command was activated while the 'OpenCL Devices' view was hidden.
