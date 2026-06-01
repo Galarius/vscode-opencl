@@ -15,8 +15,12 @@ const STR_COMPILER_PROCESS_FAILED = `${LOG_PREFIX} Failed to detect supported Op
  * @returns  {string}
  */
 const getSampleDir = () => {
-    const extPath = vscode.extensions.getExtension(EXTENSION_ID).extensionPath
-    return path.join(extPath, 'scripts')
+    const extension = vscode.extensions.getExtension(EXTENSION_ID);
+    const extPath = extension?.extensionPath;
+    if (extPath) {
+        return path.join(extPath, 'scripts')
+    }
+    return '' // should not happen
 }
 /**
  * @returns  {readonly string[]}

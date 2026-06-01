@@ -10,7 +10,7 @@ import { isDebugMode } from '../modules/debug';
 import * as cmd from './cmd';
 
 export function oclinfoDumpAll(extensionUri: vscode.Uri) {
-    var serverPath = ''
+    var serverPath: string | undefined = ''
 
     if(isDebugMode()) {
         serverPath = GetLanguageServerDebugPath(extensionUri)
@@ -21,6 +21,7 @@ export function oclinfoDumpAll(extensionUri: vscode.Uri) {
         let error = "OpenCL Language Server is not available for platform: " + os.platform();
         console.error(error);
         vscode.window.showErrorMessage("Error: " + error);
+        return;
     }
 
     let cli = new OpenCLLanguageServerCLI(serverPath).setSubcommand("clinfo");

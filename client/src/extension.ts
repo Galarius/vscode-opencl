@@ -26,14 +26,16 @@ function stateToString(state: State): string {
 }
 
 async function showDevicePicker(provider: OpenCLDevicesProvider) {
-    let format_label = (label, identifier) => `${label} [${identifier}]`
+    let format_label = (label: string, identifier: string) => `${label} [${identifier}]`
     let devices = provider.getDevices()
     let choices = devices.map(val => (format_label(val.label, val.identifier)))
     await vscode.window.showQuickPick(choices, {
         onDidSelectItem: item => {
             let device = devices.find(obj => format_label(obj.label, obj.identifier) === item)
-            let configuration = vscode.workspace.getConfiguration("OpenCL.server", null)
-            configuration.update('deviceID', device.identifier, vscode.ConfigurationTarget.Workspace, true)
+            if (device) {
+                let configuration = vscode.workspace.getConfiguration("OpenCL.server", null)
+                configuration.update('deviceID', device.identifier, vscode.ConfigurationTarget.Workspace, true)
+            }
         }
     });
 }
@@ -74,7 +76,9 @@ export function activate(context: vscode.ExtensionContext) {
         oclFileWatcher.onDidCreate(() => openclPromise = undefined);
         oclFileWatcher.onDidDelete(() => openclPromise = undefined);
     }
-    context.subscriptions.push(vscode.tasks.registerTaskProvider(OPECL_LANGUAGE_ID.language, {
+
+    let language: string = OPECL_LANGUAGE_ID.language ?? 'opencl';
+    context.subscriptions.push(vscode.tasks.registerTaskProvider(language, {
         provideTasks: async () => {
             if (!openclPromise) {
                 console.log('[OpenCL] Building opencl tasks...')

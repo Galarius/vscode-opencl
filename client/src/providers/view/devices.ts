@@ -33,7 +33,7 @@ export class OpenCLDevicesProvider implements vscode.TreeDataProvider<vscode.Tre
 
 	execute(serverPath: string): Promise<Buffer> {
 		let tmpdir = tmp.mktmp()
-		let logFilePath: string = null
+		let logFilePath: string | null = null
 		let cli = new OpenCLLanguageServerCLI(serverPath);
 		if(tmpdir) {
 			let logFilePath = path.join(tmpdir, 'clinfo.log');
@@ -74,22 +74,25 @@ export class OpenCLDevicesProvider implements vscode.TreeDataProvider<vscode.Tre
 	}
 
 	getChildren(element?: vscode.TreeItem): Thenable<vscode.TreeItem[]> {
-		var serverPath = ''
+		var serverPath : string | undefined = ''
 
 		if (isDebugMode()) {
 			serverPath = GetLanguageServerDebugPath(this.extensionUri)
 		} else {
 			serverPath = GetLanguageServerPath(this.extensionUri)
 		}
-		if (!serverPath) {
+
+		if (typeof serverPath === 'undefined') {
 			let error = "OpenCL Language Server is not available for platform: " + os.platform();
 			console.error(error);
 			vscode.window.showErrorMessage("Error: " + error);
-			Promise.resolve([]);
+			return Promise.resolve([]);
 		}
+
 		if (element === undefined) {
 			return new Promise((resolve, reject) => { 
-				this.execute(serverPath).then( (output) => {
+				let path = serverPath as string
+				this.execute(path).then( (output) => {
 					this.clinfoDict = JSON.parse(output.toString("utf-8"));
 					resolve(this.getPlatforms());
 				}).catch( (reason) => { 

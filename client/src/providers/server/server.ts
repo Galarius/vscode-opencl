@@ -4,6 +4,7 @@ import * as vscode from 'vscode';
 import * as path from 'path';
 import * as os from 'os';
 import {
+    Executable,
     LanguageClient,
     LanguageClientOptions,
     RevealOutputChannelOn,
@@ -51,14 +52,14 @@ function CreateLanguageServer(selector: vscode.DocumentFilter, output: vscode.Ou
         args.push(logLevel)
     }
 
-    const serverOptions: ServerOptions = {
-        run:{command:serverPath,args:args,transport:TransportKind.stdio},
-        debug:{command:debugServerPath,args:args,transport:TransportKind.stdio}
-    }
-
+    let run: Executable = { command: serverPath, args: args, transport: TransportKind.stdio }
+    let debug: Executable = { command: debugServerPath ? debugServerPath : serverPath, args: args, transport: TransportKind.stdio }
+    let serverOptions: ServerOptions = { run: run, debug: debug }
+    let scheme= selector.scheme ? selector.scheme : 'file';
+    let language = selector.language ? selector.language : 'opencl';
     let configuration = vscode.workspace.getConfiguration('OpenCL.server', null)
     let clientOptions: LanguageClientOptions = {
-        documentSelector: [{scheme: selector.scheme, language: selector.language}],
+        documentSelector: [{scheme: scheme, language: language}],
         outputChannel: output,
         outputChannelName: 'OpenCL Language Server',
         traceOutputChannel: output,
