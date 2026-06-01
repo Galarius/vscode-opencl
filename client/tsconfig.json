@@ -10,6 +10,7 @@
 		"sourceMap": true,
 		"composite": true,
 		"resolveJsonModule": true,
+		"noImplicitAny": false
 	},
 	"include": [
 		"src",
