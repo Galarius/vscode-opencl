@@ -3,7 +3,7 @@
 import * as os from 'os';
 import * as fs from 'fs';
 
-export function mktmp(): string {
+export function mktmp(): string | null {
     try {
         return fs.mkdtempSync(os.tmpdir());
     } catch (e) {

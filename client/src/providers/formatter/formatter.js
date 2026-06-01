@@ -16,17 +16,17 @@ class OpenCLDocumentFormattingEditProvider {
 
     async provideDocumentFormattingEdits(document, options, token) {
         // opencl settings
-        let app = vscode.workspace.getConfiguration().get('OpenCL.formatting.name', 'clang-format')
-        app = app.replace(/["]/g,"").trim()
+        var formatter = vscode.workspace.getConfiguration().get('OpenCL.formatting.name', 'clang-format')
+        formatter = formatter.replace(/["]/g,"").trim()
         const config = await scanParentFolders(path.dirname(document.fileName), '.clang-format')
         const configExists = typeof config !== 'undefined'
         if (configExists)
             console.info(`[OpenCL Formatter] Configuration file '.clang-format' is found at ${config}.`)
         const args = await getClangArgumentList(configExists)
 
-        if (app && app !== 'clang-format' && app !== 'clang-format.exe') {
+        if (formatter && formatter !== 'clang-format' && formatter !== 'clang-format.exe') {
             // Try to run non-default 'clang-format' formatter
-            return this.format({app, args, config}, {document, token})
+            return this.format({formatter, args, config}, {document, token})
         }
 
         // Default 'clang-format' (shipped with ms-vscode.cpptools)
@@ -36,8 +36,13 @@ class OpenCLDocumentFormattingEditProvider {
             return Promise.reject()
         }
 
-        app = getClangBinaryPath()
-        const binExists = await exists(app)
+        const bin = getClangBinaryPath()
+        if (typeof bin === 'undefined') {
+            console.error(`[OpenCL Formatter] Failed to get path to 'clang-format' binary`)
+            vscode.window.showErrorMessage(STR_FAILED_TO_FIND_FORMATTER)
+            return Promise.reject()
+        }
+        const binExists = await exists(bin)
 
         if (!binExists) {
             console.error(`[OpenCL Formatter] Failed to detect 'clang-format' binary`)
@@ -45,7 +50,7 @@ class OpenCLDocumentFormattingEditProvider {
             return Promise.reject()
         }
 
-        return this.format({ app, args, config }, { document, token })
+        return this.format({ bin, args, config }, { document, token })
     }
 
     format(cmd, editor) {

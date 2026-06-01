@@ -9,7 +9,7 @@ const exists = util.promisify(fs.exists)
  * 
  * @param {string} current Current directory to start looking from
  * @param {string} fileName The name of the file to search for
- * @return {Promise<string> | undefined} absolute file path or undefined
+ * @return {Promise<string | undefined>} absolute file path or undefined
  */
 const scanParentFolders = async (current, fileName) => {
 	const file = path.join(current, fileName)

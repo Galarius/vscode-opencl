@@ -7,8 +7,12 @@ export interface IEntry { brief: string, signature: string; description: string;
 export interface IEntries { [name: string]: IEntry; }
 
 function openCLManFolder(): string {
-    let extPath = vscode.extensions.getExtension('galarius.vscode-opencl').extensionPath
-    return path.join(extPath, 'man', 'opencl_2_1');
+	let extension = vscode.extensions.getExtension('galarius.vscode-opencl');
+    let extPath = extension?.extensionPath;
+	if (extPath) {
+    	return path.join(extPath, 'man', 'opencl_2_1');
+	}
+	return ''; // should not happen
 }
 
 var MAN_SIG = path.join(openCLManFolder(), 'signature')

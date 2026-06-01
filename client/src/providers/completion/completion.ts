@@ -38,8 +38,8 @@ export class OpenCLCompletionItemProvider implements vscode.CompletionItemProvid
         // based on: https://raw.githubusercontent.com/henriiik/vscode-perl/master/src/completions.ts
         let words: WordMap = {};
         let text = document.getText();
-        let word: RegExpExecArray;
-        while (word = opencl.CONFIG.wordPattern.exec(text)) {
+        let word: RegExpExecArray | null | undefined = null;
+        while (word = opencl.CONFIG.wordPattern?.exec(text)) {
             words[word[0]] = true;
         }
 
