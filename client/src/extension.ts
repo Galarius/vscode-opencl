@@ -8,7 +8,6 @@ import * as formatter from "./providers/formatter";
 import { LanguageClient, State } from 'vscode-languageclient/node';
 
 import { OPECL_LANGUAGE_ID } from './modules/common'
-import { OpenCLCompletionItemProvider } from './providers/completion/completion';
 import { OpenCLHoverProvider } from './providers/hover/hover';
 import { getOpenCLTasks, buildTask, OpenCLDeviceDetector } from './providers/task';
 import { CreateLanguageServer } from "./providers/server/server";
@@ -41,10 +40,6 @@ async function showDevicePicker(provider: OpenCLDevicesProvider) {
 }
 
 export function activate(context: vscode.ExtensionContext) {
-    // Completion
-    let completionProvider = new OpenCLCompletionItemProvider();
-    context.subscriptions.push(vscode.languages.registerCompletionItemProvider(OPECL_LANGUAGE_ID, completionProvider));
-
     // Signature Helper
     let signatureHelpProvider = new OpenCLHoverProvider();
     context.subscriptions.push(vscode.languages.registerHoverProvider(OPECL_LANGUAGE_ID, signatureHelpProvider));
