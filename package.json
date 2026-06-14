@@ -52,7 +52,11 @@
           ".cl",
           ".ocl"
         ],
-        "configuration": "./contributes/language-configuration.json"
+        "configuration": "./contributes/language-configuration.json",
+        "icon": {
+          "light": "./images/kernel.png",
+          "dark": "./images/kernel.png"
+        }
       }
     ],
     "grammars": [
