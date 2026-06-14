@@ -1,12 +1,12 @@
 {
     "compilerOptions": {
-        "target": "es2019",
+        "target": "es2022",
         "module": "commonjs",
         "removeComments": true,
         "moduleResolution": "node",
         "outDir": "./client/out",
         "lib": [
-            "es2019"
+            "es2022"
         ],
         "sourceMap": true,
         "rootDir": "./"

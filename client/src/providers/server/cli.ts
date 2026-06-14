@@ -18,6 +18,7 @@ export class OpenCLLanguageServerCLI {
     constructor(serverPath: string) {
         this.serverPath = serverPath;
         this.options = {
+            includeExecutable: true,
             enableFileLogging: false,
             logFile: undefined,
             logLevel: undefined
@@ -42,33 +43,43 @@ export class OpenCLLanguageServerCLI {
         return this;
     }
 
+    excludeExecutable(): this {
+        this.options.includeExecutable = false;
+        return this;
+    }
+
     setSubcommand(subcommand: string): this {
-        if (subcommand != "clinfo") {
-            throw new Error("Only 'clinfo' is supported as a subcommand.");
+        if (subcommand != "clinfo" && subcommand != "--version") {
+            throw new Error(`Unsupported subcommand ${subcommand}.`);
         }
         this.subcommand = subcommand;
         return this;
     }
 
     buildCommand(): string {
-        if (this.subcommand === undefined) {
-            throw new Error("Subcommand must be set before building the command.");
-        }
+        let args = this.buildArgs();
+        return `${args.join(" ")}`.trim();
+    }
 
-        var command: string[] = [
-            `"${this.serverPath}"`
-        ];
+    buildArgs(): string[] {
+        var command: string[] = []; 
+        if (this.options.includeExecutable) {
+            command.push(`"${this.serverPath}"`);
+        }
         if (this.options.enableFileLogging) {
             command.push("--enable-file-logging");
+            if (this.options.logFile) {
+                command.push("--log-file");
+                command.push(`"${this.options.logFile}"`);
+            }
+            if (this.options.logLevel !== undefined) {
+                command.push("--log-level");
+                command.push(`${this.options.logLevel}`);
+            }
         }
-        if (this.options.logFile) {
-            command.push(`--log-file "${this.options.logFile}"`);
+        if (!!this.subcommand) {
+            command.push(this.subcommand);
         }
-        if (this.options.logLevel !== undefined) {
-            command.push(`--log-level ${this.options.logLevel}`);
-        }
-        command.push(this.subcommand);
-
-        return `${command.join(" ")}`.trim();
+        return command;
     }
 }

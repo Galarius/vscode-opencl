@@ -1,18 +1,19 @@
 'use strict';
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
+import os from 'os';
 import * as path from 'path';
 import * as vscode from 'vscode';
-import * as oclinfo from "./commands/oclinfo";
 import * as formatter from "./providers/formatter";
 import { LanguageClient, State } from 'vscode-languageclient/node';
 
-import { OPECL_LANGUAGE_ID } from './modules/common'
-import { OpenCLCompletionItemProvider } from './providers/completion/completion';
+import { OPECL_LANGUAGE_ID, CONFIG_OPECL_SERVER_PATH } from './modules/common'
+
 import { OpenCLHoverProvider } from './providers/hover/hover';
 import { getOpenCLTasks, buildTask, OpenCLDeviceDetector } from './providers/task';
-import { CreateLanguageServer } from "./providers/server/server";
+import { CreateLanguageClient } from "./providers/server/server";
 import { OpenCLDevicesProvider, OpenCLDeviceTreeItem } from "./providers/view/devices";
+import { LanguageServerManager } from './providers/server/manager'
 
 let client: LanguageClient | undefined;
 
@@ -40,11 +41,185 @@ async function showDevicePicker(provider: OpenCLDevicesProvider) {
     });
 }
 
-export function activate(context: vscode.ExtensionContext) {
-    // Completion
-    let completionProvider = new OpenCLCompletionItemProvider();
-    context.subscriptions.push(vscode.languages.registerCompletionItemProvider(OPECL_LANGUAGE_ID, completionProvider));
+/**
+ *  Registers features that require invoking the language server directly
+ * 
+ * @param context 
+ * @param serverPath 
+ */
+function registerLanguageServerBasedFeatures(context: vscode.ExtensionContext, manager: LanguageServerManager, channel: vscode.OutputChannel) {
 
+    // Tree view
+    const nodeDependenciesProvider = new OpenCLDevicesProvider(manager);
+    vscode.window.registerTreeDataProvider('opencl-devices-explorer', nodeDependenciesProvider);
+
+    // Commands
+    let toogleExplorerView = vscode.commands.registerCommand('opencl.toggle-explorer-view', () => {
+        let configuration = vscode.workspace.getConfiguration("OpenCL.explorer", null)
+        let isLocalized = configuration.get('localizedProperties', true)
+        configuration.update('localizedProperties', !isLocalized, vscode.ConfigurationTarget.Workspace, true)
+        nodeDependenciesProvider.refresh()
+    });
+    context.subscriptions.push(toogleExplorerView);
+
+    let openclInfo = vscode.commands.registerCommand('opencl.info', () => {
+        manager.info().then((output) => {
+            let clinfoDict = JSON.parse(output);
+            vscode.workspace.openTextDocument({ language: 'json' }).then((doc: vscode.TextDocument) => {
+                vscode.window.showTextDocument(doc, 1, false).then(e => {
+                    e.edit(edit => {
+                        edit.insert(new vscode.Position(0, 0), JSON.stringify(clinfoDict, null, 2));
+                    });
+                });
+            }, (error: any) => {
+                console.error(error);
+                vscode.window.showErrorMessage(error);
+            });
+        }).catch(function (error) {
+            console.error(error);
+            vscode.window.showErrorMessage(error);
+        });
+    });
+    context.subscriptions.push(openclInfo);
+
+    let openclSelect = vscode.commands.registerCommand('opencl.select', async (node: OpenCLDeviceTreeItem) => {
+        if (typeof node === 'undefined') {
+            if (nodeDependenciesProvider.hasInfo()) {
+                await showDevicePicker(nodeDependenciesProvider);
+            } else {
+                vscode.window.withProgress({
+                    location: vscode.ProgressLocation.Notification,
+                    cancellable: true,
+                    title: 'Loading OpenCL Info...'
+                }, async (progress) => {
+                    progress.report({ increment: 30 });
+                    await Promise.resolve(nodeDependenciesProvider.getChildren());
+                    progress.report({ increment: 100 });
+                    showDevicePicker(nodeDependenciesProvider);
+                });
+            }
+        } else {
+            let configuration = vscode.workspace.getConfiguration("OpenCL.server")
+            configuration.update('deviceID', node.identifier, vscode.ConfigurationTarget.Workspace, true)
+            vscode.window.showInformationMessage(`Use OpenCL device '${node.label}' for diagnostics.`)
+        }
+    });
+    context.subscriptions.push(openclSelect);
+
+    let registerServer = vscode.commands.registerCommand('opencl.register-server', async () => {
+        // Pick the binary
+        const uris = await vscode.window.showOpenDialog({
+            title: 'Select OpenCL Language Server Binary',
+            openLabel: 'Register',
+            canSelectMany: false,
+            filters: os.platform() === 'win32'
+                ? { 'Executable': ['exe'] }
+                : { 'All files': ['*'] },
+        });
+
+        if (!uris || uris.length === 0) {
+            return; // Cancelled
+        }
+
+        const serverPath = uris[0].fsPath;
+
+        // Confirm before overwriting an existing registration
+        const existing = vscode.workspace
+            .getConfiguration()
+            .get<string>(CONFIG_OPECL_SERVER_PATH);
+
+        if (existing && existing !== serverPath) {
+            const answer = await vscode.window.showWarningMessage(
+                `A local server is already registered at:\n${existing}\n\nReplace it with the selected binary?`,
+                { modal: true },
+                'Replace',
+            );
+            if (answer !== 'Replace') {
+                return;
+            }
+        }
+
+        // Verify + save checksum + persist path
+        await vscode.window.withProgress(
+            {
+                location: vscode.ProgressLocation.Notification,
+                title: 'OpenCL: Registering local language server…',
+                cancellable: false,
+            },
+            async (progress) => {
+                try {
+                    progress.report({ message: 'Computing checksum…' });
+                    await manager.registerLocalServer(serverPath);
+
+                    channel.appendLine(
+                        `[OpenCL] Registered local language server at ${serverPath}`
+                    );
+                    vscode.window.showInformationMessage(
+                        `OpenCL language server registered successfully. ` +
+                        `Reload the window to apply the change.`,
+                        'Reload Now',
+                    ).then(action => {
+                        if (action === 'Reload Now') {
+                            vscode.commands.executeCommand('workbench.action.reloadWindow');
+                        }
+                    });
+                } catch (err) {
+                    channel.appendLine(`[OpenCL] Failed to register server: ${err}`);
+                    vscode.window.showErrorMessage(
+                        `Failed to register the OpenCL language server: ${(err as Error).message}`
+                    );
+                }
+            }
+        );
+    });
+    context.subscriptions.push(registerServer);
+
+    let unregisterServer = vscode.commands.registerCommand('opencl.unregister-server', async () => {
+        const existing = vscode.workspace
+            .getConfiguration()
+            .get<string>(CONFIG_OPECL_SERVER_PATH);
+
+        if (existing) {
+            // Confirm before clearing
+            const answer = await vscode.window.showWarningMessage(
+                `Unregister the local OpenCL language server?\n\n` +
+                `Path: ${existing}\n\n` +
+                `The binary file will not be deleted. ` +
+                `The extension will revert to downloading the server automatically from GitHub.`,
+                { modal: true },
+                'Unregister',
+            );
+
+            if (answer !== 'Unregister') {
+                return;
+            }
+        }
+
+        try {
+            await manager.unregisterLocalServer();
+
+            channel.appendLine('[OpenCL] Unregistered local language server.');
+            vscode.window.showInformationMessage(
+                'Local OpenCL language server unregistered. ' +
+                'Reload the window to apply the change.',
+                'Reload Now',
+            ).then(action => {
+                if (action === 'Reload Now') {
+                    vscode.commands.executeCommand('workbench.action.reloadWindow');
+                }
+            });
+        } catch (err) {
+            channel.appendLine(`[OpenCL] Failed to unregister server: ${err}`);
+            vscode.window.showErrorMessage(
+                `Failed to unregister the OpenCL language server: ${(err as Error).message}`
+            );
+        }
+    });
+    context.subscriptions.push(unregisterServer);
+
+}
+
+function registerFeatures(context: vscode.ExtensionContext) {
     // Signature Helper
     let signatureHelpProvider = new OpenCLHoverProvider();
     context.subscriptions.push(vscode.languages.registerHoverProvider(OPECL_LANGUAGE_ID, signatureHelpProvider));
@@ -103,64 +278,59 @@ export function activate(context: vscode.ExtensionContext) {
             return undefined;
         }
     }));
+}
 
-    // Tree View
-    const nodeDependenciesProvider = new OpenCLDevicesProvider(context.extensionUri);
-    vscode.window.registerTreeDataProvider('opencl-devices-explorer', nodeDependenciesProvider);
-
-    // Commands
-    let openclInfo = vscode.commands.registerCommand('opencl.info', () => {
-        oclinfo.oclinfoDumpAll(context.extensionUri);
-    });
-    context.subscriptions.push(openclInfo);
-
-    let openclSelect = vscode.commands.registerCommand('opencl.select', async (node: OpenCLDeviceTreeItem) => {
-        if (typeof node === 'undefined') {
-            if (nodeDependenciesProvider.hasInfo()) {
-                await showDevicePicker(nodeDependenciesProvider);
-            } else {
-                 vscode.window.withProgress({
-                    location: vscode.ProgressLocation.Notification,
-                    cancellable: true,
-                    title: 'Loading OpenCL Info...'
-                }, async (progress) => {
-                    progress.report({  increment: 30 });
-                    await Promise.resolve(nodeDependenciesProvider.getChildren());
-                    progress.report({ increment: 100 });
-                    showDevicePicker(nodeDependenciesProvider);
-                });
-            }
-        } else {
-            let configuration = vscode.workspace.getConfiguration("OpenCL.server")
-            configuration.update('deviceID', node.identifier, vscode.ConfigurationTarget.Workspace, true)
-            vscode.window.showInformationMessage(`Use OpenCL device '${node.label}' for diagnostics.`)
-        }
-    });
-    context.subscriptions.push(openclSelect);
-
-    let toogleExplorerView = vscode.commands.registerCommand('opencl.toggle-explorer-view', () => {
-        let configuration = vscode.workspace.getConfiguration("OpenCL.explorer", null)
-        let isLocalized = configuration.get('localizedProperties', true)
-        configuration.update('localizedProperties', !isLocalized, vscode.ConfigurationTarget.Workspace, true)
-        nodeDependenciesProvider.refresh()
-    });
-    context.subscriptions.push(toogleExplorerView);
-
-    // Language Server
-
+function registerLanguageServer(client: LanguageClient, channel: vscode.OutputChannel) {
     let configuration = vscode.workspace.getConfiguration('OpenCL.server', null)
     if (configuration.get('enable', true)) {
-        let output: vscode.OutputChannel = vscode.window.createOutputChannel('OpenCL Language Server')
-        client = CreateLanguageServer(OPECL_LANGUAGE_ID, output, context.extensionUri)
-        if (typeof client === 'undefined') {
-            return
-        }
         client.onDidChangeState((e) => {
             // Stopped = 1, Starting = 3, Running = 2
-            output.appendLine(`State changed: ${stateToString(e.oldState)} -> ${stateToString(e.newState)}`)
+            channel.appendLine(`State changed: ${stateToString(e.oldState)} -> ${stateToString(e.newState)}`)
         })
         client.start();
+    } else {
+        channel.appendLine("OpenCL Language Server is disabled");
     }
+}
+
+export async function activate(context: vscode.ExtensionContext) {
+
+    let channel = vscode.window.createOutputChannel('OpenCL Language Server');
+    let manager = new LanguageServerManager(context, channel);
+
+    try {
+        await manager.discoverLanguageServer();
+    } catch (err) {
+        channel.appendLine(`OpenCL Language Server is not available: ${err}`)
+        const choice = await vscode.window.showErrorMessage(
+            `Failed to download OpenCL Language Server: ${err}`,
+            'Retry',
+        );
+        if (choice === 'Retry') {
+            await activate(context); // re-enter activate
+            return;
+        }
+    }
+
+    client = await CreateLanguageClient(
+        OPECL_LANGUAGE_ID,
+        channel,
+        manager
+    );
+
+    if (!!client) {
+        try {
+            manager.checkServerPath();
+            registerLanguageServer(client, channel);
+        } catch (err) {
+            vscode.window.showErrorMessage(
+                `Failed to launch OpenCL Language Server: ${err}`,
+            );
+        }
+    }
+
+    registerLanguageServerBasedFeatures(context, manager, channel);
+    registerFeatures(context);
 }
 
 export function deactivate(): Thenable<void> | undefined {
