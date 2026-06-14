@@ -7,3 +7,4 @@ node_modules
 *.tsbuildinfo
 .vscode/settings.json
 /server/
+/coverage/
