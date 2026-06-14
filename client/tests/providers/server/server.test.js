@@ -8,6 +8,12 @@ describe('Server Provider CLI Tests', () => {
         ).toBe(`"${serverPath}" clinfo`);
     })
 
+    test(`Should return '"${serverPath}" --version'`, () => {
+        expect(
+            new OpenCLLanguageServerCLI(serverPath).setSubcommand("--version").buildCommand()
+        ).toBe(`"${serverPath}" --version`);
+    })
+
     let logPath = 'C:\\Users\\Name Surname\\tmp\\opencl-language-server.log';
     test(`Should return '"${serverPath}" --enable-file-logging --log-file "${logPath}" --log-level 0 clinfo'`, () => {
         expect(
@@ -19,32 +25,23 @@ describe('Server Provider CLI Tests', () => {
         ).toBe(`"${serverPath}" --enable-file-logging --log-file "${logPath}" --log-level 0 clinfo`);
     })
 
-    test(`Should return '"${serverPath}" --log-file "${logPath}" --log-level 0 clinfo'`, () => {
+    test(`Should return '"${serverPath}" clinfo when file logging disabled'`, () => {
         expect(
             new OpenCLLanguageServerCLI(serverPath)
                 .setEnableFileLogging(false)
                 .setLogFile(logPath)
                 .setLogLevel(0)
                 .setSubcommand("clinfo").buildCommand()
-        ).toBe(`"${serverPath}" --log-file "${logPath}" --log-level 0 clinfo`);
+        ).toBe(`"${serverPath}" clinfo`);
     })
 
-    test(`Should return '"${serverPath}" --log-level 0 clinfo'`, () => {
-        expect(
-            new OpenCLLanguageServerCLI(serverPath)
-                .setEnableFileLogging(false)
-                .setLogLevel(0)
-                .setSubcommand("clinfo").buildCommand()
-        ).toBe(`"${serverPath}" --log-level 0 clinfo`);
-    })
-
-    test(`Should return '"${serverPath}" --log-level 4 clinfo'`, () => {
+    test(`Should return '"${serverPath}" clinfo'`, () => {
         expect(
             new OpenCLLanguageServerCLI(serverPath)
                 .setEnableFileLogging(false)
                 .setLogLevel(4)
                 .setSubcommand("clinfo").buildCommand()
-        ).toBe(`"${serverPath}" --log-level 4 clinfo`);
+        ).toBe(`"${serverPath}" clinfo`);
     })
 
     test(`Should throw when log level is larger than 5'`, () => {
@@ -62,12 +59,6 @@ describe('Server Provider CLI Tests', () => {
     test(`Should throw when subcommand is not equal to 'clinfo''`, () => {
         expect(() => {
             new OpenCLLanguageServerCLI(serverPath).setSubcommand("diagnostics")
-        }).toThrow("Only 'clinfo' is supported as a subcommand.");
-    })
-
-    test(`Should throw when subcommand is not set'`, () => {
-        expect(() => {
-            new OpenCLLanguageServerCLI(serverPath).buildCommand()
-        }).toThrow("Subcommand must be set before building the command.");
+        }).toThrow("Unsupported subcommand diagnostics.");
     })
 })
