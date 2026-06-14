@@ -34,6 +34,7 @@ This extension adds [OpenCL C/C++](https://en.wikipedia.org/wiki/OpenCL) languag
 | `OpenCL.server.buildOptions` | Build options to be used for building the program. The list of [supported](https://www.khronos.org/registry/OpenCL/sdk/1.2/docs/man/xhtml/clBuildProgram.html) build options. |
 | `OpenCL.server.deviceID` | Device ID or 0 (automatic selection) of the OpenCL device to be used for diagnostics. Use the `OpenCL: Select` command or the `OpenCL Devices` explorer actions to specify the identifier. |
 | `OpenCL.server.maxNumberOfProblems` | Controls the maximum number of problems produced by the server. |
+| `OpenCL.server.path` | Path to a local user-defined OpenCL language server binary. When set, the extension skips the automatic download and uses this binary directly. The binary must be [compatible](https://github.com/Galarius/opencl-language-server/releases) with the extension version. Use the **OpenCL: Register Local Language Server** command to set this safely. The extension verifies the binary and saves its checksum for integrity checks. |
 | `opencl.trace.server` | Traces the communication between VS Code and the OpenCL language server. |
 | OpenCL Devices Information | |
 | `OpenCL.explorer.localizedProperties` | Show localized properties of OpenCL devices in the explorer view (uncheck to show raw OpenCL properties). |
@@ -49,6 +50,8 @@ This extension adds [OpenCL C/C++](https://en.wikipedia.org/wiki/OpenCL) languag
 | `OpenCL: Info` | This command opens a new VS Code tab filled with the information about available OpenCL devices |
 | `OpenCL: Select` | Select the OpenCL device for kernel diagnostics |
 | `OpenCL: Toggle View` | Toggle the explorer view (display localized or raw properties) |
+| `OpenCL: Register Local Language Server` | Register a user-specified local binary as the OpenCL language server (use if GitHub.com is unavailable or a prebuilt binary is missing). |
+| `OpenCL: Unregister Local Language Server` | Remove the registered user-specified local binary. The extension will revert to automatically downloading the language server from GitHub.com. |
 
 ---
 

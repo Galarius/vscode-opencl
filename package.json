@@ -3,6 +3,7 @@
   "displayName": "OpenCL",
   "description": "OpenCL for Visual Studio Code",
   "version": "0.8.8",
+  "serverVersion": "0.7.1",
   "publisher": "galarius",
   "icon": "images/OpenCL_128x.png",
   "author": {
@@ -91,8 +92,20 @@
       {
         "command": "opencl.toggle-explorer-view",
         "title": "OpenCL: Toggle View",
-        "description": "OpenCL: Toggle the explorer view (display localized or raw properties)",
+        "description": "Toggle the explorer view (display localized or raw properties)",
         "icon": "$(eye)"
+      },
+      {
+        "command": "opencl.register-server",
+        "title": "OpenCL: Register Local Language Server",
+        "description": "Register a user-specified local binary as the OpenCL language server (use if GitHub.com is unavailable or a prebuilt binary is missing).",
+        "icon": "$(pass)"
+      },
+      {
+        "command": "opencl.unregister-server",
+        "title": "OpenCL: Unregister Local Language Server",
+        "description": "Remove the registered user-specified local binary. The extension will revert to automatically downloading the language server from GitHub.com.",
+        "icon": "$(close)"
       }
     ],
     "views": {
@@ -175,10 +188,6 @@
           "type": "boolean",
           "description": "Traces the server's internal state. Server restart is required."
         },
-        "OpenCL.server.debug.logFileName": {
-          "type": "string",
-          "default": "opencl-language-server.log"
-        },
         "OpenCL.server.debug.logLevel": {
           "type": "integer",
           "enum": [
@@ -195,6 +204,12 @@
             "Warn",
             "Error"
           ]
+        },
+        "OpenCL.server.path": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": "Path to a local user-defined OpenCL language server binary. When set, the extension skips the automatic download and uses this binary directly. The binary must be [compatible](https://github.com/Galarius/opencl-language-server/releases) with the extension version. Use the **OpenCL: Register Local Language Server** command to set this safely. The extension verifies the binary and saves its checksum for integrity checks.",
+          "scope": "machine"
         }
       }
     },
