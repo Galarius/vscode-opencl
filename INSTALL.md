@@ -17,3 +17,9 @@ Press `Install` button
 2. In VS Code press `Ctrl+Shift+X` or `Cmd+Shift+X` to open the Extensions pane
 
 3. Press at the right top corner of the pane and select `Install from VSIX...`
+
+## **IV.** Install from the command line
+
+```sh
+code --install-extension galarius.vscode-opencl
+```
