@@ -1,5 +1,15 @@
 # OpenCL for Visual Studio Code Change Log
 
+## Version 0.9.0: June 17, 2026
+
+- Language server is now downloaded automatically on first use (platform/architecture-specific) and updated automatically within the current minor version. See [TROUBLESHOOTING.md - 9. Manual Installation](https://github.com/Galarius/vscode-opencl/blob/master/TROUBLESHOOTING.md#9-manual-installation) for offline/network-isolated setups.
+- Icon for OpenCL kernel files.
+- `Code Completion` is now powered by [opencl-language-server 0.7.1](https://github.com/Galarius/opencl-language-server/releases/tag/0.7.1) and `LLVM 20.1.0`.
+- Auto-injection of `-cl-std` build option when not explicitly specified.
+- Prebuilt binaries now available for Windows ARM.
+- New Linux runtime requirements: `glibc >= 2.35` (x86_64), `glibc >= 2.39` (aarch64).
+- Partial Apple Enhanced Security enablement on macOS.
+
 ## Version 0.8.8: June 1, 2026
 
 This release includes a fix for the OpenCL language server not stopping upon deactivation.
