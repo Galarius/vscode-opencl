@@ -7,6 +7,8 @@ This extension provides predefined set of VS Code tasks for kernel compilation u
 - [Run Predefined Task](#run-predefined-task)
 - [Configure Default Build Task](#configure-default-build-task)
 - [Customize Build Task](#customize-build-task)
+- [FAQ](#faq)
+    - [Why doesn't `ioc32`/`ioc64` work with `#include`?](#why-doesnt-ioc32-ioc64-work-with-include)
 
 ### Run Predefined Task
 
@@ -118,3 +120,75 @@ ERROR: <source>:56:25: error: used type 'float' where floating point type is not
 ```
 
 Customized tasks can also be bound to a custom shortcuts (See [Binding keyboard shortcuts to tasks](https://code.visualstudio.com/Docs/editor/tasks#_binding-keyboard-shortcuts-to-tasks)).
+
+
+---
+
+## FAQ
+
+### Why doesn't `ioc32`/`ioc64` work with `#include`?
+
+* **Problem matcher doesn't work on Windows for kernal file with `#include` statements** ([#13](https://github.com/Galarius/vscode-opencl/issues/13))
+
+    There are two workarounds:
+
+    1. Override `options.cwd` and `problemMatcher` in `tasks.json` adding `problemMatcher.fileLocation` like this:
+
+    <details>
+    <summary>tasks.json</summary>
+
+    ```json
+    {
+        "type": "shell",
+        "label": "opencl: custom build",
+        "command": "ioc64",
+        "options": {
+            "cwd": "${workspaceFolder}/some_path"
+        },
+        "args": [
+            "-cmd=build",
+            "-input=\"main.cl\""
+        ],
+        "problemMatcher": [
+            {
+                "fileLocation": ["autoDetect", "${workspaceFolder}/some_path"],
+                "pattern": {
+                    "regexp": "^(.*):(\\d+):(\\d+): ((fatal )?error|warning|Scholar): (.*)$",
+                    "file": 1,
+                    "line": 2,
+                    "column": 3,
+                    "severity": 4,
+                    "message": 6
+                }
+            }
+        ],
+        "group": "build"
+    }
+    ```
+
+    </details>
+
+    2. Another way is to modify `ioc` arguments in `tasks.json`:
+
+    <details>
+    <summary>tasks.json</summary>
+
+    ```json
+    {
+        "type": "shell",
+        "label": "opencl: custom build",
+        "command": "ioc64",
+        "args": [
+            "-cmd=build",
+            "-input=\"${workspaceFolder}\\some_path\\main.cl\"",
+            "-bo=\"-I ${workspaceFolder}\\some_path\""
+        ],
+        "problemMatcher": [
+            "$opencl.common"
+        ],
+        "group": "build"
+    },
+    ```
+
+    </details>
+

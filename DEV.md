@@ -16,78 +16,43 @@ Setting up the development environment for the `vscode-opencl` extension.
     cd server
     ```
 
-2. Refer to the `DEV.md` file inside the `server` directory for detailed setup instructions.
-
-    *[optional] Inside the `server` directory, use the following commands to generate an Xcode project:*
-    ```
-    mkdir .build-xcode && cd .build-xcode
-    cmake -G Xcode -DCMAKE_TOOLCHAIN_FILE="../.conan-install/build/Debug/generators/conan_toolchain.cmake" -DENABLE_TESTING=ON ..
-    ```
+2. Refer to the [DEV.md](https://github.com/Galarius/opencl-language-server/blob/main/DEV.md) file inside the `server` directory for detailed setup instructions.
 
 3. Modify the `OPENCL_LANGUAGE_SERVER` path in `.vscode/launch.json` if needed.
 
-## Download the binaries before publishing the package
+## Download opencl-language-server manually
+
+Useful when the extension is installed in a network-isolated environment where the automatic download cannot reach GitHub.
+
+1. On a machine with internet access, download the release archive matching your platform and architecture from the [Releases page](https://github.com/Galarius/opencl-language-server/releases) or using commands below. The minimum supported server version and compatible range are defined by `serverVersion` in `package.json` (compatible range is `[serverVersion, next minor)`).
+
+2. Transfer the archive to the target machine, extract the binary.
+
+3. Run `OpenCL: Register Local Language Server` from the command palette and point it to the local archive when prompted. See [TROUBLESHOOTING.md - 9. Manual Installation](https://github.com/Galarius/vscode-opencl/blob/master/TROUBLESHOOTING.md#9-manual-installation) for detailed instructions.
+
 
 ### macOS
 
 ```shell
-pushd ./bin/darwin
+mkdir -p ./bin/darwin/universal 
+pushd ./bin/darwin/universal
 curl --remote-name-all --location  $( curl -s https://api.github.com/repos/Galarius/opencl-language-server/releases/latest | grep "browser_download_url.*darwin-universal" | cut -d : -f 2,3 | tr -d \" )
 tar -xzvf opencl-language-server-darwin-universal.tar.gz
 rm opencl-language-server-darwin-universal.tar.gz
 popd
 ```
 
-Sign the executable
-
-```shell
-codesign -s $SIGNING_IDENTITY --timestamp --force --options runtime ./bin/darwin/opencl-language-server
-codesign -vvvv ./bin/darwin/opencl-language-server
-```
-
-Archive the executable
-
-```shell
-(cd ./bin/darwin; zip opencl-language-server.zip opencl-language-server)
-```
-
-Perform the notarization
-
-```shell
-(cd ./bin/darwin; xcrun notarytool submit opencl-language-server.zip --keychain-profile $PROFILE --wait)
-```
-
-Troubleshooting
-
-```shell
-pushd ./bin/darwin
-xcrun notarytool history --keychain-profile $PROFILE
-xcrun notarytool info --keychain-profile $PROFILE $SUBMISSION_ID
-xcrun notarytool log --keychain-profile $PROFILE $SUBMISSION_ID
-popd
-```
-
-Verify the notarization
-
-```shell
-spctl --assess -vv --type install ./bin/darwin/opencl-language-server
-```
-
-Remove the archive
-
-```shell
-rm ./bin/darwin/opencl-language-server.zip
-```
-
 ### Linux
 
 ```shell
+mkdir -p ./bin/linux/x64
 pushd ./bin/linux/x64
 curl --remote-name-all --location  $( curl -s https://api.github.com/repos/Galarius/opencl-language-server/releases/latest | grep "browser_download_url.*linux-x86_64" | cut -d : -f 2,3 | tr -d \" )
 tar -xzvf opencl-language-server-linux-x86_64.tar.gz
 rm opencl-language-server-linux-x86_64.tar.gz
 popd
 
+mkdir -p ./bin/linux/arm64
 pushd ./bin/linux/arm64
 curl --remote-name-all --location  $( curl -s https://api.github.com/repos/Galarius/opencl-language-server/releases/latest | grep "browser_download_url.*linux-arm64" | cut -d : -f 2,3 | tr -d \" )
 tar -xzvf opencl-language-server-linux-arm64.tar.gz
@@ -99,6 +64,7 @@ popd
 
 ```shell
 pushd ./bin/win32
+mkdir -p ./bin/win32
 curl --remote-name-all --location  $( curl -s https://api.github.com/repos/Galarius/opencl-language-server/releases/latest | grep "browser_download_url.*win32" | cut -d : -f 2,3 | tr -d \" )
 tar -xzvf opencl-language-server-win32-x86_64.zip
 rm opencl-language-server-win32-x86_64.zip
