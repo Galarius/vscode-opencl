@@ -14,3 +14,4 @@ bin/*/.keep
 bin/.gitignore
 scripts/.gitignore
 scripts/*.o
+coverage/
