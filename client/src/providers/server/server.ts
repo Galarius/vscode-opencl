@@ -21,6 +21,9 @@ async function CreateLanguageClient(
         channel.appendLine("[Error] Failed to create OpenCL Language Server client");
         return undefined;
     }
+
+    let path = manager.getRuntimePath();
+    channel.appendLine(`OpenCL Language Server runtime path: ${path}`);
     
     let args = manager.getLaunchArgs();
     let run: Executable = { command: manager.serverPath, args: args, transport: TransportKind.stdio }
