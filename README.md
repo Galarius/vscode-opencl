@@ -7,6 +7,7 @@ This extension adds [OpenCL C/C++](https://en.wikipedia.org/wiki/OpenCL) languag
 - Kernel Diagnostics ¹
 - Code Completion ¹
 - OpenCL Devices Information ¹
+- Go to Declaration / Definition ¹
 - Built-in OpenCL API Reference
 - Code Snippets
 - Kernel Formatting
@@ -44,7 +45,7 @@ This extension adds [OpenCL C/C++](https://en.wikipedia.org/wiki/OpenCL) languag
 
 | Setting | Description | Default |
 | ------- | ----------- | ------- |
-| `OpenCL.server.enable` | Enables the OpenCL Language Server. Disabling this turns off Kernel Diagnostics, Code Completion, and OpenCL Devices Information. | `true` |
+| `OpenCL.server.enable` | Enables the OpenCL Language Server. Disabling this turns off Kernel Diagnostics, Code Completion, Go to Declaration / Definition and OpenCL Devices Information. | `true` |
 | `OpenCL.server.path` | Path to a local OpenCL language server binary. When set, the extension skips automatic download and uses this binary directly. The binary must be [compatible](https://github.com/Galarius/opencl-language-server/releases) with the extension version. Use the **OpenCL: Register Local Language Server** command to set this safely - the extension registers the binary to perform integrity checks later. | `""` |
 | **Kernel Diagnostics** | | |
 | `OpenCL.server.buildOptions` | Build options passed when building the program. See the list of [supported options](https://www.khronos.org/registry/OpenCL/sdk/1.2/docs/man/xhtml/clBuildProgram.html). | `[]` |

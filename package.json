@@ -3,7 +3,7 @@
   "displayName": "OpenCL",
   "description": "OpenCL for Visual Studio Code",
   "version": "0.9.0",
-  "serverVersion": "0.7.1",
+  "serverVersion": "0.8.0",
   "publisher": "galarius",
   "icon": "images/OpenCL_128x.png",
   "author": {
