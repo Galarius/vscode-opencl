@@ -1,5 +1,16 @@
 # OpenCL for Visual Studio Code Change Log
 
+## Version 0.10.0: July 5, 2026
+
+Enhanced code navigation by upgrading to [opencl-language-server](https://github.com/Galarius/opencl-language-server/releases/tag/0.8.0) 0.8.0.  
+This adds support for:
+
+  - **Go to Definition** - [`textDocument/definition`](https://microsoft.github.io/language-server-protocol/specifications/lsp/3.18/specification/#textDocument_definition)
+  - **Go to Type Definition** - [`textDocument/typeDefinition`](https://microsoft.github.io/language-server-protocol/specifications/lsp/3.18/specification/#textDocument_typeDefinition)
+  - **Go to Declaration** - [`textDocument/declaration`](https://microsoft.github.io/language-server-protocol/specifications/lsp/3.18/specification/#textDocument_declaration)
+
+Dependencies have been updated to address potential vulnerabilities.
+
 ## Version 0.9.0: June 17, 2026
 
 - Language server is now downloaded automatically on first use (platform/architecture-specific) and updated automatically within the current minor version. See [TROUBLESHOOTING.md - 9. Manual Installation](https://github.com/Galarius/vscode-opencl/blob/master/TROUBLESHOOTING.md#9-manual-installation) for offline/network-isolated setups.
