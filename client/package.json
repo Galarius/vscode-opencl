@@ -17,7 +17,7 @@
 		"child-process-promise": "^2.2.1",
 		"fflate": "^0.8.3",
 		"querystringify": "^2.2.0",
-		"tar": "^7.5.16",
+		"tar": "^7.5.21",
 		"tree-kill": "^1.2.2",
 		"vscode-languageclient": "^8.1.0"
 	},
