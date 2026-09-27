@@ -26,7 +26,7 @@ class OpenCLDocumentFormattingEditProvider {
 
         if (formatter && formatter !== 'clang-format' && formatter !== 'clang-format.exe') {
             // Try to run non-default 'clang-format' formatter
-            return this.format({formatter, args, config}, {document, token})
+            return this.format({ app: formatter, args, config }, { document, token })
         }
 
         // Default 'clang-format' (shipped with ms-vscode.cpptools)
@@ -50,7 +50,7 @@ class OpenCLDocumentFormattingEditProvider {
             return Promise.reject()
         }
 
-        return this.format({ bin, args, config }, { document, token })
+        return this.format({ app: bin, args, config }, { document, token })
     }
 
     format(cmd, editor) {
