@@ -1,5 +1,9 @@
 # OpenCL for Visual Studio Code Change Log
 
+## Version 0.10.2: November 17, 2026
+
+Dependencies have been updated to address potential vulnerabilities.
+
 ## Version 0.10.1: September 28, 2026
 
 This release includes a fix for a bug that prevented custom or bundled `clang-format` executables from being launched by the OpenCL formatter.
